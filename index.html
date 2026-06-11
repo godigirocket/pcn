@@ -109,12 +109,18 @@ text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgb
 /* === PARTICLES canvas === */
 #particles-canvas{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.7;}
 
-/* === VISUALIZER — slightly bigger === */
-.viz-window{position:absolute;top:10px;right:10px;width:clamp(180px,20%,240px);background:rgba(10,12,16,.88);border:1px solid rgba(255,106,0,.18);border-radius:8px;overflow:hidden;z-index:6;box-shadow:0 6px 28px rgba(0,0,0,.6),0 0 12px rgba(255,106,0,.05);backdrop-filter:blur(14px);display:flex;flex-direction:column;}
+/* === VISUALIZER WINDOWS === */
+.viz-window{position:absolute;background:rgba(10,12,16,.92);border:1px solid rgba(255,106,0,.18);border-radius:8px;overflow:hidden;z-index:6;box-shadow:0 6px 28px rgba(0,0,0,.6);backdrop-filter:blur(14px);display:flex;flex-direction:column;}
+/* artista.exe — top right */
+#vizArtista{top:10px;right:10px;width:clamp(150px,18%,210px);}
+/* produtos.exe — mid right, below artista */
+#vizProd{top:calc(clamp(150px,18%,210px) + 56px);right:10px;width:clamp(150px,18%,210px);}
+/* clipe.exe — bottom right */
+#vizClipe{bottom:30px;right:10px;width:clamp(150px,18%,210px);}
 .viz-titlebar{height:22px;background:#181b22;display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;}
 .viz-titlebar .fl-dot{width:8px;height:8px;}
 .viz-titlebar .vtxt{font-size:9px;color:#666;margin-left:4px;flex:1;}
-.viz-photos{flex:1;min-height:0;position:relative;overflow:hidden;aspect-ratio:1;}
+.viz-photos{position:relative;overflow:hidden;aspect-ratio:1;}
 .viz-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;}
 .viz-photos img.show{opacity:1;}
 .viz-photos-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%);z-index:1;pointer-events:none;}
@@ -169,16 +175,9 @@ text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgb
 /* Hide visualizer 2 and 3 on mobile */
 @media(max-width:768px){
   #vizProd,#vizClipe{display:none!important;}
-  /* Also fix viz 1 on mobile — smaller, doesn't stretch */
-  .viz-window{
-    width:110px!important;
-    top:6px!important;
-    right:6px!important;
-    bottom:auto!important;
-  }
-  .viz-photos{aspect-ratio:1;height:auto!important;}
-  .viz-photos img{position:absolute;inset:0;width:100%;height:100%;}
-  .viz-bars{display:none;}
+  #vizArtista{width:100px!important;top:6px!important;right:6px!important;}
+  #vizArtista .viz-bars{display:none;}
+  #vizArtista .viz-ctrl{display:none;}
 }
 body{cursor:none;}
 .cursor{position:fixed;width:16px;height:16px;border:2px solid var(--orange);border-radius:50%;pointer-events:none;z-index:99999;transition:transform 0.1s,border-color 0.1s;mix-blend-mode:difference;}
@@ -488,7 +487,7 @@ document.addEventListener('keydown',e=>{
         <span class="ftag" style="top:78%;left:52%;animation-delay:-3s">♱</span>
 
         <!-- VISUALIZER 1 — Artista (fotos) -->
-        <div class="viz-window" style="top:10px;right:10px;">
+        <div class="viz-window" id="vizArtista">
           <div class="viz-titlebar">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
             <span class="vtxt">artista.exe</span>
@@ -511,7 +510,7 @@ document.addEventListener('keydown',e=>{
         </div>
 
         <!-- VISUALIZER 2 — Produtos (camiseta) -->
-        <div class="viz-window" id="vizProd" style="top:10px;right:calc(clamp(180px,20%,240px) + 18px);">
+        <div class="viz-window" id="vizProd">
           <div class="viz-titlebar">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
             <span class="vtxt">produtos.exe</span>
@@ -534,7 +533,7 @@ document.addEventListener('keydown',e=>{
         </div>
 
         <!-- VISUALIZER 3 — Clipe (YouTube) -->
-        <div class="viz-window" id="vizClipe" style="bottom:60px;right:10px;top:auto;">
+        <div class="viz-window" id="vizClipe">
           <div class="viz-titlebar">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
             <span class="vtxt">clipe.exe</span>
