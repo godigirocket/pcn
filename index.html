@@ -109,13 +109,17 @@ text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgb
 /* === PARTICLES canvas === */
 #particles-canvas{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.7;}
 
-/* === VISUALIZER WINDOWS === */
-.viz-window{position:absolute;background:rgba(10,12,16,.92);border:1px solid rgba(255,106,0,.18);border-radius:8px;overflow:hidden;z-index:6;box-shadow:0 6px 28px rgba(0,0,0,.6);backdrop-filter:blur(14px);display:flex;flex-direction:column;}
-/* clipe.exe — top right */
-#vizArtista{top:10px;right:10px;width:clamp(150px,17%,200px);}
-/* produtos.exe — below clipe */
-#vizProd{top:calc(clamp(150px,17%,200px) + 56px);right:10px;width:clamp(150px,17%,200px);}
-/* remove old clipe rule */
+/* === VISUALIZER WINDOWS — inside plugin-rack, normal flow === */
+.viz-window{
+  width:100%;
+  background:rgba(10,12,16,.92);
+  border:1px solid rgba(255,106,0,.15);
+  border-radius:6px;overflow:hidden;
+  box-shadow:0 4px 16px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;
+  flex-shrink:0;
+  margin-bottom:6px;
+}
 #vizClipe{display:none!important;}
 .viz-titlebar{height:22px;background:#181b22;display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;}
 .viz-titlebar .fl-dot{width:8px;height:8px;}
@@ -172,12 +176,12 @@ text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgb
 .pp-skip{font-size:11px;color:#444;cursor:pointer;transition:color .2s;}
 .pp-skip:hover{color:#888;}
 
-/* Hide visualizer 2 and 3 on mobile */
+/* Mobile responsive */
 @media(max-width:768px){
+  /* Plugin rack hidden on mobile — but show viz row below drums */
+  .plugin-rack{display:none;}
+  #vizArtista,#vizProd{display:none!important;}
   #vizClipe{display:none!important;}
-  /* Desktop visualizers absolute — hidden on mobile */
-  #vizArtista, #vizProd{display:none!important;}
-  /* Mobile row appears below hero */
   .viz-mobile-row{display:flex!important;}
 }
 /* Mobile viz row — hidden on desktop */
@@ -512,32 +516,24 @@ document.addEventListener('keydown',e=>{
         <span class="ftag" style="top:22%;left:55%;animation-delay:-1s">TRAP</span>
         <span class="ftag" style="top:78%;left:52%;animation-delay:-3s">♱</span>
 
-        <!-- VISUALIZERS — desktop: absolute right | mobile: row below name -->
-        <div class="viz-mobile-row" style="display:none;">
-          <div id="vizArtistaMob"></div>
-          <div id="vizProdMob"></div>
-        </div>
+      </div>
 
-        <!-- VISUALIZER 1 — Clipe (YouTube) — desktop only -->
+      <!-- Plugin Rack -->
+      <div class="plugin-rack">
+        <!-- VISUALIZER 1 — Clipe -->
         <div class="viz-window" id="vizArtista">
           <div class="viz-titlebar">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
             <span class="vtxt">clipe.exe</span>
           </div>
           <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;">
-            <iframe
-              src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&modestbranding=1&playsinline=1"
-              style="position:absolute;inset:0;width:100%;height:100%;border:none;"
-              allow="autoplay;encrypted-media"
-              loading="lazy">
-            </iframe>
+            <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&modestbranding=1&playsinline=1" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="autoplay;encrypted-media" loading="lazy"></iframe>
           </div>
           <div class="viz-ctrl">
             <span class="viz-btn on">Clipe</span>
             <a class="viz-btn" href="https://www.youtube.com/@PCNboladao" target="_blank" style="text-decoration:none;">YouTube</a>
           </div>
         </div>
-
         <!-- VISUALIZER 2 — Produtos -->
         <div class="viz-window" id="vizProd">
           <div class="viz-titlebar">
@@ -557,14 +553,9 @@ document.addEventListener('keydown',e=>{
           </div>
           <div class="viz-ctrl">
             <span class="viz-btn on">Produtos</span>
-            <span class="viz-btn" onclick="window.dispatchEvent(new Event('goLoja'))">Loja</span>
+            <span class="viz-btn" onclick="window.dispatchEvent(new Event('goLoja'))" style="cursor:pointer;">Loja</span>
           </div>
         </div>
-
-      </div>
-
-      <!-- Plugin Rack -->
-      <div class="plugin-rack">
         <!-- FPC — Drum Pads -->
         <div class="plugin-win">
           <div class="plugin-titlebar">
