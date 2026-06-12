@@ -71,13 +71,15 @@ header nav button:active{
 .fl-title{font-size:11px;color:#888;margin-left:10px;font-family:'Inter',sans-serif;}
 
 /* Toolbar */
-.fl-toolbar{height:30px;background:#22252b;display:flex;align-items:center;padding:0 10px;gap:10px;border-bottom:1px solid #333;}
-.tb-btn{width:22px;height:22px;border-radius:4px;border:none;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;}
-.tb-play{background:#28c840;color:#000;}.tb-stop{background:#ff5f57;color:#000;}.tb-rec{background:#666;color:#fff;}
-.bpm-display{background:#111;border:1px solid #333;padding:2px 8px;border-radius:3px;color:var(--orange);font-family:'Courier New',monospace;font-size:11px;}
-.tb-tabs{display:flex;gap:4px;margin-left:auto;}
-.tb-tab{padding:4px 10px;font-size:10px;background:#1a1d23;border:1px solid #333;border-radius:3px;color:#888;cursor:pointer;}
-.tb-tab.active{color:var(--orange);border-color:var(--orange);background:rgba(255,106,0,0.1);}
+.fl-toolbar{height:36px;background:#2a2d33;border-bottom:1px solid #1a1c22;display:flex;align-items:center;padding:0 8px;gap:4px;flex-shrink:0;overflow:hidden;}
+.tb-btn{width:26px;height:26px;border-radius:3px;border:1px solid #3a3d45;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;transition:all .15s;}
+.tb-play{background:#3a8040;border-color:#4a9050;color:#a0f0a0;}
+.tb-stop{background:#1e2228;border-color:#3a3d45;color:#cc4040;}
+.tb-rec{background:#1e2228;border-color:#3a3d45;color:#cc4040;border-radius:50%!important;width:22px!important;height:22px!important;}
+.bpm-display{background:#0a0c10;border:1px solid #2a2d33;padding:3px 8px;border-radius:2px;color:#c8f000;font-family:'Courier New',monospace;font-size:12px;font-weight:700;min-width:70px;text-align:center;}
+.tb-tabs{display:flex;gap:2px;margin-left:auto;}
+.tb-tab{padding:3px 10px;font-size:10px;background:#1e2228;border:1px solid #2a2d33;color:#607080;cursor:pointer;border-radius:2px;transition:all .15s;white-space:nowrap;}
+.tb-tab.active{color:#ff8c00;border-color:#ff8c00;background:rgba(255,140,0,.1);}
 
 /* Main Content Area */
 .fl-main{flex:1;display:flex;overflow:hidden;position:relative;}
@@ -205,7 +207,7 @@ text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgb
   font-size:8px;color:#666;flex-shrink:0;
 }
 .viz-mob-title .fl-dot{width:6px;height:6px;border-radius:50%;}
-.viz-mob-content{flex:1;position:relative;overflow:hidden;aspect-ratio:4/3;}
+.viz-mob-content{flex:1;position:relative;overflow:hidden;aspect-ratio:16/9;}
 .viz-mob-content img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s;}
 .viz-mob-content img.show{opacity:1;}
 .viz-mob-content iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
@@ -332,6 +334,11 @@ button,a,.tb-tab{transition:all 0.2s;}
   .fl-titlebar{display:none;}
   .fl-toolbar{height:auto;padding:6px 8px;gap:4px;flex-wrap:wrap;justify-content:space-between;}
   .tb-tabs{margin-left:0;width:100%;display:flex;justify-content:center;gap:4px;margin-top:2px;}
+  .fl-toolbar{gap:3px;padding:4px 6px;height:auto;flex-wrap:nowrap;}
+  .bpm-display{min-width:50px;font-size:10px;}
+  .tb-btn{width:24px;height:24px;}
+  .tb-tabs{gap:2px;}
+  .tb-tab{padding:2px 7px;font-size:9px;}
 
   /* FL window fills screen below header */
   .fl-window{width:100vw;height:calc(100vh - 48px);border-radius:0;border:none;box-shadow:none;}
@@ -527,7 +534,8 @@ document.addEventListener('keydown',e=>{
             <span class="vtxt">clipe.exe</span>
           </div>
           <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;">
-            <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&modestbranding=1&playsinline=1" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="autoplay;encrypted-media" loading="lazy"></iframe>
+            <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&iv_load_policy=3" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="autoplay;encrypted-media" loading="lazy"></iframe>
+            <div style="position:absolute;inset:0;z-index:2;"></div>
           </div>
           <div class="viz-ctrl">
             <span class="viz-btn on">Clipe</span>
@@ -676,7 +684,7 @@ document.addEventListener('keydown',e=>{
     <!-- Mobile Viz Row — only visible on mobile -->
     <div class="viz-mobile-row">
       <!-- Clipe -->
-      <div class="viz-mob">
+      <div class="viz-mob" style="flex:2;">
         <div class="viz-mob-title">
           <span class="fl-dot" style="background:#ff5f57;"></span>
           <span class="fl-dot" style="background:#ffbd2e;"></span>
@@ -688,7 +696,7 @@ document.addEventListener('keydown',e=>{
         </div>
       </div>
       <!-- Produtos -->
-      <div class="viz-mob">
+      <div class="viz-mob" style="flex:1;">
         <div class="viz-mob-title">
           <span class="fl-dot" style="background:#ff5f57;"></span>
           <span class="fl-dot" style="background:#ffbd2e;"></span>
@@ -726,7 +734,7 @@ document.addEventListener('keydown',e=>{
 /* Product main */
 .prod-main{max-width:900px;margin:0 auto;display:grid;grid-template-columns:400px 1fr;gap:40px;align-items:start;}
 /* Image flip card */
-.prod-img-wrap{position:relative;border-radius:12px;overflow:hidden;background:#0a0a0a;aspect-ratio:4/5;cursor:crosshair;border:1px solid #1a1a1a;}
+.prod-img-wrap{position:relative;border-radius:12px;overflow:hidden;background:#f8f8f8;aspect-ratio:1;cursor:crosshair;border:1px solid #1a1a1a;}
 .prod-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transition:opacity .6s ease;}
 .prod-img-wrap .prod-back{opacity:0;}
 .prod-img-wrap:hover .prod-front{opacity:0;}
@@ -773,8 +781,8 @@ document.addEventListener('keydown',e=>{
 /* Extra product cards */
 .extra-card{background:#111;border:1px solid #1c1c1c;border-radius:10px;overflow:hidden;transition:all .3s;}
 .extra-card:hover{border-color:#333;transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
-.extra-img-wrap{position:relative;aspect-ratio:1;background:#0a0a0a;overflow:hidden;cursor:crosshair;}
-.extra-front,.extra-back,.extra-back2,.extra-back3{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .6s;padding:8px;}
+.extra-img-wrap{position:relative;aspect-ratio:1;background:#f8f8f8;overflow:hidden;cursor:crosshair;}
+.extra-front,.extra-back,.extra-back2,.extra-back3{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .6s;padding:16px;}
 .extra-back,.extra-back2,.extra-back3{opacity:0;}
 .extra-img-wrap:hover .extra-front{opacity:0;}
 .extra-img-wrap:hover .extra-back{opacity:1;}
@@ -817,8 +825,8 @@ document.addEventListener('keydown',e=>{
         <span class="seal seal-new">Novo</span>
       </div>
       <div class="prod-price-block">
-        <div class="prod-price"><span class="prod-price-cents">R$</span> 89,<span style="font-size:24px">90</span></div>
-        <div class="prod-installment">ou 3x de R$ 29,97 sem juros</div>
+        <div class="prod-price"><span class="prod-price-cents">R$</span> 100,<span style="font-size:24px">00</span></div>
+        <div class="prod-installment">Frete incluído</div>
       </div>
       <div class="prod-desc">Camiseta oversized exclusiva. Tecido premium, estampa resinada, edição limitada.<br>100% algodão penteado • Exclusiva • Streetwear edition</div>
       <div class="stock-bar"><div class="stock-dot"></div>Últimas peças disponíveis</div>
@@ -844,8 +852,8 @@ document.addEventListener('keydown',e=>{
         <div class="extra-info">
           <div style="font-family:'Anton',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;">Caneca PCN</div>
           <div style="font-size:12px;color:#666;margin:4px 0 12px;">Edição Limitada · Exclusiva</div>
-          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;">R$ 49,90</div>
-          <div style="font-size:11px;color:#666;margin-bottom:14px;">3x de R$ 16,63</div>
+          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;">R$ 55,00</div>
+          <div style="font-size:11px;color:#666;margin-bottom:14px;">Frete incluído</div>
           <button class="prod-btn-buy" style="font-size:14px;padding:12px;" onclick="buyWhatsApp('Caneca PCN')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
         </div>
       </div>
@@ -861,8 +869,8 @@ document.addEventListener('keydown',e=>{
         <div class="extra-info">
           <div style="font-family:'Anton',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;">Moletom Kankiu</div>
           <div style="font-size:12px;color:#666;margin:4px 0 12px;">Oversized · Premium · Streetwear</div>
-          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;">R$ 149,90</div>
-          <div style="font-size:11px;color:#666;margin-bottom:14px;">3x de R$ 49,97</div>
+          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;">R$ 260,00</div>
+          <div style="font-size:11px;color:#666;margin-bottom:14px;">Frete incluído</div>
           <button class="prod-btn-buy" style="font-size:14px;padding:12px;" onclick="buyWhatsApp('Moletom Kankiu')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
         </div>
       </div>
@@ -896,6 +904,11 @@ document.addEventListener('keydown',e=>{
       <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Seguir</a>
     </div>
     <div class="mus-iframe-wrap">
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+        <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-spotify"></i> Spotify</a>
+        <a href="https://www.youtube.com/@PCNboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.2);color:#ff4444;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        <a href="https://www.instagram.com/7pcnboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(225,48,108,.1);border:1px solid rgba(225,48,108,.2);color:#e1306c;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      </div>
       <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="460" frameBorder="0" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block;"></iframe>
     </div>
   </div>
