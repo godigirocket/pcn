@@ -174,11 +174,37 @@ text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgb
 
 /* Hide visualizer 2 and 3 on mobile */
 @media(max-width:768px){
-  #vizProd,#vizClipe{display:none!important;}
-  #vizArtista{width:100px!important;top:6px!important;right:6px!important;}
-  #vizArtista .viz-bars{display:none;}
-  #vizArtista .viz-ctrl{display:none;}
+  #vizClipe{display:none!important;}
+  /* Desktop visualizers absolute — hidden on mobile */
+  #vizArtista, #vizProd{display:none!important;}
+  /* Mobile row appears below hero */
+  .viz-mobile-row{display:flex!important;}
 }
+/* Mobile viz row — hidden on desktop */
+.viz-mobile-row{
+  display:none;
+  gap:6px;
+  padding:4px 6px;
+  flex-shrink:0;
+  background:#0c0e14;
+  border-top:1px solid #1a1d23;
+}
+.viz-mob{
+  flex:1;background:rgba(10,12,16,.95);
+  border:1px solid rgba(255,106,0,.15);
+  border-radius:6px;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.viz-mob-title{
+  height:18px;background:#181b22;
+  display:flex;align-items:center;padding:0 6px;gap:4px;
+  font-size:8px;color:#666;flex-shrink:0;
+}
+.viz-mob-title .fl-dot{width:6px;height:6px;border-radius:50%;}
+.viz-mob-content{flex:1;position:relative;overflow:hidden;aspect-ratio:4/3;}
+.viz-mob-content img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s;}
+.viz-mob-content img.show{opacity:1;}
+.viz-mob-content iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
 body{cursor:none;}
 .cursor{position:fixed;width:16px;height:16px;border:2px solid var(--orange);border-radius:50%;pointer-events:none;z-index:99999;transition:transform 0.1s,border-color 0.1s;mix-blend-mode:difference;}
 .cursor-dot{position:fixed;width:4px;height:4px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:99999;}
@@ -486,7 +512,13 @@ document.addEventListener('keydown',e=>{
         <span class="ftag" style="top:22%;left:55%;animation-delay:-1s">TRAP</span>
         <span class="ftag" style="top:78%;left:52%;animation-delay:-3s">♱</span>
 
-        <!-- VISUALIZER 1 — Clipe (YouTube) -->
+        <!-- VISUALIZERS — desktop: absolute right | mobile: row below name -->
+        <div class="viz-mobile-row" style="display:none;">
+          <div id="vizArtistaMob"></div>
+          <div id="vizProdMob"></div>
+        </div>
+
+        <!-- VISUALIZER 1 — Clipe (YouTube) — desktop only -->
         <div class="viz-window" id="vizArtista">
           <div class="viz-titlebar">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
@@ -650,6 +682,41 @@ document.addEventListener('keydown',e=>{
       <div class="drum-pad" data-drum="perc" style="background:rgba(220,170,40,.15);border-top:2px solid #dcaa28;"><span style="font-size:10px;font-weight:700;color:#f0cc50;">PERC</span><span style="font-size:9px;background:#dcaa28;color:#000;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">5</span></div>
       <div class="drum-pad" data-drum="rim" style="background:rgba(40,190,210,.15);border-top:2px solid #28bed2;"><span style="font-size:10px;font-weight:700;color:#50dcf0;">RIM</span><span style="font-size:9px;background:#28bed2;color:#000;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">6</span></div>
     </div>
+    <!-- Mobile Viz Row — only visible on mobile -->
+    <div class="viz-mobile-row">
+      <!-- Clipe -->
+      <div class="viz-mob">
+        <div class="viz-mob-title">
+          <span class="fl-dot" style="background:#ff5f57;"></span>
+          <span class="fl-dot" style="background:#ffbd2e;"></span>
+          <span class="fl-dot" style="background:#28c840;"></span>
+          clipe.exe
+        </div>
+        <div class="viz-mob-content">
+          <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&playsinline=1" allow="autoplay;encrypted-media" loading="lazy"></iframe>
+        </div>
+      </div>
+      <!-- Produtos -->
+      <div class="viz-mob">
+        <div class="viz-mob-title">
+          <span class="fl-dot" style="background:#ff5f57;"></span>
+          <span class="fl-dot" style="background:#ffbd2e;"></span>
+          <span class="fl-dot" style="background:#28c840;"></span>
+          produtos.exe
+        </div>
+        <div class="viz-mob-content" id="vizMobProd">
+          <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="background:#0e0e0e;">
+          <img src="https://i.imgur.com/UYnObyx.png" style="background:#0e0e0e;">
+          <img src="https://i.imgur.com/RnqS6xs.png" style="background:#f0f0f0;">
+          <img src="https://i.imgur.com/T7gz5qF.png" style="background:#f0f0f0;">
+          <img src="https://i.imgur.com/UBs7TVK.png" style="background:#f0f0f0;">
+          <img src="https://i.imgur.com/COsCuKl.png" style="background:#0e0e0e;">
+          <img src="https://i.imgur.com/kDrKdm2.png" style="background:#0e0e0e;">
+          <img src="https://i.imgur.com/LcUmOL8.png" style="background:#0e0e0e;">
+        </div>
+      </div>
+    </div>
+
     <!-- Status Bar -->
     <div class="fl-status">PCN BOLADÃO — FL Studio 21 — CPU: 12% | RAM: 1.2GB</div>
   </div>
@@ -1401,12 +1468,18 @@ setTimeout(()=>{
   }
 },60000);
 
-// ===== PRODUTO CYCLING =====
+// ===== PRODUTO CYCLING — desktop + mobile =====
 (function(){
-  const imgs=document.querySelectorAll('#vizProdPhotos img');
-  if(!imgs.length)return;
-  let idx=0;
-  setInterval(()=>{imgs[idx].classList.remove('show');idx=(idx+1)%imgs.length;imgs[idx].classList.add('show');},4000);
+  // Desktop
+  const desktopImgs=document.querySelectorAll('#vizProdPhotos img');
+  if(desktopImgs.length){
+    let i=0;setInterval(()=>{desktopImgs[i].classList.remove('show');i=(i+1)%desktopImgs.length;desktopImgs[i].classList.add('show');},3000);
+  }
+  // Mobile
+  const mobImgs=document.querySelectorAll('#vizMobProd img');
+  if(mobImgs.length){
+    let i=0;setInterval(()=>{mobImgs[i].classList.remove('show');i=(i+1)%mobImgs.length;mobImgs[i].classList.add('show');},3000);
+  }
 })();
 
 // ===== GO LOJA =====
