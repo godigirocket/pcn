@@ -313,51 +313,101 @@ button,a,.tb-tab{transition:all 0.2s;}
 @media(max-width:768px){
   #cur,#cur-dot,#cur-ring{display:none!important;}
   *{cursor:auto!important;}
+
   /* Header */
   header{height:48px;padding:0 10px;}
   header .logo{font-size:14px;gap:6px;}
   header .logo img{width:28px;height:28px;}
   header nav{gap:3px;}
   header nav button{padding:6px 10px;font-size:10px;border-radius:14px;}
+
   /* Sections */
-  .section{top:48px;}
-  /* FL Window — fill screen */
-  #home.active{display:flex;}
-  .fl-window{display:flex;flex-direction:column;height:100%;border-radius:0;border:none;box-shadow:none;}
-  /* Hide desktop-only elements */
-  .fl-titlebar{display:none!important;}
-  .fl-status{display:none!important;}
-  .piano-sidebar{display:none!important;}
-  .plugin-rack{display:none!important;}
-  #vizArtista,#vizProd,#vizClipe{display:none!important;}
-  /* Toolbar compact */
-  .fl-toolbar{height:36px;padding:0 6px;gap:3px;flex-wrap:nowrap;overflow:hidden;}
-  .tb-btn{width:26px;height:26px;}
-  .bpm-display{font-size:11px;min-width:60px;}
-  .tb-tabs{gap:2px;}
-  .tb-tab{padding:2px 7px;font-size:9px;}
-  /* PCN label — must fit on one line */
-  #pcn-label{font-size:clamp(30px,10vw,52px);letter-spacing:2px;}
-  .ering.a{width:120px;height:44px;}
-  .ering.b{width:160px;height:58px;}
-  .pcn-hero-3d{pointer-events:all;}
+  .section{top:48px!important;padding-top:0;}
+
+  /* HOME — Fill screen below header */
+  #home.active{
+    display:flex;flex-direction:column;
+    height:calc(100vh - 48px);
+    overflow:hidden;
+    align-items:stretch;justify-content:flex-start;
+    padding:0;
+  }
+
+  /* FL Window fills everything */
+  .fl-window{
+    width:100%;height:100%;
+    border-radius:0;border:none;box-shadow:none;
+    background:#0c0e14;
+    display:flex;flex-direction:column;
+  }
+
+  /* Hide all desktop FL chrome */
+  .fl-titlebar,.fl-status,.piano-sidebar,.plugin-rack{display:none!important;}
+
+  /* Compact toolbar */
+  .fl-toolbar{
+    height:34px;padding:0 8px;gap:4px;
+    flex-wrap:nowrap;flex-shrink:0;overflow:hidden;
+  }
+  .tb-btn{width:26px;height:26px;font-size:11px;}
+  .bpm-display{font-size:11px;min-width:56px;padding:2px 5px;}
+  .tb-tabs{gap:2px;margin-left:auto;}
+  .tb-tab{padding:2px 8px;font-size:9px;}
+
   /* fl-main fills remaining space */
-  .fl-main{flex:1;overflow:hidden;min-height:0;}
-  .fl-center{flex:1;}
+  .fl-main{flex:1;min-height:0;overflow:hidden;}
+
+  /* Center area — fill all space */
+  .fl-center{
+    width:100%;height:100%;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+    background:#0c0e14;
+  }
+
+  /* PCN BOLADÃO — LARGE, centered */
+  .pcn-hero-3d{
+    z-index:4;position:relative;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+  }
+  #pcn-label{
+    font-size:clamp(44px,15vw,72px)!important;
+    letter-spacing:3px;text-align:center;
+    line-height:0.9;
+  }
+  .ering.a{width:140px;height:50px;}
+  .ering.b{width:185px;height:68px;}
+
   /* Drum row */
-  .drum-row{height:44px;flex-shrink:0;}
-  .drum-pad{font-size:8px;flex-direction:column;gap:1px;}
-  /* Mobile viz row — show 2 windows */
-  .viz-mobile-row{display:flex!important;gap:4px;padding:4px;background:#0c0e14;border-top:1px solid #1a1d23;flex-shrink:0;}
+  .drum-row{height:46px;flex-shrink:0;}
+  .drum-pad{
+    font-size:9px;flex-direction:column;
+    gap:1px;padding:3px 1px;
+  }
+
+  /* Mobile viz row — 2 windows side by side */
+  .viz-mobile-row{
+    display:flex!important;
+    gap:5px;padding:5px;
+    background:#0a0c10;
+    border-top:1px solid #1a1d23;
+    flex-shrink:0;
+    height:140px;
+  }
   .viz-mob{border-radius:5px;}
-  /* Loja */
-  .prod-main{grid-template-columns:1fr;gap:20px;}
+
+  /* Loja responsive */
+  .prod-main{grid-template-columns:1fr!important;gap:20px;}
   .loja-grid{grid-template-columns:repeat(2,1fr);}
 }
+
 @media(max-width:390px){
   header nav button{padding:5px 8px;font-size:9px;}
-  #pcn-label{font-size:clamp(26px,9vw,44px);}
-  .drum-pad{font-size:7px;}
+  #pcn-label{font-size:clamp(36px,13vw,58px)!important;}
+  .drum-pad{font-size:8px;}
+  .viz-mobile-row{height:120px;}
 }
 </style>
 </head>
@@ -685,7 +735,7 @@ document.addEventListener('keydown',e=>{
 /* Product main */
 .prod-main{max-width:900px;margin:0 auto;display:grid;grid-template-columns:400px 1fr;gap:40px;align-items:start;}
 /* Image flip card */
-.prod-img-wrap{position:relative;border-radius:10px;overflow:hidden;background:#111;aspect-ratio:1;cursor:crosshair;}
+.prod-img-wrap{position:relative;border-radius:10px;overflow:hidden;background:#f5f5f5;aspect-ratio:1;cursor:crosshair;}
 .prod-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transition:opacity .6s ease;}
 .prod-img-wrap .prod-back{opacity:0;}
 .prod-img-wrap:hover .prod-front{opacity:0;}
@@ -732,7 +782,7 @@ document.addEventListener('keydown',e=>{
 /* Extra product cards */
 .extra-card{background:#111;border:1px solid #1c1c1c;border-radius:10px;overflow:hidden;transition:all .3s;}
 .extra-card:hover{border-color:#333;transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
-.extra-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;cursor:crosshair;border-radius:8px 8px 0 0;background:transparent;}
+.extra-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;cursor:crosshair;border-radius:8px 8px 0 0;background:#f5f5f5;}
 .extra-front,.extra-back,.extra-back2,.extra-back3{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;background:#f5f5f5;}
 .extra-back,.extra-back2,.extra-back3{opacity:0;}
 .extra-img-wrap:hover .extra-front{opacity:0;}
@@ -757,8 +807,8 @@ document.addEventListener('keydown',e=>{
     <!-- Image -->
     <div>
       <div class="prod-img-wrap" id="prodImgWrap">
-        <img class="prod-front" src="https://i.imgur.com/DMZ6WBT.png" alt="Camisa Kankiu - Frente" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;background:#111;">
-        <img class="prod-back" src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu - Costas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;background:#111;opacity:0;transition:opacity .6s;">
+        <img class="prod-front" src="https://i.imgur.com/DMZ6WBT.png" alt="Camisa Kankiu - Frente" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;">
+        <img class="prod-back" src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu - Costas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;opacity:0;">
         <span class="img-hint">Passe o mouse para ver costas</span>
       </div>
       <div class="img-toggle">
@@ -812,9 +862,9 @@ document.addEventListener('keydown',e=>{
       <!-- MOLETOM -->
       <div class="extra-card">
         <div class="extra-img-wrap">
-          <img class="extra-front" src="https://i.imgur.com/COsCuKl.png" alt="Moletom frente" style="object-fit:contain;background:#0a0a0a;">
-          <img class="extra-back" src="https://i.imgur.com/kDrKdm2.png" alt="Moletom frente 2" style="object-fit:contain;background:#0a0a0a;">
-          <img class="extra-back2" src="https://i.imgur.com/LcUmOL8.png" alt="Moletom verso" style="object-fit:contain;background:#0a0a0a;">
+          <img class="extra-front" src="https://i.imgur.com/COsCuKl.png" alt="Moletom frente" style="object-fit:cover;background:#f5f5f5;">
+          <img class="extra-back" src="https://i.imgur.com/kDrKdm2.png" alt="Moletom frente 2" style="object-fit:cover;background:#f5f5f5;">
+          <img class="extra-back2" src="https://i.imgur.com/LcUmOL8.png" alt="Moletom verso" style="object-fit:cover;background:#f5f5f5;">
           <span class="seal seal-limit" style="position:absolute;top:10px;left:10px;z-index:2;font-size:9px;">Drop Limitado</span>
         </div>
         <div class="extra-info">
