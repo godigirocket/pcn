@@ -134,14 +134,16 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 
 /* PLUGIN RACK — desktop only */
 .plugin-rack{
-  width:220px;
-  min-width:220px;
+  width:280px;
+  min-width:280px;
   flex-shrink:0;
   background:#111;
   border-left:1px solid #2a2d35;
   display:flex;
   flex-direction:column;
-  overflow:hidden; /* nunca rola */
+  overflow:hidden;
+  padding:6px;
+  gap:6px;
 }
 
 /* Plugin Rack items distribuídos para caber sem scroll */
@@ -150,31 +152,31 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
   display:flex;
   flex-direction:column;
   overflow:hidden;
-  padding:4px;
-  gap:4px;
+  gap:6px;
 }
 
 /* cada plugin window */
 .plug-win{
   background:rgba(10,12,16,.95);
-  border:1px solid rgba(255,106,0,.12);
-  border-radius:4px;
+  border:1px solid rgba(255,106,0,.15);
+  border-radius:5px;
   overflow:hidden;
   display:flex;
   flex-direction:column;
-  flex:1; /* divide espaço igualmente */
+  flex:1;
   min-height:0;
+  box-shadow:0 3px 12px rgba(0,0,0,.5);
 }
-.plug-title{height:18px;background:#181b22;display:flex;align-items:center;padding:0 6px;gap:4px;flex-shrink:0;}
-.plug-title .fl-dot{width:6px;height:6px;}
-.plug-title span{font-size:8px;color:#666;margin-left:3px;}
+.plug-title{height:22px;background:#181b22;display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;}
+.plug-title .fl-dot{width:8px;height:8px;}
+.plug-title span{font-size:9px;color:#666;margin-left:4px;}
 .plug-body{flex:1;position:relative;overflow:hidden;min-height:0;}
 .plug-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;}
 .plug-body img.show{opacity:1;}
 .plug-body iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-.plug-footer{height:18px;background:#111318;display:flex;align-items:center;gap:3px;padding:0 4px;flex-shrink:0;border-top:1px solid #1a1a1a;}
-.plug-btn{font-size:7px;padding:1px 5px;background:#1e2028;border:1px solid #2a2d35;border-radius:2px;color:#555;cursor:pointer;transition:all 0.2s;}
-.plug-btn.on,.plug-btn:hover{color:var(--orange);border-color:rgba(255,106,0,.3);}
+.plug-footer{height:24px;background:#111318;display:flex;align-items:center;gap:3px;padding:0 5px;flex-shrink:0;border-top:1px solid #222;}
+.plug-btn{font-size:7px;padding:2px 6px;background:#1e2028;border:1px solid #2a2d35;border-radius:2px;color:#666;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.plug-btn.on,.plug-btn:hover{color:var(--orange);border-color:rgba(255,106,0,.4);background:rgba(255,106,0,.08);}
 
 /* EQ canvas inside plug */
 #eq-canvas{width:100%;height:100%;display:block;}
@@ -235,14 +237,51 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 
 /* LOJA */
 .loja-wrap{max-width:960px;width:100%;margin:0 auto;}
-.loja-titulo{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--orange);text-align:center;margin-bottom:8px;}
-.loja-sub{text-align:center;color:#555;font-size:13px;margin-bottom:40px;}
-.loja-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
-.loja-card{background:rgba(20,24,30,0.8);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all 0.3s;}
-.loja-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,106,0,0.15);}
-.loja-card i{font-size:36px;color:#444;margin-bottom:12px;display:block;}
-.loja-card h3{font-size:14px;color:#fff;margin-bottom:6px;}
-.loja-card .price{font-size:12px;color:var(--orange);}
+.loja-titulo{font-family:'Bebas Neue',sans-serif;font-size:56px;color:#fff;text-align:center;margin-bottom:4px;letter-spacing:4px;}
+.loja-titulo span{color:var(--orange);}
+.loja-sub{text-align:center;color:#666;font-size:12px;margin-bottom:50px;letter-spacing:3px;text-transform:uppercase;}
+
+/* Product Hero */
+.prod-hero{display:grid;grid-template-columns:420px 1fr;gap:40px;margin-bottom:60px;align-items:start;}
+.prod-img-flip{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#f8f8f8;cursor:pointer;}
+.prod-img-flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;}
+.prod-img-flip .prod-back{opacity:0;}
+.prod-img-flip:hover .prod-front{opacity:0;}
+.prod-img-flip:hover .prod-back{opacity:1;}
+.img-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;color:rgba(0,0,0,.4);letter-spacing:2px;text-transform:uppercase;pointer-events:none;transition:opacity .3s;}
+.prod-img-flip:hover .img-hint{opacity:0;}
+
+.prod-info-main{display:flex;flex-direction:column;gap:16px;}
+.prod-name{font-family:'Bebas Neue',sans-serif;font-size:44px;color:#fff;letter-spacing:3px;line-height:1;}
+.prod-seals{display:flex;gap:8px;flex-wrap:wrap;}
+.seal{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.seal-hot{background:#e01a1a;color:#fff;}
+.seal-limit{background:rgba(255,106,0,.15);border:1px solid var(--orange);color:var(--orange);}
+.seal-new{background:#1a1a1a;border:1px solid #444;color:#aaa;}
+.prod-price-box{border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:16px 0;}
+.prod-price{font-family:'Bebas Neue',sans-serif;font-size:40px;color:#fff;letter-spacing:1px;}
+.prod-price-cents{font-size:20px;vertical-align:super;color:#aaa;}
+.prod-installment{font-size:12px;color:#666;margin-top:4px;}
+.prod-desc{font-size:13px;color:#999;line-height:1.7;}
+.prod-btn-buy{width:100%;padding:16px;background:#e01a1a;border:none;border-radius:10px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.prod-btn-buy:hover{background:#c01515;transform:translateY(-2px);box-shadow:0 8px 24px rgba(224,26,26,.3);}
+.prod-btn-detail{width:100%;padding:12px;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#888;font-size:13px;cursor:pointer;transition:all .2s;margin-top:6px;}
+.prod-btn-detail:hover{border-color:#666;color:#ccc;}
+.stock-bar{display:flex;align-items:center;gap:8px;font-size:11px;color:#888;}
+.stock-dot{width:6px;height:6px;border-radius:50%;background:#e01a1a;animation:dotPulse 1.5s infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* More Products Grid */
+.more-products-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;text-align:center;margin-bottom:30px;letter-spacing:2px;}
+.loja-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.loja-card{background:rgba(20,24,30,0.7);border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;transition:all 0.3s;cursor:pointer;}
+.loja-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,106,0,0.15);}
+.loja-card img{width:100%;aspect-ratio:1;object-fit:cover;}
+.loja-card-info{padding:20px;}
+.loja-card h3{font-size:16px;margin-bottom:8px;color:#fff;font-weight:600;}
+.loja-card .price{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--orange);margin-bottom:12px;letter-spacing:1px;}
+.loja-card-btn{width:100%;padding:10px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);border-radius:8px;color:#25d366;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;}
+.loja-card:hover .loja-card-btn{background:rgba(37,211,102,.2);}
 
 /* MUSICAS */
 .mus-wrap{max-width:700px;width:100%;margin:0 auto;}
@@ -313,7 +352,7 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
   .tb-tab{padding:2px 6px;font-size:8px;}
   .piano-side{width:28px;}
   .p-key .kb{display:none;}
-  .plugin-rack{width:130px;min-width:130px;}
+  .plugin-rack{width:180px;min-width:180px;}
   #pcn-label{font-size:clamp(22px,7vw,36px);letter-spacing:2px;}
   .ering.a{width:80px;height:28px;}
   .ering.b{width:110px;height:38px;}
@@ -324,8 +363,12 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 
 @media(max-width:540px){
   #loja,#musicas,#contato{padding:68px 14px 30px;}
-  .loja-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .prod-hero{grid-template-columns:1fr!important;gap:24px;}
+  .loja-grid{grid-template-columns:1fr;gap:16px;}
   .loja-card{padding:16px 12px;}
+  .prod-img-flip:hover .prod-front{opacity:1!important;}
+  .prod-img-flip:hover .prod-back{opacity:0!important;}
+  .img-hint{display:none;}
   .mus-wrap,.ct-wrap,.loja-wrap{max-width:100%;}
   .mus-artist-row{flex-direction:column;text-align:center;}
   .mus-follow{margin-left:0;width:100%;justify-content:center;}
@@ -501,26 +544,54 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 <!-- LOJA -->
 <section id="loja" class="section">
   <div class="loja-wrap">
-    <div class="loja-titulo">LOJA KANKIU</div>
+    <div class="loja-titulo">KANKIU <span>COLLECTION</span></div>
     <div class="loja-sub">Streetwear Underground Edition</div>
+    
+    <!-- Product Hero -->
+    <div class="prod-hero">
+      <div class="prod-img-flip" id="prodFlip">
+        <img class="prod-front" src="https://i.imgur.com/DMZ6WBT.png" alt="Camisa Kankiu - Frente">
+        <img class="prod-back" src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu - Costas">
+        <span class="img-hint">Passe o mouse para ver costas</span>
+      </div>
+      
+      <div class="prod-info-main">
+        <div class="prod-name">Camisa Kankiu</div>
+        <div class="prod-seals">
+          <span class="seal seal-hot">🔥 Poucas Unidades</span>
+          <span class="seal seal-limit">Drop Limitado</span>
+          <span class="seal seal-new">Novo</span>
+        </div>
+        <div class="prod-price-box">
+          <div class="prod-price"><span class="prod-price-cents">R$</span> 100,<span style="font-size:28px">00</span></div>
+          <div class="prod-installment">Frete incluído</div>
+        </div>
+        <div class="prod-desc">Camiseta oversized exclusiva. Tecido premium, estampa resinada, edição limitada.<br>100% algodão penteado • Exclusiva • Streetwear edition</div>
+        <div class="stock-bar"><div class="stock-dot"></div>Últimas peças disponíveis</div>
+        <button class="prod-btn-buy" onclick="buyWhatsApp('Camisa Kankiu')"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</button>
+        <button class="prod-btn-detail" onclick="buyWhatsApp('Camisa Kankiu - Mais informações')"><i class="fa-solid fa-info-circle"></i> Mais informações</button>
+      </div>
+    </div>
+    
+    <!-- More Products -->
+    <div class="more-products-title">Mais Produtos</div>
     <div class="loja-grid">
-      <div class="loja-card" onclick="buyWhatsApp('Camisa Kankiu')">
-        <img src="https://i.imgur.com/DMZ6WBT.png" style="width:100%;height:160px;object-fit:cover;border-radius:6px;margin-bottom:12px;">
-        <h3>Camisa Kankiu</h3>
-        <div class="price">R$ 100,00</div>
-        <div style="margin-top:10px;padding:8px;background:rgba(37,211,102,.1);border-radius:6px;color:#25d366;font-size:12px;"><i class="fa-brands fa-whatsapp"></i> Comprar</div>
-      </div>
       <div class="loja-card" onclick="buyWhatsApp('Caneca PCN')">
-        <img src="https://i.imgur.com/RnqS6xs.png" style="width:100%;height:160px;object-fit:cover;border-radius:6px;margin-bottom:12px;background:#f5f5f5;">
-        <h3>Caneca PCN</h3>
-        <div class="price">R$ 55,00</div>
-        <div style="margin-top:10px;padding:8px;background:rgba(37,211,102,.1);border-radius:6px;color:#25d366;font-size:12px;"><i class="fa-brands fa-whatsapp"></i> Comprar</div>
+        <img src="https://i.imgur.com/RnqS6xs.png" alt="Caneca PCN">
+        <div class="loja-card-info">
+          <h3>Caneca PCN</h3>
+          <div class="price">R$ 55,00</div>
+          <div class="loja-card-btn"><i class="fa-brands fa-whatsapp"></i> Comprar</div>
+        </div>
       </div>
+      
       <div class="loja-card" onclick="buyWhatsApp('Moletom Kankiu')">
-        <img src="https://i.imgur.com/COsCuKl.png" style="width:100%;height:160px;object-fit:cover;border-radius:6px;margin-bottom:12px;background:#f5f5f5;">
-        <h3>Moletom Kankiu</h3>
-        <div class="price">R$ 260,00</div>
-        <div style="margin-top:10px;padding:8px;background:rgba(37,211,102,.1);border-radius:6px;color:#25d366;font-size:12px;"><i class="fa-brands fa-whatsapp"></i> Comprar</div>
+        <img src="https://i.imgur.com/COsCuKl.png" alt="Moletom Kankiu">
+        <div class="loja-card-info">
+          <h3>Moletom Kankiu</h3>
+          <div class="price">R$ 260,00</div>
+          <div class="loja-card-btn"><i class="fa-brands fa-whatsapp"></i> Comprar</div>
+        </div>
       </div>
     </div>
   </div>
