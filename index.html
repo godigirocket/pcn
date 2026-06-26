@@ -31,12 +31,57 @@ nav button:hover{background:rgba(255,255,255,0.12);color:#fff;}
 nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-color:#ff8c00;color:#000;font-weight:700;box-shadow:0 0 14px rgba(255,140,0,0.4);}
 
 /* === MOBILE PORTRAIT OVERLAY === */
-#mob-portrait{display:none;position:fixed;inset:0;background:#0a0a0f;z-index:500;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:20px;}
-#mob-portrait .mp-title{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;letter-spacing:4px;text-shadow:0 0 24px rgba(255,106,0,0.9);}
-#mob-portrait .mp-icon{font-size:64px;animation:pfloat 2.5s ease-in-out infinite;}
-@keyframes pfloat{0%,100%{transform:translateY(0) rotate(-10deg);}50%{transform:translateY(-12px) rotate(10deg);}}
-#mob-portrait .mp-text{color:#555;font-size:14px;letter-spacing:2px;}
-#mob-portrait .mp-sub{color:#333;font-size:11px;margin-top:4px;}
+#mob-portrait{
+  display:none;position:fixed;inset:0;
+  background:linear-gradient(135deg,#0a0515 0%,#1a0a2a 50%,#0a0515 100%);
+  z-index:500;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:24px;padding:20px;overflow:hidden;
+}
+#mob-portrait::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(255,106,0,0.15) 0%,transparent 60%);
+  animation:pulse-glow 3s ease-in-out infinite;
+}
+@keyframes pulse-glow{0%,100%{opacity:0.6;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
+#mob-portrait .mp-title{
+  font-family:'Bebas Neue',sans-serif;font-size:72px;color:#fff;
+  letter-spacing:8px;position:relative;z-index:2;
+  text-shadow:0 0 30px rgba(255,106,0,1),0 0 60px rgba(255,106,0,0.6),
+    0 0 90px rgba(168,85,247,0.4),0 4px 8px rgba(0,0,0,0.8);
+  animation:title-glow 2s ease-in-out infinite;
+}
+@keyframes title-glow{0%,100%{filter:brightness(1);}50%{filter:brightness(1.3);}}
+#mob-portrait .mp-icon{
+  font-size:96px;position:relative;z-index:2;
+  filter:drop-shadow(0 0 20px rgba(255,106,0,0.8));
+  animation:pfloat 2.5s ease-in-out infinite;
+}
+@keyframes pfloat{
+  0%,100%{transform:translateY(0) rotate(-15deg) scale(1);}
+  50%{transform:translateY(-16px) rotate(15deg) scale(1.1);}
+}
+#mob-portrait .mp-text{
+  color:#ff8c00;font-size:20px;letter-spacing:4px;font-weight:700;
+  text-shadow:0 0 16px rgba(255,140,0,0.6);position:relative;z-index:2;
+  animation:text-pulse 1.5s ease-in-out infinite;
+}
+@keyframes text-pulse{0%,100%{opacity:0.8;}50%{opacity:1;}}
+#mob-portrait .mp-sub{
+  color:#888;font-size:13px;margin-top:4px;position:relative;z-index:2;
+  letter-spacing:2px;text-transform:uppercase;
+}
+/* Floating particles in portrait */
+.mp-particle{
+  position:absolute;width:4px;height:4px;border-radius:50%;
+  background:rgba(255,106,0,0.6);pointer-events:none;
+  animation:float-up 4s ease-in infinite;
+}
+@keyframes float-up{
+  0%{transform:translateY(0) scale(1);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:0.8;}
+  100%{transform:translateY(-100vh) scale(0.5);opacity:0;}
+}
 
 /* === SECTIONS === */
 .section{display:none;}
@@ -94,8 +139,47 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 /* HERO */
 .hero{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;animation:heroIdle 5s ease-in-out infinite;}
 @keyframes heroIdle{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
-#pcn-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,7vw,100px);color:#fff;letter-spacing:5px;line-height:0.88;text-align:center;cursor:default;will-change:transform;transform-style:preserve-3d;
-text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgba(168,85,247,.3),1px 1px 0 #d05000,2px 2px 0 #a03800,3px 3px 0 #702000,4px 4px 0 #401000,5px 5px 12px rgba(0,0,0,.85);}
+
+/* 3D BACKGROUND TEXT - LARGER */
+.hero::before{
+  content:'PCN BOLADÃO';
+  position:absolute;font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(120px,14vw,220px);color:transparent;
+  letter-spacing:8px;text-align:center;z-index:1;
+  -webkit-text-stroke:1px rgba(255,106,0,0.08);
+  text-stroke:1px rgba(255,106,0,0.08);
+  transform:translateZ(-80px) scale(1.4);
+  animation:bg3d-float 8s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes bg3d-float{
+  0%,100%{transform:translateZ(-80px) scale(1.4) translateY(0);}
+  50%{transform:translateZ(-80px) scale(1.45) translateY(-8px);}
+}
+
+/* FLOATING ANIMATED ELEMENTS */
+.float-el{
+  position:absolute;font-size:32px;opacity:0.12;color:#ff6a00;
+  pointer-events:none;z-index:2;animation:float-element 6s ease-in-out infinite;
+}
+@keyframes float-element{
+  0%,100%{transform:translateY(0) rotate(0deg) scale(1);opacity:0.12;}
+  50%{transform:translateY(-20px) rotate(180deg) scale(1.2);opacity:0.2;}
+}
+.float-el:nth-child(1){top:10%;left:5%;animation-delay:0s;font-size:40px;}
+.float-el:nth-child(2){top:70%;left:8%;animation-delay:-2s;font-size:36px;}
+.float-el:nth-child(3){top:15%;right:10%;animation-delay:-4s;font-size:44px;}
+.float-el:nth-child(4){bottom:12%;right:8%;animation-delay:-1s;font-size:38px;}
+
+#pcn-label{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,7vw,100px);
+  color:#fff;letter-spacing:5px;line-height:0.88;text-align:center;
+  cursor:default;will-change:transform;transform-style:preserve-3d;
+  position:relative;z-index:3;
+  text-shadow:0 0 16px rgba(255,106,0,1),0 0 32px rgba(255,106,0,.7),
+    0 0 60px rgba(168,85,247,.4),2px 2px 0 #d05000,4px 4px 0 #a03800,
+    6px 6px 0 #702000,8px 8px 0 #401000,10px 10px 16px rgba(0,0,0,.9);
+}
 #pcn-label .refl{display:block;transform:scaleY(-0.3) translateY(-4px);opacity:0.1;filter:blur(3px);}
 .ering{position:absolute;border-radius:50%;border:1px solid;pointer-events:none;animation:erot linear infinite;}
 @keyframes erot{to{transform:rotateZ(360deg);}}
@@ -190,13 +274,16 @@ text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgb
 /* === OUTROS SECTIONS === */
 #loja,#musicas,#contato{
   display:none;
-  flex-direction:column;
+  width:100%;
   min-height:100vh;
   padding:70px 20px 40px;
   background:#0a0a0f;
   overflow-y:auto;
+  overflow-x:hidden;
 }
-#loja.active,#musicas.active,#contato.active{display:flex;}
+#loja.active,#musicas.active,#contato.active{
+  display:block!important;
+}
 
 /* LOJA */
 .loja-wrap{max-width:960px;width:100%;margin:0 auto;}
@@ -252,11 +339,18 @@ text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgb
   nav button{padding:6px 10px;font-size:10px;}
   .logo{font-size:14px;}
   .logo img{width:26px;height:26px;}
+  
+  /* Seções com overflow para scroll */
+  #loja,#musicas,#contato{
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch;
+  }
 }
 
 /* mobile portrait: overlay aparece */
 @media(max-width:768px) and (orientation:portrait){
   #mob-portrait{display:flex!important;}
+  #home{display:none!important;}
 }
 
 /* mobile landscape: fl studio compacto */
@@ -383,6 +477,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
         <canvas id="particles-c"></canvas>
         <!-- Hero -->
         <div class="hero" id="heroBlock">
+          <span class="float-el">🎵</span>
+          <span class="float-el">808</span>
+          <span class="float-el">♱</span>
+          <span class="float-el">🔊</span>
           <div class="ering a"></div>
           <div class="ering b"></div>
           <div id="pcn-label">PCN BOLADÃO<span class="refl">PCN BOLADÃO</span></div>
@@ -836,6 +934,23 @@ setTimeout(()=>{
 function buyWhatsApp(p){
   window.open('https://wa.me/5511976369308?text='+encodeURIComponent('Olá! Tenho interesse em: '+p),'_blank');
 }
+
+// ===== MOBILE PORTRAIT PARTICLES =====
+(function(){
+  const mp=document.getElementById('mob-portrait');
+  if(!mp)return;
+  function createParticle(){
+    const p=document.createElement('div');
+    p.className='mp-particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.animationDelay=Math.random()*2+'s';
+    p.style.animationDuration=(3+Math.random()*2)+'s';
+    mp.appendChild(p);
+    setTimeout(()=>p.remove(),5000);
+  }
+  setInterval(createParticle,300);
+  for(let i=0;i<8;i++)setTimeout(createParticle,i*200);
+})();
 
 // ===== FLOATING TAGS =====
 document.querySelectorAll('.ftag').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
