@@ -137,49 +137,54 @@ radial-gradient(circle at 70% 50%, rgba(168,85,247,0.03) 0%, transparent 50%);po
 
 /* PLUGIN RACK — desktop only */
 .plugin-rack{
-  width:240px;
-  min-width:240px;
+  width:340px;
+  min-width:340px;
   flex-shrink:0;
   background:linear-gradient(180deg,#0e0e0e 0%,#0a0a0a 100%);
   border-left:1px solid #2a2d35;
   display:flex;
   flex-direction:column;
   overflow-y:auto;
-  padding:8px 6px;
-  gap:8px;
+  padding:10px 8px;
+  gap:10px;
 }
-.plugin-rack::-webkit-scrollbar{width:4px;}
-.plugin-rack::-webkit-scrollbar-thumb{background:#2a2d35;border-radius:2px;}
+.plugin-rack::-webkit-scrollbar{width:5px;}
+.plugin-rack::-webkit-scrollbar-thumb{background:#ff6a00;border-radius:3px;}
+.plugin-rack::-webkit-scrollbar-track{background:#0a0a0a;}
 
 /* Plugin Rack items */
 .rack-inner{
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:10px;
 }
 
 /* cada plugin window */
 .plug-win{
   background:rgba(10,12,16,.98);
-  border:1px solid rgba(255,106,0,.18);
-  border-radius:6px;
+  border:1px solid rgba(255,106,0,.2);
+  border-radius:8px;
   overflow:hidden;
   display:flex;
   flex-direction:column;
-  box-shadow:0 4px 16px rgba(0,0,0,.6);
-  min-height:140px;
+  box-shadow:0 6px 20px rgba(0,0,0,.7);
+  transition:transform 0.2s,border-color 0.2s;
 }
-.plug-win.large{min-height:180px;}
-.plug-title{height:24px;background:linear-gradient(180deg,#1e2128 0%,#181b22 100%);display:flex;align-items:center;padding:0 10px;gap:5px;flex-shrink:0;border-bottom:1px solid rgba(255,106,0,.1);}
-.plug-title .fl-dot{width:8px;height:8px;}
-.plug-title span{font-size:10px;color:#888;margin-left:4px;font-weight:600;}
-.plug-body{flex:1;position:relative;overflow:hidden;min-height:90px;}
-.plug-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;}
+.plug-win:hover{transform:translateX(-3px);border-color:rgba(255,106,0,.5);}
+.plug-win.xlarge{min-height:280px;}
+.plug-win.large{min-height:220px;}
+.plug-win.medium{min-height:180px;}
+.plug-title{height:28px;background:linear-gradient(180deg,#1e2128 0%,#181b22 100%);display:flex;align-items:center;padding:0 12px;gap:6px;flex-shrink:0;border-bottom:1px solid rgba(255,106,0,.15);}
+.plug-title .fl-dot{width:9px;height:9px;}
+.plug-title span{font-size:11px;color:#aaa;margin-left:4px;font-weight:600;letter-spacing:0.3px;}
+.plug-body{flex:1;position:relative;overflow:hidden;}
+.plug-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;}
 .plug-body img.show{opacity:1;}
 .plug-body iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-.plug-footer{height:26px;background:#0e1014;display:flex;align-items:center;gap:4px;padding:0 8px;flex-shrink:0;border-top:1px solid #1a1a1a;}
-.plug-btn{font-size:8px;padding:3px 9px;background:#1e2028;border:1px solid #2a2d35;border-radius:3px;color:#666;cursor:pointer;transition:all 0.2s;white-space:nowrap;font-weight:600;}
-.plug-btn.on,.plug-btn:hover{color:var(--orange);border-color:rgba(255,106,0,.5);background:rgba(255,106,0,.12);}
+.plug-body canvas{width:100%;height:100%;display:block;}
+.plug-footer{height:30px;background:#0e1014;display:flex;align-items:center;gap:5px;padding:0 10px;flex-shrink:0;border-top:1px solid #1a1a1a;}
+.plug-btn{font-size:9px;padding:4px 11px;background:#1e2028;border:1px solid #2a2d35;border-radius:4px;color:#777;cursor:pointer;transition:all 0.2s;white-space:nowrap;font-weight:600;}
+.plug-btn.on,.plug-btn:hover{color:#fff;border-color:rgba(255,106,0,.6);background:rgba(255,106,0,.18);box-shadow:0 0 10px rgba(255,106,0,.25);}
 
 /* EQ canvas inside plug */
 #eq-canvas{width:100%;height:100%;display:block;}
@@ -414,7 +419,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     </div>
     <div class="pp-body">
       <img class="pp-cover" src="https://i.imgur.com/DMZ6WBT.png" alt="KANKIU">
-      <div class="pp-tag">🎵 Agora Disponível</div>
+      <div class="pp-tag"><i class="fa-solid fa-music"></i> Agora Disponível</div>
       <div class="pp-artist">KANKIU</div>
       <div class="pp-release">PCN BOLADÃO · Salve na sua biblioteca</div>
       <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePresave()"><i class="fa-brands fa-spotify"></i> SALVAR / PRÉ-SAVE</a>
@@ -433,7 +438,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 <!-- MOBILE PORTRAIT -->
 <div id="mob-portrait">
   <div class="mp-title">PCN BOLADÃO</div>
-  <div class="mp-icon">📱</div>
+  <div class="mp-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
   <div class="mp-text">VIRE SEU TELEFONE</div>
   <div class="mp-sub">para visualizar o FL Studio</div>
 </div>
@@ -495,8 +500,8 @@ document.addEventListener('selectstart',e=>e.preventDefault());
       <!-- Plugin Rack -->
       <div class="plugin-rack">
         <div class="rack-inner">
-          <!-- clipe.exe -->
-          <div class="plug-win">
+          <!-- clipe.exe - MAIOR -->
+          <div class="plug-win xlarge">
             <div class="plug-title">
               <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
               <span>clipe.exe</span>
@@ -509,8 +514,8 @@ document.addEventListener('selectstart',e=>e.preventDefault());
               <a class="plug-btn" href="https://www.youtube.com/@PCNboladao" target="_blank" style="text-decoration:none;">YouTube</a>
             </div>
           </div>
-          <!-- produtos.exe -->
-          <div class="plug-win">
+          <!-- produtos.exe - MAIOR -->
+          <div class="plug-win large">
             <div class="plug-title">
               <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
               <span>produtos.exe</span>
@@ -526,8 +531,38 @@ document.addEventListener('selectstart',e=>e.preventDefault());
               <span class="plug-btn" onclick="goSection('loja')" style="cursor:pointer;">Loja</span>
             </div>
           </div>
+          <!-- Fruity Limiter -->
+          <div class="plug-win medium">
+            <div class="plug-title">
+              <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
+              <span>Fruity Limiter</span>
+            </div>
+            <div class="plug-body">
+              <canvas id="limiter-canvas"></canvas>
+            </div>
+            <div class="plug-footer">
+              <span class="plug-btn on">Limiter</span>
+              <span class="plug-btn">COMP</span>
+            </div>
+          </div>
+          <!-- Maximus -->
+          <div class="plug-win medium">
+            <div class="plug-title">
+              <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
+              <span>Maximus</span>
+            </div>
+            <div class="plug-body">
+              <canvas id="maximus-canvas"></canvas>
+            </div>
+            <div class="plug-footer">
+              <span class="plug-btn on">Master</span>
+              <span class="plug-btn">LOW</span>
+              <span class="plug-btn">MID</span>
+              <span class="plug-btn">HIGH</span>
+            </div>
+          </div>
           <!-- EQ -->
-          <div class="plug-win">
+          <div class="plug-win medium">
             <div class="plug-title">
               <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
               <span>Parametric EQ 2</span>
@@ -570,7 +605,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
       <div class="prod-info-main">
         <div class="prod-name">Camisa Kankiu</div>
         <div class="prod-seals">
-          <span class="seal seal-hot">🔥 Poucas Unidades</span>
+          <span class="seal seal-hot"><i class="fa-solid fa-fire"></i> Poucas Unidades</span>
           <span class="seal seal-limit">Drop Limitado</span>
           <span class="seal seal-new">Novo</span>
         </div>
@@ -628,7 +663,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     </div>
     <!-- PRÉ-SAVE -->
     <div class="presave-block">
-      <div class="presave-label">🎵 PRÉ-SAVE — NOVO LANÇAMENTO</div>
+      <div class="presave-label"><i class="fa-solid fa-music"></i> PRÉ-SAVE — NOVO LANÇAMENTO</div>
       <iframe style="border-radius:12px;width:100%;border:none;display:block;" src="https://open.spotify.com/embed/prerelease/2KhuPf1YqIQB4zYfEPSArA?utm_source=generator&theme=0" height="352" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
     <!-- Player artista -->
@@ -932,6 +967,70 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
     }
     ctx.strokeStyle='#ff8c00';ctx.lineWidth=1.5;ctx.stroke();
     vals=vals.map(v=>Math.max(20,Math.min(80,v+(Math.random()-.5)*1)));
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ===== FRUITY LIMITER CANVAS =====
+(function(){
+  const c=document.getElementById('limiter-canvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let vals={thresh:-6,ceil:0,ratio:8};
+  function draw(){
+    c.width=c.offsetWidth;c.height=c.offsetHeight;
+    const w=c.width,h=c.height;
+    ctx.fillStyle='#050505';ctx.fillRect(0,0,w,h);
+    // grid
+    for(let i=0;i<5;i++){
+      const y=h/4*i;
+      ctx.strokeStyle='rgba(255,106,0,0.06)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
+    }
+    // waveform
+    ctx.strokeStyle='#ff6a00';ctx.lineWidth=2;
+    ctx.beginPath();
+    for(let x=0;x<w;x++){
+      const t=x/w*Math.PI*4;
+      let y=Math.sin(t)*0.3+Math.sin(t*2.5)*0.1;
+      y=Math.max(Math.min(y,vals.thresh/20),vals.ceil/20);
+      ctx.lineTo(x,h/2-y*h/2);
+    }
+    ctx.stroke();
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ===== MAXIMUS CANVAS =====
+(function(){
+  const c=document.getElementById('maximus-canvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let bands=[{gain:0.8,freq:200},{gain:1,freq:2000},{gain:0.9,freq:8000}];
+  function draw(){
+    c.width=c.offsetWidth;c.height=c.offsetHeight;
+    const w=c.width,h=c.height;
+    ctx.fillStyle='#030508';ctx.fillRect(0,0,w,h);
+    // 3 bands
+    const bw=w/3;
+    bands.forEach((b,i)=>{
+      const x=i*bw;
+      // band bg
+      ctx.fillStyle=i===0?'rgba(40,180,100,0.05)':i===1?'rgba(255,180,0,0.05)':'rgba(220,60,60,0.05)';
+      ctx.fillRect(x,0,bw,h);
+      // gain bar
+      const gh=b.gain*h*0.8;
+      const grad=ctx.createLinearGradient(0,h-gh,0,h);
+      grad.addColorStop(0,i===0?'#28b464':i===1?'#ffaa00':'#dc3c3c');
+      grad.addColorStop(1,i===0?'rgba(40,180,100,0.3)':i===1?'rgba(255,170,0,0.3)':'rgba(220,60,60,0.3)');
+      ctx.fillStyle=grad;
+      ctx.fillRect(x+bw/4,h-gh,bw/2,gh);
+      // animate
+      b.gain+=(Math.random()-0.5)*0.02;
+      b.gain=Math.max(0.3,Math.min(1,b.gain));
+    });
     requestAnimationFrame(draw);
   }
   draw();
