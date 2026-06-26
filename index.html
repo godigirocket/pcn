@@ -1168,7 +1168,8 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
       const x=i*bandW;
       
       // Band background
-      ctx.fillStyle=`${band.color}08`;
+      const bgColor=band.color+'08';
+      ctx.fillStyle=bgColor;
       ctx.fillRect(x+1,0,bandW-2,h);
       
       // Separator
@@ -1188,8 +1189,8 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
       // Meter gradient
       const grad=ctx.createLinearGradient(0,h-meterH,0,h);
       grad.addColorStop(0,band.color);
-      grad.addColorStop(0.6,`${band.color}cc`);
-      grad.addColorStop(1,`${band.color}44`);
+      grad.addColorStop(0.6,band.color+'cc');
+      grad.addColorStop(1,band.color+'44');
       
       ctx.fillStyle=grad;
       ctx.fillRect(meterX,h-meterH,meterW,meterH);
