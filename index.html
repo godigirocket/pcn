@@ -699,20 +699,23 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 <script>
 // ===== LOADING =====
 (function(){
-  const fill=document.getElementById('load-fill');
-  const msg=document.getElementById('load-msg');
-  const steps=[
-    [600,'40%','Loading PCN BOLADÃO.flp...'],
-    [1200,'75%','Initializing 808s...'],
-    [1800,'100%','Ready!'],
-    [2400,null,null]
-  ];
-  steps.forEach(([t,w,m])=>{
+  try{
+    const fill=document.getElementById('load-fill');
+    const msg=document.getElementById('load-msg');
+    const loading=document.getElementById('loading');
+    
+    setTimeout(()=>{fill.style.width='40%';msg.textContent='Loading PCN BOLADÃO.flp...';},600);
+    setTimeout(()=>{fill.style.width='75%';msg.textContent='Initializing 808s...';},1200);
+    setTimeout(()=>{fill.style.width='100%';msg.textContent='Ready!';},1800);
+    setTimeout(()=>{loading.classList.add('hide');},2400);
+  }catch(e){
+    console.error('Loading error:',e);
+    // Force hide loading on error
     setTimeout(()=>{
-      if(w){fill.style.width=w;msg.textContent=m;}
-      else{document.getElementById('loading').classList.add('hide');}
-    },t);
-  });
+      const l=document.getElementById('loading');
+      if(l)l.style.display='none';
+    },1000);
+  }
 })();
 
 // ===== NAVIGATION =====
@@ -973,6 +976,7 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
   }
 // ===== EQ CANVAS =====
 (function(){
+  try{
   const c=document.getElementById('eq-canvas');
   if(!c)return;
   const ctx=c.getContext('2d',{alpha:false});
@@ -1063,10 +1067,12 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
   }
   
   setInterval(draw,50);
+  }catch(e){console.error('EQ error:',e);}
 })();
 
 // ===== FRUITY LIMITER CANVAS =====
 (function(){
+  try{
   const c=document.getElementById('limiter-canvas');
   if(!c)return;
   const ctx=c.getContext('2d',{alpha:false});
@@ -1078,11 +1084,9 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
     w=c.width=c.offsetWidth;
     h=c.height=c.offsetHeight;
     
-    // Background
     ctx.fillStyle='#05070a';
     ctx.fillRect(0,0,w,h);
     
-    // Grid
     ctx.strokeStyle='rgba(40,180,100,0.06)';
     ctx.lineWidth=1;
     for(let i=1;i<4;i++){
@@ -1092,7 +1096,6 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
       ctx.stroke();
     }
     
-    // Threshold line
     const threshY=h*0.35;
     ctx.strokeStyle='rgba(255,140,0,0.4)';
     ctx.lineWidth=1.5;
@@ -1103,17 +1106,14 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
     ctx.stroke();
     ctx.setLineDash([]);
     
-    // Level meter
     level+=(targetLevel-level)*0.1;
     const meterH=level*h*0.8;
     const meterX=w*0.15;
     const meterW=w*0.7;
     
-    // Meter background
     ctx.fillStyle='rgba(20,25,30,0.6)';
     ctx.fillRect(meterX,h-h*0.9,meterW,h*0.8);
     
-    // Meter fill
     const meterGrad=ctx.createLinearGradient(0,h-meterH,0,h);
     if(meterH>threshY){
       meterGrad.addColorStop(0,'#ff4444');
@@ -1126,23 +1126,23 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
     ctx.fillStyle=meterGrad;
     ctx.fillRect(meterX,h-(meterH),meterW,meterH);
     
-    // Peak indicator
     if(meterH>threshY){
       ctx.fillStyle='#ff4444';
       ctx.fillRect(meterX-5,h-meterH-2,meterW+10,4);
     }
     
-    // Update target
     if(Math.random()<0.05){
       targetLevel=Math.random()*0.9+0.1;
     }
   }
   
   setInterval(draw,30);
+  }catch(e){console.error('Limiter error:',e);}
 })();
 
 // ===== MAXIMUS CANVAS =====
 (function(){
+  try{
   const c=document.getElementById('maximus-canvas');
   if(!c)return;
   const ctx=c.getContext('2d',{alpha:false});
@@ -1157,7 +1157,6 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
     w=c.width=c.offsetWidth;
     h=c.height=c.offsetHeight;
     
-    // Background
     ctx.fillStyle='#06080b';
     ctx.fillRect(0,0,w,h);
     
@@ -1167,26 +1166,21 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
     bands.forEach((band,i)=>{
       const x=i*bandW;
       
-      // Band background
       const bgColor=band.color+'08';
       ctx.fillStyle=bgColor;
       ctx.fillRect(x+1,0,bandW-2,h);
       
-      // Separator
       if(i>0){
         ctx.fillStyle='rgba(255,255,255,0.05)';
         ctx.fillRect(x,0,1,h);
       }
       
-      // Level smooth
       band.level+=(band.target-band.level)*0.08;
       
-      // Meter
       const meterH=band.level*h*0.85;
       const meterX=x+padding;
       const meterW=bandW-padding*2;
       
-      // Meter gradient
       const grad=ctx.createLinearGradient(0,h-meterH,0,h);
       grad.addColorStop(0,band.color);
       grad.addColorStop(0.6,band.color+'cc');
@@ -1195,20 +1189,17 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
       ctx.fillStyle=grad;
       ctx.fillRect(meterX,h-meterH,meterW,meterH);
       
-      // Glow on top
       ctx.fillStyle=band.color;
       ctx.shadowBlur=15;
       ctx.shadowColor=band.color;
       ctx.fillRect(meterX,h-meterH,meterW,3);
       ctx.shadowBlur=0;
       
-      // Label
       ctx.fillStyle='rgba(255,255,255,0.6)';
       ctx.font='bold 10px Inter';
       ctx.textAlign='center';
       ctx.fillText(band.name,x+bandW/2,h-10);
       
-      // Update target
       if(Math.random()<0.03){
         band.target=Math.random()*0.6+0.3;
       }
@@ -1216,6 +1207,7 @@ document.addEventListener('keyup',e=>heldKeys.delete(e.key));
   }
   
   setInterval(draw,40);
+  }catch(e){console.error('Maximus error:',e);}
 })();
 
 // ===== PRODUCT IMAGE CYCLING =====
