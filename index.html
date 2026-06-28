@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1">
 <title>PCN Boladão | KANKIU Collection, músicas e drop oficial</title>
-<meta name="description" content="Site oficial PCN Boladão. Ouça KANKIU, veja clipes, acompanhe lançamentos e compre peças exclusivas do drop KANKIU Collection.">
+<meta name="description" content="Site oficial PCN Boladão. Site oficial PCN Boladão. Ouça KANKIU, veja clipes e compre peças do drop KANKIU Collection.">
 <meta property="og:title" content="PCN Boladão | KANKIU Collection">
-<meta property="og:description" content="Som de rua. Drop limitado. KANKIU na pista.">
+<meta property="og:description" content="KANKIU Collection — PCN Boladão.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://pcnstore.vercel.app">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
@@ -220,8 +220,8 @@ radial-gradient(ellipse at 80% 80%,rgba(168,85,247,.03) 0%,transparent 50%);}
 <style>
 /* ── LOJA ── */
 .prod-hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:64px;align-items:start;}
-.prod-flip{position:relative;border-radius:12px;overflow:hidden;background:#111;aspect-ratio:1;}
-.prod-flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s;}
+.prod-flip{position:relative;border-radius:10px;overflow:hidden;background:#0e0e0e;aspect-ratio:4/3;}
+.prod-flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:16px;transition:opacity .5s;}
 .prod-flip .back{opacity:0;}
 .prod-flip:hover .front{opacity:0;}.prod-flip:hover .back{opacity:1;}
 .flip-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;background:rgba(0,0,0,.5);padding:3px 10px;border-radius:20px;white-space:nowrap;}
@@ -257,7 +257,7 @@ radial-gradient(ellipse at 80% 80%,rgba(168,85,247,.03) 0%,transparent 50%);}
 .more-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
 .more-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;transition:all .3s;}
 .more-card:hover{border-color:rgba(255,106,0,.25);transform:translateY(-3px);}
-.more-card img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+.more-card img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#0e0e0e;display:block;padding:12px;}
 .more-card-info{padding:16px;}
 .more-card-info h3{font-size:15px;font-weight:600;margin-bottom:6px;}
 .more-card-info .price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--or);margin-bottom:12px;}
@@ -268,59 +268,65 @@ radial-gradient(ellipse at 80% 80%,rgba(168,85,247,.03) 0%,transparent 50%);}
 @media(max-width:700px){.prod-hero{grid-template-columns:1fr;}.why-grid{grid-template-columns:1fr;}.more-grid{grid-template-columns:1fr;}}
 </style>
 <style>
-/* ── MÚSICAS ── */
-.mus-wrap{max-width:780px;margin:0 auto;padding:80px 20px 60px;}
+/* ── MÚSICAS — CLEAN ── */
+.mus-wrap{max-width:720px;margin:0 auto;padding:80px 20px 60px;}
 
-/* Artist carousel */
-.artist-carousel{position:relative;margin-bottom:40px;overflow:hidden;}
-.carousel-track{display:flex;gap:12px;transition:transform .4s cubic-bezier(.25,.46,.45,.94);}
-.carousel-slide{flex-shrink:0;width:200px;height:260px;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;transition:transform .3s,box-shadow .3s;}
-.carousel-slide.center{width:260px;height:320px;box-shadow:0 0 0 2px var(--or),0 20px 50px rgba(255,106,0,.25);}
+/* Carrossel limpo */
+.artist-carousel{position:relative;margin-bottom:36px;}
+.carousel-track{display:flex;gap:10px;transition:transform .4s cubic-bezier(.25,.46,.45,.94);align-items:center;}
+.carousel-slide{flex-shrink:0;width:180px;height:240px;border-radius:8px;overflow:hidden;position:relative;cursor:pointer;transition:transform .3s,box-shadow .3s,width .3s,height .3s;opacity:.55;transform:scale(.95);}
+.carousel-slide.center{width:220px;height:290px;box-shadow:0 0 0 1px rgba(255,106,0,.4),0 16px 40px rgba(0,0,0,.5);opacity:1;transform:scale(1);}
 .carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;}
-.slide-fallback{width:100%;height:100%;background:linear-gradient(135deg,#0e1018 0%,#1a1d28 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden;}
-.slide-fallback::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");background-size:cover;pointer-events:none;}
-.slide-fallback-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:#fff;text-align:center;text-shadow:0 0 20px rgba(255,106,0,.5);}
-.slide-fallback-label{font-size:8px;color:#444;letter-spacing:2px;}
-.slide-fallback-border{position:absolute;inset:0;border:1px solid rgba(255,106,0,.2);border-radius:10px;pointer-events:none;}
-.slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:12px;}
-.slide-title{font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:6px;}
-.slide-btns{display:flex;gap:5px;}
-.slide-btn{font-size:8px;padding:3px 8px;border-radius:3px;border:1px solid;font-weight:600;letter-spacing:.3px;white-space:nowrap;}
-.slide-btn-sp{border-color:rgba(29,185,84,.5);color:#1db954;background:rgba(29,185,84,.1);}
-.slide-btn-yt{border-color:rgba(255,0,0,.4);color:#ff4444;background:rgba(255,0,0,.08);}
-.carousel-arrows{display:flex;justify-content:center;gap:12px;margin-top:14px;}
-.c-arrow{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#888;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s;}
-.c-arrow:hover{background:rgba(255,106,0,.15);border-color:rgba(255,106,0,.3);color:var(--or);}
-.carousel-dots{display:flex;justify-content:center;gap:6px;margin-top:10px;}
-.c-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .2s;}
-.c-dot.active{background:var(--or);width:18px;border-radius:3px;}
+.slide-fallback{width:100%;height:100%;background:#0e1018;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.slide-fallback-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:rgba(255,255,255,.7);}
+.slide-fallback-label{font-size:8px;color:#333;letter-spacing:1px;}
+.slide-fallback-border{position:absolute;inset:0;border:1px solid rgba(255,255,255,.07);border-radius:8px;pointer-events:none;}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:10px 12px;}
+.slide-title{font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:5px;color:#fff;}
+.slide-btns{display:flex;gap:4px;}
+.slide-btn{font-size:8px;padding:3px 8px;border-radius:3px;border:1px solid;font-weight:600;white-space:nowrap;}
+.slide-btn-sp{border-color:rgba(29,185,84,.4);color:#1db954;background:rgba(29,185,84,.08);}
+.slide-btn-yt{border-color:rgba(255,0,0,.3);color:#ff4444;background:rgba(255,0,0,.06);}
+.carousel-arrows{display:flex;justify-content:center;gap:10px;margin-top:12px;}
+.c-arrow{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:#666;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s;}
+.c-arrow:hover{border-color:rgba(255,106,0,.3);color:var(--or);}
+.carousel-dots{display:flex;justify-content:center;gap:5px;margin-top:8px;}
+.c-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.12);transition:all .2s;}
+.c-dot.active{background:var(--or);width:14px;border-radius:3px;}
 
-/* Music cards */
-.music-cards-label{font-size:10px;color:#555;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;font-weight:700;}
-.music-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px;}
-.music-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px;display:flex;align-items:center;gap:14px;transition:all .2s;cursor:pointer;}
-.music-card:hover{border-color:rgba(255,106,0,.25);background:rgba(255,106,0,.04);transform:translateX(3px);}
-.music-card-thumb{width:50px;height:50px;border-radius:7px;flex-shrink:0;object-fit:cover;background:#0a0c10;}
+/* Music cards — refinados */
+.music-cards-label{font-size:9px;color:#444;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;font-weight:700;}
+.music-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px;}
+.music-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:12px;transition:all .2s;cursor:pointer;}
+.music-card:hover{border-color:rgba(255,106,0,.2);background:rgba(255,106,0,.03);}
+.music-card-thumb{width:44px;height:44px;border-radius:6px;flex-shrink:0;object-fit:cover;background:#0a0c10;}
 .music-card-info{flex:1;min-width:0;}
-.music-card-title{font-size:13px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.music-card-status{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:20px;}
-.status-live{background:rgba(29,185,84,.12);border:1px solid rgba(29,185,84,.25);color:#1db954;}
-.status-yt{background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.2);color:#ff4444;}
-.status-pre{background:rgba(255,106,0,.1);border:1px solid rgba(255,106,0,.25);color:var(--or);}
-.music-card-action{font-size:10px;color:#555;white-space:nowrap;flex-shrink:0;}
+.music-card-title{font-size:12px;font-weight:700;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#ddd;}
+.music-card-status{display:inline-flex;align-items:center;gap:4px;font-size:8px;font-weight:700;letter-spacing:.5px;padding:2px 7px;border-radius:10px;}
+.status-live{background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;}
+.status-yt{background:rgba(255,0,0,.08);border:1px solid rgba(255,0,0,.15);color:#ff4444;}
+.status-pre{background:rgba(255,106,0,.08);border:1px solid rgba(255,106,0,.2);color:var(--or);}
+.music-card-action{color:#444;flex-shrink:0;font-size:14px;}
 
-/* Tags strip */
-.mus-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:24px;}
-.mus-tag{font-size:9px;font-weight:700;padding:4px 10px;border-radius:3px;border:1px solid rgba(255,255,255,.08);color:#555;letter-spacing:1px;text-transform:uppercase;}
-.mus-tag-active{border-color:rgba(255,106,0,.3);color:var(--or);background:rgba(255,106,0,.06);}
-
-/* Mini waveform bar */
-.mus-waveform{height:28px;background:#050709;border:1px solid rgba(255,255,255,.05);border-radius:4px;overflow:hidden;position:relative;margin-bottom:24px;display:flex;align-items:center;padding:0 12px;gap:10px;}
-.mus-waveform canvas{flex:1;height:20px;opacity:.7;}
-.mus-waveform-label{font-size:9px;color:#555;font-family:'Courier New',monospace;white-space:nowrap;letter-spacing:.5px;}
-.mus-play-btn{width:22px;height:22px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:8px;color:#000;flex-shrink:0;cursor:pointer;}
-
-@media(max-width:600px){.music-cards{grid-template-columns:1fr;}.carousel-slide{width:160px;height:210px;}.carousel-slide.center{width:200px;height:250px;}}
+/* Artist row — limpo */
+.mus-artist-row{display:flex;align-items:center;gap:14px;padding:16px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:10px;margin-bottom:20px;}
+.mus-artist-row img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,106,0,.2);flex-shrink:0;}
+.mus-artist-row h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin:0;}
+.mus-artist-row p{font-size:10px;color:#555;margin:2px 0 0;letter-spacing:1px;text-transform:uppercase;}
+.mus-follow{margin-left:auto;display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;background:rgba(29,185,84,.08);border:1px solid rgba(29,185,84,.2);color:#1db954;font-size:11px;font-weight:600;white-space:nowrap;transition:all .2s;flex-shrink:0;}
+.mus-follow:hover{background:rgba(29,185,84,.16);}
+.mus-links{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px;}
+.mus-link{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-size:11px;font-weight:600;transition:all .2s;}
+.mus-link:hover{transform:translateY(-1px);}
+.presave-block{background:rgba(29,185,84,.04);border:1px solid rgba(29,185,84,.14);border-radius:10px;padding:18px;margin-bottom:22px;}
+.presave-label{font-size:9px;color:#1db954;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+/* Mini waveform */
+.mus-waveform{height:26px;background:#050709;border:1px solid rgba(255,255,255,.04);border-radius:4px;overflow:hidden;margin-bottom:20px;display:flex;align-items:center;padding:0 10px;gap:9px;}
+.mus-waveform canvas{flex:1;height:18px;opacity:.6;}
+.mus-waveform-label{font-size:8px;color:#444;font-family:'Courier New',monospace;white-space:nowrap;letter-spacing:.4px;}
+.mus-play-btn{width:20px;height:20px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:7px;color:#000;flex-shrink:0;cursor:pointer;}
+/* Removed: mus-tags strip, exaggerated stickers */
+@media(max-width:600px){.music-cards{grid-template-columns:1fr;}.carousel-slide{width:150px;height:195px;}.carousel-slide.center{width:188px;height:244px;}}
 @media(max-width:540px){.mus-artist-row{flex-direction:column;text-align:center;}.mus-follow{margin:0 auto;}.ct-wrap,.mus-wrap{padding:70px 14px 50px;}}
 .ct-wrap{max-width:520px;margin:0 auto;padding:80px 20px 60px;text-align:center;}
 .ct-wrap h1{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;margin-bottom:6px;}
@@ -447,7 +453,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
           <div class="ering a"></div>
           <div class="ering b"></div>
           <div id="pcn-label">PCN BOLADÃO</div>
-          <div class="pcn-sub">SOM DE RUA · DROP LIMITADO · KANKIU NA PISTA</div>
+          <div class="pcn-sub">KANKIU COLLECTION</div>
         </div>
         <span class="ftag" style="top:14%;left:8%">808</span>
         <span class="ftag" style="top:72%;left:7%;animation-delay:-2s">LEAN</span>
@@ -476,11 +482,11 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
             <span>produtos.exe</span>
           </div>
-          <div class="plug-body" id="vizProd">
-            <img src="https://i.imgur.com/DMZ6WBT.png" class="show" alt="Camisa Kankiu frente">
-            <img src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu costas">
-            <img src="https://i.imgur.com/RnqS6xs.png" alt="Caneca PCN">
-            <img src="https://i.imgur.com/COsCuKl.png" alt="Moletom Kankiu">
+          <div class="plug-body" id="vizProd" style="background:#0e0e0e;">
+            <img src="https://i.imgur.com/DMZ6WBT.png" class="show" alt="Camisa Kankiu frente" style="object-fit:contain;padding:8px;">
+            <img src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu costas" style="object-fit:contain;padding:8px;">
+            <img src="https://i.imgur.com/RnqS6xs.png" alt="Caneca PCN" style="object-fit:contain;padding:8px;">
+            <img src="https://i.imgur.com/COsCuKl.png" alt="Moletom Kankiu" style="object-fit:contain;padding:8px;">
           </div>
           <div class="plug-ft">
             <span class="pbtn on">Produtos</span>
@@ -597,7 +603,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
 <div class="page-wrap">
   <div class="sec-label">Drop Limitado</div>
   <h1 class="sec-h">KANKIU <span style="color:var(--or)">COLLECTION</span></h1>
-  <p class="sec-sub">Sem reposição garantida. Peças feitas pra quem cola no movimento.</p>
+  <p class="sec-sub">Peças exclusivas. Sem reposição garantida.</p>
 
   <div class="prod-hero">
     <div class="prod-flip">
@@ -616,7 +622,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
         <div class="prod-price"><span class="prod-price-sm">R$</span> 100,<span style="font-size:28px">00</span></div>
         <div class="prod-info-small">Frete incluído &nbsp;·&nbsp; Envio em 3–7 dias úteis</div>
       </div>
-      <p class="prod-copy">Peça de drop, não de vitrine comum. Oversized, pesada na presença e feita pra colar com o lançamento. Poucas unidades, sem reposição garantida.</p>
+      <p class="prod-copy">Camiseta oversized exclusiva do drop KANKIU. Tecido premium, estampa resinada, edição limitada. Poucas unidades.</p>
       <div class="prod-stock"><div class="stock-dot"></div>Últimas peças disponíveis</div>
       <button class="btn-buy" onclick="buyWhatsApp('Camisa Kankiu')"><i class="fa-brands fa-whatsapp" style="font-size:18px"></i> Comprar via WhatsApp</button>
       <button class="btn-detail" onclick="buyWhatsApp('Camisa Kankiu — mais informações')"><i class="fa-solid fa-circle-info"></i> Mais informações</button>
@@ -640,7 +646,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
       <div class="more-card-info">
         <h3>Caneca PCN</h3>
         <div class="price">R$ 55,00</div>
-        <p class="card-copy">Item de coleção pra quem acompanha desde antes do hype. Frete incluído.</p>
+        <p class="card-copy">Frete incluído.</p>
         <div class="btn-wpp"><i class="fa-brands fa-whatsapp"></i> Comprar</div>
       </div>
     </div>
@@ -649,7 +655,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
       <div class="more-card-info">
         <h3>Moletom Kankiu</h3>
         <div class="price">R$ 260,00</div>
-        <p class="card-copy">Visual fechado — rua, estúdio e madrugada. Peça principal do drop.</p>
+        <p class="card-copy">Moletom oversized do drop KANKIU. Frete incluído.</p>
         <div class="btn-wpp"><i class="fa-brands fa-whatsapp"></i> Comprar</div>
       </div>
     </div>
@@ -669,25 +675,14 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
 <section id="musicas" class="section">
 <div class="mus-wrap">
   <div class="sec-label">PCN FILES</div>
-  <h1 class="sec-h">MÚSICAS <span style="color:var(--or)">&amp; CLIPES</span></h1>
-  <p class="sec-sub">Som de rua, madrugada e estúdio. Salva antes que o algoritmo enterre.</p>
-
-  <!-- Tags -->
-  <div class="mus-tags">
-    <span class="mus-tag mus-tag-active">TRAP</span>
-    <span class="mus-tag">LEAN</span>
-    <span class="mus-tag">RUA</span>
-    <span class="mus-tag">DROP</span>
-    <span class="mus-tag">140 BPM</span>
-    <span class="mus-tag">CLIPE</span>
-    <span class="mus-tag mus-tag-active">KANKIU.exe</span>
-  </div>
+  <h1 class="sec-h">MÚSICAS</h1>
+  <p class="sec-sub" style="color:#555;margin-bottom:28px;">Ouça no Spotify e acompanhe os clipes.</p>
 
   <!-- Mini waveform player -->
   <div class="mus-waveform">
-    <div class="mus-play-btn" onclick="this.innerHTML=this.innerHTML.includes('&#9654;')?'&#9646;&#9646;':'&#9654;'">&#9654;</div>
+    <div class="mus-play-btn" id="playBtn">&#9654;</div>
     <canvas id="waveform-c"></canvas>
-    <span class="mus-waveform-label">KANKIU — PCN BOLADÃO · 2:58</span>
+    <span class="mus-waveform-label">KANKIU — PCN BOLADÃO &nbsp;·&nbsp; 2:58</span>
   </div>
 
   <!-- Artist carousel -->
@@ -716,10 +711,6 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
         </div>
         <div class="slide-overlay">
           <div class="slide-title">KANKIU — SINGLE</div>
-          <div class="slide-btns">
-            <a class="slide-btn slide-btn-sp" href="https://onerpm.link/750177162510" target="_blank">Ouvir</a>
-            <a class="slide-btn slide-btn-yt" href="https://www.youtube.com/@PCNboladao" target="_blank">Clipe</a>
-          </div>
         </div>
       </div>
       <div class="carousel-slide">
@@ -818,7 +809,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
   <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="380" style="border-radius:10px;border:none;display:block;" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy"></iframe>
 
   <div class="site-footer" style="margin-top:24px;">
-    <div class="footer-label">Site por</div>
+    <div class="footer-label">Feito com DigiRocket</div>
     <a href="https://instagram.com/ojuangoes" target="_blank" class="footer-brand">
       <i class="fa-brands fa-instagram" style="color:#e1306c;font-size:16px;"></i>
       <span>@ojuangoes</span>
