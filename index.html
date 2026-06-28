@@ -4,468 +4,1219 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PCN BOLADÃO</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-html{height:100%;}
-body{font-family:'Inter',sans-serif;background:#08080f;color:#fff;min-height:100%;}
-:root{--or:#ff6a00;--or2:#ff9500;--pu:#a855f7;}
+body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;overflow-x:hidden;}
+:root{--orange:#ff6a00;--orange2:#ff9500;--purple:#a855f7;--dark:#14181e;--glass:rgba(20,24,30,0.85);}
 
-/* LOADING */
-#loading{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .6s;}
+/* LOADING SCREEN */
+#loading{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity 0.6s;}
 #loading.hide{opacity:0;pointer-events:none;}
 #loading img{width:80px;animation:pulse 1s ease-in-out infinite;}
 @keyframes pulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 10px #ff6a00);}50%{transform:scale(1.1);filter:drop-shadow(0 0 30px #ff6a00);}}
-#lb-wrap{width:240px;height:4px;background:#1a1a1a;border-radius:4px;margin-top:24px;overflow:hidden;}
-#lb-fill{height:100%;width:0;background:linear-gradient(90deg,#ff6a00,#ff9500);border-radius:4px;transition:width .4s;}
-#lb-msg{margin-top:12px;font-size:11px;color:#555;letter-spacing:2px;}
+#load-bar-wrap{width:240px;height:4px;background:#222;border-radius:4px;margin-top:24px;overflow:hidden;}
+#load-bar{height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--orange2));border-radius:4px;transition:width 0.3s;}
+#load-msg{margin-top:12px;font-size:12px;color:#888;font-family:'Inter',sans-serif;}
 
 /* HEADER */
-header{position:fixed;top:0;left:0;right:0;height:50px;background:rgba(8,8,15,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:1000;border-bottom:1px solid rgba(255,255,255,.04);}
-.logo{display:flex;align-items:center;gap:9px;font-family:'Bebas Neue',sans-serif;font-size:19px;color:#fff;letter-spacing:1px;text-decoration:none;}
-.logo img{width:32px;height:32px;border-radius:7px;object-fit:cover;}
-nav{display:flex;gap:5px;}
-nav button{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);padding:7px 15px;border-radius:20px;font-size:11px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all .2s;white-space:nowrap;}
-nav button:hover{background:rgba(255,255,255,.1);color:#fff;}
-nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-color:transparent;color:#000;font-weight:700;box-shadow:0 0 18px rgba(255,120,0,.4);}
+header{position:fixed;top:0;left:0;right:0;height:48px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:1000;border-bottom:1px solid rgba(255,255,255,0.05);}
+header .logo{display:flex;align-items:center;gap:10px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;}
+header .logo img{width:36px;height:36px;border-radius:8px;object-fit:cover;}
+header nav{display:flex;gap:6px;}
+header nav button{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.6);
+  padding:8px 18px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  transition:all .2s;
+  letter-spacing:0.3px;
+  white-space:nowrap;
+}
+header nav button:hover{
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(255,255,255,0.2);
+  color:#fff;
+}
+header nav button.active{
+  background:linear-gradient(135deg,#ff8c00,#ff6a00);
+  border-color:#ff8c00;
+  color:#000;
+  font-weight:700;
+  box-shadow:0 0 16px rgba(255,140,0,0.4);
+}
+header nav button:active{transform:scale(0.95);}
 
-/* SECTIONS — todas usam display:block quando ativas */
-.section{display:none;min-height:100vh;padding-top:50px;}
+/* SECTIONS */
+.section{display:none;padding-top:48px;min-height:100vh;}
 .section.active{display:block;}
-#home.active{display:flex;height:100vh;padding-top:0;overflow:hidden;align-items:center;justify-content:center;}
+#home.active{display:flex;align-items:center;justify-content:center;overflow:hidden;height:100vh;}
+
+/* MOBILE PORTRAIT MODE */
+.home-mobile-portrait{display:none;width:100%;height:100%;position:fixed;inset:0;align-items:center;justify-content:center;background:#000;z-index:200;overflow:hidden;}
+
+/* Partículas de fundo */
+.home-mobile-portrait canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+
+/* Anéis orbitando */
+.mp-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.mp-ring{position:absolute;border-radius:50%;border:1px solid;top:50%;left:50%;transform:translate(-50%,-50%);}
+.mp-ring:nth-child(1){width:200px;height:200px;border-color:rgba(255,106,0,.2);animation:mpRing 6s linear infinite;}
+.mp-ring:nth-child(2){width:280px;height:280px;border-color:rgba(168,85,247,.12);animation:mpRing 10s linear infinite reverse;}
+.mp-ring:nth-child(3){width:350px;height:350px;border-color:rgba(255,106,0,.06);animation:mpRing 15s linear infinite;}
+@keyframes mpRing{to{transform:translate(-50%,-50%) rotate(360deg);}}
+
+/* Nome grande atrás */
+.mp-bg-text{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(70px,24vw,140px);color:rgba(255,106,0,.05);letter-spacing:6px;white-space:nowrap;animation:mpBgPulse 5s ease-in-out infinite;pointer-events:none;}
+@keyframes mpBgPulse{0%,100%{opacity:.05;transform:scale(1);}50%{opacity:.1;transform:scale(1.04);}}
+
+.mobile-msg-box{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;}
+
+/* FL STUDIO WINDOW */
+.fl-window{width:95vw;max-width:1400px;height:calc(100vh - 68px);background:#1a1d23;border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.7);display:flex;flex-direction:column;position:relative;}
+
+/* Window Title Bar */
+.fl-titlebar{height:30px;background:#2a2d35;display:flex;align-items:center;padding:0 12px;gap:8px;border-radius:10px 10px 0 0;}
+.fl-dot{width:10px;height:10px;border-radius:50%;}
+.fl-dot.r{background:#ff5f57;}.fl-dot.y{background:#ffbd2e;}.fl-dot.g{background:#28c840;}
+.fl-title{font-size:11px;color:#888;margin-left:10px;font-family:'Inter',sans-serif;}
+
+/* Toolbar */
+.fl-toolbar{height:36px;background:#2a2d33;border-bottom:1px solid #1a1c22;display:flex;align-items:center;padding:0 8px;gap:4px;flex-shrink:0;overflow:hidden;}
+.tb-btn{width:26px;height:26px;border-radius:3px;border:1px solid #3a3d45;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;transition:all .15s;}
+.tb-play{background:#3a8040;border-color:#4a9050;color:#a0f0a0;}
+.tb-stop{background:#1e2228;border-color:#3a3d45;color:#cc4040;}
+.tb-rec{background:#1e2228;border-color:#3a3d45;color:#cc4040;border-radius:50%!important;width:22px!important;height:22px!important;}
+.bpm-display{background:#0a0c10;border:1px solid #2a2d33;padding:3px 8px;border-radius:2px;color:#c8f000;font-family:'Courier New',monospace;font-size:12px;font-weight:700;min-width:70px;text-align:center;}
+.tb-tabs{display:flex;gap:2px;margin-left:auto;}
+.tb-tab{padding:3px 10px;font-size:10px;background:#1e2228;border:1px solid #2a2d33;color:#607080;cursor:pointer;border-radius:2px;transition:all .15s;white-space:nowrap;}
+.tb-tab.active{color:#ff8c00;border-color:#ff8c00;background:rgba(255,140,0,.1);}
+
+/* Main Content Area */
+.fl-main{flex:1;display:flex;overflow:hidden;position:relative;}
+
+/* Piano Keys — vertical sidebar with key labels */
+.piano-sidebar{width:48px;background:#111;display:flex;flex-direction:column;border-right:1px solid #333;overflow:hidden;}
+.piano-key{flex:1;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:flex-end;padding-right:4px;font-size:7px;font-weight:700;cursor:pointer;transition:all .08s;position:relative;user-select:none;}
+.piano-key.white{background:#d4d4d4;color:#444;}
+.piano-key.black{background:#1a1a1a;color:#888;border-bottom:1px solid #000;}
+.piano-key.hit{background:var(--orange)!important;color:#000!important;}
+.piano-key .kb{font-size:6px;position:absolute;left:3px;color:#888;font-family:'Courier New',monospace;top:50%;transform:translateY(-50%);}
+
+/* === HERO 3D === */
+.pcn-hero-3d{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:all;user-select:none;}
+#pcn-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,100px);color:#fff;text-align:center;letter-spacing:5px;line-height:.88;cursor:default;will-change:transform;transform-style:preserve-3d;
+text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgba(168,85,247,.3),
+1px 1px 0 #d05000,2px 2px 0 #a03800,3px 3px 0 #702000,4px 4px 0 #401000,5px 5px 12px rgba(0,0,0,.85);}
+#pcn-label .refl{display:block;transform:scaleY(-.35) translateY(-6px);opacity:.12;filter:blur(2px);}
+.pcn-tag{font-size:12px;color:rgba(255,106,0,.45);letter-spacing:5px;margin-top:10px;font-family:'Bebas Neue',sans-serif;}
+/* energy ring */
+.ering{position:absolute;border-radius:50%;pointer-events:none;border:1px solid;animation:erotate linear infinite;}
+@keyframes erotate{to{transform:rotateZ(360deg);}}
+.ering.a{width:260px;height:90px;border-color:rgba(255,106,0,.2);animation-duration:7s;}
+.ering.b{width:330px;height:115px;border-color:rgba(168,85,247,.15);animation-duration:11s;animation-direction:reverse;}
+/* float idle */
+@keyframes heroIdle{0%,100%{translate:0 0;}50%{translate:0 -5px;}}
+.pcn-hero-3d{animation:heroIdle 5s ease-in-out infinite;}
+
+/* === PARTICLES canvas === */
+#particles-canvas{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.7;}
+
+/* === VISUALIZER WINDOWS — inside plugin-rack, normal flow === */
+.viz-window{
+  width:100%;
+  background:rgba(10,12,16,.95);
+  border:1px solid rgba(255,106,0,.15);
+  border-radius:5px;overflow:hidden;
+  box-shadow:0 3px 12px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;
+  flex-shrink:0;
+  margin-bottom:5px;
+}
+.viz-window .viz-photos{position:relative;overflow:hidden;aspect-ratio:4/3;}
+.viz-window .viz-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s;}
+.viz-window .viz-photos img.show{opacity:1;}
+.viz-window .viz-photos-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%);z-index:1;pointer-events:none;}
+.viz-window .viz-bars{position:absolute;bottom:0;left:0;right:0;height:30%;display:flex;align-items:flex-end;gap:1px;padding:0 4px;z-index:2;}
+#vizClipe{display:none!important;}
+.viz-titlebar{height:22px;background:#181b22;display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;}
+.viz-titlebar .fl-dot{width:8px;height:8px;}
+.viz-titlebar .vtxt{font-size:9px;color:#666;margin-left:4px;flex:1;}
+.viz-photos{position:relative;overflow:hidden;aspect-ratio:1;}
+.viz-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;}
+.viz-photos img.show{opacity:1;}
+.viz-photos-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%);z-index:1;pointer-events:none;}
+.viz-bars{position:absolute;bottom:0;left:0;right:0;height:38%;display:flex;align-items:flex-end;gap:1px;padding:0 5px;z-index:2;}
+.viz-bar{flex:1;border-radius:1px 1px 0 0;background:rgba(255,140,0,0.5);animation:vbar var(--d,.45s) var(--dl,0s) infinite alternate ease-in-out;}
+@keyframes vbar{from{height:2px;opacity:.3;}to{height:var(--h,16px);opacity:.85;}}
+.viz-ctrl{height:24px;background:#111318;display:flex;align-items:center;gap:3px;padding:0 5px;flex-shrink:0;border-top:1px solid #222;}
+.viz-btn{font-size:7px;padding:2px 6px;background:#1e2028;border:1px solid #2a2d35;border-radius:2px;color:#666;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.viz-btn.on,.viz-btn:hover{color:var(--orange);border-color:rgba(255,106,0,.4);background:rgba(255,106,0,.08);}
+
+/* === CURSOR — crosshair premium === */
+*{cursor:none!important;}
+#cur{position:fixed;top:0;left:0;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);}
+#cur svg{display:block;transition:transform .2s;}
+#cur.big svg{transform:scale(1.6);}
+#cur-dot{position:fixed;top:0;left:0;width:5px;height:5px;background:#fff;border-radius:50%;pointer-events:none;z-index:999998;transform:translate(-50%,-50%);box-shadow:0 0 6px #fff;}
+
+/* === FLOATING TAGS === */
+.ftag{position:absolute;font-size:10px;color:rgba(255,255,255,.08);pointer-events:all;cursor:pointer;padding:2px 8px;border-radius:3px;border:1px solid transparent;transition:all .3s;z-index:3;user-select:none;}
+.ftag:hover{color:rgba(255,106,0,.5);border-color:rgba(255,106,0,.2);}
+.ftag.on{color:var(--orange);border-color:var(--orange);background:rgba(255,106,0,.08);box-shadow:0 0 8px rgba(255,106,0,.25);}
+
+/* === GRID CENTER === */
+.fl-center{flex:1;background:#0c0e14;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:40px 20px;z-index:0;}
+
+/* PRESAVE POPUP */
+#presave-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:99990;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
+#presave-overlay.show{display:flex;}
+@keyframes popFadeIn{to{opacity:1;}}
+#presave-box{
+  width:min(420px,90vw);background:rgba(22,24,30,.96);
+  border:1px solid rgba(255,255,255,.08);border-radius:14px;
+  overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.7);
+  animation:popSlide .4s .8s both;transform:scale(.92) translateY(20px);
+}
+@keyframes popSlide{to{transform:scale(1) translateY(0);}}
+.pp-titlebar{height:36px;background:#1a1c22;display:flex;align-items:center;padding:0 14px;gap:8px;border-bottom:1px solid rgba(255,255,255,.06);}
+.pp-dot{width:11px;height:11px;border-radius:50%;cursor:pointer;}
+.pp-dot.r{background:#ff5f57;}.pp-dot.y{background:#ffbd2e;}.pp-dot.g{background:#28c840;}
+.pp-title{font-size:11px;color:#666;margin-left:auto;margin-right:auto;}
+.pp-body{padding:28px 28px 24px;text-align:center;}
+.pp-cover{width:80px;height:80px;border-radius:10px;object-fit:cover;margin:0 auto 16px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.pp-tag{font-size:10px;color:var(--orange);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
+.pp-artist{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:2px;line-height:1.1;margin-bottom:4px;}
+.pp-release{font-size:11px;color:#666;margin-bottom:20px;}
+.pp-btn{display:block;width:100%;padding:14px;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:8px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:10px;}
+.pp-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,106,0,.4);}
+.pp-skip{font-size:11px;color:#444;cursor:pointer;transition:color .2s;}
+.pp-skip:hover{color:#888;}
+
+/* Mobile responsive */
+@media(max-width:768px){
+  /* Plugin rack hidden on mobile — but show viz row below drums */
+  .plugin-rack{display:none;}
+  #vizArtista,#vizProd{display:none!important;}
+  #vizClipe{display:none!important;}
+  .viz-mobile-row{display:flex!important;}
+}
+/* Mobile viz row — hidden on desktop */
+.viz-mobile-row{display:none;gap:4px;padding:4px;background:#0c0e14;border-top:1px solid #1a1d23;flex-shrink:0;height:130px;}
+.viz-mob{flex:1;background:#0a0c10;border:1px solid rgba(255,106,0,.12);border-radius:5px;overflow:hidden;display:flex;flex-direction:column;}
+.viz-mob-title{height:18px;background:#181b22;display:flex;align-items:center;padding:0 6px;gap:4px;font-size:8px;color:#666;flex-shrink:0;}
+.viz-mob-title .fl-dot{width:6px;height:6px;border-radius:50%;}
+.viz-mob-content{flex:1;position:relative;overflow:hidden;}
+.viz-mob-content iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.viz-mob-content img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s;}
+.viz-mob-content img.show{opacity:1;}
+body{cursor:none;}
+.cursor{position:fixed;width:16px;height:16px;border:2px solid var(--orange);border-radius:50%;pointer-events:none;z-index:99999;transition:transform 0.1s,border-color 0.1s;mix-blend-mode:difference;}
+.cursor-dot{position:fixed;width:4px;height:4px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:99999;}
+.cursor.hover{transform:scale(2);border-color:#fff;}
+
+/* Improved 3D Name */
+.name-3d{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,100px);color:#fff;text-align:center;transform-style:preserve-3d;perspective:800px;cursor:default;user-select:none;z-index:2;
+text-shadow:
+  0 0 10px rgba(255,106,0,0.8),
+  0 0 30px rgba(255,106,0,0.5),
+  0 0 60px rgba(168,85,247,0.3),
+  1px 1px 0 #e06000,
+  2px 2px 0 #b04000,
+  3px 3px 0 #802000,
+  4px 4px 0 #501000,
+  5px 5px 10px rgba(0,0,0,0.8);
+  animation:name-float 4s ease-in-out infinite;}
+@keyframes name-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+
+/* Floating tags — interactive */
+.floating-tag{position:absolute;font-size:11px;color:rgba(255,255,255,0.12);font-family:'Inter',sans-serif;animation:floatTag 6s ease-in-out infinite;pointer-events:all;cursor:pointer;padding:3px 8px;border-radius:3px;border:1px solid transparent;transition:all 0.3s;z-index:3;}
+.floating-tag:hover{color:rgba(255,106,0,0.6);border-color:rgba(255,106,0,0.3);}
+.floating-tag.active{color:var(--orange);border-color:var(--orange);background:rgba(255,106,0,0.1);box-shadow:0 0 10px rgba(255,106,0,0.3);}
+
+/* Visualizer upgraded */
+.viz-body{height:140px;position:relative;overflow:hidden;border-radius:4px;}
+.viz-spectrum{position:absolute;bottom:0;left:0;right:0;height:30px;display:flex;align-items:flex-end;gap:1px;padding:0 4px;z-index:2;}
+.viz-bar{flex:1;background:var(--orange);border-radius:1px 1px 0 0;animation:vizPulse var(--d,0.5s) var(--del,0s) infinite alternate ease-in-out;}
+@keyframes vizPulse{from{height:2px;opacity:0.3;}to{height:var(--h,15px);opacity:0.9;}}
+.viz-controls{display:flex;gap:3px;padding:4px;border-top:1px solid #333;}
+.viz-ctrl-btn{font-size:8px;padding:2px 6px;background:#222;border:1px solid #444;border-radius:2px;color:#888;cursor:pointer;transition:all 0.2s;}
+.viz-ctrl-btn:hover,.viz-ctrl-btn.active{color:var(--orange);border-color:var(--orange);background:rgba(255,106,0,0.1);}
+
+/* All clickable elements */
+.tb-btn,.nav-btn,.drum-pad,.fpc-pad,.knob,.piano-key,.floating-tag,.viz-ctrl-btn,.at-btn,.tb-tab{cursor:pointer;}
+.tb-btn:active,.drum-pad:active,.fpc-pad:active{transform:scale(0.9);}
+button,a,.tb-tab{transition:all 0.2s;}
+#orbit-canvas{position:absolute;inset:0;pointer-events:none;z-index:1;}
+.floating-tag{position:absolute;font-size:11px;color:rgba(255,255,255,0.08);font-family:'Inter',sans-serif;animation:floatTag 6s ease-in-out infinite;pointer-events:none;z-index:0;}
+@keyframes floatTag{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+/* Plugin Rack */
+.plugin-rack{width:240px;background:#111;border-left:1px solid #2a2d35;display:flex;flex-direction:column;gap:0;overflow-y:auto;flex-shrink:0;min-width:240px;}
+.plugin-rack::-webkit-scrollbar{width:4px;}
+.plugin-rack::-webkit-scrollbar-thumb{background:#2a2d35;border-radius:2px;}
+.plugin-win{background:rgba(20,24,30,0.95);border-bottom:1px solid #2a2d35;flex-shrink:0;}
+.plugin-titlebar{height:22px;background:#1e2228;display:flex;align-items:center;padding:0 8px;gap:4px;cursor:pointer;user-select:none;}
+.plugin-titlebar .fl-dot{width:7px;height:7px;}
+.plugin-titlebar span{font-size:9px;color:#888;margin-left:4px;flex:1;}
+.plugin-body{padding:8px;}
+
+/* Visualizer */
+.viz-body{height:120px;position:relative;overflow:hidden;border-radius:4px;}
+.viz-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;}
+.viz-body img.show{opacity:1;}
+
+/* EQ Knobs */
+.eq-knobs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:6px;}
+.knob{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 220deg,var(--orange),#333 70%,#333);border:2px solid #444;cursor:grab;position:relative;display:flex;align-items:center;justify-content:center;}
+.knob::after{content:'';width:3px;height:10px;background:#fff;border-radius:2px;position:absolute;top:4px;transform-origin:bottom center;}
+.knob-label{font-size:7px;color:#888;text-align:center;margin-top:2px;}
+
+/* Auto-tune */
+.autotune-body{text-align:center;padding:10px;}
+.pitch-circle{width:50px;height:50px;border-radius:50%;border:2px solid var(--orange);margin:6px auto;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--orange);animation:pitchPulse 2s infinite;}
+@keyframes pitchPulse{0%,100%{box-shadow:0 0 5px rgba(255,106,0,0.3);}50%{box-shadow:0 0 15px rgba(255,106,0,0.6);}}
+.autotune-body p{font-size:9px;color:#888;margin-top:4px;}
+.at-btn{font-size:8px;padding:3px 8px;background:#222;border:1px solid #444;border-radius:3px;color:#888;cursor:pointer;transition:all 0.2s;}
+.at-btn:hover,.at-btn.at-active{background:rgba(255,106,0,0.2);border-color:var(--orange);color:var(--orange);}
+.at-key-btn{font-size:8px;padding:2px 5px;background:#1a1d23;border:1px solid #2a2d35;border-radius:2px;color:#666;cursor:pointer;transition:all .15px;}
+.at-key-btn:hover,.at-key-btn.active-key{background:rgba(255,106,0,.15);border-color:var(--orange);color:var(--orange);}
+.at-slider-wrap{flex:1;height:4px;background:#1a1d23;border-radius:2px;overflow:hidden;cursor:pointer;}
+.at-slider-fill{height:100%;background:var(--orange);border-radius:2px;pointer-events:none;}
+/* FPC Drum Pads */
+.fpc-pad{aspect-ratio:1;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(0,0,0,0.6);cursor:pointer;transition:all 0.1s;opacity:0.8;}
+.fpc-pad:hover{opacity:1;transform:scale(1.05);}
+.fpc-pad:active,.fpc-pad.hit{opacity:1;transform:scale(0.9);box-shadow:0 0 12px currentColor;}
+
+/* Drum Pads */
+.drum-row{height:40px;background:#1a1d23;display:flex;border-top:1px solid #333;}
+.drum-pad{flex:1;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'Inter',sans-serif;color:#aaa;cursor:pointer;border-right:1px solid #333;transition:all 0.1s;user-select:none;}
+.drum-pad:last-child{border-right:none;}
+.drum-pad:hover{background:rgba(255,106,0,0.1);}
+.drum-pad.hit{background:var(--orange) !important;color:#000;box-shadow:0 0 15px rgba(255,106,0,0.5);}
+
+/* Status Bar */
+.fl-status{height:18px;background:#22252b;display:flex;align-items:center;padding:0 10px;font-size:10px;color:#666;border-top:1px solid #333;}
+
+/* LOJA */
+#loja{padding:80px 20px 40px;background:#0a0a0f;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--orange);text-align:center;margin-bottom:8px;}
+.section-sub{text-align:center;color:#888;font-size:14px;margin-bottom:40px;}
+.loja-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;max-width:900px;margin:0 auto;}
+.loja-card{background:rgba(20,24,30,0.7);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:24px;text-align:center;backdrop-filter:blur(10px);transition:all 0.3s;cursor:pointer;}
+.loja-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,106,0,0.15);}
+.loja-card i{font-size:36px;color:#555;margin-bottom:12px;}
+.loja-card h3{font-size:14px;margin-bottom:6px;color:#fff;}
+.loja-card p{font-size:12px;color:var(--orange);}
+
+/* MUSICAS */
+#musicas{padding:80px 20px 40px;background:#0a0a0f;}
+.spotify-wrap{max-width:700px;margin:0 auto;border-radius:12px;overflow:hidden;}
+
+/* CONTATO */
+#contato{padding:80px 20px 40px;background:#0a0a0f;}
+.contato-card{max-width:500px;margin:0 auto;background:rgba(20,24,30,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:32px;backdrop-filter:blur(10px);text-align:center;}
+.contato-card h3{margin-bottom:20px;font-size:18px;}
+.contato-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;color:#ccc;}
+.contato-item i{color:var(--orange);width:20px;text-align:center;}
+.whatsapp-btn{display:inline-block;margin-top:24px;background:#25d366;color:#fff;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;}
+.whatsapp-btn:hover{transform:scale(1.05);box-shadow:0 8px 20px rgba(37,211,102,0.3);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  #cur,#cur-dot,#cur-ring{display:none!important;}
+  *{cursor:auto!important;}
+
+  /* Header */
+  header{height:48px;padding:0 10px;}
+  header .logo{font-size:14px;gap:6px;}
+  header .logo img{width:28px;height:28px;}
+  header nav{gap:3px;}
+  header nav button{padding:6px 10px;font-size:10px;border-radius:14px;}
+
+  /* HOME SECTION — Portrait mode (vertical phone) */
+  #home.active{
+    display:none;
+  }
+  
+  /* Show mobile message in portrait */
+  @media(orientation:portrait){
+    .home-mobile-portrait{
+      display:flex;
+    }
+    .fl-window{
+      display:none;
+    }
+  }
+  
+  /* Hide mobile message in landscape */
+  @media(orientation:landscape){
+    .home-mobile-portrait{
+      display:none;
+    }
+    #home.active{
+      display:flex;
+      height:calc(100vh - 48px);
+      overflow:hidden;
+      padding:0;
+    }
+    .fl-window{
+      display:flex;
+      width:100%;
+      height:100%;
+      max-width:100%;
+      border-radius:0;
+      border:none;
+      box-shadow:none;
+      background:#0c0e14;
+    }
+  }
+
+  /* Sections */
+  .section{top:48px!important;padding-top:0;}
+
+  /* Hide desktop elements */
+  .fl-titlebar,.fl-status{display:none!important;}
+
+  /* Landscape — compact toolbar */
+  @media(orientation:landscape){
+    .fl-toolbar{
+      height:32px;
+      padding:0 4px;
+      gap:2px;
+      flex-wrap:nowrap;
+      flex-shrink:0;
+      overflow:auto;
+      border-bottom:1px solid #1a1d23;
+    }
+    .tb-btn{width:22px;height:22px;font-size:9px;padding:0;}
+    .bpm-display{font-size:9px;min-width:45px;padding:2px 3px;}
+    .tb-tabs{gap:1px;margin-left:auto;}
+    .tb-tab{padding:2px 5px;font-size:7px;}
+
+    /* Main flex */
+    .fl-main{
+      flex:1;
+      min-height:0;
+      overflow:hidden;
+      display:flex;
+      flex-direction:row;
+    }
+
+    /* Piano sidebar small */
+    .piano-sidebar{
+      width:32px;
+      background:#111;
+      border-right:1px solid #2a2d35;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      flex-shrink:0;
+    }
+    .piano-key{
+      flex:1;
+      border-bottom:1px solid #1a1a1a;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      font-size:6px;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .08s;
+      position:relative;
+      user-select:none;
+    }
+    .piano-key.white{background:#d4d4d4;color:#444;}
+    .piano-key.black{background:#1a1a1a;color:#888;border-bottom:1px solid #000;}
+    .piano-key .kb{display:none;}
+
+    /* Center area */
+    .fl-center{
+      flex:1;
+      background:#0c0e14;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    /* Hero scaled down */
+    .pcn-hero-3d{
+      position:relative;
+      z-index:4;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+    
+    #pcn-label{
+      font-size:clamp(24px,8vw,40px);
+      letter-spacing:1px;
+      text-align:center;
+      line-height:0.9;
+      margin:0;
+    }
+    
+    .ering.a{width:70px;height:25px;}
+    .ering.b{width:100px;height:35px;}
+
+    /* Floating tags hidden */
+    .ftag{display:none;}
+
+    /* Plugin rack — small */
+    .plugin-rack{
+      width:160px;
+      background:#111;
+      border-left:1px solid #2a2d35;
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      overflow-y:auto;
+      flex-shrink:0;
+      min-width:160px;
+    }
+    .plugin-rack::-webkit-scrollbar{width:3px;}
+    .plugin-rack::-webkit-scrollbar-thumb{background:#2a2d35;border-radius:2px;}
+    
+    .viz-window{
+      width:100%;
+      background:rgba(10,12,16,.95);
+      border:1px solid rgba(255,106,0,.15);
+      border-radius:3px;
+      overflow:hidden;
+      box-shadow:0 3px 12px rgba(0,0,0,.5);
+      display:flex;
+      flex-direction:column;
+      flex-shrink:0;
+      margin-bottom:3px;
+    }
+    
+    .viz-titlebar{
+      height:18px;
+      background:#181b22;
+      display:flex;
+      align-items:center;
+      padding:0 6px;
+      gap:3px;
+      flex-shrink:0;
+    }
+    .viz-titlebar .fl-dot{width:6px;height:6px;}
+    .viz-titlebar .vtxt{font-size:8px;color:#666;margin-left:3px;flex:1;}
+    
+    .viz-body{
+      height:80px;
+      position:relative;
+      overflow:hidden;
+      border-radius:2px;
+    }
+    .viz-body img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0;
+      transition:opacity 1s;
+    }
+    .viz-body img.show{opacity:1;}
+
+    /* Drum row — bottom */
+    .drum-row{
+      display:none;
+    }
+  }
+
+  /* Loja responsive */
+  .prod-main{grid-template-columns:1fr!important;gap:20px;}
+  .loja-grid{grid-template-columns:repeat(2,1fr);}
+
+  /* Musicas section */
+  #musicas{padding:70px 16px 40px;}
+  .mus-wrap{max-width:100%;}
+  .mus-topbar{flex-direction:column;gap:12px;}
+  .mus-topbar a{margin-left:0;width:100%;}
+
+  /* Contato section */
+  #contato{padding:70px 16px 40px;}
+  .ct-layout{max-width:100%;}
+}
+
+/* Mobile portrait premium keyframes */
+@keyframes mpNameFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes mpPhone{0%,100%{transform:rotate(-15deg) translateY(0);}25%{transform:rotate(0deg) translateY(-5px);}50%{transform:rotate(90deg) translateY(-3px);}75%{transform:rotate(85deg) translateY(-7px);}}
+@keyframes mpArrow{from{transform:translateX(0);}to{transform:translateX(7px);}}
+@keyframes mpDot{0%,100%{background:rgba(255,106,0,.2);transform:scale(1);}50%{background:rgba(255,106,0,.9);transform:scale(1.5);}}
 </style>
 </head>
 <body>
-<style>
-/* === MOBILE PORTRAIT PREMIUM === */
-#mob-portrait{display:none;position:fixed;inset:0;z-index:900;background:#000;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
-#mob-portrait canvas{position:absolute;inset:0;width:100%;height:100%;}
-.mp-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;}
-.mp-bg-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,22vw,130px);color:rgba(255,106,0,.06);letter-spacing:8px;line-height:1;pointer-events:none;animation:bgPulse 4s ease-in-out infinite;}
-@keyframes bgPulse{0%,100%{opacity:.06;transform:scale(1);}50%{opacity:.12;transform:scale(1.03);}}
-.mp-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:280px;height:280px;pointer-events:none;}
-.mp-ring{position:absolute;border-radius:50%;border:1px solid;top:50%;left:50%;transform:translate(-50%,-50%);}
-.mp-ring:nth-child(1){width:160px;height:160px;border-color:rgba(255,106,0,.25);animation:ringRot 6s linear infinite;}
-.mp-ring:nth-child(2){width:220px;height:220px;border-color:rgba(168,85,247,.15);animation:ringRot 10s linear infinite reverse;}
-.mp-ring:nth-child(3){width:280px;height:280px;border-color:rgba(255,106,0,.08);animation:ringRot 15s linear infinite;}
-@keyframes ringRot{to{transform:translate(-50%,-50%) rotate(360deg);}}
-.mp-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,12vw,62px);color:#fff;letter-spacing:5px;line-height:1;
-  text-shadow:0 0 20px rgba(255,106,0,1),0 0 40px rgba(255,106,0,.6),0 0 80px rgba(255,106,0,.3),
-    2px 2px 0 #c04000,4px 4px 0 #802800,6px 6px 12px rgba(0,0,0,.9);
-  animation:nameFloat 4s ease-in-out infinite;}
-@keyframes nameFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.mp-icon-wrap{margin:20px 0 14px;position:relative;}
-.mp-phone{font-size:50px;display:block;animation:phoneAnim 2s ease-in-out infinite;}
-@keyframes phoneAnim{0%,100%{transform:rotate(-15deg) translateY(0);}25%{transform:rotate(5deg) translateY(-6px);}50%{transform:rotate(90deg) translateY(-4px);}75%{transform:rotate(85deg) translateY(-8px);}}
-.mp-arrow{position:absolute;top:-8px;right:-20px;font-size:18px;color:var(--or);animation:arrowBounce .8s ease-in-out infinite alternate;}
-@keyframes arrowBounce{from{transform:translateX(0);}to{transform:translateX(8px);}}
-.mp-txt{font-size:15px;color:#fff;letter-spacing:3px;font-weight:700;font-family:'Bebas Neue',sans-serif;margin-bottom:6px;}
-.mp-sub{font-size:11px;color:#444;letter-spacing:2px;}
-.mp-dots{display:flex;gap:6px;margin-top:24px;}
-.mp-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,106,0,.3);animation:dotPulse 1.4s ease-in-out infinite;}
-.mp-dot:nth-child(2){animation-delay:.2s;}
-.mp-dot:nth-child(3){animation-delay:.4s;}
-@keyframes dotPulse{0%,100%{background:rgba(255,106,0,.2);transform:scale(1);}50%{background:rgba(255,106,0,.8);transform:scale(1.4);}}
-
-/* === FL STUDIO WINDOW === */
-.fl-win{width:calc(100vw - 28px);max-width:1440px;height:calc(100vh - 72px);background:#1a1d23;border-radius:12px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.8);display:flex;flex-direction:column;}
-.fl-tb{height:28px;background:#2a2d35;display:flex;align-items:center;padding:0 12px;gap:7px;border-radius:12px 12px 0 0;flex-shrink:0;}
-.fdot{width:9px;height:9px;border-radius:50%;}
-.fdot.r{background:#ff5f57;}.fdot.y{background:#ffbd2e;}.fdot.g{background:#28c840;}
-.fl-tb span{font-size:10px;color:#666;margin-left:8px;}
-.fl-bar{height:34px;background:#252830;border-bottom:1px solid #1a1c22;display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;}
-.tbb{width:24px;height:24px;border-radius:3px;border:1px solid #3a3d45;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;background:#1e2228;color:#888;transition:all .15s;flex-shrink:0;}
-.tbb.play{background:#3a8040;border-color:#4a9050;color:#a0f0a0;}
-.tbb.stop{color:#cc4040;}.tbb.rec{border-radius:50%!important;width:20px!important;height:20px!important;color:#cc4040;}
-.bpm-d{background:#0a0c10;border:1px solid #252830;padding:2px 7px;border-radius:2px;color:#c8f000;font-family:'Courier New',monospace;font-size:11px;font-weight:700;min-width:65px;text-align:center;flex-shrink:0;}
-.tb-tabs{display:flex;gap:2px;margin-left:auto;}
-.tb-tab{padding:2px 9px;font-size:9px;background:#1e2228;border:1px solid #252830;color:#4a5a6a;cursor:pointer;border-radius:2px;transition:all .15s;white-space:nowrap;}
-.tb-tab.active{color:#ff8c00;border-color:#ff8c00;background:rgba(255,140,0,.08);}
-.fl-main{flex:1;display:flex;overflow:hidden;min-height:0;}
-
-/* PIANO */
-.piano-side{width:42px;background:#0e1014;border-right:1px solid #2a2d35;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;}
-.pk{flex:1;border-bottom:1px solid #181818;display:flex;align-items:center;justify-content:flex-end;padding-right:3px;font-size:6px;font-weight:700;cursor:pointer;transition:background .07s;user-select:none;position:relative;}
-.pk.white{background:#d0d0d0;color:#444;}.pk.black{background:#181818;color:#666;border-bottom:1px solid #000;}
-.pk.hit{background:var(--or)!important;color:#000!important;}
-.pk .kb{font-size:5px;position:absolute;left:2px;color:#777;top:50%;transform:translateY(-50%);}
-
-/* CENTER */
-.fl-center{flex:1;background:#0c0e14;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:44px 22px;pointer-events:none;z-index:0;}
-#ptc{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.65;}
-
-/* HERO */
-.hero-wrap{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.hero-bg-name{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,180px);color:rgba(255,106,0,.04);letter-spacing:12px;white-space:nowrap;pointer-events:none;z-index:0;animation:bgN 6s ease-in-out infinite;}
-@keyframes bgN{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
-.hero-rings{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;}
-.ering{position:absolute;border-radius:50%;border:1px solid;animation:ering-rot linear infinite;}
-@keyframes ering-rot{to{transform:rotateZ(360deg);}}
-.ering.a{width:320px;height:100px;border-color:rgba(255,106,0,.18);animation-duration:7s;}
-.ering.b{width:420px;height:130px;border-color:rgba(168,85,247,.12);animation-duration:12s;animation-direction:reverse;}
-.ering.c{width:200px;height:65px;border-color:rgba(255,180,0,.1);animation-duration:5s;}
-#pcn-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(54px,7.5vw,110px);color:#fff;letter-spacing:6px;line-height:.88;text-align:center;cursor:default;transform-style:preserve-3d;position:relative;z-index:2;
-text-shadow:0 0 14px rgba(255,106,0,.95),0 0 30px rgba(255,106,0,.55),0 0 60px rgba(168,85,247,.25),
-1px 1px 0 #d05000,2px 2px 0 #a03800,3px 3px 0 #702000,4px 4px 0 #401000,5px 5px 14px rgba(0,0,0,.9);}
-#pcn-label .refl{display:block;transform:scaleY(-.28) translateY(-3px);opacity:.09;filter:blur(4px);}
-.ftag{position:absolute;font-size:9px;color:rgba(255,255,255,.06);pointer-events:all;cursor:pointer;padding:2px 7px;border-radius:3px;border:1px solid transparent;transition:all .3s;z-index:3;user-select:none;}
-.ftag:hover,.ftag.on{color:var(--or);border-color:rgba(255,106,0,.25);background:rgba(255,106,0,.05);}
-
-/* PLUGIN RACK */
-.plugin-rack{width:210px;min-width:210px;flex-shrink:0;background:#0e1014;border-left:1px solid #2a2d35;display:flex;flex-direction:column;overflow:hidden;}
-.rack-inner{flex:1;display:flex;flex-direction:column;padding:5px;gap:5px;overflow:hidden;min-height:0;}
-.plug-win{background:#0a0c10;border:1px solid rgba(255,106,0,.1);border-radius:5px;overflow:hidden;display:flex;flex-direction:column;flex:1;min-height:0;}
-.plug-head{height:18px;background:#141820;display:flex;align-items:center;padding:0 6px;gap:4px;flex-shrink:0;}
-.plug-head .fdot{width:6px;height:6px;}
-.plug-head span{font-size:8px;color:#555;margin-left:3px;}
-.plug-body{flex:1;position:relative;overflow:hidden;min-height:0;background:#000;}
-.plug-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;}
-.plug-body img.show{opacity:1;}
-.plug-body iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-#eq-canvas{width:100%;height:100%;display:block;}
-.plug-foot{height:18px;background:#0e1014;display:flex;align-items:center;gap:3px;padding:0 5px;flex-shrink:0;border-top:1px solid #1a1a1a;}
-.pbtn{font-size:7px;padding:1px 5px;background:#141820;border:1px solid #2a2d35;border-radius:2px;color:#444;cursor:pointer;transition:all .2s;}
-.pbtn.on,.pbtn:hover{color:var(--or);border-color:rgba(255,106,0,.3);}
-
-/* DRUMS */
-.drum-row{height:40px;background:#141820;display:flex;border-top:1px solid #2a2d35;flex-shrink:0;}
-.dpad{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border-right:1px solid #1e2228;transition:filter .1s;user-select:none;}
-.dpad:last-child{border-right:none;}
-.dpad span.dn{font-size:8px;font-weight:700;font-family:'Inter',sans-serif;}
-.dpad span.dk{font-size:8px;border-radius:2px;padding:0 4px;color:#fff;margin-top:1px;font-weight:700;}
-.dpad.hit{filter:brightness(2.2);transform:scale(.93);}
-.dpad:hover{filter:brightness(1.4);}
-.fl-status{height:17px;background:#0e1014;display:flex;align-items:center;padding:0 10px;font-size:9px;color:#444;border-top:1px solid #2a2d35;flex-shrink:0;}
-
-/* CURSOR */
-*{cursor:none!important;}
-#cur{position:fixed;top:0;left:0;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);transition:transform .15s;}
-#cur-dot{position:fixed;top:0;left:0;width:4px;height:4px;background:#ff6a00;border-radius:50%;pointer-events:none;z-index:999998;transform:translate(-50%,-50%);}
-
-/* PRESAVE POPUP */
-#pp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:9990;display:none;align-items:center;justify-content:center;}
-#pp-overlay.show{display:flex;}
-#pp-box{width:min(400px,92vw);background:#0e1014;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.9);}
-.pp-bar{height:34px;background:#141820;display:flex;align-items:center;padding:0 14px;gap:8px;border-bottom:1px solid rgba(255,255,255,.05);}
-.pp-dot{width:10px;height:10px;border-radius:50%;cursor:pointer;}
-.pp-dot.r{background:#ff5f57;}.pp-dot.y{background:#ffbd2e;}.pp-dot.g{background:#28c840;}
-.pp-body{padding:24px;text-align:center;}
-.pp-cover{width:72px;height:72px;border-radius:10px;object-fit:cover;margin:0 auto 14px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.6);}
-.pp-tag{font-size:9px;color:var(--or);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
-.pp-artist{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:2px;}
-.pp-rel{font-size:10px;color:#444;margin:4px 0 18px;}
-.pp-btn{display:block;width:100%;padding:12px;background:linear-gradient(135deg,var(--or),var(--or2));border:none;border-radius:8px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;margin-bottom:10px;}
-.pp-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,106,0,.4);}
-.pp-skip{font-size:10px;color:#333;cursor:pointer;transition:color .2s;display:block;text-align:center;}
-.pp-skip:hover{color:#666;}
-
-/* LOJA */
-#loja{background:#08080f;padding:70px 20px 60px;}
-.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,54px);color:var(--or);text-align:center;margin-bottom:6px;}
-.sec-sub{text-align:center;color:#444;font-size:12px;margin-bottom:36px;letter-spacing:2px;}
-.loja-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;max-width:900px;margin:0 auto;}
-.loja-card{background:rgba(14,16,20,.95);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s;border:1px solid rgba(255,255,255,.04);}
-.loja-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(255,106,0,.12);border-color:rgba(255,106,0,.2);}
-.loja-card img{width:100%;height:180px;object-fit:cover;display:block;}
-.loja-card-body{padding:16px;}
-.loja-card h3{font-size:14px;color:#fff;margin-bottom:5px;}
-.loja-card .price{font-size:20px;font-family:'Bebas Neue',sans-serif;color:var(--or);margin-bottom:12px;}
-.loja-card .buy-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:10px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.2);border-radius:7px;color:#25d366;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;}
-.loja-card .buy-btn:hover{background:rgba(37,211,102,.2);}
-
-/* MUSICAS */
-#musicas{background:#08080f;padding:70px 20px 60px;}
-.mus-wrap{max-width:680px;margin:0 auto;}
-.mus-top{display:flex;align-items:center;gap:12px;padding:16px;background:rgba(255,255,255,.02);border-radius:12px;margin-bottom:22px;border:1px solid rgba(255,255,255,.04);}
-.mus-top img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,106,0,.3);}
-.mus-top h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin:0;}
-.mus-top p{font-size:10px;color:#444;margin:0;letter-spacing:2px;text-transform:uppercase;}
-.mus-top a{margin-left:auto;display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;text-decoration:none;font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0;}
-.mus-links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
-.mus-link{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;text-decoration:none;font-size:11px;font-weight:600;}
-.presave-block{background:rgba(29,185,84,.04);border-top:2px solid rgba(29,185,84,.25);border-radius:10px;padding:16px;margin-bottom:20px;}
-.presave-lbl{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#1db954;letter-spacing:2px;text-align:center;margin-bottom:12px;}
-
-/* CONTATO */
-#contato{background:linear-gradient(180deg,#08080f 0%,#0d0b08 100%);padding:70px 20px 60px;}
-.ct-wrap{max-width:500px;margin:0 auto;}
-.ct-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,54px);color:#fff;text-align:center;margin-bottom:4px;}
-.ct-title span{color:var(--or);}
-.ct-sub{text-align:center;color:#333;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:36px;}
-.ct-card{background:rgba(14,16,20,.9);border-radius:12px;padding:18px 22px;margin-bottom:12px;border:1px solid rgba(255,255,255,.04);}
-.ct-lbl{font-size:8px;color:#333;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
-.ct-link{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);color:#aaa;text-decoration:none;font-size:13px;transition:all .2s;}
-.ct-link:last-child{border-bottom:none;}
-.ct-link:hover{color:#fff;padding-left:5px;}
-.ct-link i{width:20px;text-align:center;font-size:16px;}
-.ct-link.ig i{color:#e1306c;}.ct-link.sp i{color:#1db954;}.ct-link.ml i{color:var(--or);}
-.zap-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;background:linear-gradient(135deg,#128c7e,#25d366);border:none;border-radius:10px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .25s;}
-.zap-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.3);}
-.dr-footer{margin-top:44px;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,.04);}
-.dr-lbl{font-size:9px;color:#2a2a2a;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:12px;}
-.dr-brand{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:rgba(20,22,26,.98);border:1px solid rgba(255,255,255,.06);padding:8px 20px;border-radius:50px;transition:all .25s;}
-.dr-brand:hover{border-color:rgba(255,255,255,.14);}
-.dr-brand span{font-size:15px;font-weight:700;color:#fff;}
-.dr-copy{font-size:9px;color:#222;margin-top:10px;}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  *{cursor:auto!important;}
-  #cur,#cur-dot{display:none!important;}
-  nav button{padding:6px 9px;font-size:10px;}
-  .logo{font-size:14px;}.logo img{width:28px;height:28px;}
-}
-@media(max-width:900px) and (orientation:portrait){
-  #mob-portrait{display:flex!important;}
-  #home.active{display:none!important;}
-  #loja,#musicas,#contato{overflow-y:auto;-webkit-overflow-scrolling:touch;}
-}
-@media(max-width:900px) and (orientation:landscape){
-  .fl-win{width:100vw;height:calc(100vh - 50px);border-radius:0;}
-  .fl-tb,.fl-status{display:none!important;}
-  .plugin-rack{width:130px;min-width:130px;}
-  .piano-side{width:26px;}
-  .pk .kb{display:none;}
-  #pcn-label{font-size:clamp(20px,6vw,32px);letter-spacing:2px;}
-  .ering.a{width:80px;height:26px;}.ering.b{width:110px;height:36px;}.ering.c{width:60px;height:20px;}
-  .drum-row{height:34px;}
-  .dpad span.dn{font-size:7px;}.dpad span.dk{font-size:7px;}
-}
-@media(max-width:500px){
-  #loja,#musicas,#contato{padding:66px 14px 50px;}
-  .loja-grid{grid-template-columns:1fr 1fr;gap:10px;}
-  .loja-card img{height:140px;}
-  .mus-top{flex-wrap:wrap;}
-  .mus-top a{width:100%;justify-content:center;margin-left:0;}
-}
-</style>
-
-<!-- PROTEÇÃO -->
+<!-- Bloquear inspeção + proteção anti-clone -->
 <script>
-document.addEventListener('contextmenu',e=>e.preventDefault());
-document.addEventListener('keydown',e=>{
-  if(['F12','F11'].includes(e.key)||(e.ctrlKey&&e.shiftKey&&'ijcIJC'.includes(e.key))||(e.ctrlKey&&'usUS'.includes(e.key))){e.preventDefault();e.stopPropagation();return false;}
-},true);
-document.addEventListener('dragstart',e=>e.preventDefault());
-document.addEventListener('selectstart',e=>e.preventDefault());
-</script>
+// ═════════════════════════════════════════════════════════
+// PROTEÇÃO TOTAL CONTRA CLONAGEM E INSPEÇÃO
+// ═════════════════════════════════════════════════════════
 
-<!-- CURSOR -->
-<div id="cur"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="rgba(255,255,255,.4)" stroke-width="1"/><line x1="10" y1="3" x2="10" y2="8" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="12" x2="10" y2="17" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="10" x2="8" y2="10" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="10" x2="17" y2="10" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="1.5" fill="#ff8c00"/></svg></div>
+// 1. Bloquear clique direito
+document.addEventListener('contextmenu',e=>{e.preventDefault();return false;});
+
+// 2. Bloquear todas as teclas de inspeção
+document.addEventListener('keydown',e=>{
+  // F12
+  if(e.key==='F12'){e.preventDefault();e.stopPropagation();return false;}
+  // Ctrl+Shift+I (DevTools)
+  if(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='i')){e.preventDefault();e.stopPropagation();return false;}
+  // Ctrl+Shift+J (Console)
+  if(e.ctrlKey&&e.shiftKey&&(e.key==='J'||e.key==='j')){e.preventDefault();e.stopPropagation();return false;}
+  // Ctrl+Shift+C (Inspecionar elemento)
+  if(e.ctrlKey&&e.shiftKey&&(e.key==='C'||e.key==='c')){e.preventDefault();e.stopPropagation();return false;}
+  // Ctrl+U (Ver fonte)
+  if(e.ctrlKey&&(e.key==='U'||e.key==='u')){e.preventDefault();e.stopPropagation();return false;}
+  // F11 (Tela cheia)
+  if(e.key==='F11'){e.preventDefault();e.stopPropagation();return false;}
+  // Ctrl+S (Salvar)
+  if(e.ctrlKey&&(e.key==='S'||e.key==='s')){e.preventDefault();e.stopPropagation();return false;}
+}, true);
+
+// 3. Bloquear drag e drop
+document.addEventListener('dragstart',e=>{e.preventDefault();return false;});
+document.addEventListener('drag',e=>{e.preventDefault();return false;});
+
+// 4. Bloquear seleção de texto
+document.addEventListener('selectstart',e=>{e.preventDefault();return false;});
+document.body.style.userSelect='none';
+document.body.style.webkitUserSelect='none';
+document.body.style.webkitTouchCallout='none';
+
+// 5. Desabilitar console.log e ferramentas de debug
+(function(){
+  const noop=()=>{};
+  window.console.log=noop;
+  window.console.error=noop;
+  window.console.warn=noop;
+  window.console.info=noop;
+  window.console.debug=noop;
+  
+  // Detectar DevTools aberto
+  let devToolOpen=false;
+  const threshold=160;
+  setInterval(()=>{
+    if(window.outerHeight-window.innerHeight>threshold||window.outerWidth-window.innerWidth>threshold){
+      if(!devToolOpen){devToolOpen=true;window.location.href='about:blank';}
+    }else{devToolOpen=false;}
+  },500);
+})();
+
+// 6. Proteger HTML contra cópia/visualização
+Object.defineProperty(document,'write',{value:()=>{}});
+document.body.oncontextmenu=()=>false;
+document.body.ondragstart=()=>false;
+
+// 7. Bloqueador de ferramentas de desenvolvimento
+if(window.devtools&&window.devtools.open){window.location.href='about:blank';}
+
+// 8. Bloquear técnicas avançadas de debugging
+setInterval(()=>{
+  debugger; // força parada se DevTools estiver aberto
+},1000);
+
+console.clear=()=>{};
+</script>
+<div id="cur">
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <!-- outer ring -->
+    <circle cx="16" cy="16" r="13" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <!-- cross lines -->
+    <line x1="16" y1="2" x2="16" y2="10" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="16" y1="22" x2="16" y2="30" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="2" y1="16" x2="10" y2="16" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="22" y1="16" x2="30" y2="16" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- orange dot center -->
+    <circle cx="16" cy="16" r="2" fill="#ff8c00"/>
+  </svg>
+</div>
 <div id="cur-dot"></div>
 
 <!-- PRESAVE POPUP -->
-<div id="pp-overlay">
-  <div id="pp-box">
-    <div class="pp-bar">
-      <span class="pp-dot r" onclick="closePP()"></span><span class="pp-dot y"></span><span class="pp-dot g"></span>
-      <span style="font-size:9px;color:#444;margin:0 auto;">Novo Lançamento — KANKIU</span>
-      <span onclick="closePP()" style="color:#333;font-size:14px;cursor:pointer;">✕</span>
+<div id="presave-overlay" style="display:none;">
+  <div id="presave-box">
+    <div class="pp-titlebar">
+      <span class="pp-dot r" onclick="closePresave()"></span>
+      <span class="pp-dot y"></span>
+      <span class="pp-dot g"></span>
+      <span class="pp-title">Novo Lançamento — KANKIU</span>
+      <span onclick="closePresave()" style="margin-left:auto;color:#666;font-size:16px;cursor:pointer;line-height:1;padding:0 2px;">✕</span>
     </div>
     <div class="pp-body">
       <img class="pp-cover" src="https://i.imgur.com/DMZ6WBT.png" alt="KANKIU">
       <div class="pp-tag">🎵 Agora Disponível</div>
       <div class="pp-artist">KANKIU</div>
-      <div class="pp-rel">PCN BOLADÃO · Salve na sua biblioteca</div>
-      <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePP()"><i class="fa-brands fa-spotify"></i> SALVAR / PRÉ-SAVE</a>
-      <span class="pp-skip" onclick="closePP()">Agora não</span>
+      <div class="pp-release">PCN BOLADÃO · Salve na sua biblioteca</div>
+      <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePresave()">
+        <i class="fa-brands fa-spotify"></i> SALVAR / PRÉ-SAVE
+      </a>
+      <span class="pp-skip" onclick="closePresave()">Agora não</span>
     </div>
   </div>
 </div>
 
-<!-- LOADING -->
+<!-- LOADING SCREEN -->
 <div id="loading">
-  <img src="https://upload.wikimedia.org/wikipedia/fr/e/ef/FL-Studio-12-Logo.png" alt="FL">
-  <div id="lb-wrap"><div id="lb-fill"></div></div>
-  <p id="lb-msg">Loading PCN BOLADÃO.flp...</p>
-</div>
-
-<!-- MOBILE PORTRAIT PREMIUM -->
-<div id="mob-portrait">
-  <canvas id="mp-canvas"></canvas>
-  <div class="mp-content">
-    <div class="mp-bg-name">PCN BOLADÃO</div>
-    <div class="mp-rings">
-      <div class="mp-ring"></div><div class="mp-ring"></div><div class="mp-ring"></div>
-    </div>
-    <div class="mp-name">PCN BOLADÃO</div>
-    <div class="mp-icon-wrap">
-      <span class="mp-phone">📱</span>
-      <span class="mp-arrow">→</span>
-    </div>
-    <div class="mp-txt">VIRE SEU TELEFONE</div>
-    <div class="mp-sub">para visualizar o FL Studio</div>
-    <div class="mp-dots"><div class="mp-dot"></div><div class="mp-dot"></div><div class="mp-dot"></div></div>
-  </div>
+  <img src="https://upload.wikimedia.org/wikipedia/fr/e/ef/FL-Studio-12-Logo.png" alt="FL Studio">
+  <div id="load-bar-wrap"><div id="load-bar"></div></div>
+  <p id="load-msg">Loading PCN BOLADÃO.flp...</p>
 </div>
 
 <!-- HEADER -->
 <header>
-  <a class="logo" href="#">
-    <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN">
-    PCN BOLADÃO
-  </a>
+  <div class="logo"><img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN">PCN BOLADÃO</div>
   <nav>
-    <button class="active" data-s="home">HOME</button>
-    <button data-s="loja">LOJA</button>
-    <button data-s="musicas">MÚSICAS</button>
-    <button data-s="contato">CONTATO</button>
+    <button class="active" data-section="home">HOME</button>
+    <button data-section="loja">LOJA</button>
+    <button data-section="musicas">MÚSICAS</button>
+    <button data-section="contato">CONTATO</button>
   </nav>
 </header>
 
-<!-- HOME -->
+<!-- HOME SECTION -->
 <section id="home" class="section active">
-  <div class="fl-win">
-    <div class="fl-tb">
-      <div class="fdot r"></div><div class="fdot y"></div><div class="fdot g"></div>
-      <span>FL Studio 20 — PCN BOLADÃO.flp</span>
+  <!-- Mobile Portrait: Simple Message -->
+  <div class="home-mobile-portrait">
+    <canvas id="mp-particles"></canvas>
+    <div class="mp-rings">
+      <div class="mp-ring"></div>
+      <div class="mp-ring"></div>
+      <div class="mp-ring"></div>
     </div>
-    <div class="fl-bar">
-      <div class="tbb play">▶</div>
-      <div class="tbb stop">■</div>
-      <div class="tbb rec">●</div>
-      <div class="bpm-d">140.000</div>
+    <div class="mp-bg-text">PCN BOLADÃO</div>
+    <div class="mobile-msg-box">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,13vw,68px);color:#fff;letter-spacing:5px;margin-bottom:0;line-height:.9;text-align:center;
+        text-shadow:0 0 20px rgba(255,106,0,1),0 0 40px rgba(255,106,0,.6),0 0 80px rgba(255,106,0,.3),2px 2px 0 #c04000,4px 4px 0 #802800,6px 6px 14px rgba(0,0,0,.9);
+        animation:mpNameFloat 4s ease-in-out infinite;">PCN BOLADÃO</div>
+      <div style="margin:28px 0 20px;position:relative;">
+        <span style="font-size:56px;display:block;animation:mpPhone 2.2s ease-in-out infinite;">📱</span>
+        <span style="position:absolute;top:8px;right:-22px;font-size:20px;color:#ff6a00;animation:mpArrow .8s ease-in-out infinite alternate;">→</span>
+      </div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:4px;margin-bottom:6px;">VIRE SEU TELEFONE</div>
+      <div style="font-size:11px;color:#444;letter-spacing:2px;">para visualizar o FL Studio</div>
+      <div style="display:flex;gap:7px;margin-top:24px;">
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,106,0,.3);animation:mpDot 1.4s ease-in-out infinite;"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,106,0,.3);animation:mpDot 1.4s .2s ease-in-out infinite;"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,106,0,.3);animation:mpDot 1.4s .4s ease-in-out infinite;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop / Landscape: Full FL Studio -->
+  <div class="fl-window">
+    <!-- Title Bar -->
+    <div class="fl-titlebar">
+      <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
+      <span class="fl-title">FL Studio 20 — PCN BOLADÃO.flp</span>
+    </div>
+    <!-- Toolbar -->
+    <div class="fl-toolbar">
+      <button class="tb-btn tb-play">▶</button>
+      <button class="tb-btn tb-stop">■</button>
+      <button class="tb-btn tb-rec">●</button>
+      <span class="bpm-display">140.00</span>
       <div class="tb-tabs">
         <span class="tb-tab">Playlist</span>
         <span class="tb-tab">Mixer</span>
         <span class="tb-tab active">Piano Roll</span>
       </div>
     </div>
+    <!-- Main -->
     <div class="fl-main">
-      <div class="piano-side" id="pianoKeys"></div>
+      <!-- Piano Keys -->
+      <div class="piano-sidebar" id="pianoKeys"></div>
+      <!-- Center — clean FL Studio area -->
       <div class="fl-center">
         <div class="grid-bg"></div>
-        <canvas id="ptc"></canvas>
-        <div class="hero-wrap" id="heroBlock">
-          <div class="hero-bg-name">PCN BOLADÃO</div>
-          <div class="hero-rings">
-            <div class="ering a"></div><div class="ering b"></div><div class="ering c"></div>
-          </div>
+        <canvas id="particles-canvas"></canvas>
+        <canvas id="orbit-canvas"></canvas>
+
+        <!-- Hero 3D -->
+        <div class="pcn-hero-3d" id="heroBlock">
+          <div class="ering a"></div>
+          <div class="ering b"></div>
           <div id="pcn-label">PCN BOLADÃO<span class="refl">PCN BOLADÃO</span></div>
         </div>
-        <span class="ftag" style="top:13%;left:8%">808</span>
-        <span class="ftag" style="top:75%;left:7%;animation-delay:-2s">LEAN</span>
-        <span class="ftag" style="top:18%;right:10%;animation-delay:-1s">TRAP</span>
-        <span class="ftag" style="top:78%;right:12%;animation-delay:-3s">♱</span>
+
+        <!-- Floating tags -->
+        <span class="ftag" style="top:14%;left:8%">808</span>
+        <span class="ftag" style="top:72%;left:7%;animation-delay:-2s">LEAN</span>
+        <span class="ftag" style="top:22%;left:55%;animation-delay:-1s">TRAP</span>
+        <span class="ftag" style="top:78%;left:52%;animation-delay:-3s">♱</span>
+
       </div>
+
+      <!-- Plugin Rack -->
       <div class="plugin-rack">
-        <div class="rack-inner">
-          <div class="plug-win">
-            <div class="plug-head"><div class="fdot r"></div><div class="fdot y"></div><div class="fdot g"></div><span>clipe.exe</span></div>
-            <div class="plug-body">
-              <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&playsinline=1&rel=0" allow="autoplay;encrypted-media" loading="lazy"></iframe>
+        <!-- VISUALIZER 1 — Clipe -->
+        <div class="viz-window" id="vizArtista">
+          <div class="viz-titlebar">
+            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
+            <span class="vtxt">clipe.exe</span>
+          </div>
+          <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;">
+            <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&iv_load_policy=3" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="autoplay;encrypted-media" loading="lazy"></iframe>
+            <div style="position:absolute;inset:0;z-index:2;"></div>
+          </div>
+          <div class="viz-ctrl">
+            <span class="viz-btn on">Clipe</span>
+            <a class="viz-btn" href="https://www.youtube.com/@PCNboladao" target="_blank" style="text-decoration:none;">YouTube</a>
+          </div>
+        </div>
+        <!-- VISUALIZER 2 — Produtos -->
+        <div class="viz-window" id="vizProd">
+          <div class="viz-titlebar">
+            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
+            <span class="vtxt">produtos.exe</span>
+          </div>
+          <div class="viz-photos" id="vizProdPhotos">
+            <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="object-fit:contain;background:#111;">
+            <img src="https://i.imgur.com/UYnObyx.png" style="object-fit:contain;background:#111;">
+            <img src="https://i.imgur.com/RnqS6xs.png" style="object-fit:contain;background:#f5f5f5;">
+            <img src="https://i.imgur.com/T7gz5qF.png" style="object-fit:contain;background:#f5f5f5;">
+            <img src="https://i.imgur.com/UBs7TVK.png" style="object-fit:contain;background:#f5f5f5;">
+            <img src="https://i.imgur.com/xw69IAY.png" style="object-fit:contain;background:#f5f5f5;">
+            <img src="https://i.imgur.com/COsCuKl.png" style="object-fit:contain;background:#111;">
+            <img src="https://i.imgur.com/kDrKdm2.png" style="object-fit:contain;background:#111;">
+            <img src="https://i.imgur.com/LcUmOL8.png" style="object-fit:contain;background:#111;">
+          </div>
+          <div class="viz-ctrl">
+            <span class="viz-btn on">Produtos</span>
+            <span class="viz-btn" onclick="window.dispatchEvent(new Event('goLoja'))" style="cursor:pointer;">Loja</span>
+          </div>
+        </div>
+        <!-- FPC — Drum Pads -->
+        <div class="plugin-win">
+          <div class="plugin-titlebar">
+            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
+            <span>FPC — Drum Pads</span>
+          </div>
+          <div style="padding:6px;background:#0e1014;">
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
+              <div class="fpc-pad" data-sound="kick" style="background:linear-gradient(145deg,#2a0a0a,#1a0606);border:1px solid #5a1010;box-shadow:inset 0 1px 0 rgba(255,80,80,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#ff5555;">K</span><span style="font-size:7px;color:#aa4444;letter-spacing:1px;">KICK</span></div>
+              <div class="fpc-pad" data-sound="snare" style="background:linear-gradient(145deg,#0a0a2a,#060618);border:1px solid #101055;box-shadow:inset 0 1px 0 rgba(80,80,255,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#5577ff;">S</span><span style="font-size:7px;color:#4455aa;letter-spacing:1px;">SNARE</span></div>
+              <div class="fpc-pad" data-sound="hat" style="background:linear-gradient(145deg,#0a1e0a,#060e06);border:1px solid #105510;box-shadow:inset 0 1px 0 rgba(80,200,80,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#55cc55;">H</span><span style="font-size:7px;color:#448844;letter-spacing:1px;">H-HAT</span></div>
+              <div class="fpc-pad" data-sound="clap" style="background:linear-gradient(145deg,#1a0a1a,#0e060e);border:1px solid #551055;box-shadow:inset 0 1px 0 rgba(200,80,200,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#cc55cc;">C</span><span style="font-size:7px;color:#885588;letter-spacing:1px;">CLAP</span></div>
+              <div class="fpc-pad" data-sound="perc" style="background:linear-gradient(145deg,#1a1200,#0e0c00);border:1px solid #554400;box-shadow:inset 0 1px 0 rgba(200,160,0,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#ccaa00;">P</span><span style="font-size:7px;color:#887700;letter-spacing:1px;">PERC</span></div>
+              <div class="fpc-pad" data-sound="rim" style="background:linear-gradient(145deg,#001a1a,#000e0e);border:1px solid #005555;box-shadow:inset 0 1px 0 rgba(0,200,200,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#00cccc;">R</span><span style="font-size:7px;color:#007777;letter-spacing:1px;">RIM</span></div>
             </div>
-            <div class="plug-foot">
-              <span class="pbtn on">Clipe</span>
-              <a class="pbtn" href="https://www.youtube.com/@PCNboladao" target="_blank" style="text-decoration:none;">YouTube</a>
+            <div style="margin-top:5px;display:flex;justify-content:space-between;padding:2px 2px 0;">
+              <span style="font-size:8px;color:#333;letter-spacing:1px;">KEYS: 1-6</span>
+              <span style="font-size:8px;color:#333;">FPC v3.2</span>
             </div>
           </div>
-          <div class="plug-win">
-            <div class="plug-head"><div class="fdot r"></div><div class="fdot y"></div><div class="fdot g"></div><span>produtos.exe</span></div>
-            <div class="plug-body" id="prodPhotos">
-              <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="object-fit:cover;">
-              <img src="https://i.imgur.com/UYnObyx.png" style="object-fit:cover;">
-              <img src="https://i.imgur.com/RnqS6xs.png" style="object-fit:cover;background:#f5f5f5;">
-              <img src="https://i.imgur.com/COsCuKl.png" style="object-fit:cover;">
-            </div>
-            <div class="plug-foot">
-              <span class="pbtn on">Produtos</span>
-              <span class="pbtn" onclick="goSection('loja')" style="cursor:pointer;">Loja</span>
+        </div>
+
+        <!-- Parametric EQ 2 -->
+        <div class="plugin-win">
+          <div class="plugin-titlebar">
+            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
+            <span>Parametric EQ 2</span>
+          </div>
+          <div style="background:#080c10;padding:6px;">
+            <canvas id="eq-canvas" style="width:100%;height:70px;display:block;border-radius:3px;background:#060a0e;border:1px solid #1a2430;margin-bottom:5px;"></canvas>
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;">
+              <div style="text-align:center;">
+                <div class="knob" data-value="35" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#e04040 calc(35%*2.7deg + 0deg),#1a1d23 0);border:2px solid #3a1414;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,100,100,.1);"></div>
+                <div style="font-size:7px;color:#e04040;margin-top:2px;letter-spacing:.5px;">HP</div>
+                <div style="font-size:6px;color:#444;margin-top:1px;">80Hz</div>
+              </div>
+              <div style="text-align:center;">
+                <div class="knob" data-value="55" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#ff8c00 calc(55%*2.7deg + 0deg),#1a1d23 0);border:2px solid #3a2a00;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,180,0,.1);"></div>
+                <div style="font-size:7px;color:#ff8c00;margin-top:2px;letter-spacing:.5px;">LF</div>
+                <div style="font-size:6px;color:#444;margin-top:1px;">250Hz</div>
+              </div>
+              <div style="text-align:center;">
+                <div class="knob" data-value="65" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#c8f000 calc(65%*2.7deg + 0deg),#1a1d23 0);border:2px solid #2a3000;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(200,240,0,.1);"></div>
+                <div style="font-size:7px;color:#c8f000;margin-top:2px;letter-spacing:.5px;">MF</div>
+                <div style="font-size:6px;color:#444;margin-top:1px;">1kHz</div>
+              </div>
+              <div style="text-align:center;">
+                <div class="knob" data-value="50" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#40cc80 calc(50%*2.7deg + 0deg),#1a1d23 0);border:2px solid #0a2a1a;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(64,200,128,.1);"></div>
+                <div style="font-size:7px;color:#40cc80;margin-top:2px;letter-spacing:.5px;">HMF</div>
+                <div style="font-size:6px;color:#444;margin-top:1px;">3kHz</div>
+              </div>
+              <div style="text-align:center;">
+                <div class="knob" data-value="45" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#5599ff calc(45%*2.7deg + 0deg),#1a1d23 0);border:2px solid #0a1a3a;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(85,153,255,.1);"></div>
+                <div style="font-size:7px;color:#5599ff;margin-top:2px;letter-spacing:.5px;">HF</div>
+                <div style="font-size:6px;color:#444;margin-top:1px;">8kHz</div>
+              </div>
             </div>
           </div>
-          <div class="plug-win">
-            <div class="plug-head"><div class="fdot r"></div><div class="fdot y"></div><div class="fdot g"></div><span>Parametric EQ 2</span></div>
-            <div class="plug-body"><canvas id="eq-canvas"></canvas></div>
+        </div>
+
+        <!-- Auto-Tune Pro -->
+        <div class="plugin-win">
+          <div class="plugin-titlebar">
+            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
+            <span>Auto-Tune Pro</span>
+          </div>
+          <div style="background:#080c10;padding:6px;">
+            <!-- Pitch display -->
+            <div style="display:flex;gap:4px;align-items:stretch;margin-bottom:5px;">
+              <div id="pitch-display" style="flex:1;height:36px;background:#000;border:1px solid #1a3020;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:26px;color:#40ff80;text-shadow:0 0 8px rgba(64,255,128,.6);letter-spacing:2px;">C</div>
+              <div style="width:36px;height:36px;background:#000;border:1px solid #1a3020;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;color:#40ff80;text-align:center;line-height:1.3;font-weight:700;">C<br>MIN</div>
+            </div>
+            <!-- Key selector -->
+            <div style="background:#060a0e;border:1px solid #1a2028;border-radius:3px;padding:4px;margin-bottom:5px;">
+              <div style="font-size:7px;color:#556;letter-spacing:1px;margin-bottom:3px;">KEY</div>
+              <div style="display:flex;gap:2px;">
+                <div class="at-key-btn active-key">C</div>
+                <div class="at-key-btn">D</div>
+                <div class="at-key-btn">E</div>
+                <div class="at-key-btn">F</div>
+                <div class="at-key-btn">G</div>
+                <div class="at-key-btn">A</div>
+                <div class="at-key-btn">B</div>
+              </div>
+            </div>
+            <!-- Sliders -->
+            <div style="display:flex;flex-direction:column;gap:4px;background:#060a0e;border:1px solid #1a2028;border-radius:3px;padding:5px;">
+              <div style="display:flex;align-items:center;gap:5px;">
+                <span style="font-size:7px;color:#556;width:42px;letter-spacing:.5px;">Humanize</span>
+                <div class="at-slider-wrap" style="flex:1;height:5px;background:#0e1218;border-radius:2px;cursor:pointer;border:1px solid #1a2028;"><div class="at-slider-fill" id="humanize-fill" style="width:40%;background:linear-gradient(90deg,#40ff80,#00cc55);"></div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;">
+                <span style="font-size:7px;color:#556;width:42px;letter-spacing:.5px;">Vibrato</span>
+                <div class="at-slider-wrap" style="flex:1;height:5px;background:#0e1218;border-radius:2px;cursor:pointer;border:1px solid #1a2028;"><div class="at-slider-fill" id="vibrato-fill" style="width:25%;background:linear-gradient(90deg,#40ff80,#00cc55);"></div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;">
+                <span style="font-size:7px;color:#556;width:42px;letter-spacing:.5px;">Retune</span>
+                <div class="at-slider-wrap" style="flex:1;height:5px;background:#0e1218;border-radius:2px;cursor:pointer;border:1px solid #1a2028;"><div class="at-slider-fill" id="retune-fill" style="width:55%;background:linear-gradient(90deg,#40ff80,#00cc55);"></div></div>
+              </div>
+            </div>
+            <!-- Bypass button -->
+            <div style="margin-top:4px;display:flex;justify-content:flex-end;">
+              <div style="font-size:7px;padding:2px 8px;background:#1a2028;border:1px solid #2a3038;border-radius:2px;color:#556;cursor:pointer;letter-spacing:1px;" onclick="this.style.background=this.style.background==='#0a5030'?'#1a2028':'#0a5030';this.style.color=this.style.color==='#40ff80'?'#556':'#40ff80';">BYPASS</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Drum Pads -->
     <div class="drum-row">
-      <div class="dpad" data-drum="kick" style="background:rgba(224,40,40,.12);border-top:2px solid #e02828;"><span class="dn" style="color:#e05555;">KICK</span><span class="dk" style="background:#e02828;">1</span></div>
-      <div class="dpad" data-drum="snare" style="background:rgba(80,130,220,.12);border-top:2px solid #5082dc;"><span class="dn" style="color:#7aaaf0;">SNARE</span><span class="dk" style="background:#5082dc;">2</span></div>
-      <div class="dpad" data-drum="hat" style="background:rgba(40,180,100,.12);border-top:2px solid #28b464;"><span class="dn" style="color:#50d882;">H-HAT</span><span class="dk" style="background:#28b464;">3</span></div>
-      <div class="dpad" data-drum="clap" style="background:rgba(180,80,220,.12);border-top:2px solid #b450dc;"><span class="dn" style="color:#d480f0;">CLAP</span><span class="dk" style="background:#b450dc;">4</span></div>
-      <div class="dpad" data-drum="perc" style="background:rgba(220,170,40,.12);border-top:2px solid #dcaa28;"><span class="dn" style="color:#f0cc50;">PERC</span><span class="dk" style="background:#dcaa28;color:#000;">5</span></div>
-      <div class="dpad" data-drum="rim" style="background:rgba(40,190,210,.12);border-top:2px solid #28bed2;"><span class="dn" style="color:#50dcf0;">RIM</span><span class="dk" style="background:#28bed2;color:#000;">6</span></div>
+      <div class="drum-pad" data-drum="kick" style="background:rgba(224,40,40,.15);border-top:2px solid #e02828;"><span style="font-size:10px;font-weight:700;color:#e05555;">KICK</span><span style="font-size:9px;background:#e02828;color:#fff;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">1</span></div>
+      <div class="drum-pad" data-drum="snare" style="background:rgba(80,130,220,.15);border-top:2px solid #5082dc;"><span style="font-size:10px;font-weight:700;color:#7aaaf0;">SNARE</span><span style="font-size:9px;background:#5082dc;color:#fff;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">2</span></div>
+      <div class="drum-pad" data-drum="hat" style="background:rgba(40,180,100,.15);border-top:2px solid #28b464;"><span style="font-size:10px;font-weight:700;color:#50d882;">H-HAT</span><span style="font-size:9px;background:#28b464;color:#fff;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">3</span></div>
+      <div class="drum-pad" data-drum="clap" style="background:rgba(180,80,220,.15);border-top:2px solid #b450dc;"><span style="font-size:10px;font-weight:700;color:#d480f0;">CLAP</span><span style="font-size:9px;background:#b450dc;color:#fff;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">4</span></div>
+      <div class="drum-pad" data-drum="perc" style="background:rgba(220,170,40,.15);border-top:2px solid #dcaa28;"><span style="font-size:10px;font-weight:700;color:#f0cc50;">PERC</span><span style="font-size:9px;background:#dcaa28;color:#000;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">5</span></div>
+      <div class="drum-pad" data-drum="rim" style="background:rgba(40,190,210,.15);border-top:2px solid #28bed2;"><span style="font-size:10px;font-weight:700;color:#50dcf0;">RIM</span><span style="font-size:9px;background:#28bed2;color:#000;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">6</span></div>
     </div>
+    <!-- Mobile Viz Row — only visible on mobile -->
+    <div class="viz-mobile-row">
+      <!-- Clipe -->
+      <div class="viz-mob" style="flex:2;">
+        <div class="viz-mob-title">
+          <span class="fl-dot" style="background:#ff5f57;"></span>
+          <span class="fl-dot" style="background:#ffbd2e;"></span>
+          <span class="fl-dot" style="background:#28c840;"></span>
+          clipe.exe
+        </div>
+        <div class="viz-mob-content">
+          <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&playsinline=1" allow="autoplay;encrypted-media" loading="lazy"></iframe>
+        </div>
+      </div>
+      <!-- Produtos -->
+      <div class="viz-mob" style="flex:1;">
+        <div class="viz-mob-title">
+          <span class="fl-dot" style="background:#ff5f57;"></span>
+          <span class="fl-dot" style="background:#ffbd2e;"></span>
+          <span class="fl-dot" style="background:#28c840;"></span>
+          produtos.exe
+        </div>
+        <div class="viz-mob-content" id="vizMobProd">
+          <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="background:#111;">
+          <img src="https://i.imgur.com/UYnObyx.png" style="background:#111;">
+          <img src="https://i.imgur.com/RnqS6xs.png" style="background:#f5f5f5;">
+          <img src="https://i.imgur.com/T7gz5qF.png" style="background:#f5f5f5;">
+          <img src="https://i.imgur.com/UBs7TVK.png" style="background:#f5f5f5;">
+          <img src="https://i.imgur.com/COsCuKl.png" style="background:#111;">
+          <img src="https://i.imgur.com/kDrKdm2.png" style="background:#111;">
+          <img src="https://i.imgur.com/LcUmOL8.png" style="background:#111;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
     <div class="fl-status">PCN BOLADÃO — FL Studio 21 — CPU: 12% | RAM: 1.2GB</div>
   </div>
 </section>
 
-<!-- LOJA -->
+<!-- LOJA SECTION -->
 <section id="loja" class="section">
-  <div class="sec-title">LOJA KANKIU</div>
-  <div class="sec-sub">STREETWEAR UNDERGROUND EDITION</div>
-  <div class="loja-grid">
-    <div class="loja-card" onclick="buyZap('Camisa Kankiu')">
-      <img src="https://i.imgur.com/DMZ6WBT.png" alt="Camisa Kankiu">
-      <div class="loja-card-body">
-        <h3>Camisa Kankiu</h3>
-        <div class="price">R$ 100,00</div>
-        <div class="buy-btn"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</div>
+<style>
+/* === LOJA STREETWEAR === */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+#loja{background:#0a0a0a;overflow-y:auto;padding:60px 20px 80px;}
+.loja-header{text-align:center;margin-bottom:50px;}
+.loja-brand{font-family:'Anton',sans-serif;font-size:clamp(36px,6vw,64px);color:#fff;letter-spacing:4px;line-height:1;}
+.loja-brand span{color:#e01a1a;}
+.loja-sub{font-size:13px;color:#666;letter-spacing:3px;text-transform:uppercase;margin-top:8px;}
+/* Product main */
+.prod-main{max-width:900px;margin:0 auto;display:grid;grid-template-columns:400px 1fr;gap:40px;align-items:start;}
+/* Image flip card */
+.prod-img-wrap{position:relative;border-radius:10px;overflow:hidden;background:#f5f5f5;aspect-ratio:1;cursor:crosshair;}
+.prod-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transition:opacity .6s ease;}
+.prod-img-wrap .prod-back{opacity:0;}
+.prod-img-wrap:hover .prod-front{opacity:0;}
+.prod-img-wrap:hover .prod-back{opacity:1;}
+.img-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:10px;color:rgba(0,0,0,.45);letter-spacing:2px;text-transform:uppercase;pointer-events:none;transition:opacity .3s;}
+.prod-img-wrap:hover .img-hint{opacity:0;}
+/* Mobile toggle */
+.img-toggle{display:none;gap:8px;margin-top:8px;justify-content:center;}
+.img-toggle-btn{padding:6px 14px;background:#1a1a1a;border:1px solid #333;border-radius:4px;color:#aaa;font-size:11px;cursor:pointer;transition:all .2s;}
+.img-toggle-btn.active{border-color:#e01a1a;color:#e01a1a;}
+/* Product info */
+.prod-info{display:flex;flex-direction:column;gap:16px;}
+.prod-name{font-family:'Anton',sans-serif;font-size:clamp(28px,4vw,44px);color:#fff;letter-spacing:2px;}
+/* Seals */
+.prod-seals{display:flex;gap:8px;flex-wrap:wrap;}
+.seal{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.seal-hot{background:#e01a1a;color:#fff;}
+.seal-limit{background:rgba(224,26,26,.12);border:1px solid rgba(224,26,26,.4);color:#e01a1a;}
+.seal-new{background:#1a1a1a;border:1px solid #444;color:#aaa;}
+/* Price */
+.prod-price-block{border-top:1px solid #1c1c1c;border-bottom:1px solid #1c1c1c;padding:14px 0;}
+.prod-price{font-family:'Anton',sans-serif;font-size:36px;color:#fff;letter-spacing:1px;}
+.prod-price-cents{font-size:18px;vertical-align:super;color:#aaa;}
+.prod-installment{font-size:12px;color:#666;margin-top:4px;}
+.prod-desc{font-size:13px;color:#888;line-height:1.7;}
+/* Buttons */
+.prod-btn-buy{width:100%;padding:16px;background:#e01a1a;border:none;border-radius:8px;color:#fff;font-family:'Anton',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.prod-btn-buy:hover{background:#c01515;transform:translateY(-2px);box-shadow:0 8px 24px rgba(224,26,26,.35);}
+.prod-btn-buy:active{transform:scale(.97);}
+.prod-btn-detail{width:100%;padding:12px;background:transparent;border:1px solid #333;border-radius:8px;color:#888;font-size:13px;cursor:pointer;transition:all .2s;margin-top:4px;}
+.prod-btn-detail:hover{border-color:#666;color:#ccc;}
+.stock-bar{display:flex;align-items:center;gap:8px;font-size:11px;color:#888;}
+.stock-dot{width:6px;height:6px;border-radius:50%;background:#e01a1a;animation:dotPulse 1.5s infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+/* Complete o look */
+.complete-section{max-width:1000px;margin:60px auto 0;}
+.complete-title{font-family:'Anton',sans-serif;font-size:24px;color:#fff;letter-spacing:2px;margin-bottom:24px;border-left:3px solid #e01a1a;padding-left:12px;}
+.complete-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;}
+.complete-card{background:#111;border:1px solid #1c1c1c;border-radius:10px;overflow:hidden;transition:all .3s;}
+.complete-card:hover{border-color:#333;transform:translateY(-3px);}
+.complete-img{height:160px;background:#161616;display:flex;align-items:center;justify-content:center;color:#2a2a2a;font-size:32px;}
+.complete-info{padding:12px;}
+.complete-info h4{font-size:12px;color:#888;letter-spacing:1px;text-transform:uppercase;}
+/* Extra product cards */
+.extra-card{background:#111;border:1px solid #1c1c1c;border-radius:10px;overflow:hidden;transition:all .3s;}
+.extra-card:hover{border-color:#333;transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.extra-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;cursor:crosshair;border-radius:8px 8px 0 0;background:#f5f5f5;}
+.extra-front,.extra-back,.extra-back2,.extra-back3{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;background:#f5f5f5;}
+.extra-back,.extra-back2,.extra-back3{opacity:0;}
+.extra-img-wrap:hover .extra-front{opacity:0;}
+.extra-img-wrap:hover .extra-back{opacity:1;}
+.complete-info p{font-size:11px;color:#e01a1a;margin-top:4px;letter-spacing:1px;}
+@media(max-width:768px){
+  .prod-main{grid-template-columns:1fr;gap:24px;}
+  .img-toggle{display:flex;}
+  .prod-img-wrap .prod-back{opacity:0!important;}
+  .prod-img-wrap .prod-front{opacity:1!important;}
+  .prod-img-wrap.show-back .prod-front{opacity:0!important;}
+  .prod-img-wrap.show-back .prod-back{opacity:1!important;}
+}
+</style>
+  <div class="loja-header">
+    <div class="loja-brand">KANKIU <span>COLLECTION</span></div>
+    <div class="loja-sub">Streetwear Underground Edition</div>
+  </div>
+
+  <!-- Main Product -->
+  <div class="prod-main">
+    <!-- Image -->
+    <div>
+      <div class="prod-img-wrap" id="prodImgWrap">
+        <img class="prod-front" src="https://i.imgur.com/DMZ6WBT.png" alt="Camisa Kankiu - Frente" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;">
+        <img class="prod-back" src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu - Costas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;opacity:0;">
+        <span class="img-hint">Passe o mouse para ver costas</span>
+      </div>
+      <div class="img-toggle">
+        <button class="img-toggle-btn active" onclick="showFront()">Frente</button>
+        <button class="img-toggle-btn" onclick="showBack()">Costas</button>
       </div>
     </div>
-    <div class="loja-card" onclick="buyZap('Caneca PCN')">
-      <img src="https://i.imgur.com/RnqS6xs.png" alt="Caneca" style="background:#f5f5f5;">
-      <div class="loja-card-body">
-        <h3>Caneca PCN</h3>
-        <div class="price">R$ 55,00</div>
-        <div class="buy-btn"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</div>
+
+    <!-- Info -->
+    <div class="prod-info">
+      <div class="prod-name">Camisa Kankiu</div>
+      <div class="prod-seals">
+        <span class="seal seal-hot">🔥 Poucas Unidades</span>
+        <span class="seal seal-limit">Drop Limitado</span>
+        <span class="seal seal-new">Novo</span>
       </div>
-    </div>
-    <div class="loja-card" onclick="buyZap('Moletom Kankiu')">
-      <img src="https://i.imgur.com/COsCuKl.png" alt="Moletom" style="background:#f5f5f5;">
-      <div class="loja-card-body">
-        <h3>Moletom Kankiu</h3>
-        <div class="price">R$ 260,00</div>
-        <div class="buy-btn"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</div>
+      <div class="prod-price-block">
+        <div class="prod-price"><span class="prod-price-cents">R$</span> 100,<span style="font-size:24px">00</span></div>
+        <div class="prod-installment">Frete incluído</div>
       </div>
+      <div class="prod-desc">Camiseta oversized exclusiva. Tecido premium, estampa resinada, edição limitada.<br>100% algodão penteado • Exclusiva • Streetwear edition</div>
+      <div class="stock-bar"><div class="stock-dot"></div>Últimas peças disponíveis</div>
+      <button class="prod-btn-buy" onclick="buyWhatsApp('Camisa Kankiu')"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</button>
+      <button class="prod-btn-detail" onclick="buyWhatsApp('Camisa Kankiu')"><i class="fa-solid fa-info-circle"></i> Mais informações</button>
     </div>
+  </div>
+
+  <!-- MAIS PRODUTOS GRID -->
+  <div style="max-width:900px;margin:50px auto 0;padding:0 0 40px;">
+    <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin-bottom:24px;border-left:3px solid #e01a1a;padding-left:12px;">MAIS PRODUTOS</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;">
+
+      <!-- CANECA -->
+      <div class="extra-card">
+        <div class="extra-img-wrap">
+          <img class="extra-front" src="https://i.imgur.com/RnqS6xs.png" alt="Caneca" style="object-fit:cover;background:#f5f5f5;">
+          <img class="extra-back" src="https://i.imgur.com/T7gz5qF.png" alt="Caneca lado" style="object-fit:cover;background:#f5f5f5;">
+          <img class="extra-back2" src="https://i.imgur.com/UBs7TVK.png" alt="Caneca detalhe" style="object-fit:cover;background:#f5f5f5;">
+          <img class="extra-back3" src="https://i.imgur.com/xw69IAY.png" alt="Caneca top" style="object-fit:cover;background:#f5f5f5;">
+          <span class="seal seal-hot" style="position:absolute;top:10px;left:10px;z-index:2;font-size:9px;">🔥 Poucas</span>
+        </div>
+        <div class="extra-info">
+          <div style="font-family:'Anton',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;">Caneca PCN</div>
+          <div style="font-size:12px;color:#666;margin:4px 0 12px;">Edição Limitada · Exclusiva</div>
+          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;">R$ 55,00</div>
+          <div style="font-size:11px;color:#666;margin-bottom:14px;">Frete incluído</div>
+          <button class="prod-btn-buy" style="font-size:14px;padding:12px;" onclick="buyWhatsApp('Caneca PCN')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
+        </div>
+      </div>
+
+      <!-- MOLETOM -->
+      <div class="extra-card">
+        <div class="extra-img-wrap">
+          <img class="extra-front" src="https://i.imgur.com/COsCuKl.png" alt="Moletom frente" style="object-fit:cover;background:#f5f5f5;">
+          <img class="extra-back" src="https://i.imgur.com/kDrKdm2.png" alt="Moletom frente 2" style="object-fit:cover;background:#f5f5f5;">
+          <img class="extra-back2" src="https://i.imgur.com/LcUmOL8.png" alt="Moletom verso" style="object-fit:cover;background:#f5f5f5;">
+          <span class="seal seal-limit" style="position:absolute;top:10px;left:10px;z-index:2;font-size:9px;">Drop Limitado</span>
+        </div>
+        <div class="extra-info">
+          <div style="font-family:'Anton',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;">Moletom Kankiu</div>
+          <div style="font-size:12px;color:#666;margin:4px 0 12px;">Oversized · Premium · Streetwear</div>
+          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;">R$ 260,00</div>
+          <div style="font-size:11px;color:#666;margin-bottom:14px;">Frete incluído</div>
+          <button class="prod-btn-buy" style="font-size:14px;padding:12px;" onclick="buyWhatsApp('Moletom Kankiu')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   </div>
 </section>
 
-<!-- MÚSICAS -->
+<!-- MUSICAS SECTION -->
 <section id="musicas" class="section">
+<style>
+#musicas{background:#080810;padding:70px 20px 40px;overflow-y:auto;}
+.mus-wrap{max-width:680px;margin:0 auto;}
+.mus-topbar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:12px;}
+.mus-topbar img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,106,0,.35);}
+.mus-topbar h1{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin:0;}
+.mus-topbar p{font-size:11px;color:#555;margin:0;letter-spacing:2px;text-transform:uppercase;}
+.mus-topbar a{margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;text-decoration:none;font-size:12px;font-weight:600;transition:all .2s;white-space:nowrap;}
+.mus-topbar a:hover{background:rgba(29,185,84,.2);}
+.mus-iframe-wrap{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.05);}
+.mus-presave-section{margin-bottom:40px;padding:20px;background:rgba(29,185,84,.05);border:1px solid rgba(29,185,84,.2);border-radius:12px;}
+.mus-presave-iframe{border-radius:12px;overflow:hidden;margin-bottom:16px;}
+.mus-presave-info{font-size:12px;color:#aaa;text-align:center;}
+</style>
   <div class="mus-wrap">
-    <div class="sec-title">MÚSICAS</div>
-    <div class="sec-sub">OUÇA NO SPOTIFY</div>
-    <div class="mus-top">
+    <div class="mus-topbar">
       <img src="https://i.ibb.co/992g4LWK/imgi-41-661993170-18387838516083845-7837809524537980210-n.jpg" alt="PCN">
-      <div><h2>PCN BOLADÃO</h2><p>Artista no Spotify</p></div>
+      <div>
+        <h1>PCN BOLADÃO</h1>
+        <p>Artista no Spotify</p>
+      </div>
       <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Seguir</a>
     </div>
-    <div class="mus-links">
-      <a class="mus-link" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank" style="background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;"><i class="fa-brands fa-spotify"></i> Spotify</a>
-      <a class="mus-link" href="https://www.youtube.com/@PCNboladao" target="_blank" style="background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.2);color:#ff4444;"><i class="fa-brands fa-youtube"></i> YouTube</a>
-      <a class="mus-link" href="https://www.instagram.com/7pcnboladao" target="_blank" style="background:rgba(225,48,108,.1);border:1px solid rgba(225,48,108,.2);color:#e1306c;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+
+    <!-- PRESAVE SECTION -->
+    <div class="mus-presave-section">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#1db954;letter-spacing:2px;margin-bottom:16px;text-align:center;">🎵 PRÉ-SAVE NOVO LANÇAMENTO</div>
+      <div class="mus-presave-iframe">
+        <iframe data-testid="embed-iframe" style="border-radius:12px;width:100%" src="https://open.spotify.com/embed/prerelease/2KhuPf1YqIQB4zYfEPSArA?utm_source=generator&theme=0" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+      <div class="mus-presave-info">Clique em SALVAR para adicionar à sua biblioteca</div>
     </div>
-    <div class="presave-block">
-      <div class="presave-lbl">🎵 PRÉ-SAVE — NOVO LANÇAMENTO</div>
-      <iframe style="border-radius:10px;width:100%;border:none;display:block;" src="https://open.spotify.com/embed/prerelease/2KhuPf1YqIQB4zYfEPSArA?utm_source=generator&theme=0" height="352" allowfullscreen="" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy"></iframe>
+
+    <!-- ARTIST PROFILE -->
+    <div class="mus-iframe-wrap">
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+        <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-spotify"></i> Spotify</a>
+        <a href="https://www.youtube.com/@PCNboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.2);color:#ff4444;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        <a href="https://www.instagram.com/7pcnboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(225,48,108,.1);border:1px solid rgba(225,48,108,.2);color:#e1306c;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      </div>
+      <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="460" frameBorder="0" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block;"></iframe>
     </div>
-    <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="380" style="border-radius:10px;border:none;display:block;" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy"></iframe>
   </div>
 </section>
 
-<!-- CONTATO -->
+<!-- CONTATO SECTION -->
 <section id="contato" class="section">
-  <div class="ct-wrap">
+<style>
+#contato{background:linear-gradient(180deg,#0a0a0f 0%,#100e0a 100%);padding:70px 20px 40px;overflow-y:auto;}
+.ct-header{text-align:center;margin-bottom:44px;}
+.ct-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,60px);color:#fff;letter-spacing:4px;}
+.ct-title span{color:var(--orange);}
+.ct-subtitle{font-size:12px;color:#555;letter-spacing:3px;text-transform:uppercase;margin-top:8px;}
+.ct-layout{max-width:540px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+.ct-card{background:rgba(20,24,18,.7);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px 24px;backdrop-filter:blur(12px);}
+.ct-card-title{font-size:10px;color:#555;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+.ct-links{display:flex;flex-direction:column;gap:0;}
+.ct-link{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);color:#ccc;text-decoration:none;font-size:14px;transition:all .2s;}
+.ct-link:last-child{border-bottom:none;}
+.ct-link:hover{color:#fff;padding-left:4px;}
+.ct-link i{width:20px;text-align:center;font-size:17px;}
+.ct-link.ig i{color:#e1306c;}
+.ct-link.sp i{color:#1db954;}
+.ct-link.ml i{color:var(--orange);}
+.ct-link.yt i{color:#ff0000;}
+.ct-btn-zap{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;background:linear-gradient(135deg,#128c7e,#25d366);border:none;border-radius:10px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;transition:all .25s;text-decoration:none;}
+.ct-btn-zap:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.35);}
+/* ══ DIGIROCKET FOOTER ══ */
+.dr-footer{margin-top:50px;padding:30px 20px 10px;text-align:center;border-top:1px solid rgba(255,255,255,.04);}
+.dr-label{font-size:10px;color:#555;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:14px;}
+.dr-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:all .25s;background:rgba(25,27,30,.95);border:1px solid rgba(255,255,255,.07);padding:10px 24px;border-radius:50px;box-shadow:0 4px 20px rgba(0,0,0,.5);}
+.dr-brand:hover{background:rgba(35,38,42,.95);border-color:rgba(255,255,255,.15);}
+.dr-name{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-.3px;}
+.dr-copy{font-size:11px;color:#444;margin-top:14px;letter-spacing:.5px;}
+</style>
+  <div class="ct-header">
     <div class="ct-title">FALE <span>COMIGO</span></div>
-    <div class="ct-sub">Bookings · Feats · Parcerias</div>
+    <div class="ct-subtitle">Bookings · Feats · Parcerias</div>
+  </div>
+  <div class="ct-layout">
     <div class="ct-card">
-      <div class="ct-lbl">Redes Sociais</div>
-      <a class="ct-link ig" href="https://www.instagram.com/7pcnboladao/" target="_blank"><i class="fa-brands fa-instagram"></i>@7pcnboladao</a>
-      <a class="ct-link sp" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i>PCN BOLADÃO no Spotify</a>
-      <a class="ct-link ml" href="mailto:pcnboladao@gmail.com"><i class="fa-solid fa-envelope"></i>pcnboladao@gmail.com</a>
+      <div class="ct-card-title">Redes Sociais</div>
+      <div class="ct-links">
+        <a class="ct-link ig" href="https://www.instagram.com/7pcnboladao/" target="_blank"><i class="fa-brands fa-instagram"></i>@7pcnboladao</a>
+        <a class="ct-link sp" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i>PCN BOLADÃO no Spotify</a>
+        <a class="ct-link ml" href="mailto:pcnboladao@gmail.com"><i class="fa-solid fa-envelope"></i>pcnboladao@gmail.com</a>
+      </div>
     </div>
-    <a class="zap-btn" href="https://wa.me/5511976369308" target="_blank"><i class="fa-brands fa-whatsapp" style="font-size:22px;"></i>CHAMAR NO WHATSAPP</a>
+    <a class="ct-btn-zap" href="https://wa.me/5511976369308" target="_blank"><i class="fa-brands fa-whatsapp" style="font-size:22px;"></i>CHAMAR NO WHATSAPP</a>
+    <!-- ══ DIGIROCKET FOOTER ══ -->
     <div class="dr-footer">
-      <span class="dr-lbl">Desenvolvido por</span>
+      <span class="dr-label">Desenvolvido por</span>
       <a href="https://www.instagram.com/GODIGIROCKET" target="_blank" class="dr-brand">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" fill="#6EC72D"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" fill="#6EC72D"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" fill="#4da81e"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" fill="#4da81e"/></svg>
-        <span>DigiRocket</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" fill="#6EC72D"/>
+          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" fill="#6EC72D"/>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" fill="#4da81e"/>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" fill="#4da81e"/>
+        </svg>
+        <span class="dr-name">DigiRocket</span>
       </a>
       <p class="dr-copy">© 2025 PCN BOLADÃO · Todos os direitos reservados</p>
     </div>
@@ -473,195 +1224,665 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 </section>
 
 <script>
-// ===== LOADING =====
+// ===== LOADING SCREEN =====
 (function(){
-  const fill=document.getElementById('lb-fill'),msg=document.getElementById('lb-msg');
-  [[600,'40%','Loading PCN BOLADÃO.flp...'],[1200,'75%','Initializing 808s...'],[1800,'100%','Ready!'],[2400,null,null]].forEach(([t,w,m])=>{
-    setTimeout(()=>{if(w){fill.style.width=w;msg.textContent=m;}else document.getElementById('loading').classList.add('hide');},t);
-  });
+  const bar=document.getElementById('load-bar');
+  const msg=document.getElementById('load-msg');
+  const msgs=['Loading PCN BOLADÃO.flp...','Initializing 808s...','Ready!'];
+  let step=0;
+  const iv=setInterval(()=>{
+    step++;
+    if(step===1){bar.style.width='40%';msg.textContent=msgs[0];}
+    else if(step===2){bar.style.width='75%';msg.textContent=msgs[1];}
+    else if(step===3){bar.style.width='100%';msg.textContent=msgs[2];}
+    else if(step===4){document.getElementById('loading').classList.add('hide');clearInterval(iv);}
+  },600);
 })();
 
 // ===== NAVIGATION =====
-function goSection(id){
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.s===id));
-  document.querySelectorAll('.section').forEach(s=>{
-    s.classList.remove('active');
-    if(s.id===id){
-      s.classList.add('active');
-      if(id==='home'){document.body.style.overflow='hidden';}
-      else{document.body.style.overflow='auto';}
-    }
+const navBtns=document.querySelectorAll('header nav button');
+const sections=document.querySelectorAll('.section');
+navBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    navBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    sections.forEach(s=>s.classList.remove('active'));
+    document.getElementById(btn.dataset.section).classList.add('active');
+    if(btn.dataset.section==='home')document.body.style.overflow='hidden';
+    else document.body.style.overflow='auto';
   });
-}
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>goSection(b.dataset.s)));
+});
 document.body.style.overflow='hidden';
 
-// ===== PIANO =====
+// ===== PIANO KEYS GENERATION =====
 (function(){
-  const side=document.getElementById('pianoKeys');if(!side)return;
-  const keys=[{n:'C5',w:true,k:'A'},{n:'C#5',w:false,k:'W'},{n:'D5',w:true,k:'S'},{n:'Eb5',w:false,k:'E'},{n:'E5',w:true,k:'D'},{n:'F5',w:true,k:'F'},{n:'F#5',w:false,k:'T'},{n:'G5',w:true,k:'G'},{n:'G#5',w:false,k:'Y'},{n:'A5',w:true,k:'H'},{n:'Bb5',w:false,k:'U'},{n:'B5',w:true,k:'J'},{n:'C6',w:true,k:'K'}];
-  const nf={'C5':523.25,'C#5':554.37,'D5':587.33,'Eb5':622.25,'E5':659.25,'F5':698.46,'F#5':739.99,'G5':783.99,'G#5':830.61,'A5':880,'Bb5':932.33,'B5':987.77,'C6':1046.5};
-  const kb2n={'a':'C5','w':'C#5','s':'D5','e':'Eb5','d':'E5','f':'F5','t':'F#5','g':'G5','y':'G#5','h':'A5','u':'Bb5','j':'B5','k':'C6'};
-  window._nf=nf;window._kb2n=kb2n;
+  const sidebar=document.getElementById('pianoKeys');
+  if(!sidebar)return;
+  // C minor pentatonic + chromatic pattern with keyboard mapping
+  // Keys: A S D F G H J K = white, W E T Y U = black (displayed on piano)
+  const keys=[
+    {note:'C5',white:true,kb:'A'},{note:'C#5',white:false,kb:'W'},
+    {note:'D5',white:true,kb:'S'},{note:'Eb5',white:false,kb:'E'},
+    {note:'E5',white:true,kb:'D'},{note:'F5',white:true,kb:'F'},
+    {note:'F#5',white:false,kb:'T'},{note:'G5',white:true,kb:'G'},
+    {note:'G#5',white:false,kb:'Y'},{note:'A5',white:true,kb:'H'},
+    {note:'Bb5',white:false,kb:'U'},{note:'B5',white:true,kb:'J'},
+    {note:'C6',white:true,kb:'K'},
+  ];
   keys.forEach(k=>{
     const el=document.createElement('div');
-    el.className='pk '+(k.w?'white':'black');
-    el.dataset.note=k.n;
-    el.innerHTML=`<span class="kb">${k.k}</span>${k.n.replace(/\d/,'')}`;
-    const play=()=>{playNote(nf[k.n]);el.classList.add('hit');};
-    const stop=()=>el.classList.remove('hit');
-    el.addEventListener('mousedown',e=>{e.preventDefault();play();});
-    el.addEventListener('mouseup',stop);el.addEventListener('mouseleave',stop);
-    el.addEventListener('touchstart',e=>{e.preventDefault();play();},{passive:false});
-    el.addEventListener('touchend',stop);
-    side.appendChild(el);
+    el.className='piano-key '+(k.white?'white':'black');
+    el.dataset.note=k.note;
+    el.innerHTML=`<span class="kb">${k.kb}</span>${k.note.replace(/\d/,'')}`;
+    el.addEventListener('mousedown',e=>{e.preventDefault();playPianoNote(k.note);el.classList.add('hit');});
+    el.addEventListener('mouseup',()=>el.classList.remove('hit'));
+    el.addEventListener('mouseleave',()=>el.classList.remove('hit'));
+    el.addEventListener('touchstart',e=>{e.preventDefault();playPianoNote(k.note);el.classList.add('hit');},{passive:false});
+    el.addEventListener('touchend',()=>el.classList.remove('hit'));
+    sidebar.appendChild(el);
   });
 })();
 
-// ===== AUDIO =====
-let AC=null;
-function getAC(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();return AC;}
-function playNote(freq){
-  const ac=getAC(),t=ac.currentTime;
-  const o1=ac.createOscillator(),o2=ac.createOscillator();
-  o1.type='square';o1.frequency.value=freq;
-  o2.type='sine';o2.frequency.value=freq;
-  const bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=freq*1.5;bp.Q.value=12;
-  const g=ac.createGain();g.gain.setValueAtTime(.22,t);g.gain.setValueAtTime(.22,t+.9);g.gain.linearRampToValueAtTime(0,t+1.4);
-  const dl=ac.createDelay();dl.delayTime.value=.18;
-  const fb=ac.createGain();fb.gain.value=.18;
-  const wet=ac.createGain();wet.gain.value=.28;
-  o1.connect(bp);o2.connect(bp);bp.connect(g);g.connect(ac.destination);g.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(ac.destination);
-  o1.start(t);o2.start(t);o1.stop(t+1.5);o2.stop(t+1.5);
-  const names=['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'];
-  const pd=document.getElementById('pitch-display');
-  if(pd)pd.textContent=names[((Math.round(12*Math.log2(freq/261.63))%12)+12)%12];
+// ===== VISUALIZER PHOTO CYCLING =====
+(function(){
+  const imgs=document.querySelectorAll('#vizPhotos img');
+  if(!imgs.length)return;
+  let idx=0;
+  setInterval(()=>{
+    imgs[idx].classList.remove('show');
+    idx=(idx+1)%imgs.length;
+    imgs[idx].classList.add('show');
+  },4000);
+})();
+
+// ===== VISUALIZER WAVEFORM BARS =====
+(function(){
+  const wf=document.getElementById('vizWaveform');
+  if(!wf)return;
+  for(let i=0;i<24;i++){
+    const b=document.createElement('div');
+    b.className='viz-bar2';
+    const h=(6+Math.random()*28).toFixed(0);
+    const d=(0.2+Math.random()*0.5).toFixed(2);
+    const dl=(Math.random()*0.4).toFixed(2);
+    b.style.cssText=`--h:${h}px;--d:${d}s;--dl:${dl}s`;
+    wf.appendChild(b);
+  }
+})();
+
+// ===== VIZ CONTROL BUTTONS =====
+document.querySelectorAll('.viz-ctrl-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.viz-ctrl-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// ===== 3D NAME ANIMATION =====
+(function(){
+  const el=document.getElementById('pcn-label');
+  const block=document.getElementById('heroBlock');
+  if(!el||!block)return;
+  let targetX=0,targetY=0,curX=0,curY=0;
+  const lerp=0.06,maxRot=30;
+  function onMove(cx,cy){
+    const rect=block.getBoundingClientRect();
+    const mx=(cx-rect.left-rect.width/2)/(rect.width/2);
+    const my=(cy-rect.top-rect.height/2)/(rect.height/2);
+    targetY=mx*maxRot; targetX=-my*maxRot;
+  }
+  document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
+  document.addEventListener('touchmove',e=>{if(e.touches.length)onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+  function animate(){
+    curX+=(targetX-curX)*lerp; curY+=(targetY-curY)*lerp;
+    const s=1+Math.sqrt(curX*curX+curY*curY)/maxRot*0.08;
+    el.style.transform=`perspective(900px) rotateX(${curX}deg) rotateY(${curY}deg) scale(${s})`;
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+// ===== ORBITAL RINGS =====
+(function(){
+  const canvas=document.getElementById('orbit-canvas');
+  const ctx=canvas.getContext('2d');
+  function resize(){canvas.width=canvas.parentElement.clientWidth;canvas.height=canvas.parentElement.clientHeight;}
+  resize();window.addEventListener('resize',resize);
+
+  const rings=[
+    {rx:120,ry:40,speed:0.8,color:'rgba(255,106,0,0.3)',offset:0},
+    {rx:150,ry:50,speed:-0.6,color:'rgba(168,85,247,0.25)',offset:Math.PI/3},
+    {rx:100,ry:35,speed:1.0,color:'rgba(255,149,0,0.2)',offset:Math.PI/2},
+    {rx:170,ry:55,speed:-0.4,color:'rgba(255,255,255,0.1)',offset:Math.PI}
+  ];
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const cx=canvas.width/2,cy=canvas.height/2;
+    rings.forEach(r=>{
+      ctx.beginPath();
+      ctx.strokeStyle=r.color;
+      ctx.lineWidth=1.5;
+      for(let i=0;i<=360;i++){
+        const a=(i*Math.PI/180)+t*r.speed*0.01+r.offset;
+        const x=cx+Math.cos(a)*r.rx;
+        const y=cy+Math.sin(a)*r.ry;
+        if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    });
+    t++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ===== AUDIO ENGINE =====
+let audioCtx=null;
+function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
+
+// --- PIANO SYNTH (Plug flute: Square+Sine through Bandpass Q12, with delay) ---
+function playPiano(freq){
+  const ctx=getCtx();
+  const now=ctx.currentTime;
+
+  // Oscillators
+  const osc1=ctx.createOscillator();
+  osc1.type='square';osc1.frequency.value=freq;
+  const osc2=ctx.createOscillator();
+  osc2.type='sine';osc2.frequency.value=freq;
+
+  // Bandpass
+  const bp=ctx.createBiquadFilter();
+  bp.type='bandpass';bp.frequency.value=freq*1.5;bp.Q.value=12;
+
+  // Gain envelope: 1s sustain minimum, 500ms release
+  const gain=ctx.createGain();
+  gain.gain.setValueAtTime(0.25,now);
+  gain.gain.setValueAtTime(0.25,now+1.0);
+  gain.gain.linearRampToValueAtTime(0,now+1.5);
+
+  // Delay feedback
+  const delay=ctx.createDelay();delay.delayTime.value=0.2;
+  const fb=ctx.createGain();fb.gain.value=0.2;
+  const dryGain=ctx.createGain();dryGain.gain.value=0.8;
+  const wetGain=ctx.createGain();wetGain.gain.value=0.3;
+
+  // Routing
+  osc1.connect(bp);osc2.connect(bp);
+  bp.connect(gain);
+  gain.connect(dryGain);dryGain.connect(ctx.destination);
+  gain.connect(delay);delay.connect(fb);fb.connect(delay);
+  delay.connect(wetGain);wetGain.connect(ctx.destination);
+
+  osc1.start(now);osc2.start(now);
+  osc1.stop(now+1.6);osc2.stop(now+1.6);
+  if(typeof updatePitch==='function')updatePitch(freq);
 }
-function playKick(){const ac=getAC(),t=ac.currentTime;const o=ac.createOscillator();o.type='sine';o.frequency.setValueAtTime(200,t);o.frequency.exponentialRampToValueAtTime(15,t+.8);const g=ac.createGain();g.gain.setValueAtTime(1,t);g.gain.exponentialRampToValueAtTime(.01,t+.8);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.8);}
-function playSnare(){const ac=getAC(),t=ac.currentTime;const buf=ac.createBuffer(1,ac.sampleRate*.2,ac.sampleRate);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const n=ac.createBufferSource();n.buffer=buf;const hp=ac.createBiquadFilter();hp.type='highpass';hp.frequency.value=1000;const g=ac.createGain();g.gain.setValueAtTime(.8,t);g.gain.exponentialRampToValueAtTime(.01,t+.2);n.connect(hp);hp.connect(g);g.connect(ac.destination);n.start(t);n.stop(t+.2);}
-function playHat(){const ac=getAC(),t=ac.currentTime;const buf=ac.createBuffer(1,ac.sampleRate*.05,ac.sampleRate);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const n=ac.createBufferSource();n.buffer=buf;const hp=ac.createBiquadFilter();hp.type='highpass';hp.frequency.value=7000;const g=ac.createGain();g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.01,t+.05);n.connect(hp);hp.connect(g);g.connect(ac.destination);n.start(t);n.stop(t+.05);}
-function playClap(){const ac=getAC(),t=ac.currentTime;for(let i=0;i<3;i++){const buf=ac.createBuffer(1,ac.sampleRate*.03,ac.sampleRate);const d=buf.getChannelData(0);for(let j=0;j<d.length;j++)d[j]=Math.random()*2-1;const n=ac.createBufferSource();n.buffer=buf;const bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1200;bp.Q.value=2;const g=ac.createGain();g.gain.setValueAtTime(.6,t+i*.015);g.gain.exponentialRampToValueAtTime(.01,t+i*.015+.08);n.connect(bp);bp.connect(g);g.connect(ac.destination);n.start(t+i*.015);n.stop(t+i*.015+.08);}}
-function playPerc(){const ac=getAC(),t=ac.currentTime;const o=ac.createOscillator();o.type='sine';o.frequency.value=800;const g=ac.createGain();g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.01,t+.15);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.15);}
-function playRim(){const ac=getAC(),t=ac.currentTime;const o=ac.createOscillator();o.type='square';o.frequency.value=1800;const hp=ac.createBiquadFilter();hp.type='highpass';hp.frequency.value=2000;const g=ac.createGain();g.gain.setValueAtTime(.4,t);g.gain.exponentialRampToValueAtTime(.01,t+.06);o.connect(hp);hp.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.06);}
+
+// C minor pentatonic frequencies
+const pianoMapZ=[523.25,587.33,622.25,698.46,783.99,880.00,932.33];
+const pianoNotesLow=[261.63,293.66,311.13,349.23,392.00,440.00,466.16,523.25,587.33,622.25];
+const keyMapPiano={'z':0,'x':1,'c':2,'v':3,'b':4,'n':5,'m':6};
+const keyMapPianoLow={'q':0,'w':1,'e':2,'r':3,'t':4,'y':5,'u':6,'i':7,'o':8,'p':9};
+
+// Sidebar piano note→freq and keyboard→note
+const noteFreqMap={'C5':523.25,'C#5':554.37,'D5':587.33,'Eb5':622.25,'E5':659.25,'F5':698.46,'F#5':739.99,'G5':783.99,'G#5':830.61,'A5':880.00,'Bb5':932.33,'B5':987.77,'C6':1046.50};
+const kbToNote={'a':'C5','w':'C#5','s':'D5','e':'Eb5','d':'E5','f':'F5','t':'F#5','g':'G5','y':'G#5','h':'A5','u':'Bb5','j':'B5','k':'C6'};
+function playPianoNote(noteName){const freq=noteFreqMap[noteName];if(freq)playPiano(freq);}
+
+// --- DRUM SYNTH ---
+function playKick(){
+  const ctx=getCtx();const now=ctx.currentTime;
+  const osc=ctx.createOscillator();osc.type='sine';
+  osc.frequency.setValueAtTime(200,now);
+  osc.frequency.exponentialRampToValueAtTime(15,now+0.8);
+  const osc2=ctx.createOscillator();osc2.type='sine';
+  osc2.frequency.setValueAtTime(100,now);
+  osc2.frequency.exponentialRampToValueAtTime(10,now+0.6);
+  const g=ctx.createGain();g.gain.setValueAtTime(1,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.8);
+  osc.connect(g);osc2.connect(g);g.connect(ctx.destination);
+  osc.start(now);osc2.start(now);osc.stop(now+0.8);osc2.stop(now+0.8);
+}
+function playSnare(){
+  const ctx=getCtx();const now=ctx.currentTime;
+  // Noise
+  const buf=ctx.createBuffer(1,ctx.sampleRate*0.2,ctx.sampleRate);
+  const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  const noise=ctx.createBufferSource();noise.buffer=buf;
+  const nf=ctx.createBiquadFilter();nf.type='highpass';nf.frequency.value=1000;
+  const ng=ctx.createGain();ng.gain.setValueAtTime(0.8,now);ng.gain.exponentialRampToValueAtTime(0.01,now+0.2);
+  noise.connect(nf);nf.connect(ng);ng.connect(ctx.destination);
+  // Body
+  const osc=ctx.createOscillator();osc.type='triangle';osc.frequency.value=180;
+  const g=ctx.createGain();g.gain.setValueAtTime(0.7,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.1);
+  osc.connect(g);g.connect(ctx.destination);
+  noise.start(now);osc.start(now);noise.stop(now+0.2);osc.stop(now+0.1);
+}
+function playHat(){
+  const ctx=getCtx();const now=ctx.currentTime;
+  const buf=ctx.createBuffer(1,ctx.sampleRate*0.05,ctx.sampleRate);
+  const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  const noise=ctx.createBufferSource();noise.buffer=buf;
+  const hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=7000;
+  const g=ctx.createGain();g.gain.setValueAtTime(0.5,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.05);
+  noise.connect(hp);hp.connect(g);g.connect(ctx.destination);noise.start(now);noise.stop(now+0.05);
+}
+function playClap(){
+  const ctx=getCtx();const now=ctx.currentTime;
+  for(let i=0;i<3;i++){
+    const buf=ctx.createBuffer(1,ctx.sampleRate*0.03,ctx.sampleRate);
+    const d=buf.getChannelData(0);for(let j=0;j<d.length;j++)d[j]=Math.random()*2-1;
+    const n=ctx.createBufferSource();n.buffer=buf;
+    const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1200;bp.Q.value=2;
+    const g=ctx.createGain();g.gain.setValueAtTime(0.6,now+i*0.015);g.gain.exponentialRampToValueAtTime(0.01,now+i*0.015+0.08);
+    n.connect(bp);bp.connect(g);g.connect(ctx.destination);n.start(now+i*0.015);n.stop(now+i*0.015+0.08);
+  }
+}
+function playPerc(){
+  const ctx=getCtx();const now=ctx.currentTime;
+  const osc=ctx.createOscillator();osc.type='sine';osc.frequency.value=800;
+  const g=ctx.createGain();g.gain.setValueAtTime(0.5,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.15);
+  osc.connect(g);g.connect(ctx.destination);osc.start(now);osc.stop(now+0.15);
+}
+function playRim(){
+  const ctx=getCtx();const now=ctx.currentTime;
+  const osc=ctx.createOscillator();osc.type='square';
+  osc.frequency.value=1800;
+  const hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=2000;
+  const g=ctx.createGain();g.gain.setValueAtTime(0.4,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.06);
+  osc.connect(hp);hp.connect(g);g.connect(ctx.destination);osc.start(now);osc.stop(now+0.06);
+}
+
 const drumFns={kick:playKick,snare:playSnare,hat:playHat,clap:playClap,perc:playPerc,rim:playRim};
 const drumKeys={'1':'kick','2':'snare','3':'hat','4':'clap','5':'perc','6':'rim'};
 
-// ===== DRUMS =====
-document.querySelectorAll('.dpad').forEach(p=>{
-  const fn=()=>{drumFns[p.dataset.drum]();p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),140);};
-  p.addEventListener('mousedown',fn);
-  p.addEventListener('touchstart',e=>{e.preventDefault();fn();},{passive:false});
-});
-
-// ===== KEYBOARD =====
-const held=new Set();
+// ===== KEYBOARD EVENT HANDLER =====
+const activeKeys=new Set();
 document.addEventListener('keydown',e=>{
-  if(held.has(e.key))return;held.add(e.key);
+  if(activeKeys.has(e.key))return;
+  activeKeys.add(e.key);
   const k=e.key.toLowerCase();
-  if(window._kb2n&&window._kb2n[k]){
-    const note=window._kb2n[k],freq=window._nf[note];
-    if(freq){playNote(freq);const el=document.querySelector(`.pk[data-note="${note}"]`);if(el){el.classList.add('hit');setTimeout(()=>el.classList.remove('hit'),280);}}
-  }
-  if(drumKeys[k]){drumFns[drumKeys[k]]();const p=document.querySelector(`.dpad[data-drum="${drumKeys[k]}"]`);if(p){p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),140);}}
-});
-document.addEventListener('keyup',e=>held.delete(e.key));
 
-// ===== CURSOR =====
+  // SIDEBAR PIANO (A W S E D F T G Y H U J K)
+  if(kbToNote.hasOwnProperty(k)){
+    playPianoNote(kbToNote[k]);
+    const el=document.querySelector(`.piano-key[data-note="${kbToNote[k]}"]`);
+    if(el){el.classList.add('hit');setTimeout(()=>el.classList.remove('hit'),300);}
+    return; // don't fall through to drums
+  }
+  // Drums: 1=kick 2=snare 3=hat 4=clap 5=perc 6=rim
+  if(drumKeys.hasOwnProperty(k)){
+    drumFns[drumKeys[k]]();
+    highlightDrumPad(drumKeys[k]);
+  }
+});
+document.addEventListener('keyup',e=>{activeKeys.delete(e.key);});
+
+// ===== VISUAL FEEDBACK =====
+function highlightPianoKey(idx){
+  const keys=document.querySelectorAll('.piano-key');
+  if(keys[idx]){keys[idx].classList.add('hit');setTimeout(()=>keys[idx].classList.remove('hit'),300);}
+}
+function highlightDrumPad(name){
+  const pad=document.querySelector(`.drum-pad[data-drum="${name}"]`);
+  if(pad){pad.classList.add('hit');setTimeout(()=>pad.classList.remove('hit'),200);}
+}
+
+// Drum pad click
+document.querySelectorAll('.drum-pad').forEach(pad=>{
+  pad.addEventListener('mousedown',()=>{drumFns[pad.dataset.drum]();pad.classList.add('hit');});
+  pad.addEventListener('mouseup',()=>pad.classList.remove('hit'));
+  pad.addEventListener('mouseleave',()=>pad.classList.remove('hit'));
+  pad.addEventListener('touchstart',e=>{e.preventDefault();drumFns[pad.dataset.drum]();pad.classList.add('hit');});
+  pad.addEventListener('touchend',()=>pad.classList.remove('hit'));
+});
+
+// Piano key click
+document.querySelectorAll('.piano-key').forEach((key,i)=>{
+  key.addEventListener('mousedown',()=>{
+    const freq=i<7?pianoMapZ[i]:(i<17?pianoNotesLow[i-7]:pianoMapZ[i%7]);
+    playPiano(freq);key.classList.add('hit');
+  });
+  key.addEventListener('mouseup',()=>key.classList.remove('hit'));
+  key.addEventListener('mouseleave',()=>key.classList.remove('hit'));
+});
+
+// ===== KNOB DRAG =====
 (function(){
-  const cur=document.getElementById('cur'),dot=document.getElementById('cur-dot');
-  if(!cur)return;
-  document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';});
-  document.querySelectorAll('button,a,.dpad,.pk,.pbtn,.tb-tab,.tbb,.ftag').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(1.6)';});
-    el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';});
+  const knobs=document.querySelectorAll('.knob');
+  let dragging=null,startY=0,startVal=0;
+  knobs.forEach(knob=>{
+    knob.addEventListener('mousedown',e=>{
+      dragging=knob;startY=e.clientY;startVal=parseInt(knob.dataset.value)||50;
+      document.body.style.cursor='grabbing';
+    });
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!dragging)return;
+    const diff=startY-e.clientY;
+    const val=Math.max(0,Math.min(100,startVal+diff));
+    dragging.dataset.value=val;
+    const rot=(val-50)*2.7;
+    dragging.style.background=`conic-gradient(from ${220+rot}deg,var(--orange),#333 70%,#333)`;
+  });
+  document.addEventListener('mouseup',()=>{dragging=null;document.body.style.cursor='';});
+})();
+
+// ===== FPC DRUM PADS (gamified click pads) =====
+document.querySelectorAll('.fpc-pad').forEach(pad=>{
+  pad.addEventListener('mousedown',()=>{
+    drumFns[pad.dataset.sound]();
+    pad.classList.add('hit');
+  });
+  pad.addEventListener('mouseup',()=>pad.classList.remove('hit'));
+  pad.addEventListener('mouseleave',()=>pad.classList.remove('hit'));
+  pad.addEventListener('touchstart',e=>{e.preventDefault();drumFns[pad.dataset.sound]();pad.classList.add('hit');});
+  pad.addEventListener('touchend',()=>pad.classList.remove('hit'));
+});
+
+// ===== EQ CANVAS (FL Studio Fruity Parametric EQ 2 style) =====
+(function(){
+  const eqC=document.getElementById('eq-canvas');
+  if(!eqC)return;
+  const eqCtx=eqC.getContext('2d');
+  const bandColors=['#e04040','#ff8c00','#c8f000','#40cc80','#5599ff'];
+  
+  function drawEQ(){
+    eqC.width=eqC.offsetWidth;eqC.height=eqC.offsetHeight;
+    const w=eqC.width,h=eqC.height;
+    eqCtx.clearRect(0,0,w,h);
+    
+    // Background gradient (like FL Studio dark green/teal)
+    const bg=eqCtx.createLinearGradient(0,0,0,h);
+    bg.addColorStop(0,'#060d10');bg.addColorStop(1,'#030608');
+    eqCtx.fillStyle=bg;eqCtx.fillRect(0,0,w,h);
+    
+    // Frequency grid lines (vertical — octave markers)
+    const freqs=[63,125,250,500,1000,2000,4000,8000,16000];
+    eqCtx.strokeStyle='rgba(80,120,100,0.2)';eqCtx.lineWidth=1;
+    freqs.forEach(f=>{
+      const x=w*(Math.log10(f/20)/Math.log10(20000/20));
+      eqCtx.beginPath();eqCtx.moveTo(x,0);eqCtx.lineTo(x,h);eqCtx.stroke();
+    });
+    
+    // dB grid lines (horizontal)
+    for(let db=-18;db<=18;db+=6){
+      const y=h/2-(db/36)*h;
+      eqCtx.strokeStyle=db===0?'rgba(80,120,100,0.4)':'rgba(80,120,100,0.15)';
+      eqCtx.beginPath();eqCtx.moveTo(0,y);eqCtx.lineTo(w,y);eqCtx.stroke();
+    }
+    
+    // 0dB center label
+    eqCtx.fillStyle='rgba(80,120,100,0.5)';eqCtx.font='7px Inter';
+    eqCtx.fillText('0',2,h/2-2);
+    
+    // Build EQ curve from knobs
+    const knobs=document.querySelectorAll('.knob');
+    const vals=Array.from(knobs).map(k=>parseInt(k.dataset.value)||50);
+    const bandFreqs=[80,250,1000,3000,8000];
+    
+    // Draw curve
+    eqCtx.beginPath();
+    for(let x=0;x<w;x++){
+      const logPos=x/w;
+      const freq=20*Math.pow(20000/20,logPos);
+      let gain=0;
+      vals.forEach((v,i)=>{
+        const dB=(v-50)/50*14;
+        const bw=2.0;
+        const ratio=Math.log10(freq/bandFreqs[i]);
+        gain+=dB*Math.exp(-(ratio*ratio)/(2*bw*bw));
+      });
+      const y=h/2-(gain/28)*h;
+      if(x===0)eqCtx.moveTo(x,y);else eqCtx.lineTo(x,y);
+    }
+    
+    // Fill under curve
+    eqCtx.lineTo(w,h/2);eqCtx.lineTo(0,h/2);eqCtx.closePath();
+    const grad=eqCtx.createLinearGradient(0,0,0,h);
+    grad.addColorStop(0,'rgba(255,140,0,0.15)');
+    grad.addColorStop(1,'rgba(255,140,0,0.02)');
+    eqCtx.fillStyle=grad;eqCtx.fill();
+    
+    // Stroke curve
+    eqCtx.beginPath();
+    for(let x=0;x<w;x++){
+      const freq=20*Math.pow(20000/20,x/w);
+      let gain=0;
+      vals.forEach((v,i)=>{
+        const dB=(v-50)/50*14;
+        const ratio=Math.log10(freq/bandFreqs[i]);
+        gain+=dB*Math.exp(-(ratio*ratio)/(2*2.0*2.0));
+      });
+      const y=h/2-(gain/28)*h;
+      if(x===0)eqCtx.moveTo(x,y);else eqCtx.lineTo(x,y);
+    }
+    eqCtx.strokeStyle='#ff8c00';eqCtx.lineWidth=1.5;eqCtx.stroke();
+    
+    // Band handle dots
+    vals.forEach((v,i)=>{
+      const x=w*(Math.log10(bandFreqs[i]/20)/Math.log10(20000/20));
+      const dB=(v-50)/50*14;
+      const y=h/2-(dB/28)*h;
+      eqCtx.beginPath();eqCtx.arc(x,y,4,0,Math.PI*2);
+      eqCtx.fillStyle=bandColors[i];eqCtx.fill();
+      eqCtx.strokeStyle='rgba(0,0,0,0.5)';eqCtx.lineWidth=1;eqCtx.stroke();
+    });
+  }
+  
+  drawEQ();
+  // Redraw when knobs change
+  setInterval(drawEQ,300);
+})();
+
+// ===== AUTO-TUNE SLIDERS =====
+document.querySelectorAll('.at-slider-wrap').forEach(slider=>{
+  function update(e){
+    const fill=slider.querySelector('.at-slider-fill');
+    if(!fill)return;
+    const rect=slider.getBoundingClientRect();
+    const pct=Math.max(0,Math.min(100,((e.clientX-rect.left)/rect.width)*100));
+    fill.style.width=pct+'%';
+  }
+  slider.addEventListener('click',update);
+  let dragging=false;
+  slider.addEventListener('mousedown',()=>dragging=true);
+  document.addEventListener('mousemove',e=>{if(dragging)update(e);});
+  document.addEventListener('mouseup',()=>dragging=false);
+});
+document.querySelectorAll('.at-key-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.at-key-btn').forEach(b=>b.classList.remove('active-key'));
+    btn.classList.add('active-key');
+  });
+});
+
+// ===== WHATSAPP CHECKOUT =====
+function buyWhatsApp(produto){
+  const nome=produto||'Camisa Kankiu';
+  const msg=encodeURIComponent('Olá! Tenho interesse em: '+nome+'. Gostaria de comprar!');
+  window.open('https://wa.me/5511976369308?text='+msg,'_blank');
+}
+
+// ===== PRESAVE POPUP =====
+function closePresave(){
+  const el=document.getElementById('presave-overlay');
+  if(el){el.style.opacity='0';setTimeout(()=>{el.style.display='none';},300);}
+}
+// Show after 60 seconds
+setTimeout(()=>{
+  const el=document.getElementById('presave-overlay');
+  if(el){
+    el.classList.add('show');
+    setTimeout(()=>{el.style.opacity='1';},50);
+    el.addEventListener('click',e=>{if(e.target===el)closePresave();});
+  }
+},60000);
+
+// ===== PRODUTO CYCLING — desktop + mobile =====
+(function(){
+  // Desktop
+  const desktopImgs=document.querySelectorAll('#vizProdPhotos img');
+  if(desktopImgs.length){
+    let i=0;setInterval(()=>{desktopImgs[i].classList.remove('show');i=(i+1)%desktopImgs.length;desktopImgs[i].classList.add('show');},3000);
+  }
+  // Mobile
+  const mobImgs=document.querySelectorAll('#vizMobProd img');
+  if(mobImgs.length){
+    let i=0;setInterval(()=>{mobImgs[i].classList.remove('show');i=(i+1)%mobImgs.length;mobImgs[i].classList.add('show');},3000);
+  }
+})();
+
+// ===== GO LOJA =====
+window.addEventListener('goLoja',()=>{
+  document.querySelectorAll('header nav button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  const loja=document.getElementById('loja');
+  if(loja){loja.classList.add('active');document.body.style.overflow='auto';}
+  const btn=document.querySelector('[data-section="loja"]');
+  if(btn)btn.classList.add('active');
+});
+function showFront(){
+  const w=document.getElementById('prodImgWrap');
+  if(!w)return;
+  w.classList.remove('show-back');
+  document.querySelectorAll('.img-toggle-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+}
+function showBack(){
+  const w=document.getElementById('prodImgWrap');
+  if(!w)return;
+  w.classList.add('show-back');
+  document.querySelectorAll('.img-toggle-btn').forEach((b,i)=>b.classList.toggle('active',i===1));
+}
+
+// ===== PITCH DISPLAY UPDATE =====
+const noteNames=['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'];
+function updatePitch(freq){
+  const n=Math.round(12*Math.log2(freq/261.63))%12;
+  const el=document.getElementById('pitch-display');
+  if(el)el.textContent=noteNames[(n+12)%12];
+}
+
+// ===== MOBILE PORTRAIT PARTICLES =====
+(function(){
+  const c=document.getElementById('mp-particles');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let W,H;
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const pts=Array.from({length:45},()=>({
+    x:Math.random()*800,y:Math.random()*1400,
+    vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.15,
+    r:Math.random()*1.6+.4,o:Math.random()*.28+.05,
+    p:Math.random()>.55
+  }));
+  (function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.p?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  })();
+})();
+
+// ===== CUSTOM CURSOR =====
+(function(){
+  const cur=document.getElementById('cur');
+  const dot=document.getElementById('cur-dot');
+  if(!cur||!dot)return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cur.style.left=mx+'px';cur.style.top=my+'px';
+    dot.style.left=mx+'px';dot.style.top=my+'px';
+  });
+  const hov='button,a,.drum-pad,.fpc-pad,.knob,.piano-key,.ftag,.viz-btn,.at-btn,.at-key-btn,.tb-tab,.tb-btn,.prod-btn-buy,.prod-btn-detail,.img-toggle-btn,.at-slider-wrap';
+  document.querySelectorAll(hov).forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
   });
 })();
 
-// ===== 3D HERO =====
+// ===== 3D HERO NAME =====
 (function(){
-  const el=document.getElementById('pcn-label');if(!el)return;
-  let tX=0,tY=0,cX=0,cY=0,idle=0,active=false,timer=null;
-  const MAX=20,L=.07;
-  function onMove(x,y){active=true;clearTimeout(timer);tY=(x/window.innerWidth-.5)*MAX*2;tX=-(y/window.innerHeight-.5)*MAX*2;timer=setTimeout(()=>active=false,2500);}
+  const el=document.getElementById('pcn-label');
+  if(!el)return;
+  let tX=0,tY=0,cX=0,cY=0,idle=0;
+  let interacting=false,idleTimer=null;
+  const MAX=22;
+  function onMove(x,y){
+    interacting=true;clearTimeout(idleTimer);
+    const rect=el.getBoundingClientRect();
+    const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
+    tY=Math.max(-MAX,Math.min(MAX,(x-cx)/(window.innerWidth/2)*MAX));
+    tX=Math.max(-MAX,Math.min(MAX,-(y-cy)/(window.innerHeight/2)*MAX));
+    idleTimer=setTimeout(()=>{interacting=false;},2000);
+  }
   document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
-  document.addEventListener('touchmove',e=>{if(e.touches[0])onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
-  (function tick(){
-    if(!active){idle+=.007;tX=Math.sin(idle*.7)*5;tY=Math.cos(idle*.5)*3;}
-    cX+=(tX-cX)*L;cY+=(tY-cY)*L;
-    el.style.transform=`perspective(900px) rotateX(${cX}deg) rotateY(${cY}deg)`;
+  document.addEventListener('touchmove',e=>{if(e.touches.length)onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+  function tick(){
+    if(!interacting){idle+=.008;tX=Math.sin(idle*.7)*6;tY=Math.cos(idle*.5)*4;}
+    cX+=(tX-cX)*.07;cY+=(tY-cY)*.07;
+    const s=1+Math.sqrt(cX*cX+cY*cY)/MAX*.04;
+    el.style.transform=`perspective(900px) rotateX(${cX}deg) rotateY(${cY}deg) scale(${s})`;
     requestAnimationFrame(tick);
-  })();
+  }
+  tick();
 })();
 
 // ===== PARTICLES =====
 (function(){
-  const c=document.getElementById('ptc');if(!c)return;
+  const c=document.getElementById('particles-canvas');
+  if(!c)return;
   const ctx=c.getContext('2d');
   let W,H;
-  const resize=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
   resize();new ResizeObserver(resize).observe(c.parentElement);
-  const pts=Array.from({length:55},()=>({x:Math.random()*2000,y:Math.random()*1200,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.18,r:Math.random()*1.4+.4,o:Math.random()*.3+.07,p:Math.random()>.6}));
+  const pts=Array.from({length:55},()=>({x:Math.random()*2000,y:Math.random()*1200,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.18,r:Math.random()*1.4+.4,o:Math.random()*.35+.08,purple:Math.random()>.55}));
   let mx=.5,my=.5;
   document.addEventListener('mousemove',e=>{mx=e.clientX/window.innerWidth;my=e.clientY/window.innerHeight;});
-  (function draw(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{p.x+=p.vx+(mx-.5)*.12;p.y+=p.vy+(my-.5)*.1;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);ctx.fillStyle=p.p?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;ctx.fill();});
-    requestAnimationFrame(draw);
-  })();
-})();
-
-// ===== MOBILE PORTRAIT PARTICLES =====
-(function(){
-  const c=document.getElementById('mp-canvas');if(!c)return;
-  const ctx=c.getContext('2d');
-  let W,H;
-  const resize=()=>{W=c.width=window.innerWidth;H=c.height=window.innerHeight;};
-  resize();window.addEventListener('resize',resize);
-  const pts=Array.from({length:40},()=>({x:Math.random()*800,y:Math.random()*1400,vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.15,r:Math.random()*1.6+.4,o:Math.random()*.25+.05,p:Math.random()>.5}));
-  (function draw(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);ctx.fillStyle=p.p?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;ctx.fill();});
-    requestAnimationFrame(draw);
-  })();
-})();
-
-// ===== EQ =====
-(function(){
-  const c=document.getElementById('eq-canvas');if(!c)return;
-  const ctx=c.getContext('2d');
-  const bf=[80,250,1000,3000,8000];
-  let v=[35,55,65,50,45];
   function draw(){
-    c.width=c.offsetWidth;c.height=c.offsetHeight;
-    const w=c.width,h=c.height;
-    ctx.clearRect(0,0,w,h);ctx.fillStyle='#030608';ctx.fillRect(0,0,w,h);
-    [63,125,250,500,1000,2000,4000,8000,16000].forEach(f=>{const x=w*(Math.log10(f/20)/Math.log10(1000));ctx.strokeStyle='rgba(80,120,100,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();});
-    ctx.strokeStyle='rgba(80,120,100,.25)';ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();
-    ctx.beginPath();
-    for(let x=0;x<w;x++){const freq=20*Math.pow(1000,x/w);let g=0;v.forEach((val,i)=>{const dB=(val-50)/50*14;const r=Math.log10(freq/bf[i]);g+=dB*Math.exp(-(r*r)/8);});const y=h/2-(g/28)*h;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
-    ctx.lineTo(w,h/2);ctx.lineTo(0,h/2);ctx.closePath();
-    const gr=ctx.createLinearGradient(0,0,0,h);gr.addColorStop(0,'rgba(255,140,0,.18)');gr.addColorStop(1,'rgba(255,140,0,.02)');ctx.fillStyle=gr;ctx.fill();
-    ctx.beginPath();
-    for(let x=0;x<w;x++){const freq=20*Math.pow(1000,x/w);let g=0;v.forEach((val,i)=>{const dB=(val-50)/50*14;const r=Math.log10(freq/bf[i]);g+=dB*Math.exp(-(r*r)/8);});const y=h/2-(g/28)*h;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
-    ctx.strokeStyle='#ff8c00';ctx.lineWidth=1.5;ctx.stroke();
-    v=v.map(val=>Math.max(20,Math.min(80,val+(Math.random()-.5)*2)));
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx+(mx-.5)*.15;p.y+=p.vy+(my-.5)*.12;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.purple?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;ctx.fill();
+    });
+    requestAnimationFrame(draw);
   }
-  draw();setInterval(draw,450);
+  draw();
 })();
 
-// ===== PRODUCT CYCLING =====
+// ===== VISUALIZER photo cycling =====
 (function(){
-  const imgs=document.querySelectorAll('#prodPhotos img');if(!imgs.length)return;
-  let i=0;
-  setInterval(()=>{imgs[i].classList.remove('show');imgs[i].style.opacity='0';i=(i+1)%imgs.length;imgs[i].classList.add('show');imgs[i].style.opacity='1';},3000);
+  const imgs=document.querySelectorAll('#vizPhotos img');
+  if(!imgs.length)return;
+  let idx=0;
+  setInterval(()=>{imgs[idx].classList.remove('show');idx=(idx+1)%imgs.length;imgs[idx].classList.add('show');},3500);
 })();
 
-// ===== PRESAVE POPUP =====
-function closePP(){const el=document.getElementById('pp-overlay');if(el){el.style.opacity='0';setTimeout(()=>el.classList.remove('show'),300);}}
-setTimeout(()=>{const el=document.getElementById('pp-overlay');if(el){el.classList.add('show');el.style.opacity='1';el.style.transition='opacity .3s';el.addEventListener('click',e=>{if(e.target===el)closePP();});}},60000);
+// ===== VISUALIZER bars =====
+(function(){
+  const container=document.getElementById('vizBars');
+  if(!container)return;
+  for(let i=0;i<20;i++){
+    const b=document.createElement('div');b.className='viz-bar';
+    const h=(4+Math.random()*22).toFixed(0),d=(.2+Math.random()*.5).toFixed(2),dl=(Math.random()*.35).toFixed(2);
+    b.style.cssText=`--h:${h}px;--d:${d}s;--dl:${dl}s`;container.appendChild(b);
+  }
+})();
 
-// ===== WHATSAPP =====
-function buyZap(p){window.open('https://wa.me/5511976369308?text='+encodeURIComponent('Olá! Quero comprar: '+p),'_blank');}
+// ===== VIZ ctrl buttons =====
+document.querySelectorAll('.viz-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{document.querySelectorAll('.viz-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');});
+});
 
 // ===== FLOATING TAGS =====
 document.querySelectorAll('.ftag').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
