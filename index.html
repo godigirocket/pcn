@@ -109,59 +109,78 @@ text-shadow:0 0 14px rgba(255,106,0,.9),0 0 30px rgba(255,106,0,.5),0 0 60px rgb
 .ftag:hover,.ftag.on{color:var(--or);border-color:rgba(255,106,0,.3);background:rgba(255,106,0,.05);}
 </style>
 <style>
-/* ── PLUGIN RACK ── */
-.plugin-rack{width:300px;min-width:300px;flex-shrink:0;background:#080a0c;border-left:1px solid #242830;display:flex;flex-direction:column;overflow-y:auto;padding:8px 7px;gap:8px;}
-.plugin-rack::-webkit-scrollbar{width:4px;}
-.plugin-rack::-webkit-scrollbar-thumb{background:var(--or);border-radius:3px;}
+/* ── PLUGIN RACK — 2 plugins only ── */
+.plugin-rack{width:260px;min-width:260px;flex-shrink:0;background:#080a0c;border-left:1px solid #1e2028;display:flex;flex-direction:column;overflow-y:auto;padding:8px 7px;gap:8px;}
+.plugin-rack::-webkit-scrollbar{width:3px;}
+.plugin-rack::-webkit-scrollbar-thumb{background:#2a2d38;border-radius:2px;}
 
-/* Plugin window — DAW style */
-.plug-win{background:#0a0c10;border:1px solid #2a2d38;border-radius:5px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 20px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.04);transition:border-color .2s;}
-.plug-win:hover{border-color:rgba(255,106,0,.35);}
-.plug-win.xlg{min-height:230px;}
-.plug-win.lg{min-height:185px;}
-.plug-win.md{min-height:170px;}
+/* Plugin window */
+.plug-win{background:#090909;border:1px solid #222228;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;}
+.plug-win.xlg{min-height:210px;}
+.plug-win.lg{min-height:170px;}
+.plug-win.md{min-height:0;}
 
-/* Titlebar exactly like a plugin window */
-.plug-hd{height:24px;background:linear-gradient(180deg,#22252f 0%,#1a1d25 100%);display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;border-bottom:1px solid #0e1016;position:relative;}
-.plug-hd::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,.15),transparent);}
-.plug-hd .fl-dot{width:8px;height:8px;flex-shrink:0;}
-.plug-hd-name{font-size:10px;color:#b0b8c8;margin-left:4px;font-weight:700;letter-spacing:.3px;flex:1;font-family:'Courier New',monospace;}
-.plug-hd-ver{font-size:8px;color:#444;margin-left:auto;}
+/* Titlebar */
+.plug-hd{height:22px;background:#0f1118;display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;border-bottom:1px solid #1a1c24;}
+.plug-hd .fl-dot{width:7px;height:7px;flex-shrink:0;}
+.plug-hd-name{font-size:10px;color:#8090a8;margin-left:4px;font-weight:600;letter-spacing:.2px;flex:1;font-family:'Courier New',monospace;}
+.plug-hd-ver{font-size:8px;color:#333;margin-left:auto;}
 
-.plug-body{flex:1;position:relative;overflow:hidden;min-height:60px;background:#07090d;}
-.plug-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;}
+.plug-body{flex:1;position:relative;overflow:hidden;min-height:60px;background:#06070a;}
+.plug-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6px;opacity:0;transition:opacity 1s;}
 .plug-body img.show{opacity:1;}
 .plug-body iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-.plug-body canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
 
-.plug-ft{height:26px;background:linear-gradient(180deg,#0e1016,#0a0c10);display:flex;align-items:center;gap:4px;padding:0 8px;flex-shrink:0;border-top:1px solid #0e1016;}
-.pbtn{font-size:8px;padding:2px 8px;background:#141720;border:1px solid #252c38;border-radius:2px;color:#6a7285;font-weight:600;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:4px;letter-spacing:.2px;}
-.pbtn.on{color:#ff9a30;border-color:rgba(255,140,0,.4);background:rgba(255,140,0,.1);box-shadow:0 0 6px rgba(255,140,0,.15);}
-.pbtn:hover{color:#fff;border-color:rgba(255,106,0,.4);background:rgba(255,106,0,.12);}
-
-/* ── KNOB COMPONENT ── */
-.knob-row{display:flex;gap:6px;padding:6px 8px;background:#07090d;border-top:1px solid #12151c;}
-.knob-item{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
-.knob{width:26px;height:26px;border-radius:50%;background:conic-gradient(from 220deg,#ff8c00 0%,#ff8c00 var(--v,60%),#1e2230 var(--v,60%),#1e2230 100%);border:2px solid #2a2d3a;position:relative;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);}
-.knob::after{content:'';position:absolute;top:3px;left:50%;transform:translateX(-50%);width:2px;height:7px;background:#fff;border-radius:1px;transform-origin:bottom center;}
-.knob-label{font-size:7px;color:#555;letter-spacing:.5px;text-transform:uppercase;font-family:'Courier New',monospace;}
-.knob-val{font-size:7px;color:#888;font-family:'Courier New',monospace;}
-
-/* ── METER COMPONENT ── */
-.meter-section{display:flex;gap:4px;padding:6px 8px;background:#07090d;align-items:flex-end;height:70px;}
-.meter-lane{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
-.meter-bar-wrap{flex:1;width:100%;background:#0d1018;border-radius:2px;overflow:hidden;position:relative;display:flex;flex-direction:column-reverse;}
-.meter-fill{width:100%;border-radius:1px;background:linear-gradient(0deg,#28c840 0%,#c8f000 65%,#ff8c00 85%,#ff3333 100%);animation:mfill var(--spd,1.2s) ease-in-out infinite alternate;transform-origin:bottom;}
-@keyframes mfill{from{height:var(--lo,20%);}to{height:var(--hi,75%);}}
-.meter-peak{position:absolute;top:calc(100% - var(--pk,70%) - 2px);left:0;right:0;height:2px;background:#ff8c00;opacity:.9;}
-.meter-label{font-size:7px;color:#444;letter-spacing:.5px;font-family:'Courier New',monospace;}
+.plug-ft{height:24px;background:#0a0b0e;display:flex;align-items:center;gap:4px;padding:0 8px;flex-shrink:0;border-top:1px solid #14161c;}
+.pbtn{font-size:8px;padding:2px 7px;background:#111318;border:1px solid #1e2028;border-radius:2px;color:#505868;font-weight:600;transition:all .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:3px;letter-spacing:.2px;}
+.pbtn.on{color:#e08840;border-color:rgba(224,136,64,.35);background:rgba(224,136,64,.08);}
+.pbtn:hover{color:#ccc;border-color:#333;}
 
 /* ── PLUGIN TABS ── */
-.plug-tabs{display:flex;border-bottom:1px solid #12151c;background:#07090d;flex-shrink:0;}
-.plug-tab{flex:1;font-size:8px;color:#555;padding:5px 4px;text-align:center;letter-spacing:.3px;font-weight:700;font-family:'Courier New',monospace;border-right:1px solid #12151c;transition:all .15s;cursor:pointer;}
+.plug-tabs{display:flex;border-bottom:1px solid #141620;background:#07090c;flex-shrink:0;}
+.plug-tab{flex:1;font-size:8px;color:#3a4050;padding:4px 3px;text-align:center;font-weight:700;font-family:'Courier New',monospace;border-right:1px solid #141620;transition:all .15s;cursor:pointer;letter-spacing:.2px;}
 .plug-tab:last-child{border-right:none;}
-.plug-tab.active{color:#ff9a30;background:rgba(255,140,0,.08);border-bottom:1px solid var(--or);}
-.plug-tab:hover{color:#aaa;}
+.plug-tab.active{color:#e08840;background:rgba(224,136,64,.06);}
+.plug-tab:hover{color:#888;}
+
+/* ── MAXIMUS — CSS pure, no canvas ── */
+.max-graph{height:72px;background:#04060a;border-bottom:1px solid #141620;position:relative;overflow:hidden;}
+.max-graph-grid{position:absolute;inset:0;}
+.max-graph-grid::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:25% 25%;}
+.max-curve{position:absolute;bottom:0;left:0;right:0;height:100%;}
+.max-curve svg{width:100%;height:100%;}
+.max-meters{display:flex;gap:4px;padding:6px 8px;background:#04060a;border-bottom:1px solid #141620;height:52px;align-items:flex-end;}
+.max-lane{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
+.max-bar-bg{flex:1;width:100%;background:#0d1018;border-radius:1px;overflow:hidden;display:flex;flex-direction:column-reverse;min-height:28px;position:relative;}
+.max-bar-fill{width:100%;border-radius:1px;animation:mbar var(--s,1s) ease-in-out infinite alternate;}
+@keyframes mbar{from{height:var(--lo,20%);}to{height:var(--hi,70%);}}
+.max-bar-fill.green{background:linear-gradient(0deg,#1e7a3a,#28c840);}
+.max-bar-fill.orange{background:linear-gradient(0deg,#a05010,#e08840);}
+.max-bar-fill.purple{background:linear-gradient(0deg,#5a2a8a,#9050d0);}
+.max-bar-fill.white{background:linear-gradient(0deg,#2a3040,#5a6880);}
+.max-lane-label{font-size:7px;color:#3a4050;letter-spacing:.3px;font-family:'Courier New',monospace;}
+.max-peak{height:1px;background:#e08840;opacity:.7;margin-bottom:1px;width:100%;flex-shrink:0;}
+.max-knobs{display:flex;gap:0;border-top:1px solid #141620;}
+.max-knob{flex:1;display:flex;flex-direction:column;align-items:center;padding:6px 4px;gap:4px;border-right:1px solid #141620;}
+.max-knob:last-child{border-right:none;}
+.knob{width:24px;height:24px;border-radius:50%;position:relative;cursor:default;}
+.knob svg{width:100%;height:100%;}
+.knob-label{font-size:7px;color:#404858;letter-spacing:.4px;font-family:'Courier New',monospace;}
+
+/* ── PARAMETRIC EQ 2 — CSS pure ── */
+.eq-graph{flex:1;min-height:110px;background:#04060a;position:relative;overflow:hidden;}
+.eq-graph-grid{position:absolute;inset:0;}
+.eq-graph-grid::before{content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:20% 25%;}
+.eq-center-line{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.06);}
+.eq-curve-wrap{position:absolute;inset:0;}
+.eq-curve-wrap svg{width:100%;height:100%;overflow:visible;}
+.eq-labels{position:absolute;bottom:4px;left:0;right:0;display:flex;justify-content:space-between;padding:0 6px;}
+.eq-label{font-size:7px;color:#2a3040;font-family:'Courier New',monospace;}
+.eq-knobs{display:flex;border-top:1px solid #141620;}
+.eq-knob{flex:1;display:flex;flex-direction:column;align-items:center;padding:6px 4px;gap:4px;border-right:1px solid #141620;}
+.eq-knob:last-child{border-right:none;}
 
 /* ── DRUMS ── */
 .drum-row{height:42px;background:#161920;display:flex;border-top:1px solid #252830;flex-shrink:0;}
@@ -182,7 +201,7 @@ text-shadow:0 0 14px rgba(255,106,0,.9),0 0 30px rgba(255,106,0,.5),0 0 60px rgb
 #mob-p p{color:var(--or);font-size:14px;letter-spacing:3px;font-weight:600;}
 #mob-p small{color:#555;font-size:11px;}
 @media(max-width:768px) and (orientation:portrait){#mob-p{display:flex!important;}#home{display:none!important;}}
-@media(max-width:768px) and (orientation:landscape){.plugin-rack{width:160px;min-width:160px;}.fl-tb,.fl-st{display:none!important;}.plug-win.xlg{min-height:160px;}.plug-win.lg{min-height:130px;}.plug-win.md{min-height:110px;}}
+@media(max-width:768px) and (orientation:landscape){.plugin-rack{width:180px;min-width:180px;}.fl-tb,.fl-st{display:none!important;}.plug-win.xlg{min-height:160px;}.plug-win.lg{min-height:130px;}}
 </style>
 <style>
 /* ── POPUP PRESAVE ── */
@@ -466,7 +485,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
         <div class="plug-win xlg">
           <div class="plug-hd">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-            <span>clipe.exe</span>
+            <span class="plug-hd-name">clipe.exe</span>
           </div>
           <div class="plug-body">
             <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&modestbranding=1&playsinline=1&rel=0" allow="autoplay;encrypted-media" loading="lazy"></iframe>
@@ -476,54 +495,30 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
             <a class="pbtn" href="https://www.youtube.com/@PCNboladao" target="_blank">YouTube</a>
           </div>
         </div>
+
         <!-- produtos.exe -->
         <div class="plug-win lg">
           <div class="plug-hd">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-            <span>produtos.exe</span>
+            <span class="plug-hd-name">produtos.exe</span>
           </div>
           <div class="plug-body" id="vizProd" style="background:#0e0e0e;">
-            <img src="https://i.imgur.com/DMZ6WBT.png" class="show" alt="Camisa Kankiu frente" style="object-fit:contain;padding:8px;">
-            <img src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu costas" style="object-fit:contain;padding:8px;">
-            <img src="https://i.imgur.com/RnqS6xs.png" alt="Caneca PCN" style="object-fit:contain;padding:8px;">
-            <img src="https://i.imgur.com/COsCuKl.png" alt="Moletom Kankiu" style="object-fit:contain;padding:8px;">
+            <img src="https://i.imgur.com/DMZ6WBT.png" class="show" alt="Camisa Kankiu frente" width="240" height="240">
+            <img src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu costas" width="240" height="240">
+            <img src="https://i.imgur.com/RnqS6xs.png" alt="Caneca PCN" width="240" height="240">
+            <img src="https://i.imgur.com/COsCuKl.png" alt="Moletom Kankiu" width="240" height="240">
           </div>
           <div class="plug-ft">
             <span class="pbtn on">Produtos</span>
             <span class="pbtn" onclick="goSection('loja')">Loja</span>
           </div>
         </div>
-        <!-- Fruity Limiter -->
-        <div class="plug-win md">
-          <div class="plug-hd">
-            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-            <span class="plug-hd-name">Fruity Limiter</span><span class="plug-hd-ver">v1.4</span>
-          </div>
-          <div class="plug-tabs">
-            <div class="plug-tab active">LIM</div>
-            <div class="plug-tab">COMP</div>
-            <div class="plug-tab">NOISE</div>
-          </div>
-          <div class="plug-body" style="min-height:60px;">
-            <canvas id="limiter-c"></canvas>
-          </div>
-          <div class="meter-section">
-            <div class="meter-lane"><div class="meter-bar-wrap" style="height:48px;"><div class="meter-fill" style="--lo:15%;--hi:70%;--spd:0.9s;"></div><div class="meter-peak" style="--pk:68%;"></div></div><div class="meter-label">IN</div></div>
-            <div class="meter-lane"><div class="meter-bar-wrap" style="height:48px;"><div class="meter-fill" style="--lo:10%;--hi:55%;--spd:1.1s;"></div><div class="meter-peak" style="--pk:53%;"></div></div><div class="meter-label">GR</div></div>
-            <div class="meter-lane"><div class="meter-bar-wrap" style="height:48px;"><div class="meter-fill" style="--lo:12%;--hi:65%;--spd:0.8s;"></div><div class="meter-peak" style="--pk:64%;"></div></div><div class="meter-label">OUT</div></div>
-          </div>
-          <div class="knob-row">
-            <div class="knob-item"><div class="knob" style="--v:55%;"></div><div class="knob-label">CEIL</div></div>
-            <div class="knob-item"><div class="knob" style="--v:70%;"></div><div class="knob-label">THRS</div></div>
-            <div class="knob-item"><div class="knob" style="--v:40%;"></div><div class="knob-label">GAIN</div></div>
-            <div class="knob-item"><div class="knob" style="--v:60%;"></div><div class="knob-label">ATK</div></div>
-          </div>
-        </div>
+
         <!-- Maximus -->
-        <div class="plug-win md">
+        <div class="plug-win">
           <div class="plug-hd">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-            <span class="plug-hd-name">Maximus</span><span class="plug-hd-ver">v1.2</span>
+            <span class="plug-hd-name">Maximus</span><span class="plug-hd-ver">v1.4</span>
           </div>
           <div class="plug-tabs">
             <div class="plug-tab active">MASTER</div>
@@ -531,61 +526,68 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
             <div class="plug-tab">MID</div>
             <div class="plug-tab">HIGH</div>
           </div>
-          <div class="plug-body" style="min-height:55px;">
-            <canvas id="maximus-c"></canvas>
+          <div class="max-graph">
+            <div class="max-graph-grid"></div>
+            <div class="max-curve">
+              <svg viewBox="0 0 100 40" preserveAspectRatio="none">
+                <defs><linearGradient id="mcg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#28c840" stop-opacity="0.3"/><stop offset="100%" stop-color="#28c840" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0 30 Q10 28 20 22 Q35 14 50 18 Q65 22 80 16 Q90 12 100 20 L100 40 L0 40 Z" fill="url(#mcg)"/>
+                <path d="M0 30 Q10 28 20 22 Q35 14 50 18 Q65 22 80 16 Q90 12 100 20" fill="none" stroke="#28c840" stroke-width="1.2" opacity="0.8"/>
+              </svg>
+            </div>
           </div>
-          <div class="meter-section">
-            <div class="meter-lane"><div class="meter-bar-wrap" style="height:48px;"><div class="meter-fill" style="--lo:20%;--hi:80%;--spd:0.7s;background:linear-gradient(0deg,#28b464,#c8f000);"></div><div class="meter-peak" style="--pk:78%;"></div></div><div class="meter-label">LOW</div></div>
-            <div class="meter-lane"><div class="meter-bar-wrap" style="height:48px;"><div class="meter-fill" style="--lo:30%;--hi:90%;--spd:0.5s;background:linear-gradient(0deg,#ff8c00,#ff3333);"></div><div class="meter-peak" style="--pk:88%;"></div></div><div class="meter-label">MID</div></div>
-            <div class="meter-lane"><div class="meter-bar-wrap" style="height:48px;"><div class="meter-fill" style="--lo:10%;--hi:60%;--spd:0.9s;background:linear-gradient(0deg,#a855f7,#e040fb);"></div><div class="meter-peak" style="--pk:58%;"></div></div><div class="meter-label">HI</div></div>
-            <div class="meter-lane"><div class="meter-bar-wrap" style="height:48px;"><div class="meter-fill" style="--lo:25%;--hi:85%;--spd:0.6s;"></div><div class="meter-peak" style="--pk:83%;"></div></div><div class="meter-label">MST</div></div>
+          <div class="max-meters">
+            <div class="max-lane"><div class="max-bar-bg"><div class="max-peak"></div><div class="max-bar-fill green" style="--lo:22%;--hi:74%;--s:0.85s;"></div></div><div class="max-lane-label">LOW</div></div>
+            <div class="max-lane"><div class="max-bar-bg"><div class="max-peak"></div><div class="max-bar-fill orange" style="--lo:30%;--hi:82%;--s:0.65s;"></div></div><div class="max-lane-label">MID</div></div>
+            <div class="max-lane"><div class="max-bar-bg"><div class="max-peak"></div><div class="max-bar-fill purple" style="--lo:15%;--hi:60%;--s:0.95s;"></div></div><div class="max-lane-label">HI</div></div>
+            <div class="max-lane"><div class="max-bar-bg"><div class="max-peak"></div><div class="max-bar-fill white" style="--lo:28%;--hi:80%;--s:0.75s;"></div></div><div class="max-lane-label">MST</div></div>
           </div>
-          <div class="knob-row">
-            <div class="knob-item"><div class="knob" style="--v:65%;"></div><div class="knob-label">GAIN</div></div>
-            <div class="knob-item"><div class="knob" style="--v:50%;"></div><div class="knob-label">THRS</div></div>
-            <div class="knob-item"><div class="knob" style="--v:45%;"></div><div class="knob-label">ATK</div></div>
-            <div class="knob-item"><div class="knob" style="--v:55%;"></div><div class="knob-label">REL</div></div>
+          <div class="max-knobs">
+            <div class="max-knob"><div class="knob"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0d0f14" stroke="#1e2230" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="9" stroke="#e08840" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="knob-label">GAIN</div></div>
+            <div class="max-knob"><div class="knob"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0d0f14" stroke="#1e2230" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="9" stroke="#8090a8" stroke-width="1.5" stroke-linecap="round" transform="rotate(40 12 12)"/></svg></div><div class="knob-label">THRS</div></div>
+            <div class="max-knob"><div class="knob"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0d0f14" stroke="#1e2230" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="9" stroke="#8090a8" stroke-width="1.5" stroke-linecap="round" transform="rotate(-30 12 12)"/></svg></div><div class="knob-label">ATT</div></div>
+            <div class="max-knob"><div class="knob"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0d0f14" stroke="#1e2230" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="9" stroke="#8090a8" stroke-width="1.5" stroke-linecap="round" transform="rotate(20 12 12)"/></svg></div><div class="knob-label">REL</div></div>
           </div>
         </div>
+
         <!-- Parametric EQ 2 -->
-        <div class="plug-win md">
+        <div class="plug-win">
           <div class="plug-hd">
             <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
             <span class="plug-hd-name">Parametric EQ 2</span><span class="plug-hd-ver">v2.1</span>
           </div>
-          <div class="plug-body" style="min-height:100px;">
-            <canvas id="eq-c"></canvas>
+          <div class="eq-graph">
+            <div class="eq-graph-grid"></div>
+            <div class="eq-center-line"></div>
+            <div class="eq-curve-wrap">
+              <svg viewBox="0 0 100 60" preserveAspectRatio="none">
+                <defs><linearGradient id="eqg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e08840" stop-opacity="0.25"/><stop offset="100%" stop-color="#e08840" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0 30 Q8 32 15 28 Q22 24 28 20 Q36 14 44 22 Q52 28 60 18 Q72 8 82 24 Q90 32 100 30 L100 60 L0 60 Z" fill="url(#eqg)"/>
+                <path d="M0 30 Q8 32 15 28 Q22 24 28 20 Q36 14 44 22 Q52 28 60 18 Q72 8 82 24 Q90 32 100 30" fill="none" stroke="#e08840" stroke-width="1.2"/>
+                <circle cx="15" cy="28" r="2" fill="#28c840" opacity="0.85"/>
+                <circle cx="28" cy="20" r="2" fill="#5082dc" opacity="0.85"/>
+                <circle cx="44" cy="22" r="2" fill="#e08840" opacity="0.85"/>
+                <circle cx="60" cy="18" r="2" fill="#dcaa28" opacity="0.85"/>
+                <circle cx="82" cy="24" r="2" fill="#a855f7" opacity="0.85"/>
+              </svg>
+            </div>
+            <div class="eq-labels">
+              <span class="eq-label">80Hz</span>
+              <span class="eq-label">250Hz</span>
+              <span class="eq-label">1k</span>
+              <span class="eq-label">3k</span>
+              <span class="eq-label">8k</span>
+            </div>
           </div>
-          <div class="knob-row">
-            <div class="knob-item"><div class="knob" style="--v:45%;background:conic-gradient(from 220deg,#5082dc 0%,#5082dc 45%,#1e2230 45%,#1e2230 100%);"></div><div class="knob-label">FREQ</div></div>
-            <div class="knob-item"><div class="knob" style="--v:60%;"></div><div class="knob-label">GAIN</div></div>
-            <div class="knob-item"><div class="knob" style="--v:35%;background:conic-gradient(from 220deg,#a855f7 0%,#a855f7 35%,#1e2230 35%,#1e2230 100%);"></div><div class="knob-label">Q</div></div>
-            <div class="knob-item"><div class="knob" style="--v:70%;"></div><div class="knob-label">MIX</div></div>
+          <div class="eq-knobs">
+            <div class="eq-knob"><div class="knob"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0d0f14" stroke="#1e2230" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="9" stroke="#5082dc" stroke-width="1.5" stroke-linecap="round" transform="rotate(-20 12 12)"/></svg></div><div class="knob-label">FREQ</div></div>
+            <div class="eq-knob"><div class="knob"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0d0f14" stroke="#1e2230" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="9" stroke="#e08840" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="knob-label">GAIN</div></div>
+            <div class="eq-knob"><div class="knob"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#0d0f14" stroke="#1e2230" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="9" stroke="#a855f7" stroke-width="1.5" stroke-linecap="round" transform="rotate(30 12 12)"/></svg></div><div class="knob-label">Q</div></div>
           </div>
         </div>
-        <!-- Gross Beat -->
-        <div class="plug-win md">
-          <div class="plug-hd">
-            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-            <span class="plug-hd-name">Gross Beat</span><span class="plug-hd-ver">v2.0</span>
-          </div>
-          <div class="plug-tabs">
-            <div class="plug-tab active">VOLUME</div>
-            <div class="plug-tab">PITCH</div>
-          </div>
-          <div class="plug-body" style="min-height:80px;">
-            <canvas id="grossbeat-c"></canvas>
-          </div>
-          <div class="plug-ft" style="gap:3px;flex-wrap:wrap;height:auto;padding:5px 8px;">
-            <span class="pbtn on">GATE</span>
-            <span class="pbtn">STUTTER</span>
-            <span class="pbtn">HALF</span>
-            <span class="pbtn">REV</span>
-          </div>
-        </div>
+
       </div>
-    </div>
-    <!-- Drum Row -->
+      <!-- Drum Row -->
     <div class="drum-row">
       <div class="d-pad" data-drum="kick" style="background:rgba(224,40,40,.12);border-top:2px solid #e02828;"><span class="dn" style="color:#e05555;">KICK</span><span class="dk" style="background:#e02828;">1</span></div>
       <div class="d-pad" data-drum="snare" style="background:rgba(80,130,220,.12);border-top:2px solid #5082dc;"><span class="dn" style="color:#7aaaf0;">SNARE</span><span class="dk" style="background:#5082dc;">2</span></div>
@@ -603,7 +605,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
 <div class="page-wrap">
   <div class="sec-label">Drop Limitado</div>
   <h1 class="sec-h">KANKIU <span style="color:var(--or)">COLLECTION</span></h1>
-  <p class="sec-sub">Peças exclusivas. Sem reposição garantida.</p>
+  <p class="sec-sub">Peças oficiais PCN Boladão.</p>
 
   <div class="prod-hero">
     <div class="prod-flip">
@@ -622,7 +624,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
         <div class="prod-price"><span class="prod-price-sm">R$</span> 100,<span style="font-size:28px">00</span></div>
         <div class="prod-info-small">Frete incluído &nbsp;·&nbsp; Envio em 3–7 dias úteis</div>
       </div>
-      <p class="prod-copy">Camiseta oversized exclusiva do drop KANKIU. Tecido premium, estampa resinada, edição limitada. Poucas unidades.</p>
+      <p class="prod-copy">Peça exclusiva PCN Boladão. Poucas unidades.</p>
       <div class="prod-stock"><div class="stock-dot"></div>Últimas peças disponíveis</div>
       <button class="btn-buy" onclick="buyWhatsApp('Camisa Kankiu')"><i class="fa-brands fa-whatsapp" style="font-size:18px"></i> Comprar via WhatsApp</button>
       <button class="btn-detail" onclick="buyWhatsApp('Camisa Kankiu — mais informações')"><i class="fa-solid fa-circle-info"></i> Mais informações</button>
@@ -655,7 +657,7 @@ document.addEventListener('selectstart',function(e){e.preventDefault();});
       <div class="more-card-info">
         <h3>Moletom Kankiu</h3>
         <div class="price">R$ 260,00</div>
-        <p class="card-copy">Moletom oversized do drop KANKIU. Frete incluído.</p>
+        <p class="card-copy">Frete incluído.</p>
         <div class="btn-wpp"><i class="fa-brands fa-whatsapp"></i> Comprar</div>
       </div>
     </div>
@@ -1013,174 +1015,6 @@ document.addEventListener('keyup',function(e){delete heldKeys[e.key];});
 })();
 </script>
 <script>
-// EQ CANVAS — Parametric EQ 2 style
-(function(){
-  var c=document.getElementById('eq-c');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var bands=[{freq:80,gain:0,color:'#28c840'},{freq:200,gain:2,color:'#5082dc'},{freq:800,gain:3,color:'#ff8c00'},{freq:2500,gain:1,color:'#dcaa28'},{freq:6000,gain:-2,color:'#a855f7'},{freq:12000,gain:1,color:'#e1306c'},{freq:18000,gain:0,color:'#28b4b4'}];
-  var specBuf=[];for(var i=0;i<60;i++)specBuf.push(Math.random()*0.3+0.05);
-  function draw(){
-    var w=c.width=c.offsetWidth;var h=c.height=c.offsetHeight;if(w<1||h<1)return;
-    ctx.fillStyle='#040608';ctx.fillRect(0,0,w,h);
-    // Spectrum background
-    for(var i=0;i<specBuf.length;i++){
-      var bx=i/specBuf.length*w;var bw2=w/specBuf.length;
-      ctx.fillStyle='rgba(255,106,0,0.06)';
-      ctx.fillRect(bx,h-specBuf[i]*h*0.9,bw2,specBuf[i]*h*0.9);
-      specBuf[i]=Math.max(0.02,Math.min(0.4,specBuf[i]+(Math.random()-.5)*.04));
-    }
-    // Grid vertical freq markers
-    var freqMarks=[20,100,500,1000,5000,10000,20000];
-    ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;
-    freqMarks.forEach(function(f){
-      var x=w*(Math.log10(f/20)/Math.log10(1100));
-      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();
-      if(f>=100){ctx.fillStyle='rgba(255,255,255,0.2)';ctx.font='7px Courier New';ctx.textAlign='center';ctx.fillText(f>=1000?(f/1000)+'k':f,x,h-3);}
-    });
-    // Grid horizontal dB lines
-    ctx.strokeStyle='rgba(255,106,0,0.06)';
-    for(var i=1;i<5;i++){ctx.beginPath();ctx.moveTo(0,h/4*i);ctx.lineTo(w,h/4*i);ctx.stroke();}
-    ctx.strokeStyle='rgba(255,106,0,0.18)';ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();
-    // EQ Curve fill
-    ctx.beginPath();
-    for(var x=0;x<w;x+=2){
-      var freq=20*Math.pow(1100,x/w);var gain=0;
-      for(var j=0;j<bands.length;j++){var oct=Math.log(freq/bands[j].freq)/Math.LN2;gain+=bands[j].gain*Math.exp(-(oct*oct)/2.5);}
-      var y=h/2-(gain/14)*h;if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-    }
-    ctx.lineTo(w,h/2);ctx.lineTo(0,h/2);ctx.closePath();
-    var grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,'rgba(255,140,0,0.28)');grad.addColorStop(0.5,'rgba(255,140,0,0.05)');grad.addColorStop(1,'rgba(255,140,0,0)');
-    ctx.fillStyle=grad;ctx.fill();
-    // EQ Curve line
-    ctx.beginPath();ctx.strokeStyle='#ff9a30';ctx.lineWidth=2;ctx.shadowBlur=4;ctx.shadowColor='rgba(255,140,0,0.5)';
-    for(var x=0;x<w;x+=2){
-      var freq=20*Math.pow(1100,x/w);var gain=0;
-      for(var j=0;j<bands.length;j++){var oct=Math.log(freq/bands[j].freq)/Math.LN2;gain+=bands[j].gain*Math.exp(-(oct*oct)/2.5);}
-      var y=h/2-(gain/14)*h;if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-    }
-    ctx.stroke();ctx.shadowBlur=0;
-    // Band dots
-    bands.forEach(function(b){
-      var x=w*(Math.log10(b.freq/20)/Math.log10(1100));var y=h/2-(b.gain/14)*h;
-      ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle=b.color;ctx.fill();
-      ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.strokeStyle=b.color;ctx.lineWidth=1;ctx.globalAlpha=0.4;ctx.stroke();ctx.globalAlpha=1;
-    });
-    // Animate
-    for(var j=0;j<bands.length;j++){bands[j].gain+=(Math.random()-.5)*.12;if(bands[j].gain>6)bands[j].gain=6;if(bands[j].gain<-6)bands[j].gain=-6;}
-  }
-  setInterval(draw,80);
-})();
-
-// LIMITER CANVAS — waveform + gain reduction
-(function(){
-  var c=document.getElementById('limiter-c');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var phase=0;
-  function draw(){
-    var w=c.width=c.offsetWidth;var h=c.height=c.offsetHeight;if(w<1||h<1)return;
-    ctx.fillStyle='#04060a';ctx.fillRect(0,0,w,h);
-    phase+=0.04;
-    // Input waveform
-    ctx.beginPath();ctx.strokeStyle='rgba(255,140,0,0.5)';ctx.lineWidth=1;
-    for(var x=0;x<w;x++){
-      var t=x/w*Math.PI*6+phase;
-      var y=h/2-(Math.sin(t)*0.35+Math.sin(t*2.1)*0.15)*h;
-      if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-    }
-    ctx.stroke();
-    // Threshold line
-    var ty=h*0.28;ctx.strokeStyle='rgba(255,200,0,0.4)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
-    ctx.beginPath();ctx.moveTo(0,ty);ctx.lineTo(w,ty);ctx.stroke();
-    var by=h-ty;ctx.beginPath();ctx.moveTo(0,by);ctx.lineTo(w,by);ctx.stroke();
-    ctx.setLineDash([]);
-    // Output waveform (limited/compressed)
-    ctx.beginPath();ctx.strokeStyle='rgba(0,255,136,0.7)';ctx.lineWidth=1.5;ctx.shadowBlur=4;ctx.shadowColor='rgba(0,255,136,0.4)';
-    for(var x=0;x<w;x++){
-      var t=x/w*Math.PI*6+phase;
-      var raw=(Math.sin(t)*0.35+Math.sin(t*2.1)*0.15);
-      var clamped=Math.max(-0.25,Math.min(0.25,raw));
-      var y=h/2-clamped*h;
-      if(x===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-    }
-    ctx.stroke();ctx.shadowBlur=0;
-  }
-  setInterval(draw,35);
-})();
-
-// MAXIMUS CANVAS — multiband display
-(function(){
-  var c=document.getElementById('maximus-c');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var phase=0;
-  function draw(){
-    var w=c.width=c.offsetWidth;var h=c.height=c.offsetHeight;if(w<1||h<1)return;
-    ctx.fillStyle='#04060a';ctx.fillRect(0,0,w,h);
-    phase+=0.025;
-    var colors=['#28c840','#ff8c00','#a855f7'];
-    var freqMults=[1,2.3,5.1];
-    for(var b=0;b<3;b++){
-      ctx.beginPath();ctx.strokeStyle=colors[b]+'88';ctx.lineWidth=1.5;
-      var startX=w*(b/3);var endX=w*((b+1)/3);
-      ctx.rect(startX,0,endX-startX,h);ctx.clip();
-      ctx.beginPath();
-      for(var x=startX;x<endX;x++){
-        var t=(x-startX)/(endX-startX)*Math.PI*4+phase*freqMults[b];
-        var y=h/2-(Math.sin(t)*0.3+Math.sin(t*1.7+b)*0.12)*h;
-        if(x===startX)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-      }
-      ctx.strokeStyle=colors[b];ctx.shadowBlur=6;ctx.shadowColor=colors[b];ctx.stroke();ctx.shadowBlur=0;
-      ctx.restore();ctx.save();
-    }
-  }
-  ctx.save();
-  setInterval(draw,40);
-})();
-
-// GROSS BEAT CANVAS — stutter grid
-(function(){
-  var c=document.getElementById('grossbeat-c');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var playhead=0;
-  var grid=[];
-  var cols=16,rows=8;
-  for(var r=0;r<rows;r++){grid.push([]);for(var cc=0;cc<cols;cc++)grid[r].push(Math.random()>0.55?1:0);}
-  function draw(){
-    var w=c.width=c.offsetWidth;var h=c.height=c.offsetHeight;if(w<1||h<1)return;
-    ctx.fillStyle='#03050a';ctx.fillRect(0,0,w,h);
-    var cw=w/cols;var ch=h/rows;
-    // Draw grid cells
-    for(var r=0;r<rows;r++){
-      for(var cc=0;cc<cols;cc++){
-        var x=cc*cw;var y=r*ch;
-        if(grid[r][cc]){
-          var intensity=cc===Math.floor(playhead)?1:0.35;
-          ctx.fillStyle='rgba(255,106,0,'+intensity+')';
-          ctx.fillRect(x+1,y+1,cw-2,ch-2);
-          if(cc===Math.floor(playhead)){
-            ctx.fillStyle='rgba(255,200,0,0.4)';
-            ctx.fillRect(x+1,y+1,cw-2,ch-2);
-          }
-        } else {
-          ctx.strokeStyle='rgba(255,255,255,0.04)';ctx.lineWidth=0.5;
-          ctx.strokeRect(x,y,cw,ch);
-        }
-      }
-    }
-    // Playhead line
-    var px=(playhead/cols)*w;
-    ctx.fillStyle='rgba(255,220,0,0.7)';ctx.fillRect(px-1,0,2,h);
-    playhead=(playhead+0.18)%cols;
-    // Occasionally flip cells
-    if(Math.random()<0.04){var rr=Math.floor(Math.random()*rows);var rc=Math.floor(Math.random()*cols);grid[rr][rc]=grid[rr][rc]?0:1;}
-  }
-  setInterval(draw,50);
-})();
-
 // PRODUCTS IMAGE CYCLING
 (function(){
   var imgs=document.querySelectorAll('#vizProd img');
