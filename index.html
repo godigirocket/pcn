@@ -543,12 +543,121 @@ button,a,.tb-tab{transition:all 0.2s;}
   /* Musicas section */
   #musicas{padding:70px 16px 40px;}
   .mus-wrap{max-width:100%;}
-  .mus-topbar{flex-direction:column;gap:12px;}
-  .mus-topbar a{margin-left:0;width:100%;}
+  .mus-topbar{flex-direction:column;align-items:flex-start;gap:10px;padding:14px;}
+  .mus-topbar a{margin-left:0;width:100%;justify-content:center;}
+  .mus-presave-section{padding:14px;margin-bottom:20px;}
 
   /* Contato section */
   #contato{padding:70px 16px 40px;}
   .ct-layout{max-width:100%;}
+}
+
+/* ========================================
+   MOBILE PREMIUM — portrait only
+   ======================================== */
+@media(max-width:768px) and (orientation:portrait){
+  /* Ocultar fl-studio no portrait */
+  #home.active .fl-window{display:none!important;}
+  .home-mobile-portrait{display:flex!important;}
+
+  /* TODAS as sections precisam de padding-top por causa do header fixo */
+  .section{padding-top:58px!important;}
+
+  /* Header menor */
+  header{height:52px;padding:0 14px;background:rgba(12,12,18,.96);backdrop-filter:blur(20px);}
+  .logo{font-size:15px;gap:8px;}
+  .logo img{width:30px;height:30px;}
+  nav{gap:4px;}
+  nav button{padding:6px 11px;font-size:10px;border-radius:16px;}
+  nav button.active{box-shadow:0 0 12px rgba(255,120,0,.5);}
+
+  /* ---- LOJA ---- */
+  #loja{padding:14px;padding-top:66px;background:#121212;overflow-y:auto;}
+  #loja .section-title,#loja .loja-titulo{font-size:32px;margin-bottom:4px;}
+  #loja .section-sub{font-size:11px;margin-bottom:20px;}
+
+  /* Grid de produtos: 1 coluna, cards full width */
+  .prod-main{display:flex!important;flex-direction:column!important;gap:16px!important;max-width:100%!important;padding:0!important;}
+
+  /* Card principal de produto */
+  .prod-img-wrap{
+    width:100%!important;
+    aspect-ratio:1/1!important;
+    border-radius:16px!important;
+    overflow:hidden!important;
+    position:relative!important;
+  }
+  .prod-info{padding:0!important;}
+  .prod-name{font-size:22px!important;margin-bottom:8px!important;}
+  .prod-price{font-size:28px!important;}
+  .prod-btn-buy{
+    width:100%!important;
+    padding:15px!important;
+    font-size:16px!important;
+    border-radius:12px!important;
+    background:linear-gradient(135deg,#128c7e,#25d366)!important;
+    margin-top:12px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:8px!important;
+  }
+  .prod-btn-detail{width:100%!important;padding:12px!important;font-size:14px!important;border-radius:12px!important;margin-top:8px!important;}
+
+  /* Mais produtos: 2 colunas no mobile */
+  .extra-card{border-radius:14px!important;overflow:hidden!important;}
+  .extra-img-wrap{aspect-ratio:1/1!important;height:auto!important;}
+
+  /* Loja header */
+  .loja-header{padding:16px!important;margin-bottom:16px!important;}
+  .loja-brand{font-size:22px!important;}
+
+  /* Img toggle */
+  .img-toggle{display:flex;gap:8px;margin-top:10px;}
+  .img-toggle-btn{flex:1;padding:10px;font-size:13px;border-radius:10px;}
+
+  /* ---- MÚSICAS ---- */
+  #musicas{padding:14px;padding-top:66px;background:#121212;overflow-y:auto;}
+  .mus-wrap{max-width:100%;padding:0;}
+  .mus-topbar{
+    flex-direction:row!important;
+    align-items:center!important;
+    gap:12px!important;
+    padding:14px!important;
+    border-radius:14px!important;
+    margin-bottom:16px!important;
+    background:rgba(255,255,255,.03)!important;
+    border:1px solid rgba(255,255,255,.06)!important;
+  }
+  .mus-topbar img{width:46px!important;height:46px!important;flex-shrink:0;}
+  .mus-topbar h1{font-size:18px!important;}
+  .mus-topbar p{font-size:9px!important;}
+  .mus-topbar a{
+    margin-left:auto!important;
+    width:auto!important;
+    padding:7px 14px!important;
+    font-size:11px!important;
+    flex-shrink:0!important;
+    justify-content:center!important;
+  }
+  .mus-presave-section{
+    padding:14px!important;
+    margin-bottom:16px!important;
+    border-radius:14px!important;
+  }
+  .mus-presave-section iframe{
+    width:100%!important;
+    height:180px!important;
+    border-radius:10px!important;
+  }
+
+  /* ---- CONTATO ---- */
+  #contato{padding:14px;padding-top:66px;background:#121212;overflow-y:auto;}
+  .ct-layout{max-width:100%;}
+  .ct-title{font-size:32px!important;}
+  .ct-btn-zap{font-size:18px!important;padding:16px!important;border-radius:14px!important;}
+  .ct-link{font-size:13px!important;padding:12px 0!important;}
+  .ct-card{border-radius:14px!important;padding:16px 18px!important;}
 }
 
 /* Mobile portrait premium keyframes */
@@ -1141,23 +1250,23 @@ console.clear=()=>{};
       <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Seguir</a>
     </div>
 
-    <!-- PRESAVE SECTION -->
+    <!-- PRÉ-SAVE -->
     <div class="mus-presave-section">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#1db954;letter-spacing:2px;margin-bottom:16px;text-align:center;">🎵 PRÉ-SAVE NOVO LANÇAMENTO</div>
-      <div class="mus-presave-iframe">
-        <iframe data-testid="embed-iframe" style="border-radius:12px;width:100%" src="https://open.spotify.com/embed/prerelease/2KhuPf1YqIQB4zYfEPSArA?utm_source=generator&theme=0" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div class="mus-presave-info">Clique em SALVAR para adicionar à sua biblioteca</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#1db954;letter-spacing:2px;margin-bottom:14px;text-align:center;">🎵 PRÉ-SAVE — NOVO LANÇAMENTO</div>
+      <iframe data-testid="embed-iframe" style="border-radius:12px;width:100%;border:none;display:block;" src="https://open.spotify.com/embed/prerelease/2KhuPf1YqIQB4zYfEPSArA?utm_source=generator&theme=0" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div style="font-size:11px;color:#555;text-align:center;margin-top:10px;">Clique em SALVAR para adicionar à sua biblioteca</div>
     </div>
 
-    <!-- ARTIST PROFILE -->
-    <div class="mus-iframe-wrap">
-      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
-        <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-spotify"></i> Spotify</a>
-        <a href="https://www.youtube.com/@PCNboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.2);color:#ff4444;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-youtube"></i> YouTube</a>
-        <a href="https://www.instagram.com/7pcnboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(225,48,108,.1);border:1px solid rgba(225,48,108,.2);color:#e1306c;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-instagram"></i> Instagram</a>
-      </div>
-      <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="460" frameBorder="0" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block;"></iframe>
+    <!-- LINKS REDES -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+      <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-spotify"></i> Spotify</a>
+      <a href="https://www.youtube.com/@PCNboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.2);color:#ff4444;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-youtube"></i> YouTube</a>
+      <a href="https://www.instagram.com/7pcnboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(225,48,108,.1);border:1px solid rgba(225,48,108,.2);color:#e1306c;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    </div>
+
+    <!-- PLAYER ARTISTA -->
+    <div style="border-radius:12px;overflow:hidden;">
+      <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="380" frameBorder="0" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block;border:none;"></iframe>
     </div>
   </div>
 </section>
