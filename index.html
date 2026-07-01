@@ -2,2207 +2,990 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
-<title>PCN BOLADÃO</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>PCN BOLADÃO — Loja Oficial</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{overflow-x:hidden;max-width:100%;touch-action:pan-y;}
-body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;}
-:root{--orange:#ff6a00;--orange2:#ff9500;--purple:#a855f7;--dark:#14181e;--glass:rgba(20,24,30,0.85);}
+/* ── RESET & BASE ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{overflow-x:hidden;-webkit-text-size-adjust:100%;}
+body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;overflow-x:hidden;overflow-y:auto;}
+:root{
+  --or:#ff6a00;--or2:#ff9500;
+  --bg:#0a0a0f;--bg2:#111318;--bg3:#1a1d23;
+  --border:rgba(255,255,255,.07);
+  --glass:rgba(14,16,20,.9);
+}
+img{max-width:100%;height:auto;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font-family:'Inter',sans-serif;cursor:pointer;border:none;background:none;}
 
-/* LOADING SCREEN */
-#loading{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity 0.6s;}
+/* ── LOADING ── */
+#loading{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .6s;}
 #loading.hide{opacity:0;pointer-events:none;}
-#loading img{width:80px;animation:pulse 1s ease-in-out infinite;}
-@keyframes pulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 10px #ff6a00);}50%{transform:scale(1.1);filter:drop-shadow(0 0 30px #ff6a00);}}
-#load-bar-wrap{width:240px;height:4px;background:#222;border-radius:4px;margin-top:24px;overflow:hidden;}
-#load-bar{height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--orange2));border-radius:4px;transition:width 0.3s;}
-#load-msg{margin-top:12px;font-size:12px;color:#888;font-family:'Inter',sans-serif;}
+#loading img{width:72px;animation:ldPulse 1s ease-in-out infinite;}
+@keyframes ldPulse{0%,100%{filter:drop-shadow(0 0 8px var(--or));}50%{transform:scale(1.08);filter:drop-shadow(0 0 24px var(--or));}}
+#ld-wrap{width:200px;height:3px;background:#1a1a1a;border-radius:3px;margin-top:20px;overflow:hidden;}
+#ld-bar{height:100%;width:0;background:linear-gradient(90deg,var(--or),var(--or2));border-radius:3px;transition:width .4s;}
+#ld-msg{margin-top:10px;font-size:11px;color:#444;letter-spacing:2px;}
 
-/* HEADER */
-header{position:fixed;top:0;left:0;right:0;height:48px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:1000;border-bottom:1px solid rgba(255,255,255,0.05);}
-header .logo{display:flex;align-items:center;gap:10px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;}
-header .logo img{width:36px;height:36px;border-radius:8px;object-fit:cover;}
-header nav{display:flex;gap:6px;}
-header nav button{
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.1);
-  color:rgba(255,255,255,0.6);
-  padding:8px 18px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:600;
-  font-family:'Inter',sans-serif;
-  cursor:pointer;
-  transition:all .2s;
-  letter-spacing:0.3px;
-  white-space:nowrap;
-}
-header nav button:hover{
-  background:rgba(255,255,255,0.12);
-  border-color:rgba(255,255,255,0.2);
-  color:#fff;
-}
-header nav button.active{
-  background:linear-gradient(135deg,#ff8c00,#ff6a00);
-  border-color:#ff8c00;
-  color:#000;
-  font-weight:700;
-  box-shadow:0 0 16px rgba(255,140,0,0.4);
-}
-header nav button:active{transform:scale(0.95);}
+/* ── VERIFIED BADGE ── */
+.vbadge{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;background:linear-gradient(135deg,#1d9bf0,#0052cc);border-radius:50%;color:#fff;font-size:8px;font-weight:900;margin-left:4px;flex-shrink:0;vertical-align:middle;box-shadow:0 1px 4px rgba(29,155,240,.4);}
 
-/* VERIFIED BADGE */
-.verified-badge{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:16px;height:16px;
-  background:linear-gradient(135deg,#1da1f2,#0066cc);
-  border-radius:50%;color:#fff;font-size:9px;font-weight:900;
-  margin-left:5px;vertical-align:middle;flex-shrink:0;
-  box-shadow:0 1px 4px rgba(29,161,242,.4);
-  cursor:default;
+/* ── HEADER ── */
+header{
+  position:fixed;top:0;left:0;right:0;
+  height:50px;
+  background:var(--glass);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;
+  z-index:1000;
+  border-bottom:1px solid var(--border);
+}
+.h-logo{display:flex;align-items:center;gap:8px;font-family:'Bebas Neue',sans-serif;font-size:17px;color:#fff;letter-spacing:1px;white-space:nowrap;}
+.h-logo img{width:30px;height:30px;border-radius:6px;object-fit:cover;flex-shrink:0;}
+nav{display:flex;gap:4px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+nav button{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55);padding:6px 12px;border-radius:16px;font-size:11px;font-weight:600;white-space:nowrap;transition:all .2s;}
+nav button:hover{background:rgba(255,255,255,.1);color:#fff;}
+nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-color:transparent;color:#000;font-weight:700;}
+
+/* ── SECTION BASE ── */
+.section{display:none;}
+.section.active{display:block;}
+#home.active{display:flex;}
+</style>
+
+<style>
+/* ══════════════════════════════════════
+   HOME — MOBILE PORTRAIT (default)
+══════════════════════════════════════ */
+#home{
+  width:100%;min-height:100svh;
+  align-items:center;justify-content:center;
+  padding-top:50px;overflow:hidden;
+  background:#000;
   position:relative;
 }
-.verified-badge:hover::after{
-  content:attr(title);position:absolute;
-  background:#1a1c22;color:#fff;font-size:10px;
-  padding:4px 8px;border-radius:4px;
-  white-space:nowrap;margin-top:20px;
-  pointer-events:none;
-}
-
-/* SECTIONS */
-.section{display:none;padding-top:48px;min-height:100vh;}
-.section.active{display:block;}
-#home.active{display:flex;align-items:center;justify-content:center;overflow:hidden;height:100vh;}
-
-/* MOBILE PORTRAIT MODE */
-.home-mobile-portrait{display:none;width:100%;height:100%;position:fixed;inset:0;align-items:center;justify-content:center;background:#000;z-index:200;overflow:hidden;}
-
-/* Partículas de fundo */
-.home-mobile-portrait canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-
-/* Anéis orbitando */
-.mp-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
-.mp-ring{position:absolute;border-radius:50%;border:1px solid;top:50%;left:50%;transform:translate(-50%,-50%);}
-.mp-ring:nth-child(1){width:200px;height:200px;border-color:rgba(255,106,0,.2);animation:mpRing 6s linear infinite;}
-.mp-ring:nth-child(2){width:280px;height:280px;border-color:rgba(168,85,247,.12);animation:mpRing 10s linear infinite reverse;}
-.mp-ring:nth-child(3){width:350px;height:350px;border-color:rgba(255,106,0,.06);animation:mpRing 15s linear infinite;}
-@keyframes mpRing{to{transform:translate(-50%,-50%) rotate(360deg);}}
-
-/* Nome grande atrás */
-.mp-bg-text{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(70px,24vw,140px);color:rgba(255,106,0,.05);letter-spacing:6px;white-space:nowrap;animation:mpBgPulse 5s ease-in-out infinite;pointer-events:none;}
-@keyframes mpBgPulse{0%,100%{opacity:.05;transform:scale(1);}50%{opacity:.1;transform:scale(1.04);}}
-
-.mobile-msg-box{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;}
-
-/* FL STUDIO WINDOW */
-.fl-window{width:95vw;max-width:1400px;height:calc(100vh - 68px);background:#1a1d23;border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.7);display:flex;flex-direction:column;position:relative;}
-
-/* Window Title Bar */
-.fl-titlebar{height:30px;background:#2a2d35;display:flex;align-items:center;padding:0 12px;gap:8px;border-radius:10px 10px 0 0;}
-.fl-dot{width:10px;height:10px;border-radius:50%;}
-.fl-dot.r{background:#ff5f57;}.fl-dot.y{background:#ffbd2e;}.fl-dot.g{background:#28c840;}
-.fl-title{font-size:11px;color:#888;margin-left:10px;font-family:'Inter',sans-serif;}
-
-/* Toolbar */
-.fl-toolbar{height:36px;background:#2a2d33;border-bottom:1px solid #1a1c22;display:flex;align-items:center;padding:0 8px;gap:4px;flex-shrink:0;overflow:hidden;}
-.tb-btn{width:26px;height:26px;border-radius:3px;border:1px solid #3a3d45;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;transition:all .15s;}
-.tb-play{background:#3a8040;border-color:#4a9050;color:#a0f0a0;}
-.tb-stop{background:#1e2228;border-color:#3a3d45;color:#cc4040;}
-.tb-rec{background:#1e2228;border-color:#3a3d45;color:#cc4040;border-radius:50%!important;width:22px!important;height:22px!important;}
-.bpm-display{background:#0a0c10;border:1px solid #2a2d33;padding:3px 8px;border-radius:2px;color:#c8f000;font-family:'Courier New',monospace;font-size:12px;font-weight:700;min-width:70px;text-align:center;}
-.tb-tabs{display:flex;gap:2px;margin-left:auto;}
-.tb-tab{padding:3px 10px;font-size:10px;background:#1e2228;border:1px solid #2a2d33;color:#607080;cursor:pointer;border-radius:2px;transition:all .15s;white-space:nowrap;}
-.tb-tab.active{color:#ff8c00;border-color:#ff8c00;background:rgba(255,140,0,.1);}
-
-/* Main Content Area */
-.fl-main{flex:1;display:flex;overflow:hidden;position:relative;}
-
-/* Piano Keys — vertical sidebar with key labels */
-.piano-sidebar{width:48px;background:#111;display:flex;flex-direction:column;border-right:1px solid #333;overflow:hidden;}
-.piano-key{flex:1;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:flex-end;padding-right:4px;font-size:7px;font-weight:700;cursor:pointer;transition:all .08s;position:relative;user-select:none;}
-.piano-key.white{background:#d4d4d4;color:#444;}
-.piano-key.black{background:#1a1a1a;color:#888;border-bottom:1px solid #000;}
-.piano-key.hit{background:var(--orange)!important;color:#000!important;}
-.piano-key .kb{font-size:6px;position:absolute;left:3px;color:#888;font-family:'Courier New',monospace;top:50%;transform:translateY(-50%);}
-
-/* === HERO 3D === */
-.pcn-hero-3d{position:relative;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:all;user-select:none;}
-#pcn-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,100px);color:#fff;text-align:center;letter-spacing:5px;line-height:.88;cursor:default;will-change:transform;transform-style:preserve-3d;
-text-shadow:0 0 12px rgba(255,106,0,.9),0 0 28px rgba(255,106,0,.5),0 0 55px rgba(168,85,247,.3),
-1px 1px 0 #d05000,2px 2px 0 #a03800,3px 3px 0 #702000,4px 4px 0 #401000,5px 5px 12px rgba(0,0,0,.85);}
-#pcn-label .refl{display:block;transform:scaleY(-.35) translateY(-6px);opacity:.12;filter:blur(2px);}
-.pcn-tag{font-size:12px;color:rgba(255,106,0,.45);letter-spacing:5px;margin-top:10px;font-family:'Bebas Neue',sans-serif;}
-/* energy ring */
-.ering{position:absolute;border-radius:50%;pointer-events:none;border:1px solid;animation:erotate linear infinite;}
-@keyframes erotate{to{transform:rotateZ(360deg);}}
-.ering.a{width:260px;height:90px;border-color:rgba(255,106,0,.2);animation-duration:7s;}
-.ering.b{width:330px;height:115px;border-color:rgba(168,85,247,.15);animation-duration:11s;animation-direction:reverse;}
-/* float idle */
-@keyframes heroIdle{0%,100%{translate:0 0;}50%{translate:0 -5px;}}
-.pcn-hero-3d{animation:heroIdle 5s ease-in-out infinite;}
-
-/* === PARTICLES canvas === */
-#particles-canvas{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.7;}
-
-/* === VISUALIZER WINDOWS — inside plugin-rack, normal flow === */
-.viz-window{
-  width:100%;
-  background:rgba(10,12,16,.95);
-  border:1px solid rgba(255,106,0,.15);
-  border-radius:5px;overflow:hidden;
-  box-shadow:0 3px 12px rgba(0,0,0,.5);
+#home-portrait{
+  width:100%;min-height:calc(100svh - 50px);
   display:flex;flex-direction:column;
-  flex-shrink:0;
-  margin-bottom:5px;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  text-align:center;padding:20px 24px;
 }
-.viz-window .viz-photos{position:relative;overflow:hidden;aspect-ratio:4/3;}
-.viz-window .viz-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s;}
-.viz-window .viz-photos img.show{opacity:1;}
-.viz-window .viz-photos-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 60%);z-index:1;pointer-events:none;}
-.viz-window .viz-bars{position:absolute;bottom:0;left:0;right:0;height:30%;display:flex;align-items:flex-end;gap:1px;padding:0 4px;z-index:2;}
-#vizClipe{display:none!important;}
-.viz-titlebar{height:22px;background:#181b22;display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;}
-.viz-titlebar .fl-dot{width:8px;height:8px;}
-.viz-titlebar .vtxt{font-size:9px;color:#666;margin-left:4px;flex:1;}
-.viz-photos{position:relative;overflow:hidden;aspect-ratio:1;}
-.viz-photos img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;}
-.viz-photos img.show{opacity:1;}
-.viz-photos-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 55%);z-index:1;pointer-events:none;}
-.viz-bars{position:absolute;bottom:0;left:0;right:0;height:38%;display:flex;align-items:flex-end;gap:1px;padding:0 5px;z-index:2;}
-.viz-bar{flex:1;border-radius:1px 1px 0 0;background:rgba(255,140,0,0.5);animation:vbar var(--d,.45s) var(--dl,0s) infinite alternate ease-in-out;}
-@keyframes vbar{from{height:2px;opacity:.3;}to{height:var(--h,16px);opacity:.85;}}
-.viz-ctrl{height:24px;background:#111318;display:flex;align-items:center;gap:3px;padding:0 5px;flex-shrink:0;border-top:1px solid #222;}
-.viz-btn{font-size:7px;padding:2px 6px;background:#1e2028;border:1px solid #2a2d35;border-radius:2px;color:#666;cursor:pointer;transition:all .2s;white-space:nowrap;}
-.viz-btn.on,.viz-btn:hover{color:var(--orange);border-color:rgba(255,106,0,.4);background:rgba(255,106,0,.08);}
+#home-portrait canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.hp-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);pointer-events:none;}
+.hp-ring{position:absolute;border-radius:50%;border:1px solid;top:50%;left:50%;transform:translate(-50%,-50%);}
+.hp-ring:nth-child(1){width:220px;height:220px;border-color:rgba(255,106,0,.18);animation:hpRot 7s linear infinite;}
+.hp-ring:nth-child(2){width:300px;height:300px;border-color:rgba(168,85,247,.1);animation:hpRot 12s linear infinite reverse;}
+@keyframes hpRot{to{transform:translate(-50%,-50%) rotate(360deg);}}
+.hp-content{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.hp-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,17vw,88px);
+  color:#fff;letter-spacing:4px;line-height:.9;
+  text-shadow:0 0 20px rgba(255,106,0,.9),0 0 50px rgba(255,106,0,.4),2px 2px 0 #c04000,4px 4px 0 #802000,6px 6px 12px rgba(0,0,0,.9);
+  animation:nameFloat 4s ease-in-out infinite;
+}
+@keyframes nameFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.hp-sub{font-size:12px;color:rgba(255,106,0,.6);letter-spacing:5px;text-transform:uppercase;margin-top:4px;}
+.hp-official{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,.5);margin-top:8px;}
+.hp-ctas{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;justify-content:center;}
+.hp-btn-main{display:flex;align-items:center;gap:7px;padding:13px 24px;background:linear-gradient(135deg,var(--or),var(--or2));border-radius:24px;font-size:13px;font-weight:700;color:#000;box-shadow:0 4px 20px rgba(255,106,0,.4);}
+.hp-btn-sec{display:flex;align-items:center;gap:7px;padding:12px 22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:24px;font-size:13px;color:#fff;}
+.hp-turn{margin-top:24px;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,106,0,.06);border:1px solid rgba(255,106,0,.15);border-radius:12px;}
+.hp-turn-icon{font-size:22px;animation:turnPhone 2.5s ease-in-out infinite;}
+@keyframes turnPhone{0%,100%{transform:rotate(-10deg);}50%{transform:rotate(80deg);}}
+.hp-turn-txt{text-align:left;}
+.hp-turn-txt b{display:block;font-size:12px;color:#fff;letter-spacing:1px;}
+.hp-turn-txt span{font-size:10px;color:#555;}
+.hp-dots{display:flex;gap:6px;margin-top:20px;}
+.hp-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,106,0,.3);animation:dotPop 1.4s ease-in-out infinite;}
+.hp-dot:nth-child(2){animation-delay:.2s;}.hp-dot:nth-child(3){animation-delay:.4s;}
+@keyframes dotPop{0%,100%{background:rgba(255,106,0,.2);transform:scale(1);}50%{background:rgba(255,106,0,.9);transform:scale(1.5);}}
 
-/* === CURSOR — crosshair premium === */
-*{cursor:none!important;}
-#cur{position:fixed;top:0;left:0;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);}
-#cur svg{display:block;transition:transform .2s;}
-#cur.big svg{transform:scale(1.6);}
-#cur-dot{position:fixed;top:0;left:0;width:5px;height:5px;background:#fff;border-radius:50%;pointer-events:none;z-index:999998;transform:translate(-50%,-50%);box-shadow:0 0 6px #fff;}
-
-/* === FLOATING TAGS === */
-.ftag{position:absolute;font-size:10px;color:rgba(255,255,255,.08);pointer-events:all;cursor:pointer;padding:2px 8px;border-radius:3px;border:1px solid transparent;transition:all .3s;z-index:3;user-select:none;}
-.ftag:hover{color:rgba(255,106,0,.5);border-color:rgba(255,106,0,.2);}
-.ftag.on{color:var(--orange);border-color:var(--orange);background:rgba(255,106,0,.08);box-shadow:0 0 8px rgba(255,106,0,.25);}
-
-/* === GRID CENTER === */
+/* ══════════════════════════════════════
+   HOME — FL STUDIO (landscape + desktop)
+══════════════════════════════════════ */
+#home-fl{display:none;width:100%;height:100%;}
+.fl-win{
+  width:100%;height:100%;
+  background:var(--bg3);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.fl-tb{height:28px;background:#252830;display:flex;align-items:center;padding:0 10px;gap:7px;flex-shrink:0;}
+.fl-tb .fd{width:9px;height:9px;border-radius:50%;}
+.fd.r{background:#ff5f57;}.fd.y{background:#ffbd2e;}.fd.g{background:#28c840;}
+.fl-tb-title{font-size:10px;color:#555;margin-left:6px;}
+.fl-bar{height:34px;background:#1e2228;border-bottom:1px solid #151820;display:flex;align-items:center;padding:0 8px;gap:5px;flex-shrink:0;}
+.fl-btn{width:24px;height:24px;border-radius:3px;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-size:10px;background:#151820;color:#888;cursor:pointer;flex-shrink:0;}
+.fl-btn.play{background:#2e6b35;border-color:#3d8a44;color:#90e898;}
+.fl-btn.stop{color:#cc3333;}.fl-btn.rec{border-radius:50%!important;width:20px!important;height:20px!important;color:#cc3333;}
+.fl-bpm{background:#050709;border:1px solid #1e2228;padding:2px 7px;border-radius:2px;color:#c8f000;font-family:'Courier New',monospace;font-size:11px;font-weight:700;min-width:64px;text-align:center;flex-shrink:0;}
+.fl-tabs{display:flex;gap:2px;margin-left:auto;}
+.fl-tab{padding:2px 9px;font-size:9px;background:#151820;border:1px solid #1e2228;color:#3a4a5a;cursor:pointer;border-radius:2px;white-space:nowrap;transition:all .15s;}
+.fl-tab.active{color:#ff8c00;border-color:#ff8c00;background:rgba(255,140,0,.08);}
+.fl-main{flex:1;display:flex;min-height:0;overflow:hidden;}
+.fl-piano{width:40px;background:#0c0e12;border-right:1px solid #252830;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;}
+.pk{flex:1;border-bottom:1px solid #181818;display:flex;align-items:center;justify-content:flex-end;padding-right:2px;font-size:6px;font-weight:700;cursor:pointer;user-select:none;transition:background .07s;position:relative;}
+.pk.white{background:#cecece;color:#444;}.pk.black{background:#181818;color:#555;border-bottom:1px solid #000;}
+.pk.hit{background:var(--or)!important;color:#000!important;}
+.pk .kb{font-size:5px;position:absolute;left:2px;color:#666;top:50%;transform:translateY(-50%);}
 .fl-center{flex:1;background:#0c0e14;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:40px 20px;z-index:0;}
-
-/* PRESAVE POPUP */
-#presave-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:99990;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
-#presave-overlay.show{display:flex;}
-@keyframes popFadeIn{to{opacity:1;}}
-#presave-box{
-  width:min(420px,90vw);background:rgba(22,24,30,.96);
-  border:1px solid rgba(255,255,255,.08);border-radius:14px;
-  overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.7);
-  animation:popSlide .4s .8s both;transform:scale(.92) translateY(20px);
+.fl-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:42px 21px;}
+#ptc{position:absolute;inset:0;pointer-events:none;opacity:.6;}
+.hero-wrap{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;}
+.hero-bg{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,180px);color:rgba(255,106,0,.04);letter-spacing:10px;white-space:nowrap;animation:bgFloat 8s ease-in-out infinite;pointer-events:none;}
+@keyframes bgFloat{0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+.hero-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.ering{position:absolute;border-radius:50%;border:1px solid;animation:erot linear infinite;}
+@keyframes erot{to{transform:rotateZ(360deg);}}
+.ering.a{width:320px;height:100px;border-color:rgba(255,106,0,.16);animation-duration:7s;}
+.ering.b{width:420px;height:132px;border-color:rgba(168,85,247,.1);animation-duration:12s;animation-direction:reverse;}
+.ering.c{width:200px;height:64px;border-color:rgba(255,180,0,.09);animation-duration:5s;}
+#pcn-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(54px,7.5vw,110px);
+  color:#fff;letter-spacing:5px;line-height:.88;text-align:center;
+  transform-style:preserve-3d;position:relative;z-index:2;
+  text-shadow:0 0 14px rgba(255,106,0,.95),0 0 30px rgba(255,106,0,.5),0 0 60px rgba(168,85,247,.2),1px 1px 0 #d05000,2px 2px 0 #a03800,3px 3px 0 #702000,4px 4px 8px rgba(0,0,0,.9);
 }
-@keyframes popSlide{to{transform:scale(1) translateY(0);}}
-.pp-titlebar{height:36px;background:#1a1c22;display:flex;align-items:center;padding:0 14px;gap:8px;border-bottom:1px solid rgba(255,255,255,.06);}
-.pp-dot{width:11px;height:11px;border-radius:50%;cursor:pointer;}
-.pp-dot.r{background:#ff5f57;}.pp-dot.y{background:#ffbd2e;}.pp-dot.g{background:#28c840;}
-.pp-title{font-size:11px;color:#666;margin-left:auto;margin-right:auto;}
-.pp-body{padding:28px 28px 24px;text-align:center;}
-.pp-cover{width:80px;height:80px;border-radius:10px;object-fit:cover;margin:0 auto 16px;display:block;box-shadow:0 8px 24px rgba(0,0,0,.5);}
-.pp-tag{font-size:10px;color:var(--orange);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
-.pp-artist{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:2px;line-height:1.1;margin-bottom:4px;}
-.pp-release{font-size:11px;color:#666;margin-bottom:20px;}
-.pp-btn{display:block;width:100%;padding:14px;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;border-radius:8px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-decoration:none;margin-bottom:10px;}
-.pp-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,106,0,.4);}
-.pp-skip{font-size:11px;color:#444;cursor:pointer;transition:color .2s;}
-.pp-skip:hover{color:#888;}
-
-/* Mobile responsive */
-@media(max-width:768px){
-  /* Plugin rack hidden on mobile — but show viz row below drums */
-  .plugin-rack{display:none;}
-  #vizArtista,#vizProd{display:none!important;}
-  #vizClipe{display:none!important;}
-  .viz-mobile-row{display:flex!important;}
+#pcn-label .refl{display:block;transform:scaleY(-.25) translateY(-3px);opacity:.08;filter:blur(4px);}
+.fl-rack{
+  width:210px;min-width:210px;flex-shrink:0;
+  background:#0e1014;border-left:1px solid #252830;
+  display:flex;flex-direction:column;overflow:hidden;
 }
-/* Mobile viz row — hidden on desktop */
-.viz-mobile-row{display:none;gap:4px;padding:4px;background:#0c0e14;border-top:1px solid #1a1d23;flex-shrink:0;height:130px;}
-.viz-mob{flex:1;background:#0a0c10;border:1px solid rgba(255,106,0,.12);border-radius:5px;overflow:hidden;display:flex;flex-direction:column;}
-.viz-mob-title{height:18px;background:#181b22;display:flex;align-items:center;padding:0 6px;gap:4px;font-size:8px;color:#666;flex-shrink:0;}
-.viz-mob-title .fl-dot{width:6px;height:6px;border-radius:50%;}
-.viz-mob-content{flex:1;position:relative;overflow:hidden;}
-.viz-mob-content iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-.viz-mob-content img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.2s;}
-.viz-mob-content img.show{opacity:1;}
-body{cursor:none;}
-.cursor{position:fixed;width:16px;height:16px;border:2px solid var(--orange);border-radius:50%;pointer-events:none;z-index:99999;transition:transform 0.1s,border-color 0.1s;mix-blend-mode:difference;}
-.cursor-dot{position:fixed;width:4px;height:4px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:99999;}
-.cursor.hover{transform:scale(2);border-color:#fff;}
+.rack-body{flex:1;display:flex;flex-direction:column;padding:4px;gap:4px;overflow:hidden;min-height:0;}
+.rwin{background:#080c10;border:1px solid rgba(255,106,0,.1);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;flex:1;min-height:0;}
+.rwin-head{height:18px;background:#12151a;display:flex;align-items:center;padding:0 6px;gap:3px;flex-shrink:0;}
+.rwin-head .fd{width:6px;height:6px;}
+.rwin-head span{font-size:8px;color:#444;margin-left:2px;}
+.rwin-body{flex:1;position:relative;overflow:hidden;min-height:0;background:#000;}
+.rwin-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;}
+.rwin-body img.show{opacity:1;}
+.rwin-body iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+#eq-c{width:100%;height:100%;display:block;}
+.rwin-foot{height:18px;background:#0a0c10;border-top:1px solid #151820;display:flex;align-items:center;gap:3px;padding:0 4px;flex-shrink:0;}
+.rbtn{font-size:7px;padding:1px 5px;background:#12151a;border:1px solid #1e2228;border-radius:2px;color:#444;cursor:pointer;transition:all .2s;}
+.rbtn.on,.rbtn:hover{color:var(--or);border-color:rgba(255,106,0,.25);}
+.fl-drums{height:38px;background:#12151a;border-top:1px solid #252830;display:flex;flex-shrink:0;}
+.dpad{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border-right:1px solid #1a1d23;transition:filter .1s;user-select:none;}
+.dpad:last-child{border-right:none;}
+.dpad .dn{font-size:8px;font-weight:700;}
+.dpad .dk{font-size:7px;border-radius:2px;padding:0 3px;color:#fff;margin-top:1px;font-weight:700;}
+.dpad.hit{filter:brightness(2.2);transform:scale(.92);}
+.fl-status{height:16px;background:#0a0c10;border-top:1px solid #1a1d23;display:flex;align-items:center;padding:0 8px;font-size:9px;color:#333;flex-shrink:0;}
 
-/* Improved 3D Name */
-.name-3d{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,100px);color:#fff;text-align:center;transform-style:preserve-3d;perspective:800px;cursor:default;user-select:none;z-index:2;
-text-shadow:
-  0 0 10px rgba(255,106,0,0.8),
-  0 0 30px rgba(255,106,0,0.5),
-  0 0 60px rgba(168,85,247,0.3),
-  1px 1px 0 #e06000,
-  2px 2px 0 #b04000,
-  3px 3px 0 #802000,
-  4px 4px 0 #501000,
-  5px 5px 10px rgba(0,0,0,0.8);
-  animation:name-float 4s ease-in-out infinite;}
-@keyframes name-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
-
-/* Floating tags — interactive */
-.floating-tag{position:absolute;font-size:11px;color:rgba(255,255,255,0.12);font-family:'Inter',sans-serif;animation:floatTag 6s ease-in-out infinite;pointer-events:all;cursor:pointer;padding:3px 8px;border-radius:3px;border:1px solid transparent;transition:all 0.3s;z-index:3;}
-.floating-tag:hover{color:rgba(255,106,0,0.6);border-color:rgba(255,106,0,0.3);}
-.floating-tag.active{color:var(--orange);border-color:var(--orange);background:rgba(255,106,0,0.1);box-shadow:0 0 10px rgba(255,106,0,0.3);}
-
-/* Visualizer upgraded */
-.viz-body{height:140px;position:relative;overflow:hidden;border-radius:4px;}
-.viz-spectrum{position:absolute;bottom:0;left:0;right:0;height:30px;display:flex;align-items:flex-end;gap:1px;padding:0 4px;z-index:2;}
-.viz-bar{flex:1;background:var(--orange);border-radius:1px 1px 0 0;animation:vizPulse var(--d,0.5s) var(--del,0s) infinite alternate ease-in-out;}
-@keyframes vizPulse{from{height:2px;opacity:0.3;}to{height:var(--h,15px);opacity:0.9;}}
-.viz-controls{display:flex;gap:3px;padding:4px;border-top:1px solid #333;}
-.viz-ctrl-btn{font-size:8px;padding:2px 6px;background:#222;border:1px solid #444;border-radius:2px;color:#888;cursor:pointer;transition:all 0.2s;}
-.viz-ctrl-btn:hover,.viz-ctrl-btn.active{color:var(--orange);border-color:var(--orange);background:rgba(255,106,0,0.1);}
-
-/* All clickable elements */
-.tb-btn,.nav-btn,.drum-pad,.fpc-pad,.knob,.piano-key,.floating-tag,.viz-ctrl-btn,.at-btn,.tb-tab{cursor:pointer;}
-.tb-btn:active,.drum-pad:active,.fpc-pad:active{transform:scale(0.9);}
-button,a,.tb-tab{transition:all 0.2s;}
-#orbit-canvas{position:absolute;inset:0;pointer-events:none;z-index:1;}
-.floating-tag{position:absolute;font-size:11px;color:rgba(255,255,255,0.08);font-family:'Inter',sans-serif;animation:floatTag 6s ease-in-out infinite;pointer-events:none;z-index:0;}
-@keyframes floatTag{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-
-/* Plugin Rack */
-.plugin-rack{width:240px;background:#0d0f14;border-left:1px solid #1e2230;display:flex;flex-direction:column;gap:0;overflow-y:auto;flex-shrink:0;min-width:240px;}
-.plugin-rack::-webkit-scrollbar{width:4px;}
-.plugin-rack::-webkit-scrollbar-thumb{background:#1e2230;border-radius:2px;}
-
-/* FL Plugin Wrapper — estilo real */
-.fl-plugin-wrap{background:#0a0c12;border-bottom:1px solid #1a1c24;flex-shrink:0;}
-.fl-plugin-header{height:22px;background:linear-gradient(90deg,#1e2230,#181c26);display:flex;align-items:center;padding:0 7px;gap:5px;user-select:none;border-bottom:1px solid #0e1020;}
-.fl-plugin-dots{display:flex;gap:3px;align-items:center;}
-.fld{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.fld.r{background:#ff5f57;}.fld.y{background:#ffbd2e;}.fld.g{background:#28c840;}
-.fl-plugin-name{font-size:9px;color:#8899aa;margin-left:4px;flex:1;font-family:'Inter',sans-serif;font-weight:500;letter-spacing:.3px;}
-.fl-plugin-actions{display:flex;gap:3px;}
-.fl-pw-btn{font-size:10px;cursor:pointer;color:#445566;transition:color .15s;}
-.fl-pw-btn:hover{color:#8899aa;}
-.fl-plugin-footer{height:20px;background:#0d0f14;display:flex;align-items:center;gap:3px;padding:0 5px;border-top:1px solid #0e1020;}
-.fl-pf-btn{font-size:7px;padding:1px 6px;background:#141820;border:1px solid #1e2230;border-radius:2px;color:#445566;cursor:pointer;transition:all .15s;white-space:nowrap;}
-.fl-pf-btn.active,.fl-pf-btn:hover{color:#ff8c00;border-color:rgba(255,140,0,.3);background:rgba(255,140,0,.06);}
-
-/* Visualizer */
-.viz-body{height:120px;position:relative;overflow:hidden;border-radius:4px;}
-.viz-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;}
-.viz-body img.show{opacity:1;}
-
-/* EQ Knobs */
-.eq-knobs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:6px;}
-.knob{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 220deg,var(--orange),#333 70%,#333);border:2px solid #444;cursor:grab;position:relative;display:flex;align-items:center;justify-content:center;}
-.knob::after{content:'';width:3px;height:10px;background:#fff;border-radius:2px;position:absolute;top:4px;transform-origin:bottom center;}
-.knob-label{font-size:7px;color:#888;text-align:center;margin-top:2px;}
-
-/* Auto-tune */
-.autotune-body{text-align:center;padding:10px;}
-.pitch-circle{width:50px;height:50px;border-radius:50%;border:2px solid var(--orange);margin:6px auto;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--orange);animation:pitchPulse 2s infinite;}
-@keyframes pitchPulse{0%,100%{box-shadow:0 0 5px rgba(255,106,0,0.3);}50%{box-shadow:0 0 15px rgba(255,106,0,0.6);}}
-.autotune-body p{font-size:9px;color:#888;margin-top:4px;}
-.at-btn{font-size:8px;padding:3px 8px;background:#222;border:1px solid #444;border-radius:3px;color:#888;cursor:pointer;transition:all 0.2s;}
-.at-btn:hover,.at-btn.at-active{background:rgba(255,106,0,0.2);border-color:var(--orange);color:var(--orange);}
-.at-key-btn{font-size:8px;padding:2px 5px;background:#1a1d23;border:1px solid #2a2d35;border-radius:2px;color:#666;cursor:pointer;transition:all .15px;}
-.at-key-btn:hover,.at-key-btn.active-key{background:rgba(255,106,0,.15);border-color:var(--orange);color:var(--orange);}
-.at-slider-wrap{flex:1;height:4px;background:#1a1d23;border-radius:2px;overflow:hidden;cursor:pointer;}
-.at-slider-fill{height:100%;background:var(--orange);border-radius:2px;pointer-events:none;}
-/* FPC Drum Pads */
-.fpc-pad{aspect-ratio:1;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(0,0,0,0.6);cursor:pointer;transition:all 0.1s;opacity:0.8;}
-.fpc-pad:hover{opacity:1;transform:scale(1.05);}
-.fpc-pad:active,.fpc-pad.hit{opacity:1;transform:scale(0.9);box-shadow:0 0 12px currentColor;}
-
-/* Drum Pads */
-.drum-row{height:40px;background:#1a1d23;display:flex;border-top:1px solid #333;}
-.drum-pad{flex:1;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'Inter',sans-serif;color:#aaa;cursor:pointer;border-right:1px solid #333;transition:all 0.1s;user-select:none;}
-.drum-pad:last-child{border-right:none;}
-.drum-pad:hover{background:rgba(255,106,0,0.1);}
-.drum-pad.hit{background:var(--orange) !important;color:#000;box-shadow:0 0 15px rgba(255,106,0,0.5);}
-
-/* Status Bar */
-.fl-status{height:18px;background:#22252b;display:flex;align-items:center;padding:0 10px;font-size:10px;color:#666;border-top:1px solid #333;}
-
-/* LOJA */
-#loja{padding:80px 20px 40px;background:#0a0a0f;}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--orange);text-align:center;margin-bottom:8px;}
-.section-sub{text-align:center;color:#888;font-size:14px;margin-bottom:40px;}
-.loja-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;max-width:900px;margin:0 auto;}
-.loja-card{background:rgba(20,24,30,0.7);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:24px;text-align:center;backdrop-filter:blur(10px);transition:all 0.3s;cursor:pointer;}
-.loja-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,106,0,0.15);}
-.loja-card i{font-size:36px;color:#555;margin-bottom:12px;}
-.loja-card h3{font-size:14px;margin-bottom:6px;color:#fff;}
-.loja-card p{font-size:12px;color:var(--orange);}
-
-/* MUSICAS */
-#musicas{padding:80px 20px 40px;background:#0a0a0f;}
-.spotify-wrap{max-width:700px;margin:0 auto;border-radius:12px;overflow:hidden;}
-
-/* CONTATO */
-#contato{padding:80px 20px 40px;background:#0a0a0f;}
-.contato-card{max-width:500px;margin:0 auto;background:rgba(20,24,30,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:32px;backdrop-filter:blur(10px);text-align:center;}
-.contato-card h3{margin-bottom:20px;font-size:18px;}
-.contato-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;color:#ccc;}
-.contato-item i{color:var(--orange);width:20px;text-align:center;}
-.whatsapp-btn{display:inline-block;margin-top:24px;background:#25d366;color:#fff;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;}
-.whatsapp-btn:hover{transform:scale(1.05);box-shadow:0 8px 20px rgba(37,211,102,0.3);}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  #cur,#cur-dot,#cur-ring{display:none!important;}
+/* ── CURSOR desktop only ── */
+@media(pointer:fine){
+  *{cursor:none!important;}
+  #cur{position:fixed;top:0;left:0;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);transition:transform .12s;}
+  #cur-dot{position:fixed;top:0;left:0;width:4px;height:4px;background:var(--or);border-radius:50%;pointer-events:none;z-index:999998;transform:translate(-50%,-50%);}
+}
+@media(pointer:coarse){
+  #cur,#cur-dot{display:none!important;}
   *{cursor:auto!important;}
-
-  header{height:48px;padding:0 10px;}
-  header .logo{font-size:14px;gap:6px;}
-  header .logo img{width:28px;height:28px;}
-  header nav{gap:3px;}
-  header nav button{padding:6px 10px;font-size:10px;border-radius:14px;}
 }
-
-/* MOBILE PORTRAIT — mostra tela "vire" */
-@media(max-width:768px) and (orientation:portrait){
-  #home.active{
-    display:flex!important;
-    height:100vh;
-    overflow:hidden;
-    padding:0;
-    align-items:stretch;
-    justify-content:stretch;
-  }
-  #home.active .fl-window{display:none!important;}
-  .home-mobile-portrait{display:flex!important;}
-  .ftag { display: none !important; }
-}
-
-/* MOBILE LANDSCAPE — FL Studio compacto mas grande */
-@media(max-width:900px) and (orientation:landscape){
-  html,body{overflow:hidden;height:100%;width:100%;}
-  #home.active{
-    display:flex!important;
-    height:100dvh;width:100vw;
-    overflow:hidden;padding:0;
-  }
-  .home-mobile-portrait{display:none!important;}
-  .fl-window{
-    width:100vw;height:100%;max-width:100vw;
-    border-radius:0;border:none;box-shadow:none;background:#1a1d23;
-    display:flex;flex-direction:column;
-  }
-  .fl-titlebar,.fl-status{display:none!important;}
-  .fl-toolbar{height:32px;padding:0 6px;gap:4px;flex-shrink:0;}
-  .tb-btn{width:24px;height:24px;font-size:10px;}
-  .bpm-display{font-size:10px;min-width:60px;padding:2px 5px;}
-  .tb-tabs{gap:2px;margin-left:auto;}
-  .tb-tab{padding:2px 8px;font-size:9px;}
-  .fl-main{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:row;}
-  .piano-sidebar{width:36px;background:#111;border-right:1px solid #333;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;}
-  .piano-key{flex:1;min-height:0;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:flex-end;padding-right:2px;font-size:5px;font-weight:700;cursor:pointer;user-select:none;}
-  .piano-key.white{background:#d0d0d0;color:#444;}
-  .piano-key.black{background:#1a1a1a;color:#555;}
-  .piano-key.hit{background:#ff6a00!important;color:#000!important;}
-  .piano-key .kb{display:none;}
-  .fl-center{flex:1;background:#0c0e14;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-  #pcn-label{font-size:clamp(28px,7vw,44px)!important;letter-spacing:3px!important;line-height:.9!important;}
-  .ering.a{width:110px;height:36px;}
-  .ering.b{width:155px;height:52px;}
-  .ftag{display:none!important;}
-  .plugin-rack{width:170px!important;min-width:170px!important;background:#111;border-left:1px solid #2a2d35;display:flex!important;flex-direction:column;overflow-y:auto;flex-shrink:0;}
-  .plugin-rack::-webkit-scrollbar{width:2px;}
-  .viz-titlebar{height:18px!important;}
-  .viz-titlebar .vtxt{font-size:8px!important;}
-  .viz-ctrl{height:18px!important;}
-  .viz-btn{font-size:7px!important;padding:1px 4px!important;}
-  .drum-row{height:38px;flex-shrink:0;background:#1a1d23;border-top:1px solid #333;}
-  .drum-pad{font-size:9px!important;}
-  .drum-pad span:last-child{font-size:8px!important;padding:0 3px!important;}
-}
-
-  /* Sections */
-  .section{top:48px!important;padding-top:0;}
-
-  /* Hide desktop elements */
-  .fl-titlebar,.fl-status{display:none!important;}
-
-  /* Landscape — compact toolbar */
-  @media(orientation:landscape){
-    .fl-toolbar{
-      height:32px;
-      padding:0 4px;
-      gap:2px;
-      flex-wrap:nowrap;
-      flex-shrink:0;
-      overflow:auto;
-      border-bottom:1px solid #1a1d23;
-    }
-    .tb-btn{width:22px;height:22px;font-size:9px;padding:0;}
-    .bpm-display{font-size:9px;min-width:45px;padding:2px 3px;}
-  /* Sections mobile */
-  .prod-main{grid-template-columns:1fr!important;gap:20px;}
-  .loja-grid{grid-template-columns:repeat(2,1fr);}
-
-  /* Musicas section */
-  #musicas{padding:70px 16px 40px;}
-  .mus-wrap{max-width:100%;}
-  .mus-topbar{flex-direction:column;align-items:flex-start;gap:10px;padding:14px;}
-  .mus-topbar a{margin-left:0;width:100%;justify-content:center;}
-  .mus-presave-section{padding:14px;margin-bottom:20px;}
-
-  /* Contato section */
-  #contato{padding:70px 16px 40px;}
-  .ct-layout{max-width:100%;}
-}
-
-/* ========================================
-   MOBILE PREMIUM — portrait only
-   ======================================== */
-@media(max-width:768px) and (orientation:portrait){
-  /* Ocultar fl-studio no portrait */
-  #home.active .fl-window{display:none!important;}
-  .home-mobile-portrait{display:flex!important;}
-
-  /* TODAS as sections precisam de padding-top por causa do header fixo */
-  .section{padding-top:58px!important;}
-
-  /* Header menor */
-  header{height:52px;padding:0 14px;background:rgba(12,12,18,.96);backdrop-filter:blur(20px);}
-  .logo{font-size:15px;gap:8px;}
-  .logo img{width:30px;height:30px;}
-  nav{gap:4px;}
-  nav button{padding:6px 11px;font-size:10px;border-radius:16px;}
-  nav button.active{box-shadow:0 0 12px rgba(255,120,0,.5);}
-
-  /* ---- LOJA ---- */
-  #loja{padding:14px;padding-top:66px;background:#121212;overflow-y:auto;}
-  #loja .section-title,#loja .loja-titulo{font-size:32px;margin-bottom:4px;}
-  #loja .section-sub{font-size:11px;margin-bottom:20px;}
-
-  /* Grid de produtos: 1 coluna, cards full width */
-  .prod-main{display:flex!important;flex-direction:column!important;gap:16px!important;max-width:100%!important;padding:0!important;}
-
-  /* Card principal de produto */
-  .prod-img-wrap{
-    width:100%!important;
-    aspect-ratio:1/1!important;
-    border-radius:16px!important;
-    overflow:hidden!important;
-    position:relative!important;
-  }
-  .prod-info{padding:0!important;}
-  .prod-name{font-size:22px!important;margin-bottom:8px!important;}
-  .prod-price{font-size:28px!important;}
-  .prod-btn-buy{
-    width:100%!important;
-    padding:15px!important;
-    font-size:16px!important;
-    border-radius:12px!important;
-    background:linear-gradient(135deg,#128c7e,#25d366)!important;
-    margin-top:12px!important;
-    display:flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    gap:8px!important;
-  }
-  .prod-btn-detail{width:100%!important;padding:12px!important;font-size:14px!important;border-radius:12px!important;margin-top:8px!important;}
-
-  /* Mais produtos: 2 colunas no mobile */
-  .extra-card{border-radius:14px!important;overflow:hidden!important;}
-  .extra-img-wrap{aspect-ratio:1/1!important;height:auto!important;}
-
-  /* Loja header */
-  .loja-header{padding:16px!important;margin-bottom:16px!important;}
-  .loja-brand{font-size:22px!important;}
-
-  /* Img toggle */
-  .img-toggle{display:flex;gap:8px;margin-top:10px;}
-  .img-toggle-btn{flex:1;padding:10px;font-size:13px;border-radius:10px;}
-
-  /* ---- MÚSICAS ---- */
-  #musicas{padding:14px;padding-top:66px;background:#121212;overflow-y:auto;}
-  .mus-wrap{max-width:100%;padding:0;}
-  .mus-topbar{
-    flex-direction:row!important;
-    align-items:center!important;
-    gap:12px!important;
-    padding:14px!important;
-    border-radius:14px!important;
-    margin-bottom:16px!important;
-    background:rgba(255,255,255,.03)!important;
-    border:1px solid rgba(255,255,255,.06)!important;
-  }
-  .mus-topbar img{width:46px!important;height:46px!important;flex-shrink:0;}
-  .mus-topbar h1{font-size:18px!important;}
-  .mus-topbar p{font-size:9px!important;}
-  .mus-topbar a{
-    margin-left:auto!important;
-    width:auto!important;
-    padding:7px 14px!important;
-    font-size:11px!important;
-    flex-shrink:0!important;
-    justify-content:center!important;
-  }
-  .mus-presave-section{
-    padding:14px!important;
-    margin-bottom:16px!important;
-    border-radius:14px!important;
-  }
-  .mus-presave-section iframe{
-    width:100%!important;
-    height:180px!important;
-    border-radius:10px!important;
-  }
-
-  /* ---- CONTATO ---- */
-  #contato{padding:14px;padding-top:66px;background:#121212;overflow-y:auto;}
-  .ct-layout{max-width:100%;}
-  .ct-title{font-size:32px!important;}
-  .ct-btn-zap{font-size:18px!important;padding:16px!important;border-radius:14px!important;}
-  .ct-link{font-size:13px!important;padding:12px 0!important;}
-  .ct-card{border-radius:14px!important;padding:16px 18px!important;}
-}
-
-/* Mobile portrait premium keyframes */
-@keyframes mpNameFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-@keyframes mpPhone{0%,100%{transform:rotate(-15deg) translateY(0);}25%{transform:rotate(0deg) translateY(-5px);}50%{transform:rotate(90deg) translateY(-3px);}75%{transform:rotate(85deg) translateY(-7px);}}
-@keyframes mpArrow{from{transform:translateX(0);}to{transform:translateX(7px);}}
-@keyframes mpDot{0%,100%{background:rgba(255,106,0,.2);transform:scale(1);}50%{background:rgba(255,106,0,.9);transform:scale(1.5);}}
 </style>
+
+<style>
+/* ══════════════════════════════════════
+   LOJA
+══════════════════════════════════════ */
+#loja{background:var(--bg);padding:66px 0 50px;overflow-y:auto;}
+.loja-inner{max-width:960px;margin:0 auto;padding:0 16px;}
+.loja-hero{padding:28px 0 20px;text-align:center;}
+.loja-brand{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,8vw,48px);color:#fff;letter-spacing:3px;}
+.loja-brand span{color:#e01a1a;}
+.loja-sub-txt{font-size:11px;color:#444;letter-spacing:3px;text-transform:uppercase;margin-top:4px;}
+
+/* Produto principal — 1 col mobile, 2 col desktop */
+.prod-layout{display:grid;grid-template-columns:1fr;gap:0;}
+@media(min-width:640px){.prod-layout{grid-template-columns:1fr 1fr;gap:32px;align-items:start;}}
+.prod-gallery{width:100%;}
+.prod-img-box{
+  width:100%;aspect-ratio:1;
+  background:#111;border-radius:14px;overflow:hidden;position:relative;
+}
+.prod-img-box img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;background:#111;
+  transition:opacity .5s;
+}
+.prod-img-box img.hidden{opacity:0;}
+.prod-img-hint{
+  position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+  font-size:10px;color:rgba(255,255,255,.25);letter-spacing:2px;
+  pointer-events:none;white-space:nowrap;
+}
+.prod-toggle{display:flex;gap:8px;margin-top:10px;}
+.ptbtn{flex:1;padding:10px;background:#111;border:1px solid #2a2a2a;border-radius:8px;color:#888;font-size:12px;font-weight:600;transition:all .2s;}
+.ptbtn.active{background:#1a1a1a;border-color:#ff6a00;color:#ff6a00;}
+.prod-info{padding:20px 0;}
+@media(min-width:640px){.prod-info{padding:4px 0;}}
+.prod-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,40px);color:#fff;letter-spacing:2px;margin-bottom:10px;}
+.prod-seals{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+.seal{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.3px;}
+.seal-hot{background:linear-gradient(135deg,#c01515,#e83232);color:#fff;box-shadow:0 2px 10px rgba(200,20,20,.35);}
+.seal-limit{background:#0e0e0e;border:1px solid rgba(255,140,0,.35);color:#ff8c00;}
+.seal-new{background:#0e0e0e;border:1px solid rgba(255,255,255,.12);color:#aaa;}
+.prod-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:6px;}
+.prod-price{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,8vw,52px);color:#fff;line-height:1;}
+.prod-price-pre{font-size:16px;color:#888;align-self:flex-start;margin-top:8px;}
+.prod-freight{font-size:11px;color:#444;margin-bottom:12px;}
+.prod-desc{font-size:13px;color:#666;line-height:1.6;margin-bottom:16px;}
+.prod-stock{display:flex;align-items:center;gap:7px;font-size:11px;color:#888;margin-bottom:18px;}
+.stock-dot{width:6px;height:6px;border-radius:50%;background:#e01a1a;animation:sdPulse 1.5s infinite;}
+@keyframes sdPulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.prod-buy{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,#128c7e,#25d366);
+  border-radius:12px;color:#fff;font-size:16px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  box-shadow:0 4px 20px rgba(37,211,102,.25);transition:all .2s;border:none;
+  font-family:'Bebas Neue',sans-serif;letter-spacing:1px;
+}
+.prod-buy:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.35);}
+.prod-buy i{font-size:20px;}
+
+/* Mais produtos */
+.more-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin:40px 0 16px;border-left:3px solid #e01a1a;padding-left:12px;}
+.more-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.more-card{background:#111;border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s;}
+.more-card:hover{transform:translateY(-4px);}
+.more-card-img{aspect-ratio:1;overflow:hidden;background:#0a0a0a;}
+.more-card-img img{width:100%;height:100%;object-fit:cover;background:#0a0a0a;}
+.more-card-body{padding:14px;}
+.more-card-body h3{font-size:15px;color:#fff;margin-bottom:4px;}
+.more-card-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:12px;}
+.more-buy{width:100%;padding:10px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);border-radius:8px;color:#25d366;font-size:12px;font-weight:600;transition:all .2s;}
+.more-buy:hover{background:rgba(37,211,102,.15);}
+
+/* ══════════════════════════════════════
+   MÚSICAS
+══════════════════════════════════════ */
+#musicas{background:var(--bg);padding:66px 0 50px;overflow-y:auto;}
+.mus-inner{max-width:680px;margin:0 auto;padding:0 16px;}
+.mus-header{display:flex;align-items:center;gap:12px;padding:16px;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;margin-bottom:20px;}
+.mus-header img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,106,0,.3);flex-shrink:0;}
+.mus-header-info h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin:0;display:flex;align-items:center;}
+.mus-header-info p{font-size:10px;color:#444;margin:2px 0 0;letter-spacing:2px;text-transform:uppercase;}
+.mus-follow{margin-left:auto;display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:20px;background:rgba(29,185,84,.08);border:1px solid rgba(29,185,84,.18);color:#1db954;font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0;transition:all .2s;}
+.mus-follow:hover{background:rgba(29,185,84,.15);}
+
+/* Carrossel */
+.mus-carousel{border-radius:14px;overflow:hidden;margin-bottom:20px;position:relative;background:#111;}
+.mc-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.mc-slide{min-width:100%;aspect-ratio:1;overflow:hidden;position:relative;background:#111;}
+.mc-slide img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.mc-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:36px;color:rgba(255,106,0,.3);background:#0a0a0f;}
+.mc-dots{display:flex;justify-content:center;gap:6px;padding:10px 0;background:#0a0a0f;}
+.mcdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .3s;}
+.mcdot.active{background:var(--or);width:18px;border-radius:3px;}
+
+/* Links */
+.mus-links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.mlink{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap;}
+
+/* Presave */
+.mus-presave{background:rgba(29,185,84,.04);border-top:2px solid rgba(29,185,84,.2);border-radius:12px;padding:16px;margin-bottom:20px;}
+.mus-presave-label{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#1db954;letter-spacing:2px;text-align:center;margin-bottom:12px;}
+.mus-presave iframe{width:100%;border:none;border-radius:10px;display:block;}
+
+/* ══════════════════════════════════════
+   CONTATO
+══════════════════════════════════════ */
+#contato{background:var(--bg);padding:66px 0 50px;overflow-y:auto;}
+.ct-inner{max-width:560px;margin:0 auto;padding:0 16px;}
+.win-window{background:var(--bg3);border-radius:10px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);border:1px solid #252830;}
+.win-tb{height:30px;background:#1a1d23;display:flex;align-items:center;padding:0 12px;gap:7px;border-bottom:1px solid #252830;}
+.wdot{width:10px;height:10px;border-radius:50%;}
+.wdot.r{background:#ff5f57;}.wdot.y{background:#ffbd2e;}.wdot.g{background:#28c840;}
+.win-tb-title{font-size:11px;color:#555;margin-left:6px;}
+.win-tabs{display:flex;border-bottom:1px solid #252830;}
+.wtab{flex:1;padding:10px;font-size:11px;color:#3a4a5a;cursor:pointer;text-align:center;border-right:1px solid #252830;transition:all .2s;font-weight:500;}
+.wtab:last-child{border-right:none;}
+.wtab:hover{color:#fff;background:rgba(255,255,255,.03);}
+.wtab.active{color:#ff8c00;background:rgba(255,140,0,.05);border-bottom:2px solid #ff8c00;}
+.win-body{padding:20px;}
+.wpanel{display:none;flex-direction:column;gap:4px;}
+.wpanel.active{display:flex;}
+.wlink{display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;color:#bbb;text-decoration:none;font-size:13px;background:rgba(255,255,255,.02);border:1px solid transparent;transition:all .2s;}
+.wlink:hover{background:rgba(255,255,255,.05);border-color:#252830;color:#fff;}
+.wlink i{width:22px;text-align:center;font-size:17px;flex-shrink:0;}
+.wlink.ig i{color:#e1306c;}.wlink.sp i{color:#1db954;}.wlink.ml i{color:var(--or);}.wlink.yt i{color:#ff0000;}
+.wlink-sub{font-size:10px;color:#444;margin-top:2px;}
+.wlink-arr{margin-left:auto;color:#333;font-size:11px;}
+.win-zap{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;background:linear-gradient(135deg,#128c7e,#25d366);border-radius:10px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;text-decoration:none;transition:all .25s;border:none;margin-top:4px;}
+.win-zap:hover{transform:translateY(-2px);}
+.win-sb{height:20px;background:#12151a;border-top:1px solid #1a1d23;display:flex;align-items:center;padding:0 12px;gap:12px;}
+.win-sb span{font-size:9px;color:#333;}
+.booking-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.btag{padding:4px 12px;background:rgba(255,106,0,.07);border:1px solid rgba(255,106,0,.18);border-radius:16px;font-size:11px;color:#ff8c00;}
+.dr-wrap{margin-top:32px;text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.04);}
+.dr-lbl{font-size:9px;color:#2a2a2a;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:10px;}
+.dr-brand{display:inline-flex;align-items:center;gap:8px;background:rgba(20,22,26,.98);border:1px solid rgba(255,255,255,.06);padding:8px 20px;border-radius:50px;text-decoration:none;transition:all .2s;}
+.dr-brand span{font-size:14px;font-weight:700;color:#fff;}
+.dr-copy{font-size:9px;color:#1a1a1a;margin-top:10px;}
+
+/* ══════════════════════════════════════
+   PRESAVE POPUP
+══════════════════════════════════════ */
+#pp{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:9990;display:none;align-items:center;justify-content:center;}
+#pp.show{display:flex;}
+#pp-box{width:min(400px,92vw);background:#0e1014;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;}
+.pp-tb{height:32px;background:#12151a;display:flex;align-items:center;padding:0 12px;gap:7px;border-bottom:1px solid rgba(255,255,255,.05);}
+.pp-dot{width:10px;height:10px;border-radius:50%;cursor:pointer;}
+.pp-dot.r{background:#ff5f57;}.pp-dot.y{background:#ffbd2e;}.pp-dot.g{background:#28c840;}
+.pp-body{padding:22px;text-align:center;}
+.pp-cover{width:70px;height:70px;border-radius:10px;object-fit:cover;margin:0 auto 12px;display:block;}
+.pp-tag{font-size:9px;color:var(--or);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;}
+.pp-artist{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;}
+.pp-rel{font-size:10px;color:#333;margin:4px 0 16px;}
+.pp-btn{display:block;width:100%;padding:12px;background:linear-gradient(135deg,var(--or),var(--or2));border:none;border-radius:8px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;cursor:pointer;text-decoration:none;margin-bottom:10px;}
+.pp-skip{font-size:10px;color:#2a2a2a;cursor:pointer;display:block;text-align:center;transition:color .2s;}
+.pp-skip:hover{color:#666;}
+</style>
+
+<style>
+/* ══════════════════════════════════════
+   RESPONSIVE — Mobile + Landscape
+══════════════════════════════════════ */
+
+/* Mobile base (<768px) */
+@media(max-width:768px){
+  header{height:50px;padding:0 12px;}
+  .h-logo{font-size:15px;gap:7px;}
+  .h-logo img{width:28px;height:28px;}
+  nav button{padding:5px 10px;font-size:10px;border-radius:14px;}
+  #home.active{flex-direction:column;}
+  /* portrait: show portrait UI */
+  #home-portrait{display:flex;}
+  /* fl studio: hidden in portrait */
+  #home-fl{display:none!important;}
+}
+
+/* Landscape mobile (<900px wide, landscape) */
+@media(max-width:900px) and (orientation:landscape){
+  header{height:42px;padding:0 10px;}
+  nav button{padding:4px 9px;font-size:10px;}
+  #home.active{height:100dvh;overflow:hidden;padding:0;align-items:stretch;}
+  #home-portrait{display:none!important;}
+  #home-fl{
+    display:flex!important;
+    width:100%;height:100%;
+  }
+  .fl-win{border-radius:0;border:none;box-shadow:none;}
+  .fl-tb,.fl-status{display:none!important;}
+  .fl-bar{height:30px;padding:0 6px;gap:3px;}
+  .fl-btn{width:22px;height:22px;font-size:9px;}
+  .fl-bpm{font-size:9px;min-width:54px;padding:2px 4px;}
+  .fl-tab{padding:2px 7px;font-size:8px;}
+  .fl-piano{width:30px;}
+  .pk .kb{display:none;}
+  #pcn-label{font-size:clamp(24px,7vw,38px)!important;letter-spacing:2px!important;}
+  .ering.a{width:90px;height:30px;}.ering.b{width:130px;height:44px;}.ering.c{width:60px;height:20px;}
+  .fl-rack{width:155px;min-width:155px;}
+  .fl-drums{height:34px;}
+  .dpad .dn{font-size:7px;}.dpad .dk{font-size:6px;}
+}
+
+/* Tablet portrait (769–1024px) */
+@media(min-width:769px) and (max-width:1024px){
+  #home.active{height:100svh;padding:0;overflow:hidden;}
+  #home-portrait{display:none!important;}
+  #home-fl{display:flex!important;width:100%;height:100%;}
+  .fl-rack{width:190px;min-width:190px;}
+}
+
+/* Desktop (>1024px) */
+@media(min-width:1025px){
+  #home.active{height:100svh;padding:0;overflow:hidden;align-items:stretch;}
+  #home-portrait{display:none!important;}
+  #home-fl{display:flex!important;width:100%;height:100%;}
+}
+
+/* Loja mobile */
+@media(max-width:639px){
+  .more-grid{grid-template-columns:1fr 1fr;}
+  .more-card-body h3{font-size:13px;}
+}
+
+/* Músicas mobile */
+@media(max-width:500px){
+  .mus-header{flex-wrap:wrap;gap:10px;}
+  .mus-follow{width:100%;justify-content:center;margin-left:0;}
+  .mus-links{gap:6px;}
+  .mlink{padding:7px 12px;font-size:11px;}
+}
+
+/* Landscape músicas/loja scroll fix */
+@media(orientation:landscape) and (max-height:500px){
+  #loja,#musicas,#contato{padding-top:48px;}
+}
+</style>
+
 </head>
 <body>
-<!-- Bloquear inspeção + proteção anti-clone -->
+
+<!-- PROTEÇÃO -->
 <script>
-// ═════════════════════════════════════════════════════════
-// PROTEÇÃO TOTAL CONTRA CLONAGEM E INSPEÇÃO
-// ═════════════════════════════════════════════════════════
-
-// 1. Bloquear clique direito
-document.addEventListener('contextmenu',e=>{e.preventDefault();return false;});
-
-// 2. Bloquear todas as teclas de inspeção
+document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{
-  // F12
-  if(e.key==='F12'){e.preventDefault();e.stopPropagation();return false;}
-  // Ctrl+Shift+I (DevTools)
-  if(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='i')){e.preventDefault();e.stopPropagation();return false;}
-  // Ctrl+Shift+J (Console)
-  if(e.ctrlKey&&e.shiftKey&&(e.key==='J'||e.key==='j')){e.preventDefault();e.stopPropagation();return false;}
-  // Ctrl+Shift+C (Inspecionar elemento)
-  if(e.ctrlKey&&e.shiftKey&&(e.key==='C'||e.key==='c')){e.preventDefault();e.stopPropagation();return false;}
-  // Ctrl+U (Ver fonte)
-  if(e.ctrlKey&&(e.key==='U'||e.key==='u')){e.preventDefault();e.stopPropagation();return false;}
-  // F11 (Tela cheia)
-  if(e.key==='F11'){e.preventDefault();e.stopPropagation();return false;}
-  // Ctrl+S (Salvar)
-  if(e.ctrlKey&&(e.key==='S'||e.key==='s')){e.preventDefault();e.stopPropagation();return false;}
-}, true);
-
-// 3. Bloquear drag e drop
-document.addEventListener('dragstart',e=>{e.preventDefault();return false;});
-document.addEventListener('drag',e=>{e.preventDefault();return false;});
-
-// 4. Bloquear seleção de texto
-document.addEventListener('selectstart',e=>{e.preventDefault();return false;});
-document.body.style.userSelect='none';
-document.body.style.webkitUserSelect='none';
-document.body.style.webkitTouchCallout='none';
-
-// 5. Desabilitar console.log e ferramentas de debug
-(function(){
-  const noop=()=>{};
-  window.console.log=noop;
-  window.console.error=noop;
-  window.console.warn=noop;
-  window.console.info=noop;
-  window.console.debug=noop;
-  
-  // Detectar DevTools aberto
-  let devToolOpen=false;
-  const threshold=160;
-  setInterval(()=>{
-    if(window.outerHeight-window.innerHeight>threshold||window.outerWidth-window.innerWidth>threshold){
-      if(!devToolOpen){devToolOpen=true;window.location.href='about:blank';}
-    }else{devToolOpen=false;}
-  },500);
-})();
-
-// 6. Proteger HTML contra cópia/visualização
-Object.defineProperty(document,'write',{value:()=>{}});
-document.body.oncontextmenu=()=>false;
-document.body.ondragstart=()=>false;
-
-// 7. Bloqueador de ferramentas de desenvolvimento
-if(window.devtools&&window.devtools.open){window.location.href='about:blank';}
-
-// 8. Bloquear técnicas avançadas de debugging
-setInterval(()=>{
-  debugger; // força parada se DevTools estiver aberto
-},1000);
-
-console.clear=()=>{};
+  if(['F12','F11'].includes(e.key)||(e.ctrlKey&&e.shiftKey&&'ijcIJC'.includes(e.key))||(e.ctrlKey&&'usUS'.includes(e.key))){e.preventDefault();e.stopPropagation();return false;}
+},true);
+document.addEventListener('dragstart',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
 </script>
-<div id="cur">
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <!-- outer ring -->
-    <circle cx="16" cy="16" r="13" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
-    <!-- cross lines -->
-    <line x1="16" y1="2" x2="16" y2="10" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-    <line x1="16" y1="22" x2="16" y2="30" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-    <line x1="2" y1="16" x2="10" y2="16" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-    <line x1="22" y1="16" x2="30" y2="16" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-    <!-- orange dot center -->
-    <circle cx="16" cy="16" r="2" fill="#ff8c00"/>
-  </svg>
-</div>
+
+<!-- CURSOR (desktop only) -->
+<div id="cur"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="rgba(255,255,255,.4)" stroke-width="1"/><line x1="10" y1="3" x2="10" y2="8" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="12" x2="10" y2="17" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="10" x2="8" y2="10" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="10" x2="17" y2="10" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="1.5" fill="#ff8c00"/></svg></div>
 <div id="cur-dot"></div>
 
-<!-- PRESAVE POPUP -->
-<div id="presave-overlay" style="display:none;">
-  <div id="presave-box">
-    <div class="pp-titlebar">
-      <span class="pp-dot r" onclick="closePresave()"></span>
-      <span class="pp-dot y"></span>
-      <span class="pp-dot g"></span>
-      <span class="pp-title">Novo Lançamento — KANKIU</span>
-      <span onclick="closePresave()" style="margin-left:auto;color:#666;font-size:16px;cursor:pointer;line-height:1;padding:0 2px;">✕</span>
-    </div>
-    <div class="pp-body">
-      <img class="pp-cover" src="https://i.imgur.com/DMZ6WBT.png" alt="KANKIU">
-      <div class="pp-tag">🎵 Agora Disponível</div>
-      <div class="pp-artist">KANKIU</div>
-      <div class="pp-release">PCN BOLADÃO · Salve na sua biblioteca</div>
-      <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePresave()">
-        <i class="fa-brands fa-spotify"></i> SALVAR / PRÉ-SAVE
-      </a>
-      <span class="pp-skip" onclick="closePresave()">Agora não</span>
-    </div>
-  </div>
+<!-- LOADING -->
+<div id="loading">
+  <img src="https://upload.wikimedia.org/wikipedia/fr/e/ef/FL-Studio-12-Logo.png" alt="FL" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+  <div id="ld-wrap"><div id="ld-bar"></div></div>
+  <p id="ld-msg">Loading PCN BOLADÃO.flp...</p>
 </div>
 
-<!-- LOADING SCREEN -->
-<div id="loading">
-  <img src="https://upload.wikimedia.org/wikipedia/fr/e/ef/FL-Studio-12-Logo.png" alt="FL Studio">
-  <div id="load-bar-wrap"><div id="load-bar"></div></div>
-  <p id="load-msg">Loading PCN BOLADÃO.flp...</p>
+<!-- PRESAVE POPUP -->
+<div id="pp">
+  <div id="pp-box">
+    <div class="pp-tb">
+      <span class="pp-dot r" onclick="closePP()"></span>
+      <span class="pp-dot y"></span><span class="pp-dot g"></span>
+      <span style="font-size:9px;color:#444;margin:0 auto;">Novo Lançamento</span>
+      <span onclick="closePP()" style="color:#333;font-size:14px;cursor:pointer;">✕</span>
+    </div>
+    <div class="pp-body">
+      <img class="pp-cover" src="https://i.imgur.com/DMZ6WBT.png" alt="KANKIU" onerror="this.style.display='none'">
+      <div class="pp-tag">🎵 Agora Disponível</div>
+      <div class="pp-artist">KANKIU</div>
+      <div class="pp-rel">PCN BOLADÃO · Salve na sua biblioteca</div>
+      <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePP()"><i class="fa-brands fa-spotify"></i> SALVAR / PRÉ-SAVE</a>
+      <span class="pp-skip" onclick="closePP()">Agora não</span>
+    </div>
+  </div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <div class="logo"><img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN">PCN BOLADÃO<span class="verified-badge" title="Loja Oficial">✓</span></div>
+  <div class="h-logo">
+    <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN" onerror="this.style.display='none'">
+    PCN BOLADÃO<span class="vbadge" title="Loja Oficial">✓</span>
+  </div>
   <nav>
-    <button class="active" data-section="home">HOME</button>
-    <button data-section="loja">LOJA</button>
-    <button data-section="musicas">MÚSICAS</button>
-    <button data-section="contato">CONTATO</button>
+    <button class="active" data-s="home">HOME</button>
+    <button data-s="loja">LOJA</button>
+    <button data-s="musicas">MÚSICAS</button>
+    <button data-s="contato">CONTATO</button>
   </nav>
 </header>
 
-<!-- HOME SECTION -->
+<!-- ══ HOME ══ -->
 <section id="home" class="section active">
-  <!-- Mobile Portrait: PREMIUM UNDERGROUND -->
-  <div class="home-mobile-portrait">
-    <canvas id="mp-particles"></canvas>
 
-    <!-- Anéis orbitando -->
-    <div class="mp-rings">
-      <div class="mp-ring"></div>
-      <div class="mp-ring"></div>
-      <div class="mp-ring"></div>
+  <!-- PORTRAIT UI -->
+  <div id="home-portrait">
+    <canvas id="hp-canvas"></canvas>
+    <div class="hp-rings">
+      <div class="hp-ring"></div>
+      <div class="hp-ring"></div>
     </div>
-
-    <!-- Nome gigante de fundo -->
-    <div class="mp-bg-text">PCN</div>
-
-    <div class="mobile-msg-box">
-      <!-- Nome em 3D principal -->
-      <div style="
-        font-family:'Bebas Neue',sans-serif;
-        font-size:clamp(52px,18vw,90px);
-        color:#fff;
-        letter-spacing:6px;
-        line-height:.88;
-        text-align:center;
-        text-shadow:
-          0 0 20px rgba(255,106,0,1),
-          0 0 50px rgba(255,106,0,.7),
-          0 0 100px rgba(255,106,0,.3),
-          2px 2px 0 #c04000,
-          4px 4px 0 #802800,
-          6px 6px 0 #401400,
-          8px 8px 16px rgba(0,0,0,.95);
-        animation:mpNameFloat 4s ease-in-out infinite;
-        margin-bottom:6px;
-      ">PCN<br>BOLADÃO</div>
-
-      <div style="
-        font-size:10px;
-        color:rgba(255,106,0,.5);
-        letter-spacing:6px;
-        text-transform:uppercase;
-        font-family:'Inter',sans-serif;
-        font-weight:600;
-        margin-bottom:36px;
-      ">UNDERGROUND · TRAP</div>
-
-      <!-- Instrução giro -->
-      <div style="
-        background:rgba(255,106,0,.06);
-        border:1px solid rgba(255,106,0,.2);
-        border-radius:16px;
-        padding:18px 24px;
-        display:flex;
-        align-items:center;
-        gap:14px;
-        backdrop-filter:blur(10px);
-        margin-bottom:20px;
-        max-width:280px;
-      ">
-        <span style="font-size:36px;animation:mpPhone 2s ease-in-out infinite;display:block;flex-shrink:0;">📱</span>
-        <div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;letter-spacing:3px;margin-bottom:3px;">VIRE SEU CELULAR</div>
-          <div style="font-size:11px;color:#555;letter-spacing:1px;">Para acessar o FL Studio</div>
+    <div class="mp-bg-text" style="position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(70px,24vw,140px);color:rgba(255,106,0,.05);letter-spacing:6px;white-space:nowrap;pointer-events:none;animation:bgFloat 8s ease-in-out infinite;">PCN BOLADÃO</div>
+    <div class="hp-content">
+      <div class="hp-name">PCN BOLADÃO</div>
+      <div class="hp-sub">Underground · Trap</div>
+      <div class="hp-official"><span class="vbadge">✓</span> Artista Oficial</div>
+      <div class="hp-ctas">
+        <a class="hp-btn-main" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Ouvir agora</a>
+        <button class="hp-btn-sec" onclick="goSection('loja')"><i class="fa-solid fa-bag-shopping"></i> Ver loja</button>
+      </div>
+      <div class="hp-turn">
+        <span class="hp-turn-icon">📱</span>
+        <div class="hp-turn-txt">
+          <b>VIRE SEU CELULAR</b>
+          <span>para acessar o FL Studio</span>
         </div>
       </div>
-
-      <!-- Linha decorativa -->
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;width:100%;max-width:260px;">
-        <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,106,0,.3));"></div>
-        <div style="font-size:9px;color:#333;letter-spacing:3px;">FL STUDIO</div>
-        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,106,0,.3),transparent);"></div>
-      </div>
-
-      <!-- Tags underground -->
-      <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;max-width:260px;">
-        <span style="padding:4px 10px;border:1px solid rgba(255,106,0,.2);border-radius:20px;font-size:9px;color:rgba(255,106,0,.6);letter-spacing:2px;">808</span>
-        <span style="padding:4px 10px;border:1px solid rgba(255,255,255,.08);border-radius:20px;font-size:9px;color:rgba(255,255,255,.3);letter-spacing:2px;">TRAP</span>
-        <span style="padding:4px 10px;border:1px solid rgba(168,85,247,.2);border-radius:20px;font-size:9px;color:rgba(168,85,247,.5);letter-spacing:2px;">LEAN</span>
-        <span style="padding:4px 10px;border:1px solid rgba(255,106,0,.2);border-radius:20px;font-size:9px;color:rgba(255,106,0,.6);letter-spacing:2px;">PCN ♱</span>
-      </div>
-
-      <!-- Dots pulsando -->
-      <div style="display:flex;gap:7px;margin-top:28px;">
-        <div style="width:5px;height:5px;border-radius:50%;animation:mpDot 1.4s ease-in-out infinite;"></div>
-        <div style="width:5px;height:5px;border-radius:50%;animation:mpDot 1.4s .2s ease-in-out infinite;"></div>
-        <div style="width:5px;height:5px;border-radius:50%;animation:mpDot 1.4s .4s ease-in-out infinite;"></div>
-      </div>
+      <div class="hp-dots"><div class="hp-dot"></div><div class="hp-dot"></div><div class="hp-dot"></div></div>
     </div>
   </div>
 
-  <!-- Desktop / Landscape: Full FL Studio -->
-  <div class="fl-window">
-    <!-- Title Bar -->
-    <div class="fl-titlebar">
-      <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-      <span class="fl-title">FL Studio 20 — PCN BOLADÃO.flp</span>
+  <!-- FL STUDIO UI (landscape + desktop) -->
+  <div id="home-fl">
+    <div class="fl-win">
+      <div class="fl-tb">
+        <div class="fd r"></div><div class="fd y"></div><div class="fd g"></div>
+        <span class="fl-tb-title">FL Studio 20 — PCN BOLADÃO.flp</span>
+      </div>
+      <div class="fl-bar">
+        <div class="fl-btn play">▶</div>
+        <div class="fl-btn stop">■</div>
+        <div class="fl-btn rec">●</div>
+        <div class="fl-bpm">140.000</div>
+        <div class="fl-tabs">
+          <span class="fl-tab">Playlist</span>
+          <span class="fl-tab">Mixer</span>
+          <span class="fl-tab active">Piano Roll</span>
+        </div>
+      </div>
+      <div class="fl-main">
+        <div class="fl-piano" id="pianoKeys"></div>
+        <div class="fl-center">
+          <div class="fl-grid"></div>
+          <canvas id="ptc"></canvas>
+          <div class="hero-wrap" id="heroBlock">
+            <div class="hero-bg">PCN BOLADÃO</div>
+            <div class="hero-rings">
+              <div class="ering a"></div>
+              <div class="ering b"></div>
+              <div class="ering c"></div>
+            </div>
+            <div id="pcn-label">PCN BOLADÃO<span class="refl">PCN BOLADÃO</span></div>
+          </div>
+        </div>
+        <div class="fl-rack">
+          <div class="rack-body">
+            <div class="rwin">
+              <div class="rwin-head"><div class="fd r"></div><div class="fd y"></div><div class="fd g"></div><span>clipe.exe</span></div>
+              <div class="rwin-body">
+                <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&playsinline=1&rel=0" allow="autoplay;encrypted-media" loading="lazy"></iframe>
+              </div>
+              <div class="rwin-foot">
+                <span class="rbtn on">Clipe</span>
+                <a class="rbtn" href="https://www.youtube.com/@PCNboladao" target="_blank">YouTube</a>
+              </div>
+            </div>
+            <div class="rwin">
+              <div class="rwin-head"><div class="fd r"></div><div class="fd y"></div><div class="fd g"></div><span>produtos.exe</span></div>
+              <div class="rwin-body" id="prodPhotos">
+                <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="object-fit:cover;" onerror="this.style.display='none'">
+                <img src="https://i.imgur.com/UYnObyx.png" style="object-fit:cover;" onerror="this.style.display='none'">
+                <img src="https://i.imgur.com/RnqS6xs.png" style="object-fit:cover;background:#f5f5f5;" onerror="this.style.display='none'">
+                <img src="https://i.imgur.com/COsCuKl.png" style="object-fit:cover;" onerror="this.style.display='none'">
+              </div>
+              <div class="rwin-foot">
+                <span class="rbtn on">Produtos</span>
+                <span class="rbtn" onclick="goSection('loja')" style="cursor:pointer;">Loja</span>
+              </div>
+            </div>
+            <div class="rwin">
+              <div class="rwin-head"><div class="fd r"></div><div class="fd y"></div><div class="fd g"></div><span>Parametric EQ 2</span></div>
+              <div class="rwin-body"><canvas id="eq-c"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-drums">
+        <div class="dpad" data-drum="kick" style="background:rgba(224,40,40,.1);border-top:2px solid #e02828;"><span class="dn" style="color:#e05555;">KICK</span><span class="dk" style="background:#e02828;">1</span></div>
+        <div class="dpad" data-drum="snare" style="background:rgba(80,130,220,.1);border-top:2px solid #5082dc;"><span class="dn" style="color:#7aaaf0;">SNARE</span><span class="dk" style="background:#5082dc;">2</span></div>
+        <div class="dpad" data-drum="hat" style="background:rgba(40,180,100,.1);border-top:2px solid #28b464;"><span class="dn" style="color:#50d882;">H-HAT</span><span class="dk" style="background:#28b464;">3</span></div>
+        <div class="dpad" data-drum="clap" style="background:rgba(180,80,220,.1);border-top:2px solid #b450dc;"><span class="dn" style="color:#d480f0;">CLAP</span><span class="dk" style="background:#b450dc;">4</span></div>
+        <div class="dpad" data-drum="perc" style="background:rgba(220,170,40,.1);border-top:2px solid #dcaa28;"><span class="dn" style="color:#f0cc50;">PERC</span><span class="dk" style="background:#dcaa28;color:#000;">5</span></div>
+        <div class="dpad" data-drum="rim" style="background:rgba(40,190,210,.1);border-top:2px solid #28bed2;"><span class="dn" style="color:#50dcf0;">RIM</span><span class="dk" style="background:#28bed2;color:#000;">6</span></div>
+      </div>
+      <div class="fl-status">PCN BOLADÃO — FL Studio 21 — CPU: 12% | RAM: 1.2GB</div>
     </div>
-    <!-- Toolbar -->
-    <div class="fl-toolbar">
-      <button class="tb-btn tb-play">▶</button>
-      <button class="tb-btn tb-stop">■</button>
-      <button class="tb-btn tb-rec">●</button>
-      <span class="bpm-display">140.00</span>
-      <div class="tb-tabs">
-        <span class="tb-tab">Playlist</span>
-        <span class="tb-tab">Mixer</span>
-        <span class="tb-tab active">Piano Roll</span>
-      </div>
-    </div>
-    <!-- Main -->
-    <div class="fl-main">
-      <!-- Piano Keys -->
-      <div class="piano-sidebar" id="pianoKeys"></div>
-      <!-- Center — clean FL Studio area -->
-      <div class="fl-center">
-        <div class="grid-bg"></div>
-        <canvas id="particles-canvas"></canvas>
-        <canvas id="orbit-canvas"></canvas>
-
-        <!-- Hero 3D -->
-        <div class="pcn-hero-3d" id="heroBlock">
-          <div class="ering a"></div>
-          <div class="ering b"></div>
-          <div id="pcn-label">PCN BOLADÃO<span class="refl">PCN BOLADÃO</span></div>
-        </div>
-
-        <!-- Floating tags -->
-        <span class="ftag" style="top:14%;left:8%">808</span>
-        <span class="ftag" style="top:72%;left:7%;animation-delay:-2s">LEAN</span>
-        <span class="ftag" style="top:22%;left:55%;animation-delay:-1s">TRAP</span>
-        <span class="ftag" style="top:78%;left:52%;animation-delay:-3s">♱</span>
-
-      </div>
-
-      <!-- Plugin Rack — FL Studio estilo real -->
-      <div class="plugin-rack">
-
-        <!-- Clipe.exe — fl-style wrapper -->
-        <div class="fl-plugin-wrap" id="vizArtista">
-          <div class="fl-plugin-header">
-            <div class="fl-plugin-dots"><span class="fld r"></span><span class="fld y"></span><span class="fld g"></span></div>
-            <div class="fl-plugin-name">clipe.exe</div>
-            <div class="fl-plugin-actions"><span class="fl-pw-btn" title="Pin">📌</span></div>
-          </div>
-          <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;">
-            <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&modestbranding=1&playsinline=1&rel=0" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allow="autoplay;encrypted-media" loading="lazy"></iframe>
-          </div>
-          <div class="fl-plugin-footer">
-            <span class="fl-pf-btn active">Clipe</span>
-            <a class="fl-pf-btn" href="https://www.youtube.com/@PCNboladao" target="_blank" style="text-decoration:none;">YouTube ↗</a>
-          </div>
-        </div>
-
-        <!-- produtos.exe — fl-style wrapper -->
-        <div class="fl-plugin-wrap" id="vizProd">
-          <div class="fl-plugin-header">
-            <div class="fl-plugin-dots"><span class="fld r"></span><span class="fld y"></span><span class="fld g"></span></div>
-            <div class="fl-plugin-name">produtos.exe</div>
-            <div class="fl-plugin-actions"><span class="fl-pw-btn">🛒</span></div>
-          </div>
-          <div id="vizProdPhotos" style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#111;">
-            <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity 1.2s;">
-            <img src="https://i.imgur.com/UYnObyx.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;">
-            <img src="https://i.imgur.com/RnqS6xs.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;background:#f5f5f5;">
-            <img src="https://i.imgur.com/COsCuKl.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;background:#f5f5f5;">
-          </div>
-          <div class="fl-plugin-footer">
-            <span class="fl-pf-btn active">Produtos</span>
-            <span class="fl-pf-btn" onclick="window.dispatchEvent(new Event('goLoja'))" style="cursor:pointer;">Ver Loja</span>
-          </div>
-        </div>
-
-        <!-- FPC Drum Pads — fl-style -->
-        <div class="fl-plugin-wrap">
-          <div class="fl-plugin-header">
-            <div class="fl-plugin-dots"><span class="fld r"></span><span class="fld y"></span><span class="fld g"></span></div>
-            <div class="fl-plugin-name">FPC — Drum Pads</div>
-            <div class="fl-plugin-actions"><span style="font-size:8px;color:#607080;">v3.2</span></div>
-          </div>
-          <div style="padding:5px;background:#0d0f14;">
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:4px;">
-              <div class="fpc-pad" data-sound="kick" style="background:linear-gradient(160deg,#1e0808,#140404);border:1px solid #3a1010;border-bottom:2px solid #cc2222;height:36px;flex-direction:column;gap:1px;border-radius:3px;"><span style="font-size:11px;font-weight:900;color:#ff6666;font-family:'Courier New',monospace;">K</span><span style="font-size:6px;color:#884444;letter-spacing:1px;">KICK</span></div>
-              <div class="fpc-pad" data-sound="snare" style="background:linear-gradient(160deg,#080818,#040410);border:1px solid #101044;border-bottom:2px solid #4466cc;height:36px;flex-direction:column;gap:1px;border-radius:3px;"><span style="font-size:11px;font-weight:900;color:#6688ff;font-family:'Courier New',monospace;">S</span><span style="font-size:6px;color:#445588;letter-spacing:1px;">SNARE</span></div>
-              <div class="fpc-pad" data-sound="hat" style="background:linear-gradient(160deg,#081408,#040c04);border:1px solid #104410;border-bottom:2px solid #22aa44;height:36px;flex-direction:column;gap:1px;border-radius:3px;"><span style="font-size:11px;font-weight:900;color:#44dd66;font-family:'Courier New',monospace;">H</span><span style="font-size:6px;color:#448844;letter-spacing:1px;">H-HAT</span></div>
-              <div class="fpc-pad" data-sound="clap" style="background:linear-gradient(160deg,#180818,#0e040e);border:1px solid #441044;border-bottom:2px solid #aa22aa;height:36px;flex-direction:column;gap:1px;border-radius:3px;"><span style="font-size:11px;font-weight:900;color:#ee66ee;font-family:'Courier New',monospace;">C</span><span style="font-size:6px;color:#884488;letter-spacing:1px;">CLAP</span></div>
-              <div class="fpc-pad" data-sound="perc" style="background:linear-gradient(160deg,#141000,#0c0a00);border:1px solid #443800;border-bottom:2px solid #ccaa00;height:36px;flex-direction:column;gap:1px;border-radius:3px;"><span style="font-size:11px;font-weight:900;color:#ffcc22;font-family:'Courier New',monospace;">P</span><span style="font-size:6px;color:#887700;letter-spacing:1px;">PERC</span></div>
-              <div class="fpc-pad" data-sound="rim" style="background:linear-gradient(160deg,#001414,#000c0c);border:1px solid #004444;border-bottom:2px solid #00aaaa;height:36px;flex-direction:column;gap:1px;border-radius:3px;"><span style="font-size:11px;font-weight:900;color:#00dddd;font-family:'Courier New',monospace;">R</span><span style="font-size:6px;color:#007777;letter-spacing:1px;">RIM</span></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:0 2px;">
-              <span style="font-size:7px;color:#2a3040;letter-spacing:1px;font-family:'Courier New',monospace;">KEYS: 1-6</span>
-              <span style="font-size:7px;color:#2a3040;font-family:'Courier New',monospace;">FPC v3.2</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- EQ 2 — fl-style -->
-        <div class="fl-plugin-wrap">
-          <div class="fl-plugin-header">
-            <div class="fl-plugin-dots"><span class="fld r"></span><span class="fld y"></span><span class="fld g"></span></div>
-            <div class="fl-plugin-name">Parametric EQ 2</div>
-          </div>
-          <div style="background:#060a0e;padding:5px;">
-            <canvas id="eq-canvas" style="width:100%;height:65px;display:block;border-radius:2px;background:#040810;border:1px solid #0e1820;"></canvas>
-            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:4px;">
-              <div style="text-align:center;"><div class="knob" data-value="35" style="width:22px;height:22px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#e04040 0%,#1a1d23 50%);border:1.5px solid #3a1414;box-shadow:0 0 4px rgba(0,0,0,.8);"></div><div style="font-size:6px;color:#e04040;margin-top:2px;">HP</div><div style="font-size:5px;color:#2a3040;">80Hz</div></div>
-              <div style="text-align:center;"><div class="knob" data-value="55" style="width:22px;height:22px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#ff8c00 0%,#1a1d23 50%);border:1.5px solid #3a2a00;box-shadow:0 0 4px rgba(0,0,0,.8);"></div><div style="font-size:6px;color:#ff8c00;margin-top:2px;">LF</div><div style="font-size:5px;color:#2a3040;">250Hz</div></div>
-              <div style="text-align:center;"><div class="knob" data-value="65" style="width:22px;height:22px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#c8f000 0%,#1a1d23 50%);border:1.5px solid #2a3000;box-shadow:0 0 4px rgba(0,0,0,.8);"></div><div style="font-size:6px;color:#c8f000;margin-top:2px;">MF</div><div style="font-size:5px;color:#2a3040;">1kHz</div></div>
-              <div style="text-align:center;"><div class="knob" data-value="50" style="width:22px;height:22px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#40cc80 0%,#1a1d23 50%);border:1.5px solid #0a2a1a;box-shadow:0 0 4px rgba(0,0,0,.8);"></div><div style="font-size:6px;color:#40cc80;margin-top:2px;">HMF</div><div style="font-size:5px;color:#2a3040;">3kHz</div></div>
-              <div style="text-align:center;"><div class="knob" data-value="45" style="width:22px;height:22px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#5599ff 0%,#1a1d23 50%);border:1.5px solid #0a1a3a;box-shadow:0 0 4px rgba(0,0,0,.8);"></div><div style="font-size:6px;color:#5599ff;margin-top:2px;">HF</div><div style="font-size:5px;color:#2a3040;">8kHz</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Auto-Tune Pro — fl-style -->
-        <div class="fl-plugin-wrap">
-          <div class="fl-plugin-header">
-            <div class="fl-plugin-dots"><span class="fld r"></span><span class="fld y"></span><span class="fld g"></span></div>
-            <div class="fl-plugin-name">Auto-Tune Pro</div>
-          </div>
-          <div style="background:#060a0e;padding:6px;">
-            <div style="display:flex;gap:4px;margin-bottom:5px;">
-              <div id="pitch-display" style="flex:1;height:32px;background:#000;border:1px solid #0a2018;border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:22px;font-weight:700;color:#33ff88;text-shadow:0 0 8px rgba(51,255,136,.6);">C</div>
-              <div style="width:32px;height:32px;background:#000;border:1px solid #0a2018;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:7px;color:#33ff88;text-align:center;line-height:1.3;font-family:'Courier New',monospace;font-weight:700;">C<br>MIN</div>
-            </div>
-            <div style="background:#040810;border:1px solid #0e1820;border-radius:2px;padding:4px;margin-bottom:4px;">
-              <div style="font-size:6px;color:#2a3a4a;letter-spacing:1px;margin-bottom:3px;font-family:'Courier New',monospace;">KEY</div>
-              <div style="display:flex;gap:2px;">
-                <div class="at-key-btn active-key">C</div><div class="at-key-btn">D</div><div class="at-key-btn">E</div><div class="at-key-btn">F</div><div class="at-key-btn">G</div><div class="at-key-btn">A</div><div class="at-key-btn">B</div>
-              </div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:3px;background:#040810;border:1px solid #0e1820;border-radius:2px;padding:4px;">
-              <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:6px;color:#2a3a4a;width:38px;font-family:'Courier New',monospace;">Humanize</span><div class="at-slider-wrap"><div class="at-slider-fill" id="humanize-fill" style="width:40%;background:linear-gradient(90deg,#33ff88,#00cc55);"></div></div></div>
-              <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:6px;color:#2a3a4a;width:38px;font-family:'Courier New',monospace;">Vibrato</span><div class="at-slider-wrap"><div class="at-slider-fill" id="vibrato-fill" style="width:25%;background:linear-gradient(90deg,#33ff88,#00cc55);"></div></div></div>
-              <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:6px;color:#2a3a4a;width:38px;font-family:'Courier New',monospace;">Retune</span><div class="at-slider-wrap"><div class="at-slider-fill" id="retune-fill" style="width:55%;background:linear-gradient(90deg,#33ff88,#00cc55);"></div></div></div>
-            </div>
-            <div style="margin-top:4px;display:flex;justify-content:flex-end;">
-              <div class="at-btn" onclick="this.classList.toggle('at-active')">BYPASS</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    
-        <!-- FPC — Drum Pads -->
-        <div class="plugin-win">
-          <div class="plugin-titlebar">
-            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-            <span>FPC — Drum Pads</span>
-          </div>
-          <div style="padding:6px;background:#0e1014;">
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
-              <div class="fpc-pad" data-sound="kick" style="background:linear-gradient(145deg,#2a0a0a,#1a0606);border:1px solid #5a1010;box-shadow:inset 0 1px 0 rgba(255,80,80,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#ff5555;">K</span><span style="font-size:7px;color:#aa4444;letter-spacing:1px;">KICK</span></div>
-              <div class="fpc-pad" data-sound="snare" style="background:linear-gradient(145deg,#0a0a2a,#060618);border:1px solid #101055;box-shadow:inset 0 1px 0 rgba(80,80,255,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#5577ff;">S</span><span style="font-size:7px;color:#4455aa;letter-spacing:1px;">SNARE</span></div>
-              <div class="fpc-pad" data-sound="hat" style="background:linear-gradient(145deg,#0a1e0a,#060e06);border:1px solid #105510;box-shadow:inset 0 1px 0 rgba(80,200,80,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#55cc55;">H</span><span style="font-size:7px;color:#448844;letter-spacing:1px;">H-HAT</span></div>
-              <div class="fpc-pad" data-sound="clap" style="background:linear-gradient(145deg,#1a0a1a,#0e060e);border:1px solid #551055;box-shadow:inset 0 1px 0 rgba(200,80,200,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#cc55cc;">C</span><span style="font-size:7px;color:#885588;letter-spacing:1px;">CLAP</span></div>
-              <div class="fpc-pad" data-sound="perc" style="background:linear-gradient(145deg,#1a1200,#0e0c00);border:1px solid #554400;box-shadow:inset 0 1px 0 rgba(200,160,0,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#ccaa00;">P</span><span style="font-size:7px;color:#887700;letter-spacing:1px;">PERC</span></div>
-              <div class="fpc-pad" data-sound="rim" style="background:linear-gradient(145deg,#001a1a,#000e0e);border:1px solid #005555;box-shadow:inset 0 1px 0 rgba(0,200,200,.1);border-radius:4px;flex-direction:column;gap:2px;height:44px;"><span style="font-size:13px;font-weight:900;color:#00cccc;">R</span><span style="font-size:7px;color:#007777;letter-spacing:1px;">RIM</span></div>
-            </div>
-            <div style="margin-top:5px;display:flex;justify-content:space-between;padding:2px 2px 0;">
-              <span style="font-size:8px;color:#333;letter-spacing:1px;">KEYS: 1-6</span>
-              <span style="font-size:8px;color:#333;">FPC v3.2</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Parametric EQ 2 -->
-        <div class="plugin-win">
-          <div class="plugin-titlebar">
-            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-            <span>Parametric EQ 2</span>
-          </div>
-          <div style="background:#080c10;padding:6px;">
-            <canvas id="eq-canvas" style="width:100%;height:70px;display:block;border-radius:3px;background:#060a0e;border:1px solid #1a2430;margin-bottom:5px;"></canvas>
-            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;">
-              <div style="text-align:center;">
-                <div class="knob" data-value="35" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#e04040 calc(35%*2.7deg + 0deg),#1a1d23 0);border:2px solid #3a1414;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,100,100,.1);"></div>
-                <div style="font-size:7px;color:#e04040;margin-top:2px;letter-spacing:.5px;">HP</div>
-                <div style="font-size:6px;color:#444;margin-top:1px;">80Hz</div>
-              </div>
-              <div style="text-align:center;">
-                <div class="knob" data-value="55" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#ff8c00 calc(55%*2.7deg + 0deg),#1a1d23 0);border:2px solid #3a2a00;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,180,0,.1);"></div>
-                <div style="font-size:7px;color:#ff8c00;margin-top:2px;letter-spacing:.5px;">LF</div>
-                <div style="font-size:6px;color:#444;margin-top:1px;">250Hz</div>
-              </div>
-              <div style="text-align:center;">
-                <div class="knob" data-value="65" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#c8f000 calc(65%*2.7deg + 0deg),#1a1d23 0);border:2px solid #2a3000;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(200,240,0,.1);"></div>
-                <div style="font-size:7px;color:#c8f000;margin-top:2px;letter-spacing:.5px;">MF</div>
-                <div style="font-size:6px;color:#444;margin-top:1px;">1kHz</div>
-              </div>
-              <div style="text-align:center;">
-                <div class="knob" data-value="50" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#40cc80 calc(50%*2.7deg + 0deg),#1a1d23 0);border:2px solid #0a2a1a;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(64,200,128,.1);"></div>
-                <div style="font-size:7px;color:#40cc80;margin-top:2px;letter-spacing:.5px;">HMF</div>
-                <div style="font-size:6px;color:#444;margin-top:1px;">3kHz</div>
-              </div>
-              <div style="text-align:center;">
-                <div class="knob" data-value="45" style="width:26px;height:26px;margin:0 auto;cursor:ns-resize;background:conic-gradient(from 220deg,#5599ff calc(45%*2.7deg + 0deg),#1a1d23 0);border:2px solid #0a1a3a;box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 0 rgba(85,153,255,.1);"></div>
-                <div style="font-size:7px;color:#5599ff;margin-top:2px;letter-spacing:.5px;">HF</div>
-                <div style="font-size:6px;color:#444;margin-top:1px;">8kHz</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Auto-Tune Pro -->
-        <div class="plugin-win">
-          <div class="plugin-titlebar">
-            <div class="fl-dot r"></div><div class="fl-dot y"></div><div class="fl-dot g"></div>
-            <span>Auto-Tune Pro</span>
-          </div>
-          <div style="background:#080c10;padding:6px;">
-            <!-- Pitch display -->
-            <div style="display:flex;gap:4px;align-items:stretch;margin-bottom:5px;">
-              <div id="pitch-display" style="flex:1;height:36px;background:#000;border:1px solid #1a3020;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:26px;color:#40ff80;text-shadow:0 0 8px rgba(64,255,128,.6);letter-spacing:2px;">C</div>
-              <div style="width:36px;height:36px;background:#000;border:1px solid #1a3020;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;color:#40ff80;text-align:center;line-height:1.3;font-weight:700;">C<br>MIN</div>
-            </div>
-            <!-- Key selector -->
-            <div style="background:#060a0e;border:1px solid #1a2028;border-radius:3px;padding:4px;margin-bottom:5px;">
-              <div style="font-size:7px;color:#556;letter-spacing:1px;margin-bottom:3px;">KEY</div>
-              <div style="display:flex;gap:2px;">
-                <div class="at-key-btn active-key">C</div>
-                <div class="at-key-btn">D</div>
-                <div class="at-key-btn">E</div>
-                <div class="at-key-btn">F</div>
-                <div class="at-key-btn">G</div>
-                <div class="at-key-btn">A</div>
-                <div class="at-key-btn">B</div>
-              </div>
-            </div>
-            <!-- Sliders -->
-            <div style="display:flex;flex-direction:column;gap:4px;background:#060a0e;border:1px solid #1a2028;border-radius:3px;padding:5px;">
-              <div style="display:flex;align-items:center;gap:5px;">
-                <span style="font-size:7px;color:#556;width:42px;letter-spacing:.5px;">Humanize</span>
-                <div class="at-slider-wrap" style="flex:1;height:5px;background:#0e1218;border-radius:2px;cursor:pointer;border:1px solid #1a2028;"><div class="at-slider-fill" id="humanize-fill" style="width:40%;background:linear-gradient(90deg,#40ff80,#00cc55);"></div></div>
-              </div>
-              <div style="display:flex;align-items:center;gap:5px;">
-                <span style="font-size:7px;color:#556;width:42px;letter-spacing:.5px;">Vibrato</span>
-                <div class="at-slider-wrap" style="flex:1;height:5px;background:#0e1218;border-radius:2px;cursor:pointer;border:1px solid #1a2028;"><div class="at-slider-fill" id="vibrato-fill" style="width:25%;background:linear-gradient(90deg,#40ff80,#00cc55);"></div></div>
-              </div>
-              <div style="display:flex;align-items:center;gap:5px;">
-                <span style="font-size:7px;color:#556;width:42px;letter-spacing:.5px;">Retune</span>
-                <div class="at-slider-wrap" style="flex:1;height:5px;background:#0e1218;border-radius:2px;cursor:pointer;border:1px solid #1a2028;"><div class="at-slider-fill" id="retune-fill" style="width:55%;background:linear-gradient(90deg,#40ff80,#00cc55);"></div></div>
-              </div>
-            </div>
-            <!-- Bypass button -->
-            <div style="margin-top:4px;display:flex;justify-content:flex-end;">
-              <div style="font-size:7px;padding:2px 8px;background:#1a2028;border:1px solid #2a3038;border-radius:2px;color:#556;cursor:pointer;letter-spacing:1px;" onclick="this.style.background=this.style.background==='#0a5030'?'#1a2028':'#0a5030';this.style.color=this.style.color==='#40ff80'?'#556':'#40ff80';">BYPASS</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Drum Pads -->
-    <div class="drum-row">
-      <div class="drum-pad" data-drum="kick" style="background:rgba(224,40,40,.15);border-top:2px solid #e02828;"><span style="font-size:10px;font-weight:700;color:#e05555;">KICK</span><span style="font-size:9px;background:#e02828;color:#fff;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">1</span></div>
-      <div class="drum-pad" data-drum="snare" style="background:rgba(80,130,220,.15);border-top:2px solid #5082dc;"><span style="font-size:10px;font-weight:700;color:#7aaaf0;">SNARE</span><span style="font-size:9px;background:#5082dc;color:#fff;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">2</span></div>
-      <div class="drum-pad" data-drum="hat" style="background:rgba(40,180,100,.15);border-top:2px solid #28b464;"><span style="font-size:10px;font-weight:700;color:#50d882;">H-HAT</span><span style="font-size:9px;background:#28b464;color:#fff;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">3</span></div>
-      <div class="drum-pad" data-drum="clap" style="background:rgba(180,80,220,.15);border-top:2px solid #b450dc;"><span style="font-size:10px;font-weight:700;color:#d480f0;">CLAP</span><span style="font-size:9px;background:#b450dc;color:#fff;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">4</span></div>
-      <div class="drum-pad" data-drum="perc" style="background:rgba(220,170,40,.15);border-top:2px solid #dcaa28;"><span style="font-size:10px;font-weight:700;color:#f0cc50;">PERC</span><span style="font-size:9px;background:#dcaa28;color:#000;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">5</span></div>
-      <div class="drum-pad" data-drum="rim" style="background:rgba(40,190,210,.15);border-top:2px solid #28bed2;"><span style="font-size:10px;font-weight:700;color:#50dcf0;">RIM</span><span style="font-size:9px;background:#28bed2;color:#000;border-radius:2px;padding:1px 4px;margin-top:2px;display:block;">6</span></div>
-    </div>
-    <!-- Mobile Viz Row — only visible on mobile -->
-    <div class="viz-mobile-row">
-      <!-- Clipe -->
-      <div class="viz-mob" style="flex:2;">
-        <div class="viz-mob-title">
-          <span class="fl-dot" style="background:#ff5f57;"></span>
-          <span class="fl-dot" style="background:#ffbd2e;"></span>
-          <span class="fl-dot" style="background:#28c840;"></span>
-          clipe.exe
-        </div>
-        <div class="viz-mob-content">
-          <iframe src="https://www.youtube.com/embed/KE3V-oxv11A?autoplay=1&mute=1&loop=1&playlist=KE3V-oxv11A&controls=0&playsinline=1" allow="autoplay;encrypted-media" loading="lazy"></iframe>
-        </div>
-      </div>
-      <!-- Produtos -->
-      <div class="viz-mob" style="flex:1;">
-        <div class="viz-mob-title">
-          <span class="fl-dot" style="background:#ff5f57;"></span>
-          <span class="fl-dot" style="background:#ffbd2e;"></span>
-          <span class="fl-dot" style="background:#28c840;"></span>
-          produtos.exe
-        </div>
-        <div class="viz-mob-content" id="vizMobProd">
-          <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="background:#111;">
-          <img src="https://i.imgur.com/UYnObyx.png" style="background:#111;">
-          <img src="https://i.imgur.com/RnqS6xs.png" style="background:#f5f5f5;">
-          <img src="https://i.imgur.com/T7gz5qF.png" style="background:#f5f5f5;">
-          <img src="https://i.imgur.com/UBs7TVK.png" style="background:#f5f5f5;">
-          <img src="https://i.imgur.com/COsCuKl.png" style="background:#111;">
-          <img src="https://i.imgur.com/kDrKdm2.png" style="background:#111;">
-          <img src="https://i.imgur.com/LcUmOL8.png" style="background:#111;">
-        </div>
-      </div>
-    </div>
-
-    <!-- Status Bar -->
-    <div class="fl-status">PCN BOLADÃO — FL Studio 21 — CPU: 12% | RAM: 1.2GB</div>
   </div>
 </section>
 
-<!-- LOJA SECTION -->
+<!-- ══ LOJA ══ -->
 <section id="loja" class="section">
-<style>
-/* === LOJA STREETWEAR === */
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-#loja{background:#0a0a0a;overflow-y:auto;padding:60px 20px 80px;}
-.loja-header{text-align:center;margin-bottom:50px;}
-.loja-brand{font-family:'Anton',sans-serif;font-size:clamp(36px,6vw,64px);color:#fff;letter-spacing:4px;line-height:1;}
-.loja-brand span{color:#e01a1a;}
-.loja-sub{font-size:13px;color:#666;letter-spacing:3px;text-transform:uppercase;margin-top:8px;}
-/* Product main */
-.prod-main{max-width:900px;margin:0 auto;display:grid;grid-template-columns:400px 1fr;gap:40px;align-items:start;}
-/* Image flip card */
-.prod-img-wrap{position:relative;border-radius:10px;overflow:hidden;background:#111;aspect-ratio:1;cursor:crosshair;}
-.prod-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transition:opacity .6s ease;background:#111;}
-.prod-img-wrap .prod-back{opacity:0;}
-.prod-img-wrap:hover .prod-front{opacity:0;}
-.prod-img-wrap:hover .prod-back{opacity:1;}
-.img-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:10px;color:rgba(0,0,0,.45);letter-spacing:2px;text-transform:uppercase;pointer-events:none;transition:opacity .3s;}
-.prod-img-wrap:hover .img-hint{opacity:0;}
-/* Mobile toggle */
-.img-toggle{display:none;gap:8px;margin-top:8px;justify-content:center;}
-.img-toggle-btn{padding:6px 14px;background:#1a1a1a;border:1px solid #333;border-radius:4px;color:#aaa;font-size:11px;cursor:pointer;transition:all .2s;}
-.img-toggle-btn.active{border-color:#e01a1a;color:#e01a1a;}
-/* Product info */
-.prod-info{display:flex;flex-direction:column;gap:16px;}
-.prod-name{font-family:'Anton',sans-serif;font-size:clamp(28px,4vw,44px);color:#fff;letter-spacing:2px;}
-/* Seals */
-.prod-seals{display:flex;gap:8px;flex-wrap:wrap;}
-.seal{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px;}
-.seal-hot{background:linear-gradient(135deg,#e01a1a,#ff4444);color:#fff;box-shadow:0 2px 8px rgba(224,26,26,.4);}
-.seal-limit{background:#1a1a1a;border:1px solid #ff8c00;color:#ff8c00;}
-.seal-new{background:#1a1a1a;border:1px solid #ffffff30;color:#fff;}
-/* Price */
-.prod-price-block{border-top:1px solid #1c1c1c;border-bottom:1px solid #1c1c1c;padding:14px 0;}
-.prod-price{font-family:'Anton',sans-serif;font-size:36px;color:#fff;letter-spacing:1px;}
-.prod-price-cents{font-size:18px;vertical-align:super;color:#aaa;}
-.prod-installment{font-size:12px;color:#666;margin-top:4px;}
-.prod-desc{font-size:13px;color:#888;line-height:1.7;}
-/* Buttons */
-.prod-btn-buy{width:100%;padding:16px;background:#e01a1a;border:none;border-radius:8px;color:#fff;font-family:'Anton',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;}
-.prod-btn-buy:hover{background:#c01515;transform:translateY(-2px);box-shadow:0 8px 24px rgba(224,26,26,.35);}
-.prod-btn-buy:active{transform:scale(.97);}
-.prod-btn-detail{width:100%;padding:12px;background:transparent;border:1px solid #333;border-radius:8px;color:#888;font-size:13px;cursor:pointer;transition:all .2s;margin-top:4px;}
-.prod-btn-detail:hover{border-color:#666;color:#ccc;}
-.stock-bar{display:flex;align-items:center;gap:8px;font-size:11px;color:#888;}
-.stock-dot{width:6px;height:6px;border-radius:50%;background:#e01a1a;animation:dotPulse 1.5s infinite;}
-@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-/* Complete o look */
-.complete-section{max-width:1000px;margin:60px auto 0;}
-.complete-title{font-family:'Anton',sans-serif;font-size:24px;color:#fff;letter-spacing:2px;margin-bottom:24px;border-left:3px solid #e01a1a;padding-left:12px;}
-.complete-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;}
-.complete-card{background:#111;border:1px solid #1c1c1c;border-radius:10px;overflow:hidden;transition:all .3s;}
-.complete-card:hover{border-color:#333;transform:translateY(-3px);}
-.complete-img{height:160px;background:#161616;display:flex;align-items:center;justify-content:center;color:#2a2a2a;font-size:32px;}
-.complete-info{padding:12px;}
-.complete-info h4{font-size:12px;color:#888;letter-spacing:1px;text-transform:uppercase;}
-/* Extra product cards */
-.extra-card{background:#111;border:1px solid #1c1c1c;border-radius:10px;overflow:hidden;transition:all .3s;}
-.extra-card:hover{border-color:#333;transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
-.extra-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;cursor:crosshair;border-radius:8px 8px 0 0;background:#111;}
-.extra-front,.extra-back,.extra-back2,.extra-back3{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;background:#111;}
-.extra-back,.extra-back2,.extra-back3{opacity:0;}
-.extra-img-wrap:hover .extra-front{opacity:0;}
-.extra-img-wrap:hover .extra-back{opacity:1;}
-.complete-info p{font-size:11px;color:#e01a1a;margin-top:4px;letter-spacing:1px;}
-@media(max-width:768px){
-  .prod-main{
-    display:flex!important;
-    flex-direction:column!important;
-    gap:16px!important;
-    width:100%!important;
-  }
-  .prod-img-wrap{
-    width:100%!important;
-    max-width:100%!important;
-    aspect-ratio:1/1!important;
-    border-radius:12px!important;
-  }
-  .img-toggle{display:flex;}
-  .prod-img-wrap .prod-back{opacity:0!important;}
-  .prod-img-wrap .prod-front{opacity:1!important;}
-  .prod-img-wrap.show-back .prod-front{opacity:0!important;}
-  .prod-img-wrap.show-back .prod-back{opacity:1!important;}
-}
-</style>
-  <div class="loja-header">
+<div class="loja-inner">
+  <div class="loja-hero">
     <div class="loja-brand">KANKIU <span>COLLECTION</span></div>
-    <div class="loja-sub">Streetwear Underground Edition</div>
+    <div class="loja-sub-txt">Streetwear Underground Edition · Drop Oficial</div>
   </div>
-
-  <!-- Main Product -->
-  <div class="prod-main">
-    <!-- Image -->
-    <div>
-      <div class="prod-img-wrap" id="prodImgWrap">
-        <img class="prod-front" src="https://i.imgur.com/DMZ6WBT.png" alt="Camisa Kankiu - Frente" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;" onerror="this.src='https://i.imgur.com/DMZ6WBT.png'">
-        <img class="prod-back" src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu - Costas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s;opacity:0;" onerror="this.src='https://i.imgur.com/DMZ6WBT.png'">
-        <span class="img-hint">Passe o mouse para ver costas</span>
+  <div class="prod-layout">
+    <!-- Galeria -->
+    <div class="prod-gallery">
+      <div class="prod-img-box" id="prodBox">
+        <img id="prodFront" src="https://i.imgur.com/DMZ6WBT.png" alt="Camisa Kankiu Frente" onerror="this.src='https://i.imgur.com/DMZ6WBT.png'">
+        <img id="prodBack" src="https://i.imgur.com/UYnObyx.png" alt="Camisa Kankiu Costas" class="hidden" onerror="this.src='https://i.imgur.com/UYnObyx.png'">
+        <span class="prod-img-hint">Toque para ver costas</span>
       </div>
-      <div class="img-toggle">
-        <button class="img-toggle-btn active" onclick="showFront()">Frente</button>
-        <button class="img-toggle-btn" onclick="showBack()">Costas</button>
+      <div class="prod-toggle">
+        <button class="ptbtn active" id="btnFront" onclick="showFront()">Frente</button>
+        <button class="ptbtn" id="btnBack" onclick="showBack()">Costas</button>
       </div>
     </div>
-
     <!-- Info -->
     <div class="prod-info">
-      <div class="prod-name">Camisa Kankiu</div>
+      <div class="prod-name">Camisa Kankiu<span class="vbadge" style="font-size:10px;width:14px;height:14px;margin-left:6px;" title="Drop Oficial">✓</span></div>
       <div class="prod-seals">
         <span class="seal seal-hot">🔥 Poucas Unidades</span>
         <span class="seal seal-limit">Drop Limitado</span>
         <span class="seal seal-new">Novo</span>
       </div>
-      <div class="prod-price-block">
-        <div class="prod-price"><span class="prod-price-cents">R$</span> 100,<span style="font-size:24px">00</span></div>
-        <div class="prod-installment">Frete incluído</div>
+      <div class="prod-price-row">
+        <span class="prod-price-pre">R$</span>
+        <span class="prod-price">100,00</span>
       </div>
-      <div class="prod-desc">Camiseta oversized exclusiva. Tecido premium, estampa resinada, edição limitada.<br>100% algodão penteado • Exclusiva • Streetwear edition</div>
-      <div class="stock-bar"><div class="stock-dot"></div>Últimas peças disponíveis</div>
-      <button class="prod-btn-buy" onclick="buyWhatsApp('Camisa Kankiu')"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</button>
-      <button class="prod-btn-detail" onclick="buyWhatsApp('Camisa Kankiu')"><i class="fa-solid fa-info-circle"></i> Mais informações</button>
+      <div class="prod-freight">Frete incluído</div>
+      <div class="prod-desc">Camiseta oversized exclusiva. Tecido premium, estampa resinada, edição limitada.<br>100% algodão penteado · Drop oficial PCN</div>
+      <div class="prod-stock"><div class="stock-dot"></div>Últimas peças disponíveis</div>
+      <button class="prod-buy" onclick="buyZap('Camisa Kankiu R$ 100')"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</button>
     </div>
   </div>
 
-  <!-- MAIS PRODUTOS GRID -->
-  <div style="max-width:900px;margin:50px auto 0;padding:0 0 40px;">
-    <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin-bottom:24px;border-left:3px solid #e01a1a;padding-left:12px;">MAIS PRODUTOS</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;">
-
-      <!-- CANECA -->
-      <div class="extra-card">
-        <div class="extra-img-wrap">
-          <img class="extra-front" src="https://i.imgur.com/RnqS6xs.png" alt="Caneca" style="object-fit:cover;background:#f5f5f5;">
-          <img class="extra-back" src="https://i.imgur.com/T7gz5qF.png" alt="Caneca lado" style="object-fit:cover;background:#f5f5f5;">
-          <img class="extra-back2" src="https://i.imgur.com/UBs7TVK.png" alt="Caneca detalhe" style="object-fit:cover;background:#f5f5f5;">
-          <img class="extra-back3" src="https://i.imgur.com/xw69IAY.png" alt="Caneca top" style="object-fit:cover;background:#f5f5f5;">
-          <span class="seal seal-hot" style="position:absolute;top:10px;left:10px;z-index:2;font-size:9px;">🔥 Poucas</span>
-        </div>
-        <div class="extra-info">
-          <div style="font-family:'Anton',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;">Caneca PCN</div>
-          <div style="font-size:12px;color:#666;margin:4px 0 12px;">Edição Limitada · Exclusiva</div>
-          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;">R$ 55,00</div>
-          <div style="font-size:11px;color:#666;margin-bottom:14px;">Frete incluído</div>
-          <button class="prod-btn-buy" style="font-size:14px;padding:12px;" onclick="buyWhatsApp('Caneca PCN')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
-        </div>
+  <!-- Mais produtos -->
+  <div class="more-title">MAIS PRODUTOS</div>
+  <div class="more-grid">
+    <div class="more-card">
+      <div class="more-card-img"><img src="https://i.imgur.com/RnqS6xs.png" alt="Caneca PCN" style="background:#f5f5f5;" onerror="this.parentElement.style.background='#111'"></div>
+      <div class="more-card-body">
+        <h3>Caneca PCN</h3>
+        <div class="more-card-price">R$ 55,00</div>
+        <button class="more-buy" onclick="buyZap('Caneca PCN R$ 55')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
       </div>
-
-      <!-- MOLETOM -->
-      <div class="extra-card">
-        <div class="extra-img-wrap">
-          <img class="extra-front" src="https://i.imgur.com/COsCuKl.png" alt="Moletom frente" style="object-fit:cover;background:#f5f5f5;">
-          <img class="extra-back" src="https://i.imgur.com/kDrKdm2.png" alt="Moletom frente 2" style="object-fit:cover;background:#f5f5f5;">
-          <img class="extra-back2" src="https://i.imgur.com/LcUmOL8.png" alt="Moletom verso" style="object-fit:cover;background:#f5f5f5;">
-          <span class="seal seal-limit" style="position:absolute;top:10px;left:10px;z-index:2;font-size:9px;">Drop Limitado</span>
-        </div>
-        <div class="extra-info">
-          <div style="font-family:'Anton',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;">Moletom Kankiu</div>
-          <div style="font-size:12px;color:#666;margin:4px 0 12px;">Oversized · Premium · Streetwear</div>
-          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;">R$ 260,00</div>
-          <div style="font-size:11px;color:#666;margin-bottom:14px;">Frete incluído</div>
-          <button class="prod-btn-buy" style="font-size:14px;padding:12px;" onclick="buyWhatsApp('Moletom Kankiu')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
-        </div>
+    </div>
+    <div class="more-card">
+      <div class="more-card-img"><img src="https://i.imgur.com/COsCuKl.png" alt="Moletom Kankiu" style="background:#f5f5f5;" onerror="this.parentElement.style.background='#111'"></div>
+      <div class="more-card-body">
+        <h3>Moletom Kankiu</h3>
+        <div class="more-card-price">R$ 260,00</div>
+        <button class="more-buy" onclick="buyZap('Moletom Kankiu R$ 260')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
       </div>
-
     </div>
-  </div>
-
-  </div>
-</section>
-
-<!-- MUSICAS SECTION -->
-<section id="musicas" class="section">
-<style>
-#musicas{background:#080810;padding:70px 20px 40px;overflow-y:auto;}
-.mus-wrap{max-width:680px;margin:0 auto;}
-.mus-topbar{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:12px;}
-.mus-topbar img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,106,0,.35);}
-.mus-topbar h1{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin:0;}
-.mus-topbar p{font-size:11px;color:#555;margin:0;letter-spacing:2px;text-transform:uppercase;}
-.mus-topbar a{margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;text-decoration:none;font-size:12px;font-weight:600;transition:all .2s;white-space:nowrap;}
-.mus-topbar a:hover{background:rgba(29,185,84,.2);}
-.mus-iframe-wrap{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.05);}
-.mus-presave-section{margin-bottom:40px;padding:20px;background:rgba(29,185,84,.05);border:1px solid rgba(29,185,84,.2);border-radius:12px;}
-.mus-presave-iframe{border-radius:12px;overflow:hidden;margin-bottom:16px;}
-.mus-presave-info{font-size:12px;color:#aaa;text-align:center;}
-</style>
-  <div class="mus-wrap">
-    <div class="mus-topbar">
-      <img src="https://i.ibb.co/992g4LWK/imgi-41-661993170-18387838516083845-7837809524537980210-n.jpg" alt="PCN">
-      <div>
-        <h1>PCN BOLADÃO</h1>
-        <p>Artista no Spotify</p>
-      </div>
-      <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Seguir</a>
-    </div>
-
-    <!-- PRÉ-SAVE -->
-    <div class="mus-presave-section">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#1db954;letter-spacing:2px;margin-bottom:14px;text-align:center;">🎵 PRÉ-SAVE — KANKIU</div>
-      <iframe data-testid="embed-iframe" style="border-radius:12px;width:100%;border:none;display:block;" src="https://open.spotify.com/embed/prerelease/2KhuPf1YqIQB4zYfEPSArA?utm_source=generator&theme=0" height="280" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-
-    <!-- LINKS REDES -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
-      <a href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.2);color:#1db954;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-spotify"></i> Spotify</a>
-      <a href="https://www.youtube.com/@PCNboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.2);color:#ff4444;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-youtube"></i> YouTube</a>
-      <a href="https://www.instagram.com/7pcnboladao" target="_blank" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(225,48,108,.1);border:1px solid rgba(225,48,108,.2);color:#e1306c;text-decoration:none;border-radius:20px;font-size:12px;"><i class="fa-brands fa-instagram"></i> Instagram</a>
-    </div>
-
-    <!-- CARROSSEL DO ARTISTA -->
-<style>
-.artist-carousel{width:100%;border-radius:14px;overflow:hidden;position:relative;margin-bottom:20px;background:#111;}
-.carousel-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
-.carousel-slide{min-width:100%;aspect-ratio:1/1;overflow:hidden;position:relative;}
-.carousel-slide img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
-.carousel-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:32px;color:rgba(255,106,0,.4);background:#0a0a0f;}
-.carousel-dots{display:flex;justify-content:center;gap:6px;padding:10px 0;background:#0a0a0f;}
-.cdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;}
-.cdot.active{background:#ff6a00;width:18px;border-radius:3px;}
-</style>
-<div class="artist-carousel" id="artistCarousel">
-  <div class="carousel-track" id="carouselTrack">
-    <div class="carousel-slide">
-      <img src="https://i.ibb.co/992g4LWK/imgi-41-661993170-18387838516083845-7837809524537980210-n.jpg" alt="PCN Boladão" onerror="this.parentElement.innerHTML='<div class=carousel-fallback>PCN BOLADÃO</div>'">
-    </div>
-    <div class="carousel-slide">
-      <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN Boladão" onerror="this.parentElement.innerHTML='<div class=carousel-fallback>PCN BOLADÃO</div>'">
-    </div>
-  </div>
-  <div class="carousel-dots">
-    <span class="cdot active" onclick="goSlide(0)"></span>
-    <span class="cdot" onclick="goSlide(1)"></span>
   </div>
 </div>
-
-    <!-- PLAYER ARTISTA -->
-    <div style="border-radius:12px;overflow:hidden;">
-      <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="380" frameBorder="0" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block;border:none;"></iframe>
-    </div>
-  </div>
 </section>
 
-<!-- CONTATO SECTION -->
-<section id="contato" class="section">
-<style>
-#contato{background:#0a0a0f;padding:70px 20px 40px;overflow-y:auto;}
-
-/* Janela estilo Windows */
-.win-window{max-width:560px;margin:0 auto;background:#1e2228;border-radius:8px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.7);border:1px solid #2a2d35;}
-.win-titlebar{height:32px;background:linear-gradient(90deg,#2a2d35,#1e2228);display:flex;align-items:center;padding:0 12px;gap:8px;border-bottom:1px solid #2a2d35;user-select:none;}
-.win-dot{width:12px;height:12px;border-radius:50%;}
-.win-dot.r{background:#ff5f57;}.win-dot.y{background:#ffbd2e;}.win-dot.g{background:#28c840;}
-.win-title{font-size:12px;color:#888;margin-left:8px;font-family:'Inter',sans-serif;}
-.win-body{padding:24px;}
-
-/* Tabs estilo Windows */
-.win-tabs{display:flex;border-bottom:1px solid #2a2d35;margin-bottom:20px;gap:2px;}
-.win-tab{padding:8px 18px;font-size:12px;color:#607080;cursor:pointer;border-radius:4px 4px 0 0;border:1px solid transparent;border-bottom:none;transition:all .2s;font-family:'Inter',sans-serif;font-weight:500;}
-.win-tab:hover{color:#fff;background:rgba(255,255,255,.04);}
-.win-tab.active{color:#ff8c00;border-color:#2a2d35;border-bottom-color:#1e2228;background:#1e2228;}
-
-/* Painel de conteúdo */
-.win-panel{display:none;}
-.win-panel.active{display:block;}
-
-/* Links */
-.win-link-row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:6px;color:#ccc;text-decoration:none;font-size:13px;transition:all .2s;margin-bottom:4px;background:rgba(255,255,255,.02);border:1px solid transparent;}
-.win-link-row:hover{background:rgba(255,255,255,.05);border-color:#2a2d35;color:#fff;}
-.win-link-row i{width:22px;text-align:center;font-size:18px;flex-shrink:0;}
-.win-link-row.ig i{color:#e1306c;}.win-link-row.sp i{color:#1db954;}.win-link-row.ml i{color:var(--orange);}.win-link-row.yt i{color:#ff0000;}
-.win-link-label{flex:1;}
-.win-link-arrow{color:#444;font-size:11px;}
-
-/* Botão WhatsApp */
-.win-zap{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:linear-gradient(135deg,#128c7e,#25d366);border:none;border-radius:8px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .25s;margin-top:16px;}
-.win-zap:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.35);}
-
-/* Status bar estilo Windows */
-.win-statusbar{height:22px;background:#2a2d35;display:flex;align-items:center;padding:0 12px;gap:16px;border-top:1px solid #1a1c22;}
-.win-status-item{font-size:10px;color:#607080;font-family:'Inter',sans-serif;}
-
-/* Footer DigiRocket */
-.dr-footer{margin-top:40px;padding:24px 0 10px;text-align:center;border-top:1px solid rgba(255,255,255,.04);}
-.dr-label{font-size:10px;color:#555;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:12px;}
-.dr-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;background:rgba(25,27,30,.95);border:1px solid rgba(255,255,255,.07);padding:10px 24px;border-radius:50px;}
-.dr-name{font-size:15px;font-weight:700;color:#fff;}
-.dr-copy{font-size:10px;color:#444;margin-top:12px;}
-
-/* Mobile contato */
-@media(max-width:768px){
-  #contato{padding:70px 12px 40px;}
-  .win-window{max-width:100%;}
-  .win-tab{padding:7px 12px;font-size:11px;}
-  .win-body{padding:16px;}
-}
-</style>
-
-  <div class="win-window">
-    <!-- Titlebar estilo Windows -->
-    <div class="win-titlebar">
-      <div class="win-dot r"></div>
-      <div class="win-dot y"></div>
-      <div class="win-dot g"></div>
-      <span class="win-title">contato.exe — PCN BOLADÃO</span>
+<!-- ══ MÚSICAS ══ -->
+<section id="musicas" class="section">
+<div class="mus-inner">
+  <!-- Header artista -->
+  <div class="mus-header">
+    <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN Boladão" onerror="this.style.display='none'">
+    <div class="mus-header-info">
+      <h2>PCN BOLADÃO<span class="vbadge" style="width:14px;height:14px;font-size:8px;">✓</span></h2>
+      <p>Artista Oficial</p>
     </div>
+    <a class="mus-follow" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Seguir</a>
+  </div>
 
-    <div class="win-body">
-      <!-- Tabs -->
-      <div class="win-tabs">
-        <div class="win-tab active" onclick="winTab('redes')">Redes Sociais</div>
-        <div class="win-tab" onclick="winTab('booking')">Booking</div>
-        <div class="win-tab" onclick="winTab('whats')">WhatsApp</div>
+  <!-- Carrossel — APENAS fotos reais verificadas do artista -->
+  <div class="mus-carousel">
+    <div class="mc-track" id="mcTrack">
+      <div class="mc-slide">
+        <img src="https://i.ibb.co/992g4LWK/imgi-41-661993170-18387838516083845-7837809524537980210-n.jpg"
+             alt="PCN Boladão"
+             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
       </div>
-
-      <!-- Painel Redes -->
-      <div class="win-panel active" id="win-redes">
-        <a class="win-link-row ig" href="https://www.instagram.com/ojuangoes" target="_blank">
-          <i class="fa-brands fa-instagram"></i>
-          <span class="win-link-label"><strong>@7pcnboladao</strong><br><span style="font-size:11px;color:#555;">Instagram</span></span>
-          <span class="win-link-arrow">↗</span>
-        </a>
-        <a class="win-link-row sp" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank">
-          <i class="fa-brands fa-spotify"></i>
-          <span class="win-link-label"><strong>PCN BOLADÃO</strong><br><span style="font-size:11px;color:#555;">Spotify · Artista</span></span>
-          <span class="win-link-arrow">↗</span>
-        </a>
-        <a class="win-link-row yt" href="https://www.youtube.com/@PCNboladao" target="_blank">
-          <i class="fa-brands fa-youtube"></i>
-          <span class="win-link-label"><strong>@PCNboladao</strong><br><span style="font-size:11px;color:#555;">YouTube</span></span>
-          <span class="win-link-arrow">↗</span>
-        </a>
-      </div>
-
-      <!-- Painel Booking -->
-      <div class="win-panel" id="win-booking">
-        <a class="win-link-row ml" href="mailto:pcnboladao@gmail.com">
-          <i class="fa-solid fa-envelope"></i>
-          <span class="win-link-label"><strong>pcnboladao@gmail.com</strong><br><span style="font-size:11px;color:#555;">Bookings · Feats · Parcerias</span></span>
-          <span class="win-link-arrow">↗</span>
-        </a>
-        <div style="margin-top:16px;padding:14px;background:rgba(255,106,0,.05);border:1px solid rgba(255,106,0,.1);border-radius:8px;">
-          <div style="font-size:11px;color:#666;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;">Disponível para</div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <span style="padding:4px 10px;background:rgba(255,106,0,.1);border:1px solid rgba(255,106,0,.2);border-radius:20px;font-size:11px;color:var(--orange);">Shows</span>
-            <span style="padding:4px 10px;background:rgba(255,106,0,.1);border:1px solid rgba(255,106,0,.2);border-radius:20px;font-size:11px;color:var(--orange);">Feat</span>
-            <span style="padding:4px 10px;background:rgba(255,106,0,.1);border:1px solid rgba(255,106,0,.2);border-radius:20px;font-size:11px;color:var(--orange);">Mix & Master</span>
-            <span style="padding:4px 10px;background:rgba(255,106,0,.1);border:1px solid rgba(255,106,0,.2);border-radius:20px;font-size:11px;color:var(--orange);">Beats</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Painel WhatsApp -->
-      <div class="win-panel" id="win-whats">
-        <div style="text-align:center;padding:20px 0;">
-          <div style="font-size:48px;margin-bottom:12px;">💬</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin-bottom:6px;">FALE DIRETO</div>
-          <div style="font-size:12px;color:#555;margin-bottom:20px;">Resposta rápida · Atendimento direto</div>
-        </div>
-        <a class="win-zap" href="https://wa.me/5511976369308" target="_blank">
-          <i class="fa-brands fa-whatsapp" style="font-size:22px;"></i>CHAMAR NO WHATSAPP
-        </a>
+      <div class="mc-slide">
+        <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg"
+             alt="PCN Boladão"
+             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
       </div>
     </div>
-
-    <!-- Status bar -->
-    <div class="win-statusbar">
-      <span class="win-status-item">● Online</span>
-      <span class="win-status-item">PCN BOLADÃO © 2025</span>
+    <div class="mc-dots" id="mcDots">
+      <span class="mcdot active" onclick="goSlide(0)"></span>
+      <span class="mcdot" onclick="goSlide(1)"></span>
     </div>
   </div>
 
-  <div class="dr-footer">
-    <span class="dr-label">Desenvolvido por</span>
-    <a href="https://www.instagram.com/GODIGIROCKET" target="_blank" class="dr-brand">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" fill="#6EC72D"/>
-        <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" fill="#6EC72D"/>
-        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" fill="#4da81e"/>
-        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" fill="#4da81e"/>
-      </svg>
-      <span class="dr-name">DigiRocket</span>
+  <!-- Links -->
+  <div class="mus-links">
+    <a class="mlink" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank" style="background:rgba(29,185,84,.08);border:1px solid rgba(29,185,84,.18);color:#1db954;"><i class="fa-brands fa-spotify"></i> Spotify</a>
+    <a class="mlink" href="https://www.youtube.com/@PCNboladao" target="_blank" style="background:rgba(255,0,0,.08);border:1px solid rgba(255,0,0,.18);color:#ff4444;"><i class="fa-brands fa-youtube"></i> YouTube</a>
+    <a class="mlink" href="https://www.instagram.com/7pcnboladao" target="_blank" style="background:rgba(225,48,108,.08);border:1px solid rgba(225,48,108,.18);color:#e1306c;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+  </div>
+
+  <!-- Presave -->
+  <div class="mus-presave">
+    <div class="mus-presave-label">🎵 PRÉ-SAVE — KANKIU</div>
+    <iframe src="https://open.spotify.com/embed/prerelease/2KhuPf1YqIQB4zYfEPSArA?utm_source=generator&theme=0" height="250" allowfullscreen="" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy"></iframe>
+  </div>
+
+  <!-- Player artista -->
+  <div style="border-radius:12px;overflow:hidden;">
+    <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="360" frameBorder="0" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block;border:none;"></iframe>
+  </div>
+</div>
+</section>
+
+<!-- ══ CONTATO ══ -->
+<section id="contato" class="section">
+<div class="ct-inner">
+  <div class="win-window">
+    <div class="win-tb">
+      <div class="wdot r"></div><div class="wdot y"></div><div class="wdot g"></div>
+      <span class="win-tb-title">contato.exe — PCN BOLADÃO</span>
+    </div>
+    <div class="win-tabs">
+      <div class="wtab active" onclick="winTab('redes')">Redes</div>
+      <div class="wtab" onclick="winTab('booking')">Booking</div>
+      <div class="wtab" onclick="winTab('whats')">WhatsApp</div>
+    </div>
+    <div class="win-body">
+      <div class="wpanel active" id="wp-redes">
+        <a class="wlink ig" href="https://www.instagram.com/7pcnboladao/" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+          <div><div>@7pcnboladao</div><div class="wlink-sub">Instagram</div></div>
+          <span class="wlink-arr">↗</span>
+        </a>
+        <a class="wlink sp" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank">
+          <i class="fa-brands fa-spotify"></i>
+          <div><div>PCN BOLADÃO</div><div class="wlink-sub">Spotify · Artista Oficial</div></div>
+          <span class="wlink-arr">↗</span>
+        </a>
+        <a class="wlink yt" href="https://www.youtube.com/@PCNboladao" target="_blank">
+          <i class="fa-brands fa-youtube"></i>
+          <div><div>@PCNboladao</div><div class="wlink-sub">YouTube</div></div>
+          <span class="wlink-arr">↗</span>
+        </a>
+      </div>
+      <div class="wpanel" id="wp-booking">
+        <a class="wlink ml" href="mailto:pcnboladao@gmail.com">
+          <i class="fa-solid fa-envelope"></i>
+          <div><div>pcnboladao@gmail.com</div><div class="wlink-sub">Bookings · Feats · Parcerias</div></div>
+          <span class="wlink-arr">↗</span>
+        </a>
+        <div class="booking-tags">
+          <span class="btag">Shows</span>
+          <span class="btag">Feat</span>
+          <span class="btag">Mix & Master</span>
+          <span class="btag">Beats</span>
+          <span class="btag">Parcerias</span>
+        </div>
+      </div>
+      <div class="wpanel" id="wp-whats">
+        <div style="text-align:center;padding:16px 0;">
+          <div style="font-size:44px;margin-bottom:10px;">💬</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#fff;margin-bottom:4px;">FALE DIRETO</div>
+          <div style="font-size:11px;color:#444;">Resposta rápida · Atendimento direto</div>
+        </div>
+        <a class="win-zap" href="https://wa.me/5511976369308" target="_blank"><i class="fa-brands fa-whatsapp" style="font-size:20px;"></i>CHAMAR NO WHATSAPP</a>
+      </div>
+    </div>
+    <div class="win-sb"><span class="win-sb">● Online</span><span style="font-size:9px;color:#333;">PCN BOLADÃO © 2025</span></div>
+  </div>
+
+  <div class="dr-wrap">
+    <span class="dr-lbl">Desenvolvido por</span>
+    <a href="https://www.instagram.com/ojuangoes" target="_blank" class="dr-brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" fill="#6EC72D"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" fill="#6EC72D"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" fill="#4da81e"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" fill="#4da81e"/></svg>
+      <span>DigiRocket</span>
     </a>
     <p class="dr-copy">© 2025 PCN BOLADÃO · Todos os direitos reservados</p>
   </div>
+</div>
 </section>
 
 <script>
-// ===== LOADING SCREEN =====
+// ── LOADING ──
 (function(){
-  const bar=document.getElementById('load-bar');
-  const msg=document.getElementById('load-msg');
-  const msgs=['Loading PCN BOLADÃO.flp...','Initializing 808s...','Ready!'];
-  let step=0;
-  const iv=setInterval(()=>{
-    step++;
-    if(step===1){bar.style.width='40%';msg.textContent=msgs[0];}
-    else if(step===2){bar.style.width='75%';msg.textContent=msgs[1];}
-    else if(step===3){bar.style.width='100%';msg.textContent=msgs[2];}
-    else if(step===4){document.getElementById('loading').classList.add('hide');clearInterval(iv);}
-  },600);
+  const bar=document.getElementById('ld-bar'),msg=document.getElementById('ld-msg');
+  [[600,'40%','Loading PCN BOLADÃO.flp...'],[1300,'75%','Initializing 808s...'],[1900,'100%','Ready!📢'],[2500,null,null]].forEach(([t,w,m])=>setTimeout(()=>{if(w){bar.style.width=w;msg.textContent=m;}else document.getElementById('loading').classList.add('hide');},t));
 })();
 
-// ===== TABS CONTATO =====
-function winTab(id){
-  document.querySelectorAll('.win-tab').forEach((t,i)=>{
-    const ids=['redes','booking','whats'];
-    t.classList.toggle('active',ids[i]===id);
-  });
-  document.querySelectorAll('.win-panel').forEach(p=>p.classList.remove('active'));
-  const panel=document.getElementById('win-'+id);
-  if(panel)panel.classList.add('active');
+// ── NAVIGATION ──
+function goSection(id){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.s===id));
+  document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));
+  document.body.style.overflowY=id==='home'?'hidden':'auto';
+  window.scrollTo(0,0);
 }
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>goSection(b.dataset.s)));
+document.body.style.overflowY='hidden';
 
-// ===== NAVIGATION =====
-const navBtns=document.querySelectorAll('header nav button');
-const sections=document.querySelectorAll('.section');
-navBtns.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    navBtns.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    sections.forEach(s=>s.classList.remove('active'));
-    document.getElementById(btn.dataset.section).classList.add('active');
-    if(btn.dataset.section==='home')document.body.style.overflow='hidden';
-    else document.body.style.overflow='auto';
-  });
-});
-document.body.style.overflow='hidden';
-
-// ===== PIANO KEYS GENERATION =====
+// ── PIANO KEYS ──
 (function(){
-  const sidebar=document.getElementById('pianoKeys');
-  if(!sidebar)return;
-  // C minor pentatonic + chromatic pattern with keyboard mapping
-  // Keys: A S D F G H J K = white, W E T Y U = black (displayed on piano)
-  const keys=[
-    {note:'C5',white:true,kb:'A'},{note:'C#5',white:false,kb:'W'},
-    {note:'D5',white:true,kb:'S'},{note:'Eb5',white:false,kb:'E'},
-    {note:'E5',white:true,kb:'D'},{note:'F5',white:true,kb:'F'},
-    {note:'F#5',white:false,kb:'T'},{note:'G5',white:true,kb:'G'},
-    {note:'G#5',white:false,kb:'Y'},{note:'A5',white:true,kb:'H'},
-    {note:'Bb5',white:false,kb:'U'},{note:'B5',white:true,kb:'J'},
-    {note:'C6',white:true,kb:'K'},
+  const side=document.getElementById('pianoKeys');
+  if(!side)return;
+  const kdata=[
+    {n:'C5',w:true,kb:'A'},{n:'C#5',w:false,kb:'W'},{n:'D5',w:true,kb:'S'},
+    {n:'Eb5',w:false,kb:'E'},{n:'E5',w:true,kb:'D'},{n:'F5',w:true,kb:'F'},
+    {n:'F#5',w:false,kb:'T'},{n:'G5',w:true,kb:'G'},{n:'G#5',w:false,kb:'Y'},
+    {n:'A5',w:true,kb:'H'},{n:'Bb5',w:false,kb:'U'},{n:'B5',w:true,kb:'J'},{n:'C6',w:true,kb:'K'}
   ];
-  keys.forEach(k=>{
+  const nf={C5:523.25,'C#5':554.37,D5:587.33,Eb5:622.25,E5:659.25,F5:698.46,'F#5':739.99,G5:783.99,'G#5':830.61,A5:880,Bb5:932.33,B5:987.77,C6:1046.5};
+  window._nf=nf;window._kb2n={a:'C5',w:'C#5',s:'D5',e:'Eb5',d:'E5',f:'F5',t:'F#5',g:'G5',y:'G#5',h:'A5',u:'Bb5',j:'B5',k:'C6'};
+  kdata.forEach(k=>{
     const el=document.createElement('div');
-    el.className='piano-key '+(k.white?'white':'black');
-    el.dataset.note=k.note;
-    el.innerHTML=`<span class="kb">${k.kb}</span>${k.note.replace(/\d/,'')}`;
-    el.addEventListener('mousedown',e=>{e.preventDefault();playPianoNote(k.note);el.classList.add('hit');});
-    el.addEventListener('mouseup',()=>el.classList.remove('hit'));
-    el.addEventListener('mouseleave',()=>el.classList.remove('hit'));
-    el.addEventListener('touchstart',e=>{e.preventDefault();playPianoNote(k.note);el.classList.add('hit');},{passive:false});
-    el.addEventListener('touchend',()=>el.classList.remove('hit'));
-    sidebar.appendChild(el);
+    el.className='pk '+(k.w?'white':'black');el.dataset.note=k.n;
+    el.innerHTML=`<span class="kb">${k.kb}</span>${k.n.replace(/\d/,'')}`;
+    const play=()=>{playNote(nf[k.n]);el.classList.add('hit');};
+    const stop=()=>el.classList.remove('hit');
+    el.addEventListener('mousedown',e=>{e.preventDefault();play();});
+    el.addEventListener('mouseup',stop);el.addEventListener('mouseleave',stop);
+    el.addEventListener('touchstart',e=>{e.preventDefault();play();},{passive:false});
+    el.addEventListener('touchend',stop);
+    side.appendChild(el);
   });
 })();
 
-// ===== VISUALIZER PHOTO CYCLING =====
-(function(){
-  const imgs=document.querySelectorAll('#vizPhotos img');
-  if(!imgs.length)return;
-  let idx=0;
-  setInterval(()=>{
-    imgs[idx].classList.remove('show');
-    idx=(idx+1)%imgs.length;
-    imgs[idx].classList.add('show');
-  },4000);
-})();
-
-// ===== VISUALIZER WAVEFORM BARS =====
-(function(){
-  const wf=document.getElementById('vizWaveform');
-  if(!wf)return;
-  for(let i=0;i<24;i++){
-    const b=document.createElement('div');
-    b.className='viz-bar2';
-    const h=(6+Math.random()*28).toFixed(0);
-    const d=(0.2+Math.random()*0.5).toFixed(2);
-    const dl=(Math.random()*0.4).toFixed(2);
-    b.style.cssText=`--h:${h}px;--d:${d}s;--dl:${dl}s`;
-    wf.appendChild(b);
-  }
-})();
-
-// ===== VIZ CONTROL BUTTONS =====
-document.querySelectorAll('.viz-ctrl-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.viz-ctrl-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
-
-// ===== 3D NAME ANIMATION =====
-(function(){
-  const el=document.getElementById('pcn-label');
-  const block=document.getElementById('heroBlock');
-  if(!el||!block)return;
-  let targetX=0,targetY=0,curX=0,curY=0;
-  const lerp=0.06,maxRot=30;
-  function onMove(cx,cy){
-    const rect=block.getBoundingClientRect();
-    const mx=(cx-rect.left-rect.width/2)/(rect.width/2);
-    const my=(cy-rect.top-rect.height/2)/(rect.height/2);
-    targetY=mx*maxRot; targetX=-my*maxRot;
-  }
-  document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
-  document.addEventListener('touchmove',e=>{if(e.touches.length)onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
-  function animate(){
-    curX+=(targetX-curX)*lerp; curY+=(targetY-curY)*lerp;
-    const s=1+Math.sqrt(curX*curX+curY*curY)/maxRot*0.08;
-    el.style.transform=`perspective(900px) rotateX(${curX}deg) rotateY(${curY}deg) scale(${s})`;
-    requestAnimationFrame(animate);
-  }
-  animate();
-})();
-
-// ===== ORBITAL RINGS =====
-(function(){
-  const canvas=document.getElementById('orbit-canvas');
-  const ctx=canvas.getContext('2d');
-  function resize(){canvas.width=canvas.parentElement.clientWidth;canvas.height=canvas.parentElement.clientHeight;}
-  resize();window.addEventListener('resize',resize);
-
-  const rings=[
-    {rx:120,ry:40,speed:0.8,color:'rgba(255,106,0,0.3)',offset:0},
-    {rx:150,ry:50,speed:-0.6,color:'rgba(168,85,247,0.25)',offset:Math.PI/3},
-    {rx:100,ry:35,speed:1.0,color:'rgba(255,149,0,0.2)',offset:Math.PI/2},
-    {rx:170,ry:55,speed:-0.4,color:'rgba(255,255,255,0.1)',offset:Math.PI}
-  ];
-  let t=0;
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    const cx=canvas.width/2,cy=canvas.height/2;
-    rings.forEach(r=>{
-      ctx.beginPath();
-      ctx.strokeStyle=r.color;
-      ctx.lineWidth=1.5;
-      for(let i=0;i<=360;i++){
-        const a=(i*Math.PI/180)+t*r.speed*0.01+r.offset;
-        const x=cx+Math.cos(a)*r.rx;
-        const y=cy+Math.sin(a)*r.ry;
-        if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-      }
-      ctx.stroke();
-    });
-    t++;
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-// ===== AUDIO ENGINE =====
-let audioCtx=null;
-function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
-
-// --- PIANO SYNTH — Som de Melodia Trap/Pluggnb ---
-function playPiano(freq){
-  const ctx=getCtx();
-  const now=ctx.currentTime;
-
-  // Sub-oscillator (oitava abaixo) — dá o peso do trap
-  const subOsc=ctx.createOscillator();
-  subOsc.type='sine';subOsc.frequency.value=freq/2;
-
-  // Lead — sawtooth suavizado (som de synth plug)
-  const leadOsc=ctx.createOscillator();
-  leadOsc.type='sawtooth';leadOsc.frequency.value=freq;
-
-  // Segundo lead levemente desafinado (chorus effect)
-  const leadOsc2=ctx.createOscillator();
-  leadOsc2.type='sawtooth';leadOsc2.frequency.value=freq*1.003;
-
-  // Lowpass filter — suaviza o sawtooth, deixa mais melódico
-  const lp=ctx.createBiquadFilter();
-  lp.type='lowpass';lp.frequency.value=freq*4;lp.Q.value=2;
-
-  // Envelope — ataque rápido, sustain longo (característica plug)
-  const env=ctx.createGain();
-  env.gain.setValueAtTime(0,now);
-  env.gain.linearRampToValueAtTime(0.3,now+0.01);
-  env.gain.setValueAtTime(0.3,now+0.6);
-  env.gain.exponentialRampToValueAtTime(0.001,now+2.2);
-
-  // Sub envelope
-  const subEnv=ctx.createGain();
-  subEnv.gain.setValueAtTime(0.18,now);
-  subEnv.gain.exponentialRampToValueAtTime(0.001,now+1.4);
-
-  // Reverb simulado com delay
-  const delay=ctx.createDelay(1.0);delay.delayTime.value=0.35;
-  const fb=ctx.createGain();fb.gain.value=0.35;
-  const wet=ctx.createGain();wet.gain.value=0.22;
-
-  // Routing
-  leadOsc.connect(lp);leadOsc2.connect(lp);
-  lp.connect(env);env.connect(ctx.destination);
-  env.connect(delay);delay.connect(fb);fb.connect(delay);
-  delay.connect(wet);wet.connect(ctx.destination);
-  subOsc.connect(subEnv);subEnv.connect(ctx.destination);
-
-  leadOsc.start(now);leadOsc2.start(now);subOsc.start(now);
-  leadOsc.stop(now+2.3);leadOsc2.stop(now+2.3);subOsc.stop(now+1.5);
-  if(typeof updatePitch==='function')updatePitch(freq);
+// ── AUDIO ──
+let AC=null;
+function getAC(){if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();return AC;}
+function playNote(freq){
+  const ac=getAC(),t=ac.currentTime;
+  const o1=ac.createOscillator(),o2=ac.createOscillator(),sub=ac.createOscillator();
+  o1.type='sawtooth';o1.frequency.value=freq;
+  o2.type='sawtooth';o2.frequency.value=freq*1.003;
+  sub.type='sine';sub.frequency.value=freq/2;
+  const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=freq*3.5;lp.Q.value=1.5;
+  const env=ac.createGain();env.gain.setValueAtTime(0,t);env.gain.linearRampToValueAtTime(.28,t+.01);env.gain.setValueAtTime(.28,t+.5);env.gain.exponentialRampToValueAtTime(.001,t+2.2);
+  const se=ac.createGain();se.gain.setValueAtTime(.15,t);se.gain.exponentialRampToValueAtTime(.001,t+1.2);
+  const dl=ac.createDelay(1);dl.delayTime.value=.33;
+  const fb=ac.createGain();fb.gain.value=.32;
+  const wet=ac.createGain();wet.gain.value=.2;
+  o1.connect(lp);o2.connect(lp);lp.connect(env);
+  env.connect(ac.destination);env.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(ac.destination);
+  sub.connect(se);se.connect(ac.destination);
+  [o1,o2,sub].forEach(o=>o.start(t));
+  o1.stop(t+2.3);o2.stop(t+2.3);sub.stop(t+1.3);
 }
-
-// C minor pentatonic frequencies
-const pianoMapZ=[523.25,587.33,622.25,698.46,783.99,880.00,932.33];
-const pianoNotesLow=[261.63,293.66,311.13,349.23,392.00,440.00,466.16,523.25,587.33,622.25];
-const keyMapPiano={'z':0,'x':1,'c':2,'v':3,'b':4,'n':5,'m':6};
-const keyMapPianoLow={'q':0,'w':1,'e':2,'r':3,'t':4,'y':5,'u':6,'i':7,'o':8,'p':9};
-
-// Sidebar piano note→freq and keyboard→note
-const noteFreqMap={'C5':523.25,'C#5':554.37,'D5':587.33,'Eb5':622.25,'E5':659.25,'F5':698.46,'F#5':739.99,'G5':783.99,'G#5':830.61,'A5':880.00,'Bb5':932.33,'B5':987.77,'C6':1046.50};
-const kbToNote={'a':'C5','w':'C#5','s':'D5','e':'Eb5','d':'E5','f':'F5','t':'F#5','g':'G5','y':'G#5','h':'A5','u':'Bb5','j':'B5','k':'C6'};
-function playPianoNote(noteName){const freq=noteFreqMap[noteName];if(freq)playPiano(freq);}
-
-// --- DRUM SYNTH ---
-function playKick(){
-  const ctx=getCtx();const now=ctx.currentTime;
-  const osc=ctx.createOscillator();osc.type='sine';
-  osc.frequency.setValueAtTime(200,now);
-  osc.frequency.exponentialRampToValueAtTime(15,now+0.8);
-  const osc2=ctx.createOscillator();osc2.type='sine';
-  osc2.frequency.setValueAtTime(100,now);
-  osc2.frequency.exponentialRampToValueAtTime(10,now+0.6);
-  const g=ctx.createGain();g.gain.setValueAtTime(1,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.8);
-  osc.connect(g);osc2.connect(g);g.connect(ctx.destination);
-  osc.start(now);osc2.start(now);osc.stop(now+0.8);osc2.stop(now+0.8);
-}
-function playSnare(){
-  const ctx=getCtx();const now=ctx.currentTime;
-  // Noise
-  const buf=ctx.createBuffer(1,ctx.sampleRate*0.2,ctx.sampleRate);
-  const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
-  const noise=ctx.createBufferSource();noise.buffer=buf;
-  const nf=ctx.createBiquadFilter();nf.type='highpass';nf.frequency.value=1000;
-  const ng=ctx.createGain();ng.gain.setValueAtTime(0.8,now);ng.gain.exponentialRampToValueAtTime(0.01,now+0.2);
-  noise.connect(nf);nf.connect(ng);ng.connect(ctx.destination);
-  // Body
-  const osc=ctx.createOscillator();osc.type='triangle';osc.frequency.value=180;
-  const g=ctx.createGain();g.gain.setValueAtTime(0.7,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.1);
-  osc.connect(g);g.connect(ctx.destination);
-  noise.start(now);osc.start(now);noise.stop(now+0.2);osc.stop(now+0.1);
-}
-function playHat(){
-  const ctx=getCtx();const now=ctx.currentTime;
-  const buf=ctx.createBuffer(1,ctx.sampleRate*0.05,ctx.sampleRate);
-  const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
-  const noise=ctx.createBufferSource();noise.buffer=buf;
-  const hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=7000;
-  const g=ctx.createGain();g.gain.setValueAtTime(0.5,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.05);
-  noise.connect(hp);hp.connect(g);g.connect(ctx.destination);noise.start(now);noise.stop(now+0.05);
-}
-function playClap(){
-  const ctx=getCtx();const now=ctx.currentTime;
-  for(let i=0;i<3;i++){
-    const buf=ctx.createBuffer(1,ctx.sampleRate*0.03,ctx.sampleRate);
-    const d=buf.getChannelData(0);for(let j=0;j<d.length;j++)d[j]=Math.random()*2-1;
-    const n=ctx.createBufferSource();n.buffer=buf;
-    const bp=ctx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1200;bp.Q.value=2;
-    const g=ctx.createGain();g.gain.setValueAtTime(0.6,now+i*0.015);g.gain.exponentialRampToValueAtTime(0.01,now+i*0.015+0.08);
-    n.connect(bp);bp.connect(g);g.connect(ctx.destination);n.start(now+i*0.015);n.stop(now+i*0.015+0.08);
-  }
-}
-function playPerc(){
-  const ctx=getCtx();const now=ctx.currentTime;
-  const osc=ctx.createOscillator();osc.type='sine';osc.frequency.value=800;
-  const g=ctx.createGain();g.gain.setValueAtTime(0.5,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.15);
-  osc.connect(g);g.connect(ctx.destination);osc.start(now);osc.stop(now+0.15);
-}
-function playRim(){
-  const ctx=getCtx();const now=ctx.currentTime;
-  const osc=ctx.createOscillator();osc.type='square';
-  osc.frequency.value=1800;
-  const hp=ctx.createBiquadFilter();hp.type='highpass';hp.frequency.value=2000;
-  const g=ctx.createGain();g.gain.setValueAtTime(0.4,now);g.gain.exponentialRampToValueAtTime(0.01,now+0.06);
-  osc.connect(hp);hp.connect(g);g.connect(ctx.destination);osc.start(now);osc.stop(now+0.06);
-}
-
+function playKick(){const ac=getAC(),t=ac.currentTime;const o=ac.createOscillator();o.type='sine';o.frequency.setValueAtTime(200,t);o.frequency.exponentialRampToValueAtTime(15,t+.8);const g=ac.createGain();g.gain.setValueAtTime(1,t);g.gain.exponentialRampToValueAtTime(.01,t+.8);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.8);}
+function playSnare(){const ac=getAC(),t=ac.currentTime;const buf=ac.createBuffer(1,ac.sampleRate*.2,ac.sampleRate);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const n=ac.createBufferSource();n.buffer=buf;const hp=ac.createBiquadFilter();hp.type='highpass';hp.frequency.value=1000;const g=ac.createGain();g.gain.setValueAtTime(.8,t);g.gain.exponentialRampToValueAtTime(.01,t+.2);n.connect(hp);hp.connect(g);g.connect(ac.destination);n.start(t);n.stop(t+.2);}
+function playHat(){const ac=getAC(),t=ac.currentTime;const buf=ac.createBuffer(1,ac.sampleRate*.05,ac.sampleRate);const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const n=ac.createBufferSource();n.buffer=buf;const hp=ac.createBiquadFilter();hp.type='highpass';hp.frequency.value=7000;const g=ac.createGain();g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.01,t+.05);n.connect(hp);hp.connect(g);g.connect(ac.destination);n.start(t);n.stop(t+.05);}
+function playClap(){const ac=getAC(),t=ac.currentTime;for(let i=0;i<3;i++){const buf=ac.createBuffer(1,ac.sampleRate*.03,ac.sampleRate);const d=buf.getChannelData(0);for(let j=0;j<d.length;j++)d[j]=Math.random()*2-1;const n=ac.createBufferSource();n.buffer=buf;const bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1200;bp.Q.value=2;const g=ac.createGain();g.gain.setValueAtTime(.6,t+i*.015);g.gain.exponentialRampToValueAtTime(.01,t+i*.015+.08);n.connect(bp);bp.connect(g);g.connect(ac.destination);n.start(t+i*.015);n.stop(t+i*.015+.08);}}
+function playPerc(){const ac=getAC(),t=ac.currentTime;const o=ac.createOscillator();o.type='sine';o.frequency.value=800;const g=ac.createGain();g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.01,t+.15);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.15);}
+function playRim(){const ac=getAC(),t=ac.currentTime;const o=ac.createOscillator();o.type='square';o.frequency.value=1800;const hp=ac.createBiquadFilter();hp.type='highpass';hp.frequency.value=2000;const g=ac.createGain();g.gain.setValueAtTime(.4,t);g.gain.exponentialRampToValueAtTime(.01,t+.06);o.connect(hp);hp.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.06);}
 const drumFns={kick:playKick,snare:playSnare,hat:playHat,clap:playClap,perc:playPerc,rim:playRim};
 const drumKeys={'1':'kick','2':'snare','3':'hat','4':'clap','5':'perc','6':'rim'};
+document.querySelectorAll('.dpad').forEach(p=>{
+  const fn=()=>{drumFns[p.dataset.drum]();p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),140);};
+  p.addEventListener('mousedown',fn);
+  p.addEventListener('touchstart',e=>{e.preventDefault();fn();},{passive:false});
+});
 
-// ===== KEYBOARD EVENT HANDLER =====
-const activeKeys=new Set();
+// ── KEYBOARD ──
+const held=new Set();
 document.addEventListener('keydown',e=>{
-  if(activeKeys.has(e.key))return;
-  activeKeys.add(e.key);
+  if(held.has(e.key))return;held.add(e.key);
   const k=e.key.toLowerCase();
-
-  // SIDEBAR PIANO (A W S E D F T G Y H U J K)
-  if(kbToNote.hasOwnProperty(k)){
-    playPianoNote(kbToNote[k]);
-    const el=document.querySelector(`.piano-key[data-note="${kbToNote[k]}"]`);
-    if(el){el.classList.add('hit');setTimeout(()=>el.classList.remove('hit'),300);}
-    return; // don't fall through to drums
-  }
-  // Drums: 1=kick 2=snare 3=hat 4=clap 5=perc 6=rim
-  if(drumKeys.hasOwnProperty(k)){
-    drumFns[drumKeys[k]]();
-    highlightDrumPad(drumKeys[k]);
-  }
+  if(window._kb2n&&window._kb2n[k]){const freq=window._nf[window._kb2n[k]];if(freq){playNote(freq);const el=document.querySelector(`.pk[data-note="${window._kb2n[k]}"]`);if(el){el.classList.add('hit');setTimeout(()=>el.classList.remove('hit'),260);}}}
+  if(drumKeys[k]){drumFns[drumKeys[k]]();const p=document.querySelector(`.dpad[data-drum="${drumKeys[k]}"]`);if(p){p.classList.add('hit');setTimeout(()=>p.classList.remove('hit'),140);}}
 });
-document.addEventListener('keyup',e=>{activeKeys.delete(e.key);});
+document.addEventListener('keyup',e=>held.delete(e.key));
 
-// ===== VISUAL FEEDBACK =====
-function highlightPianoKey(idx){
-  const keys=document.querySelectorAll('.piano-key');
-  if(keys[idx]){keys[idx].classList.add('hit');setTimeout(()=>keys[idx].classList.remove('hit'),300);}
-}
-function highlightDrumPad(name){
-  const pad=document.querySelector(`.drum-pad[data-drum="${name}"]`);
-  if(pad){pad.classList.add('hit');setTimeout(()=>pad.classList.remove('hit'),200);}
-}
-
-// Drum pad click
-document.querySelectorAll('.drum-pad').forEach(pad=>{
-  pad.addEventListener('mousedown',()=>{drumFns[pad.dataset.drum]();pad.classList.add('hit');});
-  pad.addEventListener('mouseup',()=>pad.classList.remove('hit'));
-  pad.addEventListener('mouseleave',()=>pad.classList.remove('hit'));
-  pad.addEventListener('touchstart',e=>{e.preventDefault();drumFns[pad.dataset.drum]();pad.classList.add('hit');});
-  pad.addEventListener('touchend',()=>pad.classList.remove('hit'));
-});
-
-// Piano key click
-document.querySelectorAll('.piano-key').forEach((key,i)=>{
-  key.addEventListener('mousedown',()=>{
-    const freq=i<7?pianoMapZ[i]:(i<17?pianoNotesLow[i-7]:pianoMapZ[i%7]);
-    playPiano(freq);key.classList.add('hit');
-  });
-  key.addEventListener('mouseup',()=>key.classList.remove('hit'));
-  key.addEventListener('mouseleave',()=>key.classList.remove('hit'));
-});
-
-// ===== KNOB DRAG =====
+// ── CURSOR ──
 (function(){
-  const knobs=document.querySelectorAll('.knob');
-  let dragging=null,startY=0,startVal=0;
-  knobs.forEach(knob=>{
-    knob.addEventListener('mousedown',e=>{
-      dragging=knob;startY=e.clientY;startVal=parseInt(knob.dataset.value)||50;
-      document.body.style.cursor='grabbing';
-    });
-  });
-  document.addEventListener('mousemove',e=>{
-    if(!dragging)return;
-    const diff=startY-e.clientY;
-    const val=Math.max(0,Math.min(100,startVal+diff));
-    dragging.dataset.value=val;
-    const rot=(val-50)*2.7;
-    dragging.style.background=`conic-gradient(from ${220+rot}deg,var(--orange),#333 70%,#333)`;
-  });
-  document.addEventListener('mouseup',()=>{dragging=null;document.body.style.cursor='';});
-})();
-
-// ===== FPC DRUM PADS (gamified click pads) =====
-document.querySelectorAll('.fpc-pad').forEach(pad=>{
-  pad.addEventListener('mousedown',()=>{
-    drumFns[pad.dataset.sound]();
-    pad.classList.add('hit');
-  });
-  pad.addEventListener('mouseup',()=>pad.classList.remove('hit'));
-  pad.addEventListener('mouseleave',()=>pad.classList.remove('hit'));
-  pad.addEventListener('touchstart',e=>{e.preventDefault();drumFns[pad.dataset.sound]();pad.classList.add('hit');});
-  pad.addEventListener('touchend',()=>pad.classList.remove('hit'));
-});
-
-// ===== EQ CANVAS (FL Studio Fruity Parametric EQ 2 style) =====
-(function(){
-  const eqC=document.getElementById('eq-canvas');
-  if(!eqC)return;
-  const eqCtx=eqC.getContext('2d');
-  const bandColors=['#e04040','#ff8c00','#c8f000','#40cc80','#5599ff'];
-  
-  function drawEQ(){
-    eqC.width=eqC.offsetWidth;eqC.height=eqC.offsetHeight;
-    const w=eqC.width,h=eqC.height;
-    eqCtx.clearRect(0,0,w,h);
-    
-    // Background gradient (like FL Studio dark green/teal)
-    const bg=eqCtx.createLinearGradient(0,0,0,h);
-    bg.addColorStop(0,'#060d10');bg.addColorStop(1,'#030608');
-    eqCtx.fillStyle=bg;eqCtx.fillRect(0,0,w,h);
-    
-    // Frequency grid lines (vertical — octave markers)
-    const freqs=[63,125,250,500,1000,2000,4000,8000,16000];
-    eqCtx.strokeStyle='rgba(80,120,100,0.2)';eqCtx.lineWidth=1;
-    freqs.forEach(f=>{
-      const x=w*(Math.log10(f/20)/Math.log10(20000/20));
-      eqCtx.beginPath();eqCtx.moveTo(x,0);eqCtx.lineTo(x,h);eqCtx.stroke();
-    });
-    
-    // dB grid lines (horizontal)
-    for(let db=-18;db<=18;db+=6){
-      const y=h/2-(db/36)*h;
-      eqCtx.strokeStyle=db===0?'rgba(80,120,100,0.4)':'rgba(80,120,100,0.15)';
-      eqCtx.beginPath();eqCtx.moveTo(0,y);eqCtx.lineTo(w,y);eqCtx.stroke();
-    }
-    
-    // 0dB center label
-    eqCtx.fillStyle='rgba(80,120,100,0.5)';eqCtx.font='7px Inter';
-    eqCtx.fillText('0',2,h/2-2);
-    
-    // Build EQ curve from knobs
-    const knobs=document.querySelectorAll('.knob');
-    const vals=Array.from(knobs).map(k=>parseInt(k.dataset.value)||50);
-    const bandFreqs=[80,250,1000,3000,8000];
-    
-    // Draw curve
-    eqCtx.beginPath();
-    for(let x=0;x<w;x++){
-      const logPos=x/w;
-      const freq=20*Math.pow(20000/20,logPos);
-      let gain=0;
-      vals.forEach((v,i)=>{
-        const dB=(v-50)/50*14;
-        const bw=2.0;
-        const ratio=Math.log10(freq/bandFreqs[i]);
-        gain+=dB*Math.exp(-(ratio*ratio)/(2*bw*bw));
-      });
-      const y=h/2-(gain/28)*h;
-      if(x===0)eqCtx.moveTo(x,y);else eqCtx.lineTo(x,y);
-    }
-    
-    // Fill under curve
-    eqCtx.lineTo(w,h/2);eqCtx.lineTo(0,h/2);eqCtx.closePath();
-    const grad=eqCtx.createLinearGradient(0,0,0,h);
-    grad.addColorStop(0,'rgba(255,140,0,0.15)');
-    grad.addColorStop(1,'rgba(255,140,0,0.02)');
-    eqCtx.fillStyle=grad;eqCtx.fill();
-    
-    // Stroke curve
-    eqCtx.beginPath();
-    for(let x=0;x<w;x++){
-      const freq=20*Math.pow(20000/20,x/w);
-      let gain=0;
-      vals.forEach((v,i)=>{
-        const dB=(v-50)/50*14;
-        const ratio=Math.log10(freq/bandFreqs[i]);
-        gain+=dB*Math.exp(-(ratio*ratio)/(2*2.0*2.0));
-      });
-      const y=h/2-(gain/28)*h;
-      if(x===0)eqCtx.moveTo(x,y);else eqCtx.lineTo(x,y);
-    }
-    eqCtx.strokeStyle='#ff8c00';eqCtx.lineWidth=1.5;eqCtx.stroke();
-    
-    // Band handle dots
-    vals.forEach((v,i)=>{
-      const x=w*(Math.log10(bandFreqs[i]/20)/Math.log10(20000/20));
-      const dB=(v-50)/50*14;
-      const y=h/2-(dB/28)*h;
-      eqCtx.beginPath();eqCtx.arc(x,y,4,0,Math.PI*2);
-      eqCtx.fillStyle=bandColors[i];eqCtx.fill();
-      eqCtx.strokeStyle='rgba(0,0,0,0.5)';eqCtx.lineWidth=1;eqCtx.stroke();
-    });
-  }
-  
-  drawEQ();
-  // Redraw when knobs change
-  setInterval(drawEQ,300);
-})();
-
-// ===== AUTO-TUNE SLIDERS =====
-document.querySelectorAll('.at-slider-wrap').forEach(slider=>{
-  function update(e){
-    const fill=slider.querySelector('.at-slider-fill');
-    if(!fill)return;
-    const rect=slider.getBoundingClientRect();
-    const pct=Math.max(0,Math.min(100,((e.clientX-rect.left)/rect.width)*100));
-    fill.style.width=pct+'%';
-  }
-  slider.addEventListener('click',update);
-  let dragging=false;
-  slider.addEventListener('mousedown',()=>dragging=true);
-  document.addEventListener('mousemove',e=>{if(dragging)update(e);});
-  document.addEventListener('mouseup',()=>dragging=false);
-});
-document.querySelectorAll('.at-key-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.at-key-btn').forEach(b=>b.classList.remove('active-key'));
-    btn.classList.add('active-key');
-  });
-});
-
-// ===== WHATSAPP CHECKOUT =====
-function buyWhatsApp(produto){
-  const nome=produto||'Camisa Kankiu';
-  const msg=encodeURIComponent('Olá! Tenho interesse em: '+nome+'. Gostaria de comprar!');
-  window.open('https://wa.me/5511976369308?text='+msg,'_blank');
-}
-
-// ===== PRESAVE POPUP =====
-function closePresave(){
-  const el=document.getElementById('presave-overlay');
-  if(el){el.style.opacity='0';setTimeout(()=>{el.style.display='none';},300);}
-}
-// Show after 60 seconds
-setTimeout(()=>{
-  const el=document.getElementById('presave-overlay');
-  if(el){
-    el.classList.add('show');
-    setTimeout(()=>{el.style.opacity='1';},50);
-    el.addEventListener('click',e=>{if(e.target===el)closePresave();});
-  }
-},60000);
-
-// ===== PRODUTO CYCLING — desktop + mobile =====
-(function(){
-  // Desktop
-  const desktopImgs=document.querySelectorAll('#vizProdPhotos img');
-  if(desktopImgs.length){
-    let i=0;setInterval(()=>{desktopImgs[i].classList.remove('show');i=(i+1)%desktopImgs.length;desktopImgs[i].classList.add('show');},3000);
-  }
-  // Mobile
-  const mobImgs=document.querySelectorAll('#vizMobProd img');
-  if(mobImgs.length){
-    let i=0;setInterval(()=>{mobImgs[i].classList.remove('show');i=(i+1)%mobImgs.length;mobImgs[i].classList.add('show');},3000);
-  }
-})();
-
-// ===== GO LOJA =====
-window.addEventListener('goLoja',()=>{
-  document.querySelectorAll('header nav button').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  const loja=document.getElementById('loja');
-  if(loja){loja.classList.add('active');document.body.style.overflow='auto';}
-  const btn=document.querySelector('[data-section="loja"]');
-  if(btn)btn.classList.add('active');
-});
-function showFront(){
-  const w=document.getElementById('prodImgWrap');
-  if(!w)return;
-  w.classList.remove('show-back');
-  document.querySelectorAll('.img-toggle-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
-}
-function showBack(){
-  const w=document.getElementById('prodImgWrap');
-  if(!w)return;
-  w.classList.add('show-back');
-  document.querySelectorAll('.img-toggle-btn').forEach((b,i)=>b.classList.toggle('active',i===1));
-}
-
-// ===== PITCH DISPLAY UPDATE =====
-const noteNames=['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'];
-function updatePitch(freq){
-  const n=Math.round(12*Math.log2(freq/261.63))%12;
-  const el=document.getElementById('pitch-display');
-  if(el)el.textContent=noteNames[(n+12)%12];
-}
-
-// ===== MOBILE PORTRAIT PARTICLES =====
-(function(){
-  const c=document.getElementById('mp-particles');
-  if(!c)return;
-  const ctx=c.getContext('2d');
-  let W,H;
-  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
-  resize();window.addEventListener('resize',resize);
-  const pts=Array.from({length:45},()=>({
-    x:Math.random()*800,y:Math.random()*1400,
-    vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.15,
-    r:Math.random()*1.6+.4,o:Math.random()*.28+.05,
-    p:Math.random()>.55
-  }));
-  (function draw(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-      ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);
-      ctx.fillStyle=p.p?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  })();
-})();
-
-// ===== CUSTOM CURSOR =====
-(function(){
-  const cur=document.getElementById('cur');
-  const dot=document.getElementById('cur-dot');
-  if(!cur||!dot)return;
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{
-    mx=e.clientX;my=e.clientY;
-    cur.style.left=mx+'px';cur.style.top=my+'px';
-    dot.style.left=mx+'px';dot.style.top=my+'px';
-  });
-  const hov='button,a,.drum-pad,.fpc-pad,.knob,.piano-key,.ftag,.viz-btn,.at-btn,.at-key-btn,.tb-tab,.tb-btn,.prod-btn-buy,.prod-btn-detail,.img-toggle-btn,.at-slider-wrap';
-  document.querySelectorAll(hov).forEach(el=>{
-    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
-    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+  const cur=document.getElementById('cur'),dot=document.getElementById('cur-dot');
+  if(!cur)return;
+  document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';});
+  document.querySelectorAll('button,a,.dpad,.pk,.rbtn,.fl-tab,.fl-btn').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.style.transform='translate(-50%,-50%) scale(1.5)');
+    el.addEventListener('mouseleave',()=>cur.style.transform='translate(-50%,-50%) scale(1)');
   });
 })();
 
-// ===== 3D HERO NAME =====
+// ── 3D HERO ──
 (function(){
-  const el=document.getElementById('pcn-label');
-  if(!el)return;
-  let tX=0,tY=0,cX=0,cY=0,idle=0;
-  let interacting=false,idleTimer=null;
-  const MAX=22;
-  function onMove(x,y){
-    interacting=true;clearTimeout(idleTimer);
-    const rect=el.getBoundingClientRect();
-    const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
-    tY=Math.max(-MAX,Math.min(MAX,(x-cx)/(window.innerWidth/2)*MAX));
-    tX=Math.max(-MAX,Math.min(MAX,-(y-cy)/(window.innerHeight/2)*MAX));
-    idleTimer=setTimeout(()=>{interacting=false;},2000);
-  }
+  const el=document.getElementById('pcn-label');if(!el)return;
+  let tX=0,tY=0,cX=0,cY=0,idle=0,active=false,timer=null;
+  const MAX=20,L=.07;
+  function onMove(x,y){active=true;clearTimeout(timer);tY=(x/window.innerWidth-.5)*MAX*2;tX=-(y/window.innerHeight-.5)*MAX*2;timer=setTimeout(()=>active=false,2500);}
   document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
-  document.addEventListener('touchmove',e=>{if(e.touches.length)onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
-  function tick(){
-    if(!interacting){idle+=.008;tX=Math.sin(idle*.7)*6;tY=Math.cos(idle*.5)*4;}
-    cX+=(tX-cX)*.07;cY+=(tY-cY)*.07;
-    const s=1+Math.sqrt(cX*cX+cY*cY)/MAX*.04;
-    el.style.transform=`perspective(900px) rotateX(${cX}deg) rotateY(${cY}deg) scale(${s})`;
-    requestAnimationFrame(tick);
-  }
-  tick();
+  (function tick(){if(!active){idle+=.007;tX=Math.sin(idle*.7)*5;tY=Math.cos(idle*.5)*3;}cX+=(tX-cX)*L;cY+=(tY-cY)*L;el.style.transform=`perspective(900px) rotateX(${cX}deg) rotateY(${cY}deg)`;requestAnimationFrame(tick);})();
 })();
 
-// ===== PARTICLES =====
+// ── PARTICLES (desktop) ──
 (function(){
-  const c=document.getElementById('particles-canvas');
-  if(!c)return;
-  const ctx=c.getContext('2d');
-  let W,H;
-  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
+  const c=document.getElementById('ptc');if(!c)return;
+  const ctx=c.getContext('2d');let W,H;
+  const resize=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
   resize();new ResizeObserver(resize).observe(c.parentElement);
-  const pts=Array.from({length:55},()=>({x:Math.random()*2000,y:Math.random()*1200,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.18,r:Math.random()*1.4+.4,o:Math.random()*.35+.08,purple:Math.random()>.55}));
+  const pts=Array.from({length:50},()=>({x:Math.random()*2000,y:Math.random()*1200,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.16,r:Math.random()*1.4+.4,o:Math.random()*.28+.06,p:Math.random()>.6}));
   let mx=.5,my=.5;
   document.addEventListener('mousemove',e=>{mx=e.clientX/window.innerWidth;my=e.clientY/window.innerHeight;});
+  (function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx+(mx-.5)*.1;p.y+=p.vy+(my-.5)*.08;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);ctx.fillStyle=p.p?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;ctx.fill();});requestAnimationFrame(draw);})();
+})();
+
+// ── PORTRAIT PARTICLES ──
+(function(){
+  const c=document.getElementById('hp-canvas');if(!c)return;
+  const ctx=c.getContext('2d');let W,H;
+  const resize=()=>{W=c.width=window.innerWidth;H=c.height=window.innerHeight;};
+  resize();window.addEventListener('resize',resize);
+  const pts=Array.from({length:40},()=>({x:Math.random()*800,y:Math.random()*1400,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.14,r:Math.random()*1.5+.4,o:Math.random()*.22+.05,p:Math.random()>.55}));
+  (function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);ctx.fillStyle=p.p?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;ctx.fill();});requestAnimationFrame(draw);})();
+})();
+
+// ── EQ ──
+(function(){
+  const c=document.getElementById('eq-c');if(!c)return;
+  const ctx=c.getContext('2d');const bf=[80,250,1000,3000,8000];let v=[35,55,65,50,45];
   function draw(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{
-      p.x+=p.vx+(mx-.5)*.15;p.y+=p.vy+(my-.5)*.12;
-      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-      ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);
-      ctx.fillStyle=p.purple?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;ctx.fill();
-    });
-    requestAnimationFrame(draw);
+    c.width=c.offsetWidth;c.height=c.offsetHeight;const w=c.width,h=c.height;
+    ctx.fillStyle='#020406';ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='rgba(80,120,100,.12)';ctx.lineWidth=1;
+    [63,250,1000,4000,16000].forEach(f=>{const x=w*(Math.log10(f/20)/Math.log10(1000));ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();});
+    ctx.strokeStyle='rgba(80,120,100,.2)';ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();
+    ctx.beginPath();
+    for(let x=0;x<w;x++){const freq=20*Math.pow(1000,x/w);let g=0;v.forEach((val,i)=>{const dB=(val-50)/50*14;const r=Math.log10(freq/bf[i]);g+=dB*Math.exp(-(r*r)/8);});const y=h/2-(g/28)*h;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+    ctx.lineTo(w,h/2);ctx.lineTo(0,h/2);ctx.closePath();
+    const gr=ctx.createLinearGradient(0,0,0,h);gr.addColorStop(0,'rgba(255,140,0,.16)');gr.addColorStop(1,'rgba(255,140,0,.02)');ctx.fillStyle=gr;ctx.fill();
+    ctx.beginPath();
+    for(let x=0;x<w;x++){const freq=20*Math.pow(1000,x/w);let g=0;v.forEach((val,i)=>{const dB=(val-50)/50*14;const r=Math.log10(freq/bf[i]);g+=dB*Math.exp(-(r*r)/8);});const y=h/2-(g/28)*h;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+    ctx.strokeStyle='#ff8c00';ctx.lineWidth=1.5;ctx.stroke();
+    v=v.map(val=>Math.max(22,Math.min(78,val+(Math.random()-.5)*1.8)));
   }
-  draw();
+  draw();setInterval(draw,420);
 })();
 
-// ===== VISUALIZER photo cycling =====
+// ── PRODUCT PHOTO CYCLE ──
 (function(){
-  const imgs=document.querySelectorAll('#vizPhotos img');
-  if(!imgs.length)return;
-  let idx=0;
-  setInterval(()=>{imgs[idx].classList.remove('show');idx=(idx+1)%imgs.length;imgs[idx].classList.add('show');},3500);
+  const imgs=document.querySelectorAll('#prodPhotos img');if(!imgs.length)return;
+  let i=0;
+  setInterval(()=>{imgs[i].classList.remove('show');imgs[i].style.opacity='0';i=(i+1)%imgs.length;imgs[i].classList.add('show');imgs[i].style.opacity='1';},3000);
 })();
 
-// ===== VISUALIZER bars =====
-(function(){
-  const container=document.getElementById('vizBars');
-  if(!container)return;
-  for(let i=0;i<20;i++){
-    const b=document.createElement('div');b.className='viz-bar';
-    const h=(4+Math.random()*22).toFixed(0),d=(.2+Math.random()*.5).toFixed(2),dl=(Math.random()*.35).toFixed(2);
-    b.style.cssText=`--h:${h}px;--d:${d}s;--dl:${dl}s`;container.appendChild(b);
-  }
-})();
-
-// ===== VIZ ctrl buttons =====
-document.querySelectorAll('.viz-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{document.querySelectorAll('.viz-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');});
+// ── LOJA: TOGGLE FRENTE/COSTAS ──
+function showFront(){
+  document.getElementById('prodFront').classList.remove('hidden');
+  document.getElementById('prodBack').classList.add('hidden');
+  document.getElementById('btnFront').classList.add('active');
+  document.getElementById('btnBack').classList.remove('active');
+}
+function showBack(){
+  document.getElementById('prodFront').classList.add('hidden');
+  document.getElementById('prodBack').classList.remove('hidden');
+  document.getElementById('btnFront').classList.remove('active');
+  document.getElementById('btnBack').classList.add('active');
+}
+// Tap on image toggles
+document.getElementById('prodBox')?.addEventListener('click',()=>{
+  const back=document.getElementById('prodBack');
+  if(back.classList.contains('hidden'))showBack();else showFront();
 });
 
-// ===== FLOATING TAGS =====
-document.querySelectorAll('.ftag').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
-
-// ===== CARROSSEL ARTISTA =====
+// ── CARROSSEL MÚSICAS ──
 (function(){
   let cur=0;
-  const slides=document.querySelectorAll('.carousel-slide');
-  const dots=document.querySelectorAll('.cdot');
-  const track=document.getElementById('carouselTrack');
+  const track=document.getElementById('mcTrack');
+  const dots=document.querySelectorAll('.mcdot');
+  const slides=document.querySelectorAll('.mc-slide');
   if(!track||!slides.length)return;
-  function goSlide(n){
-    cur=n;
-    track.style.transform=`translateX(-${cur*100}%)`;
-    dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
-  }
+  function goSlide(n){cur=n;track.style.transform=`translateX(-${cur*100}%)`;dots.forEach((d,i)=>d.classList.toggle('active',i===cur));}
   window.goSlide=goSlide;
-  // Autoplay
-  setInterval(()=>goSlide((cur+1)%slides.length),4000);
-  // Swipe
-  let startX=0;
-  track.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;},{passive:true});
-  track.addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-startX;
-    if(Math.abs(dx)>50)goSlide(dx<0?(cur+1)%slides.length:(cur-1+slides.length)%slides.length);
-  },{passive:true});
+  setInterval(()=>goSlide((cur+1)%slides.length),4200);
+  let sx=0;
+  track.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)goSlide(dx<0?(cur+1)%slides.length:(cur-1+slides.length)%slides.length);},{passive:true});
 })();
+
+// ── CONTATO TABS ──
+function winTab(id){
+  document.querySelectorAll('.wtab').forEach((t,i)=>t.classList.toggle('active',['redes','booking','whats'][i]===id));
+  document.querySelectorAll('.wpanel').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('wp-'+id);if(el)el.classList.add('active');
+}
+
+// ── PRESAVE POPUP ──
+function closePP(){const el=document.getElementById('pp');if(el){el.style.opacity='0';setTimeout(()=>el.classList.remove('show'),300);}}
+setTimeout(()=>{const el=document.getElementById('pp');if(el){el.classList.add('show');el.style.opacity='1';el.style.transition='opacity .3s';el.addEventListener('click',e=>{if(e.target===el)closePP();});}},60000);
+
+// ── WHATSAPP ──
+function buyZap(p){window.open('https://wa.me/5511976369308?text='+encodeURIComponent('Olá! Quero comprar: '+p),'_blank');}
 </script>
 </body>
 </html>
