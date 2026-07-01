@@ -276,19 +276,59 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 }
 .prod-buy:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.35);}
 .prod-buy i{font-size:20px;}
+.prod-detail-btn{width:100%;padding:12px;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#666;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;transition:all .2s;margin-top:8px;}
+.prod-detail-btn:hover{border-color:rgba(255,106,0,.3);color:#ff8c00;}
 
 /* Mais produtos */
 .more-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin:40px 0 16px;border-left:3px solid #e01a1a;padding-left:12px;}
 .more-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
-.more-card{background:#111;border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s;}
-.more-card:hover{transform:translateY(-4px);}
+.more-card{background:#111;border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s;border:1px solid transparent;}
+.more-card:hover{transform:translateY(-4px);border-color:rgba(255,106,0,.2);}
 .more-card-img{aspect-ratio:1;overflow:hidden;background:#0a0a0a;}
 .more-card-img img{width:100%;height:100%;object-fit:cover;background:#0a0a0a;}
 .more-card-body{padding:14px;}
 .more-card-body h3{font-size:15px;color:#fff;margin-bottom:4px;}
-.more-card-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:12px;}
-.more-buy{width:100%;padding:10px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);border-radius:8px;color:#25d366;font-size:12px;font-weight:600;transition:all .2s;}
+.more-card-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:8px;}
+.more-card-row{display:flex;gap:8px;}
+.more-detail{flex:1;padding:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#888;font-size:11px;font-weight:600;transition:all .2s;cursor:pointer;}
+.more-detail:hover{background:rgba(255,255,255,.08);color:#fff;}
+.more-buy{flex:1;padding:9px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);border-radius:8px;color:#25d366;font-size:11px;font-weight:600;transition:all .2s;cursor:pointer;}
 .more-buy:hover{background:rgba(37,211,102,.15);}
+
+/* MODAL DE PRODUTO */
+#prod-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:8000;display:none;align-items:flex-end;justify-content:center;}
+#prod-modal.show{display:flex;}
+@media(min-width:600px){#prod-modal{align-items:center;}}
+.pm-box{
+  width:100%;max-width:520px;
+  background:#111318;border-radius:20px 20px 0 0;
+  max-height:92dvh;overflow-y:auto;
+  animation:pmSlideUp .35s cubic-bezier(.4,0,.2,1);
+}
+@media(min-width:600px){.pm-box{border-radius:16px;max-height:85dvh;}}
+@keyframes pmSlideUp{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.pm-handle{width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:12px auto 0;}
+.pm-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;}
+.pm-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;}
+.pm-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:none;color:#888;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
+.pm-close:hover{background:rgba(255,255,255,.12);color:#fff;}
+.pm-img{width:calc(100% - 40px);margin:0 auto 16px;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#0a0a0a;}
+.pm-img img{width:100%;height:100%;object-fit:contain;background:#0a0a0a;}
+.pm-body{padding:0 20px 24px;}
+.pm-price{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;margin-bottom:4px;}
+.pm-freight{font-size:11px;color:#444;margin-bottom:12px;}
+.pm-desc{font-size:13px;color:#666;line-height:1.6;margin-bottom:16px;}
+.pm-seals{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+.pm-buy{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,#128c7e,#25d366);
+  border:none;border-radius:12px;color:#fff;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  cursor:pointer;transition:all .2s;
+}
+.pm-buy:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3);}
+.pm-buy i{font-size:20px;}
 
 /* ══════════════════════════════════════
    MÚSICAS
@@ -525,8 +565,6 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     <div class="mp-bg-text" style="position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(70px,24vw,140px);color:rgba(255,106,0,.05);letter-spacing:6px;white-space:nowrap;pointer-events:none;animation:bgFloat 8s ease-in-out infinite;">PCN BOLADÃO</div>
     <div class="hp-content">
       <div class="hp-name">PCN BOLADÃO</div>
-      <div class="hp-sub">Underground · Trap</div>
-      <div class="hp-official"><span class="vbadge">✓</span> Artista Oficial</div>
       <div class="hp-ctas">
         <a class="hp-btn-main" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Ouvir agora</a>
         <button class="hp-btn-sec" onclick="goSection('loja')"><i class="fa-solid fa-bag-shopping"></i> Ver loja</button>
@@ -656,6 +694,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
       <div class="prod-desc">Camiseta oversized exclusiva. Tecido premium, estampa resinada, edição limitada.<br>100% algodão penteado · Drop oficial PCN</div>
       <div class="prod-stock"><div class="stock-dot"></div>Últimas peças disponíveis</div>
       <button class="prod-buy" onclick="buyZap('Camisa Kankiu R$ 100')"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</button>
+      <button class="prod-detail-btn" onclick="openModal('Camisa Kankiu','100,00','https://i.imgur.com/DMZ6WBT.png','Camiseta oversized exclusiva. Tecido premium 100% algodão penteado, estampa resinada, edição limitada. Drop oficial PCN Kankiu Collection.','Camisa Kankiu R$ 100')"><i class="fa-solid fa-magnifying-glass"></i> Ver mais detalhes</button>
     </div>
   </div>
 
@@ -667,7 +706,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
       <div class="more-card-body">
         <h3>Caneca PCN</h3>
         <div class="more-card-price">R$ 55,00</div>
-        <button class="more-buy" onclick="buyZap('Caneca PCN R$ 55')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
+        <div class="more-card-row">
+          <button class="more-detail" onclick="openModal('Caneca PCN','55,00','https://i.imgur.com/RnqS6xs.png','Caneca exclusiva PCN. Edição limitada, resinada, perfeita para o dia a dia.','Caneca PCN R$ 55')"><i class="fa-solid fa-eye"></i> Ver</button>
+          <button class="more-buy" onclick="buyZap('Caneca PCN R$ 55')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
+        </div>
       </div>
     </div>
     <div class="more-card">
@@ -675,7 +717,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
       <div class="more-card-body">
         <h3>Moletom Kankiu</h3>
         <div class="more-card-price">R$ 260,00</div>
-        <button class="more-buy" onclick="buyZap('Moletom Kankiu R$ 260')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
+        <div class="more-card-row">
+          <button class="more-detail" onclick="openModal('Moletom Kankiu','260,00','https://i.imgur.com/COsCuKl.png','Moletom oversized premium. Tecido de alta qualidade, drop limitado Kankiu Collection.','Moletom Kankiu R$ 260')"><i class="fa-solid fa-eye"></i> Ver</button>
+          <button class="more-buy" onclick="buyZap('Moletom Kankiu R$ 260')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1010,6 +1055,56 @@ setTimeout(()=>{const el=document.getElementById('pp');if(el){el.classList.add('
 
 // ── WHATSAPP ──
 function buyZap(p){window.open('https://wa.me/5511976369308?text='+encodeURIComponent('Olá! Quero comprar: '+p),'_blank');}
+
+// ── MODAL PRODUTO ──
+function openModal(name,price,img,desc,zapMsg){
+  document.getElementById('pm-name').textContent=name;
+  document.getElementById('pm-price').textContent='R$ '+price;
+  document.getElementById('pm-img-el').src=img;
+  document.getElementById('pm-desc').textContent=desc;
+  document.getElementById('pm-zap-btn').onclick=()=>buyZap(zapMsg);
+  const m=document.getElementById('prod-modal');
+  m.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('prod-modal').classList.remove('show');
+  document.body.style.overflow='';
+}
+document.getElementById('prod-modal')?.addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+// Camisa principal também abre modal no mobile
+document.getElementById('prodBox')?.addEventListener('click',function(){
+  if(window.innerWidth<640){
+    const back=document.getElementById('prodBack');
+    if(back.classList.contains('hidden'))showBack();else showFront();
+  }
+});
 </script>
+<!-- MODAL PRODUTO -->
+<div id="prod-modal">
+  <div class="pm-box">
+    <div class="pm-handle"></div>
+    <div class="pm-header">
+      <div class="pm-title" id="pm-name">Produto</div>
+      <button class="pm-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="pm-img">
+      <img id="pm-img-el" src="" alt="Produto" onerror="this.parentElement.style.background='#111';this.style.display='none'">
+    </div>
+    <div class="pm-body">
+      <div class="pm-price" id="pm-price">R$ 0,00</div>
+      <div class="pm-freight">Frete incluído · Drop oficial PCN</div>
+      <div class="pm-seals">
+        <span class="seal seal-limit">Drop Limitado</span>
+        <span class="seal seal-new">Kankiu Collection</span>
+      </div>
+      <div class="pm-desc" id="pm-desc"></div>
+      <button class="pm-buy" id="pm-zap-btn">
+        <i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
