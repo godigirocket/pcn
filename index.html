@@ -528,11 +528,11 @@ document.addEventListener('selectstart',e=>e.preventDefault());
       <span onclick="closePP()" style="color:#333;font-size:14px;cursor:pointer;">✕</span>
     </div>
     <div class="pp-body">
-      <img class="pp-cover" src="https://i.imgur.com/DMZ6WBT.png" alt="KANKIU" onerror="this.style.display='none'">
-      <div class="pp-tag"><i class="fa-solid fa-music pp-icon-spin"></i> Agora Disponível</div>
+      <img class="pp-cover" src="https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg" alt="KANKIU" onerror="this.src='https://i.imgur.com/DMZ6WBT.png'">
+      <div class="pp-tag"><i class="fa-solid fa-music pp-icon-spin"></i> Novo Lançamento</div>
       <div class="pp-artist">KANKIU</div>
-      <div class="pp-rel">PCN BOLADÃO · Salve na sua biblioteca</div>
-      <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePP()"><i class="fa-brands fa-spotify"></i> SALVAR / PRÉ-SAVE</a>
+      <div class="pp-rel">PCN BOLADÃO · Agora no Spotify</div>
+      <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePP()" style="background:linear-gradient(135deg,#1db954,#0d7a3a);"><i class="fa-brands fa-spotify"></i> OUVIR AGORA</a>
       <span class="pp-skip" onclick="closePP()">Agora não</span>
     </div>
   </div>
@@ -727,58 +727,8 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 </div>
 </section>
 
-<!-- ══ MÚSICAS ══ -->
-<section id="musicas" class="section">
-<div class="mus-inner">
-  <!-- Header artista -->
-  <div class="mus-header">
-    <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN Boladão" onerror="this.style.display='none'">
-    <div class="mus-header-info">
-      <h2>PCN BOLADÃO<span class="vbadge" style="width:14px;height:14px;font-size:8px;">✓</span></h2>
-      <p>Artista Oficial</p>
-    </div>
-    <a class="mus-follow" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Seguir</a>
-  </div>
 
-  <!-- Carrossel — APENAS fotos reais verificadas do artista -->
-  <div class="mus-carousel">
-    <div class="mc-track" id="mcTrack">
-      <div class="mc-slide">
-        <img src="https://i.ibb.co/992g4LWK/imgi-41-661993170-18387838516083845-7837809524537980210-n.jpg"
-             alt="PCN Boladão"
-             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
-      </div>
-      <div class="mc-slide">
-        <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg"
-             alt="PCN Boladão"
-             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
-      </div>
-    </div>
-    <div class="mc-dots" id="mcDots">
-      <span class="mcdot active" onclick="goSlide(0)"></span>
-      <span class="mcdot" onclick="goSlide(1)"></span>
-    </div>
-  </div>
 
-  <!-- Links -->
-  <div class="mus-links">
-    <a class="mlink" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank" style="background:rgba(29,185,84,.08);border:1px solid rgba(29,185,84,.18);color:#1db954;"><i class="fa-brands fa-spotify"></i> Spotify</a>
-    <a class="mlink" href="https://www.youtube.com/@PCNboladao" target="_blank" style="background:rgba(255,0,0,.08);border:1px solid rgba(255,0,0,.18);color:#ff4444;"><i class="fa-brands fa-youtube"></i> YouTube</a>
-    <a class="mlink" href="https://www.instagram.com/7pcnboladao" target="_blank" style="background:rgba(225,48,108,.08);border:1px solid rgba(225,48,108,.18);color:#e1306c;"><i class="fa-brands fa-instagram"></i> Instagram</a>
-  </div>
-
-  <!-- Presave -->
-  <div class="mus-presave">
-    <div class="mus-presave-label"><i class="fa-solid fa-music icon-pulse"></i> PRÉ-SAVE — KANKIU</div>
-    <iframe src="https://open.spotify.com/embed/prerelease/2KhuPf1YqIQB4zYfEPSArA?utm_source=generator&theme=0" height="250" allowfullscreen="" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy"></iframe>
-  </div>
-
-  <!-- Player artista -->
-  <div style="border-radius:12px;overflow:hidden;">
-    <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0" width="100%" height="360" frameBorder="0" allowfullscreen allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" loading="lazy" style="display:block;border:none;"></iframe>
-  </div>
-</div>
-</section>
 
 <!-- ══ CONTATO ══ -->
 <section id="contato" class="section">
@@ -1089,7 +1039,7 @@ document.getElementById('prodBox')?.addEventListener('click',function(){
       <button class="pm-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="pm-img">
-      <img id="pm-img-el" src="" alt="Produto" onerror="this.parentElement.style.background='#111';this.style.display='none'">
+      <img id="pm-img-el" src="" alt="Produto" style="background:#0a0a0a;" onerror="this.style.opacity='.3'">
     </div>
     <div class="pm-body">
       <div class="pm-price" id="pm-price">R$ 0,00</div>
