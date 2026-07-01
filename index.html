@@ -728,6 +728,132 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 </section>
 
 
+<!-- ══ MÚSICAS ══ -->
+<section id="musicas" class="section">
+<style>
+#musicas{background:#0a0a0f;padding:66px 0 60px;overflow-y:auto;min-height:100svh;}
+.sp-page{max-width:600px;margin:0 auto;padding:0 16px;}
+.sp-hero{position:relative;border-radius:16px;overflow:hidden;margin-bottom:0;background:#111;}
+.sp-hero-bg{width:100%;aspect-ratio:3/1;object-fit:cover;object-position:top center;display:block;}
+.sp-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,#0a0a0f 20%,transparent 65%);}
+.sp-hero-info{position:absolute;bottom:0;left:0;right:0;padding:16px;}
+.sp-hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,5vw,34px);color:#fff;letter-spacing:2px;display:flex;align-items:center;gap:6px;line-height:1;}
+.sp-hero-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px;letter-spacing:1px;}
+.sp-hero-actions{display:flex;align-items:center;gap:10px;padding:14px 16px 20px;background:#0a0a0f;}
+.sp-follow-btn{padding:8px 22px;background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:20px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.sp-follow-btn:hover{border-color:#fff;}
+.sp-play-btn{width:46px;height:46px;background:#1db954;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-size:18px;text-decoration:none;margin-left:auto;transition:all .2s;flex-shrink:0;}
+.sp-play-btn:hover{background:#1ed760;transform:scale(1.06);}
+.sp-links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.sp-link{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid transparent;transition:all .2s;white-space:nowrap;}
+.sp-link.green{background:rgba(29,185,84,.08);border-color:rgba(29,185,84,.2);color:#1db954;}
+.sp-link.red{background:rgba(255,0,0,.08);border-color:rgba(255,0,0,.2);color:#ff4444;}
+.sp-link.pink{background:rgba(225,48,108,.08);border-color:rgba(225,48,108,.2);color:#e1306c;}
+.sp-link:hover{filter:brightness(1.3);}
+.sp-release{background:#111318;border-radius:14px;overflow:hidden;margin-bottom:24px;border:1px solid rgba(29,185,84,.12);}
+.sp-release-tag{display:flex;align-items:center;gap:7px;padding:12px 16px 0;font-size:10px;color:#1db954;letter-spacing:2px;text-transform:uppercase;font-weight:700;}
+.sp-release-tag i{animation:iconPulse 1.4s ease-in-out infinite;}
+.sp-release-row{display:flex;align-items:center;gap:14px;padding:12px 16px 16px;}
+.sp-release-cover{width:72px;height:72px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#0a0a0a;}
+.sp-release-cover img{width:100%;height:100%;object-fit:cover;display:block;}
+.sp-release-title{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:2px;}
+.sp-release-artist{font-size:12px;color:#888;margin:2px 0 10px;}
+.sp-release-listen{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#1db954;border-radius:20px;color:#000;font-size:12px;font-weight:700;text-decoration:none;transition:all .2s;}
+.sp-release-listen:hover{background:#1ed760;}
+.sp-section-label{font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.sp-carousel{border-radius:14px;overflow:hidden;background:#111;margin-bottom:24px;position:relative;}
+.mc-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
+.mc-slide{min-width:100%;aspect-ratio:1/1;overflow:hidden;background:#111;}
+.mc-slide img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.mc-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:32px;color:rgba(29,185,84,.3);background:#0a0a0f;}
+.mc-dots{display:flex;justify-content:center;gap:6px;padding:10px;background:#0a0a0f;}
+.mcdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;}
+.mcdot.active{background:#1db954;width:18px;border-radius:3px;}
+.sp-player{border-radius:12px;overflow:hidden;}
+.sp-player iframe{width:100%;border:none;display:block;}
+</style>
+<div class="sp-page">
+  <!-- Hero -->
+  <div class="sp-hero">
+    <img class="sp-hero-bg"
+         src="https://i.ibb.co/KxtSQhqD/imgi-32-464298985-17943959666865619-7484067345195022157-n.jpg"
+         alt="PCN Boladao"
+         onerror="this.style.opacity='.2'">
+    <div class="sp-hero-overlay"></div>
+    <div class="sp-hero-info">
+      <div class="sp-hero-name">PCN BOLADÃO<span class="vbadge" style="width:16px;height:16px;font-size:9px;background:linear-gradient(135deg,#1db954,#0d7a3a);">✓</span></div>
+      <div class="sp-hero-sub">Artista Oficial</div>
+    </div>
+  </div>
+  <div class="sp-hero-actions">
+    <a class="sp-follow-btn" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank">SEGUIR</a>
+    <a class="sp-play-btn" href="https://onerpm.link/750177162510" target="_blank"><i class="fa-solid fa-play" style="margin-left:2px;"></i></a>
+  </div>
+
+  <!-- Links -->
+  <div class="sp-links">
+    <a class="sp-link green" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Spotify</a>
+    <a class="sp-link red" href="https://www.youtube.com/@PCNboladao" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a>
+    <a class="sp-link pink" href="https://www.instagram.com/7pcnboladao" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+  </div>
+
+  <!-- Último lançamento -->
+  <div class="sp-release">
+    <div class="sp-release-tag"><i class="fa-solid fa-bolt"></i> ÚLTIMO LANÇAMENTO</div>
+    <div class="sp-release-row">
+      <div class="sp-release-cover">
+        <img src="https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg"
+             alt="KANKIU"
+             onerror="this.parentElement.style.background='#1db954';this.style.display='none'">
+      </div>
+      <div>
+        <div class="sp-release-title">KANKIU</div>
+        <div class="sp-release-artist">PCN BOLADÃO · No ar agora</div>
+        <a class="sp-release-listen" href="https://onerpm.link/750177162510" target="_blank">
+          <i class="fa-brands fa-spotify"></i> Ouvir agora
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fotos -->
+  <div class="sp-section-label"><i class="fa-solid fa-camera"></i> FOTOS</div>
+  <div class="sp-carousel">
+    <div class="mc-track" id="mcTrack">
+      <div class="mc-slide">
+        <img src="https://i.ibb.co/KxtSQhqD/imgi-32-464298985-17943959666865619-7484067345195022157-n.jpg"
+             alt="PCN Boladao"
+             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
+      </div>
+      <div class="mc-slide">
+        <img src="https://i.ibb.co/9R50RNv/imgi-41-661993170-18387838516083845-7837809524537980210-n.jpg"
+             alt="PCN Boladao"
+             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
+      </div>
+      <div class="mc-slide">
+        <img src="https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg"
+             alt="PCN Boladao"
+             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
+      </div>
+    </div>
+    <div class="mc-dots" id="mcDots">
+      <span class="mcdot active" onclick="goSlide(0)"></span>
+      <span class="mcdot" onclick="goSlide(1)"></span>
+      <span class="mcdot" onclick="goSlide(2)"></span>
+    </div>
+  </div>
+
+  <!-- Player -->
+  <div class="sp-section-label"><i class="fa-solid fa-headphones"></i> DISCOGRAFIA</div>
+  <div class="sp-player">
+    <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0"
+            height="380"
+            allowfullscreen
+            allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture"
+            loading="lazy"></iframe>
+  </div>
+</div>
+</section>
 
 
 <!-- ══ CONTATO ══ -->
