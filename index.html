@@ -3,7 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>PCN BOLADÃO — Loja Oficial</title>
+<title>PCN BOLADÃO — Loja Oficial | Underground Trap</title>
+
+<!-- SEO -->
+<meta name="description" content="Site oficial de PCN BOLADÃO — artista de trap underground. Ouça KANKIU no Spotify, compre merch exclusivo e fique por dentro dos lançamentos.">
+<meta name="keywords" content="PCN BOLADÃO, KANKIU, trap, underground, música, loja oficial, merch, Spotify">
+<meta name="author" content="PCN BOLADÃO">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://pcnstore.vercel.app/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pcnstore.vercel.app/">
+<meta property="og:title" content="PCN BOLADÃO — Loja Oficial">
+<meta property="og:description" content="Artista de trap underground. Ouça KANKIU agora no Spotify.">
+<meta property="og:image" content="https://i.ibb.co/5x8YfYbT/channels4-profile.jpg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PCN BOLADÃO — Loja Oficial">
+<meta name="twitter:description" content="Artista de trap underground. Ouça KANKIU agora no Spotify.">
+<meta name="twitter:image" content="https://i.ibb.co/5x8YfYbT/channels4-profile.jpg">
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -16,10 +37,20 @@ body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;overflow-x:hid
   --bg:#0a0a0f;--bg2:#111318;--bg3:#1a1d23;
   --border:rgba(255,255,255,.07);
   --glass:rgba(14,16,20,.9);
+  --neon-or:0 0 8px rgba(255,106,0,.6),0 0 20px rgba(255,106,0,.3);
+  --neon-green:0 0 8px rgba(29,185,84,.6),0 0 20px rgba(29,185,84,.3);
+  --neon-blue:0 0 8px rgba(29,155,240,.6),0 0 20px rgba(29,155,240,.3);
 }
 img{max-width:100%;height:auto;display:block;}
 a{color:inherit;text-decoration:none;}
 button{font-family:'Inter',sans-serif;cursor:pointer;border:none;background:none;}
+
+/* Neon highlight global para botões ativos */
+nav button.active{box-shadow:var(--neon-or);}
+.sp-play-btn{box-shadow:var(--neon-green);}
+.prod-buy{box-shadow:0 4px 20px rgba(37,211,102,.3);}
+.hp-btn-main{box-shadow:var(--neon-or);}
+.vbadge{box-shadow:var(--neon-blue);}
 
 /* ── LOADING ── */
 #loading{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity .6s;}
@@ -31,7 +62,7 @@ button{font-family:'Inter',sans-serif;cursor:pointer;border:none;background:none
 #ld-msg{margin-top:10px;font-size:11px;color:#444;letter-spacing:2px;}
 
 /* ── VERIFIED BADGE ── */
-.vbadge{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;background:linear-gradient(135deg,#1d9bf0,#0052cc);border-radius:50%;color:#fff;font-size:8px;font-weight:900;margin-left:4px;flex-shrink:0;vertical-align:middle;box-shadow:0 1px 4px rgba(29,155,240,.4);}
+.vbadge{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;background:linear-gradient(135deg,#1d9bf0,#0052cc);border-radius:50%;color:#fff;font-size:10px;font-weight:900;margin-left:5px;flex-shrink:0;vertical-align:middle;box-shadow:0 1px 6px rgba(29,155,240,.5);position:relative;top:-1px;}
 
 /* ── ANIMATED ICONS ── */
 /* Spin suave — ícone de música */
@@ -68,7 +99,7 @@ header{
   z-index:1000;
   border-bottom:1px solid var(--border);
 }
-.h-logo{display:flex;align-items:center;gap:8px;font-family:'Bebas Neue',sans-serif;font-size:17px;color:#fff;letter-spacing:1px;white-space:nowrap;}
+.h-logo{display:flex;align-items:center;gap:8px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;white-space:nowrap;}
 .h-logo img{width:30px;height:30px;border-radius:6px;object-fit:cover;flex-shrink:0;}
 nav{display:flex;gap:4px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;}
 nav::-webkit-scrollbar{display:none;}
@@ -312,8 +343,8 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .pm-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;}
 .pm-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:none;color:#888;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
 .pm-close:hover{background:rgba(255,255,255,.12);color:#fff;}
-.pm-img{width:calc(100% - 40px);margin:0 auto 16px;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#fff;}
-.pm-img img{width:100%;height:100%;object-fit:contain;background:#fff;}
+.pm-img{width:calc(100% - 40px);margin:0 auto 16px;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#f8f8f8;}
+.pm-img img{width:100%;height:100%;object-fit:contain;background:#f8f8f8;display:block;}
 .pm-body{padding:0 20px 24px;}
 .pm-price{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;margin-bottom:4px;}
 .pm-freight{font-size:11px;color:#444;margin-bottom:12px;}
@@ -495,6 +526,9 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 </style>
 
 </head>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"MusicGroup","name":"PCN BOLADÃO","url":"https://pcnstore.vercel.app/","image":"https://i.ibb.co/5x8YfYbT/channels4-profile.jpg","genre":["Trap","Underground"],"sameAs":["https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc","https://www.instagram.com/7pcnboladao","https://www.youtube.com/@PCNboladao"]}</script>
 <body>
 
 <!-- PROTEÇÃO -->
@@ -802,7 +836,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     <div class="sp-release-tag"><i class="fa-solid fa-bolt"></i> ÚLTIMO LANÇAMENTO</div>
     <div class="sp-release-row">
       <div class="sp-release-cover">
-        <img src="https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg"
+        <img src="https://i.ibb.co/5x8YfYbT/channels4-profile.jpg"
              alt="KANKIU"
              onerror="this.parentElement.style.background='#1db954';this.style.display='none'">
       </div>
@@ -845,6 +879,11 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 
   <!-- Player -->
   <div class="sp-section-label"><i class="fa-solid fa-headphones"></i> DISCOGRAFIA</div>
+  <div style="border-radius:12px;overflow:hidden;margin-bottom:16px;background:#111;border:1px solid rgba(255,255,255,.05);">
+    <img src="https://i.ibb.co/pjrLw5d4/images.jpg" alt="PCN BOLADAO Discografia"
+         style="width:100%;display:block;object-fit:cover;border-radius:12px 12px 0 0;"
+         onerror="this.style.display='none'">
+  </div>
   <div class="sp-player">
     <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0"
             height="380"
