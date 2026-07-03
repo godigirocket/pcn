@@ -370,6 +370,7 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .pm-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;}
 .pm-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:none;color:#888;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
 .pm-close:hover{background:rgba(255,255,255,.12);color:#fff;}
+/* MODAL DE PRODUTO — fundo claro para produtos brancos */
 .pm-img{
   width:calc(100% - 32px);
   margin:0 auto 16px;
@@ -377,14 +378,13 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
   max-height:clamp(280px,58svh,480px);
   border-radius:14px;
   overflow:hidden;
-  background:radial-gradient(circle at center,#2a2a32 0%,#111318 50%,#050508 100%);
-  border:1px solid rgba(255,255,255,.07);
+  background:#f0f0f0;
   display:flex;align-items:center;justify-content:center;
 }
 .pm-img img{
-  width:90%;height:90%;
+  width:100%;height:100%;
   object-fit:contain;
-  filter:drop-shadow(0 16px 32px rgba(0,0,0,.6));
+  background:#f0f0f0;
   display:block;
 }
 .pm-body{padding:0 20px 24px;}
@@ -470,23 +470,40 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .dr-brand span{font-size:14px;font-weight:700;color:#fff;}
 .dr-copy{font-size:9px;color:#1a1a1a;margin-top:10px;}
 
-/* ══════════════════════════════════════
-   PRESAVE POPUP
-══════════════════════════════════════ */
-#pp{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:9990;display:none;align-items:center;justify-content:center;}
+/* ══ POPUP MODERNO ══ */
+#pp{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:9990;display:none;align-items:flex-end;justify-content:center;padding-bottom:env(safe-area-inset-bottom);}
 #pp.show{display:flex;}
-#pp-box{width:min(400px,92vw);background:#0e1014;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;}
-.pp-tb{height:32px;background:#12151a;display:flex;align-items:center;padding:0 12px;gap:7px;border-bottom:1px solid rgba(255,255,255,.05);}
+@media(min-width:500px){#pp{align-items:center;}}
+#pp-box{
+  width:100%;max-width:420px;
+  background:linear-gradient(160deg,#111b14 0%,#0a0d0a 100%);
+  border:1px solid rgba(29,185,84,.2);
+  border-radius:24px 24px 0 0;
+  overflow:hidden;
+  box-shadow:0 -8px 40px rgba(29,185,84,.15),0 0 80px rgba(0,0,0,.8);
+  animation:ppUp .4s cubic-bezier(.4,0,.2,1);
+}
+@media(min-width:500px){#pp-box{border-radius:20px;}}
+@keyframes ppUp{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+/* capa hero do popup */
+.pp-hero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#111;}
+.pp-hero img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.pp-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,#111b14 0%,transparent 60%);}
+.pp-hero-badge{position:absolute;top:12px;right:12px;background:#1db954;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#000;display:flex;align-items:center;gap:5px;}
+/* corpo */
+.pp-body{padding:16px 20px 24px;text-align:center;}
+.pp-cover{display:none;}
+.pp-tag{font-size:9px;color:#1db954;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:6px;}
+.pp-artist{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:3px;margin-bottom:2px;}
+.pp-rel{font-size:11px;color:#555;margin-bottom:18px;}
+.pp-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#1db954;border:none;border-radius:50px;color:#000;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;margin-bottom:12px;box-shadow:0 4px 20px rgba(29,185,84,.4);}
+.pp-btn:hover{background:#1ed760;transform:scale(1.02);}
+.pp-skip{font-size:11px;color:#333;cursor:pointer;display:block;text-align:center;transition:color .2s;}
+.pp-skip:hover{color:#777;}
+/* Dots da titlebar */
+.pp-tb{height:36px;background:rgba(0,0,0,.3);display:flex;align-items:center;padding:0 14px;gap:8px;}
 .pp-dot{width:10px;height:10px;border-radius:50%;cursor:pointer;}
 .pp-dot.r{background:#ff5f57;}.pp-dot.y{background:#ffbd2e;}.pp-dot.g{background:#28c840;}
-.pp-body{padding:22px;text-align:center;}
-.pp-cover{width:70px;height:70px;border-radius:10px;object-fit:cover;margin:0 auto 12px;display:block;}
-.pp-tag{font-size:9px;color:var(--or);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;}
-.pp-artist{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;}
-.pp-rel{font-size:10px;color:#333;margin:4px 0 16px;}
-.pp-btn{display:block;width:100%;padding:12px;background:linear-gradient(135deg,var(--or),var(--or2));border:none;border-radius:8px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;cursor:pointer;text-decoration:none;margin-bottom:10px;}
-.pp-skip{font-size:10px;color:#2a2a2a;cursor:pointer;display:block;text-align:center;transition:color .2s;}
-.pp-skip:hover{color:#666;}
 </style>
 
 <style>
@@ -607,15 +624,24 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     <div class="pp-tb">
       <span class="pp-dot r" onclick="closePP()"></span>
       <span class="pp-dot y"></span><span class="pp-dot g"></span>
-      <span style="font-size:9px;color:#444;margin:0 auto;">Novo Lançamento</span>
-      <span onclick="closePP()" style="color:#333;font-size:14px;cursor:pointer;">✕</span>
+      <span style="font-size:9px;color:#555;margin:0 auto;letter-spacing:2px;">NOVO LANÇAMENTO</span>
+      <span onclick="closePP()" style="color:#444;font-size:15px;cursor:pointer;line-height:1;">✕</span>
+    </div>
+    <!-- Hero com imagem -->
+    <div class="pp-hero">
+      <img src="https://image-cdn-ak.spotifycdn.com/image/ab6761610000f1789efcb98b99bcfd26adf832e9"
+           alt="KANKIU"
+           onerror="this.src='https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg'">
+      <div class="pp-hero-overlay"></div>
+      <div class="pp-hero-badge"><i class="fa-brands fa-spotify"></i> No ar agora</div>
     </div>
     <div class="pp-body">
-      <img class="pp-cover" src="https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg" alt="KANKIU" onerror="this.src='https://i.imgur.com/DMZ6WBT.png'">
       <div class="pp-tag"><i class="fa-solid fa-music pp-icon-spin"></i> Novo Lançamento</div>
       <div class="pp-artist">KANKIU</div>
-      <div class="pp-rel">PCN BOLADÃO · Agora no Spotify</div>
-      <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePP()" style="background:linear-gradient(135deg,#1db954,#0d7a3a);"><i class="fa-brands fa-spotify"></i> OUVIR AGORA</a>
+      <div class="pp-rel">PCN BOLADÃO · Ouça agora no Spotify</div>
+      <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePP()">
+        <i class="fa-brands fa-spotify" style="font-size:20px;"></i> OUVIR AGORA
+      </a>
       <span class="pp-skip" onclick="closePP()">Agora não</span>
     </div>
   </div>
@@ -763,7 +789,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     </div>
     <!-- Info -->
     <div class="prod-info">
-      <div class="prod-name">Camisa Kankiu<span class="vbadge" style="width:16px;height:16px;margin-left:6px;" title="Drop Oficial"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="prod-name">Camisa Kankiu</div>
       <div class="prod-seals">
         <span class="seal seal-hot"><i class="fa-solid fa-fire icon-fire"></i> Poucas Unidades</span>
         <span class="seal seal-limit">Drop Limitado</span>
@@ -816,8 +842,9 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 <style>
 #musicas{background:#0a0a0f;padding:66px 0 60px;overflow-y:auto;min-height:100svh;}
 .sp-page{max-width:600px;margin:0 auto;padding:0 16px;}
-.sp-hero{position:relative;border-radius:0;overflow:hidden;margin-bottom:0;background:#111;}
-.sp-hero-bg{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;display:block;}
+.sp-hero{position:relative;overflow:hidden;margin-bottom:0;background:#111;}
+.sp-hero-bg{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center center;display:block;}
+@media(max-width:600px){.sp-hero-bg{aspect-ratio:4/3;}}
 .sp-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,#0a0a0f 18%,rgba(0,0,0,.3) 100%);}
 .sp-hero-info{position:absolute;bottom:0;left:0;right:0;padding:20px 16px;}
 .sp-hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,5vw,34px);color:#fff;letter-spacing:2px;display:flex;align-items:center;gap:6px;line-height:1;}
@@ -897,9 +924,9 @@ document.addEventListener('selectstart',e=>e.preventDefault());
   <!-- Hero -->
   <div class="sp-hero">
     <img class="sp-hero-bg"
-         src="https://i.ibb.co/5x8YfYbT/channels4-profile.jpg"
+         src="https://image-cdn-ak.spotifycdn.com/image/ab6761610000f1789efcb98b99bcfd26adf832e9"
          alt="PCN Boladao"
-         onerror="this.style.opacity='.2'">
+         onerror="this.src='https://i.ibb.co/5x8YfYbT/channels4-profile.jpg'">
     <div class="sp-hero-overlay"></div>
     <div class="sp-hero-info">
       <div style="font-size:11px;color:#1db954;letter-spacing:1px;margin-bottom:4px;font-weight:600;">Artista Verificado</div>
