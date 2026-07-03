@@ -1,0 +1,218 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║   🎵 GUIA RÁPIDO - 7PCN BOLADÃO SITE                         ║
+║   Configure em 5 minutos!                                    ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PASSO 1: ABRIR O ARQUIVO HTML
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Clique com botão direito em "7pcn_site.html"
+2. Escolha "Abrir com" → "Bloco de notas" (ou Notepad++)
+
+   OU
+
+1. Abra Bloco de notas
+2. Arraste o arquivo HTML para dentro
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PASSO 2: MUDAR NÚMERO DO WHATSAPP (OBRIGATÓRIO)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+► Pressione Ctrl+F e procure: 5551999999999
+
+   Você vai encontrar 2 resultados:
+
+   ┌─────────────────────────────────────────────────────────┐
+   │ RESULTADO 1 (Linha ~853)                                │
+   ├─────────────────────────────────────────────────────────┤
+   │                                                         │
+   │ <a class="zap-big" href="https://wa.me/5551999999999"  │
+   │                                                         │
+   │ MUDE PARA:                                              │
+   │ <a class="zap-big" href="https://wa.me/55119876543321" │
+   │                            ↑↑↑↑↑↑↑↑↑↑↑↑↑↑                │
+   │                         SEU NÚMERO AQUI                 │
+   └─────────────────────────────────────────────────────────┘
+
+   ┌─────────────────────────────────────────────────────────┐
+   │ RESULTADO 2 (Linha ~1100)                               │
+   ├─────────────────────────────────────────────────────────┤
+   │                                                         │
+   │ const num='5551999999999'; // ← TROQUE PELO SEU NÚMERO │
+   │                                                         │
+   │ MUDE PARA:                                              │
+   │ const num='5511987654321'; // Seu WhatsApp             │
+   │            ↑↑↑↑↑↑↑↑↑↑↑↑↑                                │
+   │         SEU NÚMERO AQUI                                 │
+   └─────────────────────────────────────────────────────────┘
+
+⚠️ FORMATO: 55 + DDD + NÚMERO (sem espaços ou hífens)
+
+Exemplos:
+   SP: 5511987654321
+   RJ: 5521987654321
+   MG: 5531987654321
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PASSO 3: VERIFICAR REDES SOCIAIS (OPCIONAL)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+► Instagram: Procure "@7pcnboladao"
+   Se não for seu Instagram, mude para o seu
+
+► Spotify: Procure "4EaBvk5268lNcv35sXhinc"
+   Se não for seu Spotify, mude para seu ID
+
+► Email: Procure "pcnboladao@gmail.com"
+   Se não for seu email, mude para o seu
+
+💡 DICA: Use Ctrl+F para encontrar rapidamente!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PASSO 4: SALVAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Arquivo → Salvar (ou Ctrl+S)
+2. Feche o editor
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PASSO 5: TESTAR NO NAVEGADOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Clique duas vezes em "7pcn_site.html"
+2. O site abrirá no navegador
+
+✅ Teste cada seção:
+   • INÍCIO - veja o visual
+   • LOJA - adicione um produto
+   • MÚSICAS - clique no Spotify
+   • CONTATO - clique no WhatsApp
+
+⚠️ O botão do WhatsApp deve abrir o WhatsApp Web
+   com seu número!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PASSO 6: PUBLICAR ONLINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌───────────────────────────────────────────────────────────┐
+│ OPÇÃO 1: NETLIFY (MAIS FÁCIL) ★★★★★                      │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│ 1. Acesse: https://netlify.com                           │
+│ 2. Crie uma conta (grátis)                               │
+│ 3. Clique em "Add new site"                              │
+│ 4. Escolha "Deploy manually"                             │
+│ 5. Arraste o arquivo "7pcn_site.html"                    │
+│    (RENOMEIE PARA "index.html" antes!)                   │
+│ 6. Pronto! URL gerada na hora                            │
+│                                                           │
+│ Seu site estará em:                                      │
+│ https://seu-site-aleatorio.netlify.app                   │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────┐
+│ OPÇÃO 2: GITHUB PAGES (GRÁTIS PARA SEMPRE)               │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│ 1. Crie conta: https://github.com                        │
+│ 2. Novo repositório: Clique no "+" → New repository      │
+│ 3. Nome: "7pcn-site" (ou qualquer nome)                  │
+│ 4. Marque "Public"                                        │
+│ 5. Create repository                                      │
+│ 6. Upload: "uploading an existing file"                  │
+│    IMPORTANTE: Renomeie para "index.html"!               │
+│ 7. Settings → Pages → Source: main → Save                │
+│ 8. Aguarde 2 minutos                                      │
+│                                                           │
+│ Seu site estará em:                                      │
+│ https://seu-usuario.github.io/7pcn-site/                 │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+
+🔥 AMBAS AS OPÇÕES SÃO 100% GRÁTIS!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PASSO 7: DIVULGAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Adicione o link na bio do Instagram
+✓ Faça story mostrando o site
+✓ Mande para clientes
+✓ Compartilhe em grupos
+
+💡 Use encurtador de link: bit.ly ou tinyurl.com
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ⚡ RESUMÃO: 3 AÇÕES OBRIGATÓRIAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ ] 1. MUDAR WHATSAPP (2 lugares!)
+[ ] 2. TESTAR NO NAVEGADOR
+[ ] 3. PUBLICAR ONLINE
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 🆘 PROBLEMAS?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ Site não abre no navegador
+   → Use Chrome, Edge ou Firefox
+   → Clique com botão direito → Abrir com → Chrome
+
+❌ WhatsApp não funciona
+   → Verifique o formato do número: 5511987654321
+   → Sem espaços, sem hífens, sem parênteses
+
+❌ Editei mas não mudou
+   → Salvou o arquivo? (Ctrl+S)
+   → Atualize o navegador: Ctrl+F5
+
+❌ Site não carrega online
+   → Aguarde 2-5 minutos após publicar
+   → Limpe cache: Ctrl+Shift+R
+
+❌ Não sei onde editar
+   → Abra PERSONALIZACAO.md
+   → Todas as linhas estão numeradas
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 📚 DOCUMENTAÇÃO COMPLETA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Para mais detalhes, leia:
+
+→ LEIA-ME-PRIMEIRO.txt ........ Visão geral
+→ CHECKLIST.md ................ Lista de tarefas
+→ PERSONALIZACAO.md ........... Guia completo
+→ HOSPEDAGEM.md ............... Como publicar
+→ README.md ................... Documentação técnica
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ✨ TUDO PRONTO!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Seu site profissional está pronto para decolar! 🚀
+
+Só falta você:
+1. Mudar o WhatsApp
+2. Publicar online
+3. Divulgar
+
+Boa sorte com as vendas! 💰🎵
+
+                                    - 7PCN BOLADÃO © 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

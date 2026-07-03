@@ -1,0 +1,212 @@
+═══════════════════════════════════════════════════════════════
+  🖼️ COMO TROCAR A IMAGEM DE FUNDO
+═══════════════════════════════════════════════════════════════
+
+
+📸 IMAGENS DISPONÍVEIS NA PASTA:
+
+✓ imgi_2_651454321... (ATUAL - já está no site)
+✓ imgi_32_464298985...
+✓ imgi_41_661993170...
+✓ imgi_46_669848000...
+✓ imgi_52_623367536...
+✓ imgi_5_566613094...
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ OPÇÃO 1: USAR UMA IMAGEM LOCAL (DAS 6 DISPONÍVEIS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Abra "7pcn_site.html" no Bloco de notas
+
+2. Procure (Ctrl+F): background:url('https://instagram
+
+3. Você vai encontrar essa linha (~410):
+
+   ┌────────────────────────────────────────────────────┐
+   │ ATUAL:                                             │
+   ├────────────────────────────────────────────────────┤
+   │ background:url('https://instagram.fpoa39-1.fna...  │
+   │    ...n.jpg') center/cover no-repeat;             │
+   └────────────────────────────────────────────────────┘
+
+4. SUBSTITUA por uma das opções abaixo:
+
+   ┌────────────────────────────────────────────────────┐
+   │ OPÇÃO 1: Imagem 32                                 │
+   ├────────────────────────────────────────────────────┤
+   │ background:url('imgi_32_464298985_17943959666865   │
+   │   619_7484067345195022157_n.jpg') center/cover     │
+   │   no-repeat;                                       │
+   └────────────────────────────────────────────────────┘
+
+   ┌────────────────────────────────────────────────────┐
+   │ OPÇÃO 2: Imagem 41                                 │
+   ├────────────────────────────────────────────────────┤
+   │ background:url('imgi_41_661993170_18387838516083   │
+   │   845_7837809524537980210_n.jpg') center/cover     │
+   │   no-repeat;                                       │
+   └────────────────────────────────────────────────────┘
+
+   ┌────────────────────────────────────────────────────┐
+   │ OPÇÃO 3: Imagem 46                                 │
+   ├────────────────────────────────────────────────────┤
+   │ background:url('imgi_46_669848000_18574712185062   │
+   │   930_4582735058102764467_n.jpg') center/cover     │
+   │   no-repeat;                                       │
+   └────────────────────────────────────────────────────┘
+
+   ┌────────────────────────────────────────────────────┐
+   │ OPÇÃO 4: Imagem 52                                 │
+   ├────────────────────────────────────────────────────┤
+   │ background:url('imgi_52_623367536_18091530344097   │
+   │   695_1155066948758255741_n.jpg') center/cover     │
+   │   no-repeat;                                       │
+   └────────────────────────────────────────────────────┘
+
+   ┌────────────────────────────────────────────────────┐
+   │ OPÇÃO 5: Imagem 5                                  │
+   ├────────────────────────────────────────────────────┤
+   │ background:url('imgi_5_566613094_18332624719230    │
+   │   101_3862666784869282345_n.jpg') center/cover     │
+   │   no-repeat;                                       │
+   └────────────────────────────────────────────────────┘
+
+5. Salve (Ctrl+S) e teste no navegador
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ OPÇÃO 2: USAR SUA PRÓPRIA IMAGEM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Coloque sua foto na mesma pasta do HTML
+
+2. Renomeie para algo simples:
+   Exemplo: "minha_foto.jpg"
+
+3. No HTML, linha ~410, mude para:
+
+   ┌────────────────────────────────────────────────────┐
+   │ background:url('minha_foto.jpg') center/cover      │
+   │   no-repeat;                                       │
+   └────────────────────────────────────────────────────┘
+
+4. Salve e teste
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ OPÇÃO 3: USAR LINK ONLINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Se você tem a imagem hospedada online:
+
+1. Copie a URL completa da imagem
+   Exemplo: https://i.imgur.com/abc123.jpg
+
+2. No HTML, linha ~410:
+
+   ┌────────────────────────────────────────────────────┐
+   │ background:url('https://i.imgur.com/abc123.jpg')   │
+   │   center/cover no-repeat;                          │
+   └────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 💡 DICAS PARA BOA IMAGEM DE FUNDO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Use foto quadrada ou vertical
+✓ Resolução mínima: 1080x1080
+✓ Formato: JPG ou PNG
+✓ Tamanho: menos de 2MB (para carregar rápido)
+✓ Foto com boa iluminação
+✓ Evite fotos muito claras (texto fica difícil de ler)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 🎨 AJUSTAR FILTROS DA IMAGEM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Linha ~411, você pode ajustar:
+
+filter:blur(4px) brightness(0.22) saturate(0.5);
+
+┌──────────────────────────────────────────────────────┐
+│ blur(4px)          → Desfoque (0-10px)               │
+│ brightness(0.22)   → Brilho (0.1-1.0)                │
+│ saturate(0.5)      → Saturação (0.1-2.0)             │
+└──────────────────────────────────────────────────────┘
+
+Exemplo - imagem mais clara:
+filter:blur(4px) brightness(0.35) saturate(0.5);
+
+Exemplo - imagem mais escura:
+filter:blur(4px) brightness(0.15) saturate(0.5);
+
+Exemplo - mais colorida:
+filter:blur(4px) brightness(0.22) saturate(0.8);
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 🖼️ COMPARAR ANTES DE ESCOLHER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Para ver qual imagem fica melhor:
+
+1. Mude a imagem
+2. Salve (Ctrl+S)
+3. Recarregue o navegador (F5 ou Ctrl+R)
+4. Não gostou? Mude de novo
+
+💡 Teste 2-3 opções antes de decidir!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ⚠️ IMPORTANTE PARA PUBLICAÇÃO ONLINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Se usar IMAGEM LOCAL:
+
+Ao publicar online (Netlify/GitHub), você DEVE:
+
+1. Fazer upload do HTML
+2. Fazer upload da IMAGEM também
+3. Ambos na mesma pasta
+
+Exemplo no Netlify:
+- Selecione HTML + JPG juntos
+- Arraste os dois de uma vez
+
+
+Se usar LINK ONLINE:
+
+Não precisa fazer upload da imagem, só do HTML.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 🔄 VOLTAR PARA A ORIGINAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Se quiser voltar para a imagem original (online):
+
+background:url('https://instagram.fpoa39-1.fna.fbcdn.net/v/
+  t51.82787-19/651454321_17997294479865619_4343586608265419
+  942_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLm
+  RqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.fpoa39-1.fna.fbcdn
+  .net&_nc_cat=107&_nc_oc=Q6cZ2gEshJLR4mjBqu-V0YYwo0Cw0r_eW
+  TK_JeZhBBKzxiV-YU4_OyJODx7ZgtJaah6elis&_nc_ohc=eINSTaeTH9E
+  Q7kNvwEr5EBf&_nc_gid=qEWAXaiDh_2CUcKJoowCKg&edm=AP4sbd4BA
+  AAA&ccb=7-5&oh=00_Af9ZUdWlti4MMDF6cZeQdfP0nZywhuiWdNJH3
+  avtx5VvFA&oe=6A2D0014&_nc_sid=7a9f4b') center/cover 
+  no-repeat;
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ✅ PRONTO!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Agora você sabe como trocar a imagem de fundo!
+
+Teste diferentes opções e escolha a que ficou melhor.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

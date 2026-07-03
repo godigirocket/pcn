@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pcnstore.vercel.app/sitemap.xml

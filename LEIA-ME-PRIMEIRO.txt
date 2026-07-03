@@ -1,0 +1,248 @@
+═══════════════════════════════════════════════════════════════
+   🎵 7PCN BOLADÃO - FL STUDIO SITE
+   Site Profissional com Visual do FL Studio 20
+═══════════════════════════════════════════════════════════════
+
+📁 ARQUIVOS DO PROJETO:
+
+┌─────────────────────────────────────────────────────────────┐
+│ ARQUIVO PRINCIPAL                                           │
+└─────────────────────────────────────────────────────────────┘
+
+► 7pcn_site.html
+  → Site completo em um único arquivo HTML
+  → Abra no navegador para ver funcionando
+  → Pronto para personalização e publicação
+
+
+┌─────────────────────────────────────────────────────────────┐
+│ DOCUMENTAÇÃO                                                │
+└─────────────────────────────────────────────────────────────┘
+
+1️⃣ README.md
+   → Visão geral do projeto
+   → Características e recursos
+   → Compatibilidade
+
+2️⃣ CHECKLIST.md
+   → ✅ Lista de tarefas antes de publicar
+   → Itens obrigatórios marcados
+   → Testes finais
+
+3️⃣ PERSONALIZACAO.md
+   → 🎨 Guia completo de personalização
+   → Todos os pontos que podem ser editados
+   → Instruções linha por linha
+
+4️⃣ HOSPEDAGEM.md
+   → 🌐 Como publicar o site (grátis)
+   → GitHub Pages, Netlify, Vercel
+   → Configurar domínio personalizado
+
+
+┌─────────────────────────────────────────────────────────────┐
+│ IMAGENS DISPONÍVEIS                                         │
+└─────────────────────────────────────────────────────────────┘
+
+► imgi_2_651454321... (ATUAL - usada no site)
+► imgi_32_464298985...
+► imgi_41_661993170...
+► imgi_46_669848000...
+► imgi_52_623367536...
+► imgi_5_566613094...
+
+→ Use qualquer uma dessas imagens no background
+
+
+═══════════════════════════════════════════════════════════════
+   🚀 INÍCIO RÁPIDO
+═══════════════════════════════════════════════════════════════
+
+PASSO 1: Testar o site
+   → Abra "7pcn_site.html" no navegador
+   → Navegue pelas seções: INÍCIO / LOJA / MÚSICAS / CONTATO
+
+PASSO 2: Personalizar (obrigatório)
+   → Abra CHECKLIST.md
+   → Marque todos os itens obrigatórios (🚨)
+   → Principalmente: NÚMERO DO WHATSAPP
+
+PASSO 3: Publicar online
+   → Abra HOSPEDAGEM.md
+   → Escolha um serviço (Netlify é o mais fácil)
+   → Siga o passo a passo
+
+PASSO 4: Divulgar
+   → Adicione o link na bio do Instagram
+   → Faça story anunciando
+   → Compartilhe com clientes
+
+
+═══════════════════════════════════════════════════════════════
+   ⚠️ IMPORTANTE - CONFIGURAÇÕES OBRIGATÓRIAS
+═══════════════════════════════════════════════════════════════
+
+Antes de publicar, você DEVE alterar:
+
+1. WHATSAPP (2 lugares no HTML)
+   → Linha 853: Link do botão de contato
+   → Linha 1100: Função de checkout
+   → Mudar de: 5551999999999
+   → Para: SEU_DDD_NUMERO (ex: 5511987654321)
+
+2. Verificar links de redes sociais
+   → Instagram
+   → Spotify
+   → Email
+
+→ Use Ctrl+F para procurar rapidamente no HTML
+
+
+═══════════════════════════════════════════════════════════════
+   📋 RECURSOS DO SITE
+═══════════════════════════════════════════════════════════════
+
+✅ Design idêntico ao FL Studio 20
+✅ Loading screen animada com som
+✅ 4 seções navegáveis
+✅ Player Spotify integrado
+✅ Sistema de carrinho de compras
+✅ Checkout direto pelo WhatsApp
+✅ Totalmente responsivo (mobile)
+✅ Animações e efeitos profissionais
+✅ Channel Rack com meters animados
+✅ Beat counter funcionando em tempo real
+
+
+═══════════════════════════════════════════════════════════════
+   🎯 SEÇÕES DO SITE
+═══════════════════════════════════════════════════════════════
+
+🏠 INÍCIO
+   → Visual da playlist do FL Studio
+   → Apresentação do artista
+   → Player Spotify
+   → Animação EQ
+
+🛒 LOJA
+   → 5 produtos pré-configurados
+   → Beat exclusivo (R$ 150)
+   → Feat/Parceria (R$ 200)
+   → Mix & Master (R$ 99.90)
+   → Melodia exclusiva (R$ 79.90)
+   → Pack drum kit (R$ 29.90)
+   → Carrinho + checkout WhatsApp
+
+🎵 MÚSICAS
+   → Player Spotify do artista
+   → Links para redes sociais
+
+📞 CONTATO
+   → Informações completas
+   → Botão direto para WhatsApp
+   → Email e redes sociais
+
+
+═══════════════════════════════════════════════════════════════
+   💾 BACKUP
+═══════════════════════════════════════════════════════════════
+
+IMPORTANTE: Antes de editar o HTML, faça uma cópia!
+
+1. Copie "7pcn_site.html"
+2. Cole na mesma pasta
+3. Renomeie para "7pcn_site_BACKUP.html"
+
+Assim você sempre terá o original se algo der errado.
+
+
+═══════════════════════════════════════════════════════════════
+   🔧 COMO EDITAR O HTML
+═══════════════════════════════════════════════════════════════
+
+Use qualquer editor de texto:
+
+→ Notepad (básico, já vem no Windows)
+→ Notepad++ (recomendado, grátis)
+→ Visual Studio Code (profissional, grátis)
+→ Sublime Text (profissional, grátis)
+
+NÃO use Word ou Google Docs!
+
+
+═══════════════════════════════════════════════════════════════
+   📱 TESTAR NO CELULAR
+═══════════════════════════════════════════════════════════════
+
+Opção 1: Publicar online primeiro (mais fácil)
+Opção 2: Usar ferramenta de dev do navegador
+   → F12 no Chrome/Edge
+   → Ícone de celular no canto superior
+
+Opção 3: Servidor local
+   → Python: python -m http.server
+   → Acesse pelo IP do PC no celular
+
+
+═══════════════════════════════════════════════════════════════
+   ❓ DÚVIDAS FREQUENTES
+═══════════════════════════════════════════════════════════════
+
+P: Preciso saber programar?
+R: Não! Só seguir as instruções para trocar textos/links.
+
+P: O site funciona em qualquer celular?
+R: Sim! É totalmente responsivo.
+
+P: Posso mudar as cores?
+R: Sim! Veja PERSONALIZACAO.md
+
+P: Preciso pagar hospedagem?
+R: Não! Tem várias opções grátis. Veja HOSPEDAGEM.md
+
+P: Como adiciono mais produtos?
+R: Veja PERSONALIZACAO.md → seção "Produtos da Loja"
+
+P: O som do FL Studio não toca
+R: Normal em alguns navegadores. Não é problema.
+
+
+═══════════════════════════════════════════════════════════════
+   🎓 ORDEM DE LEITURA RECOMENDADA
+═══════════════════════════════════════════════════════════════
+
+1º → LEIA-ME-PRIMEIRO.txt (este arquivo)
+2º → CHECKLIST.md (marque as tarefas)
+3º → PERSONALIZACAO.md (quando for editar)
+4º → HOSPEDAGEM.md (quando for publicar)
+5º → README.md (documentação técnica)
+
+
+═══════════════════════════════════════════════════════════════
+   🌟 PRÓXIMOS PASSOS
+═══════════════════════════════════════════════════════════════
+
+[ ] 1. Abrir o site no navegador
+[ ] 2. Testar todas as funções
+[ ] 3. Ler o CHECKLIST.md
+[ ] 4. Fazer backup do HTML
+[ ] 5. Editar número do WhatsApp
+[ ] 6. Verificar redes sociais
+[ ] 7. Ajustar produtos/preços (opcional)
+[ ] 8. Escolher onde hospedar
+[ ] 9. Publicar o site
+[ ] 10. Divulgar nas redes!
+
+
+═══════════════════════════════════════════════════════════════
+   ✨ PRONTO PARA COMEÇAR!
+═══════════════════════════════════════════════════════════════
+
+Seu site profissional está pronto para usar!
+
+Qualquer dúvida, consulte a documentação.
+
+Boa sorte com seu site! 🎵🔥
+
+                        - Desenvolvido com ❤️ em estilo FL Studio
+═══════════════════════════════════════════════════════════════
