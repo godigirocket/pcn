@@ -854,8 +854,8 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 .sp-section-label{font-size:10px;color:#444;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
 .sp-carousel{border-radius:14px;overflow:hidden;background:#111;margin-bottom:24px;position:relative;}
 .mc-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);}
-.mc-slide{min-width:100%;aspect-ratio:1/1;overflow:hidden;background:#111;}
-.mc-slide img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.mc-slide{min-width:100%;aspect-ratio:4/3;overflow:hidden;background:#111;}
+.mc-slide img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 .mc-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:32px;color:rgba(29,185,84,.3);background:#0a0a0f;}
 .mc-dots{display:flex;justify-content:center;gap:6px;padding:10px;background:#0a0a0f;}
 .mcdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;}
@@ -893,9 +893,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     <div class="sp-release-tag"><i class="fa-solid fa-bolt"></i> ÚLTIMO LANÇAMENTO</div>
     <div class="sp-release-row">
       <div class="sp-release-cover">
-        <img src="https://i.ibb.co/5x8YfYbT/channels4-profile.jpg"
+        <img src="https://i.imgur.com/DMZ6WBT.png"
              alt="KANKIU — PCN Boladão"
              draggable="false"
+             style="background:#fff;"
              onerror="this.parentElement.style.background='#1db954';this.style.display='none'">
       </div>
       <div>
