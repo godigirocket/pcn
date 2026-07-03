@@ -78,25 +78,17 @@ nav button.active{box-shadow:0 0 10px rgba(255,122,0,.5),0 0 22px rgba(255,122,0
 #ld-bar{height:100%;width:0;background:linear-gradient(90deg,var(--or),var(--or2));border-radius:3px;transition:width .4s;}
 #ld-msg{margin-top:10px;font-size:11px;color:#444;letter-spacing:2px;}
 
-/* ── VERIFIED BADGE ── */
+/* ── VERIFIED BADGE — igual ao Spotify/Instagram ── */
 .vbadge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:18px;height:18px;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;
   background:linear-gradient(135deg,#1d9bf0,#0052cc);
   border-radius:50%;
-  color:#fff;
-  font-size:10px;
-  font-weight:900;
-  margin-left:6px;
-  flex-shrink:0;
+  margin-left:6px;flex-shrink:0;
   box-shadow:0 0 8px rgba(29,155,240,.5),0 0 18px rgba(29,155,240,.2);
-  vertical-align:middle;
-  position:relative;
-  top:-1px;
-  line-height:1;
+  vertical-align:middle;position:relative;top:-1px;
 }
+.vbadge svg{width:11px;height:11px;display:block;}
 
 /* ── ANIMATED ICONS ── */
 /* Spin suave — ícone de música */
@@ -633,7 +625,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 <header>
   <div class="h-logo">
     <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN" onerror="this.style.display='none'">
-    <span class="h-name">PCN BOLADÃO</span><span class="vbadge" aria-label="Loja oficial PCN Boladão" title="Loja oficial PCN Boladão">✓</span>
+    <span class="h-name">PCN BOLADÃO</span><span class="vbadge" aria-label="Artista Oficial" title="Artista Oficial"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
   </div>
   <nav>
     <button class="active" data-s="home">HOME</button>
@@ -771,7 +763,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     </div>
     <!-- Info -->
     <div class="prod-info">
-      <div class="prod-name">Camisa Kankiu<span class="vbadge" style="font-size:10px;width:14px;height:14px;margin-left:6px;" title="Drop Oficial">✓</span></div>
+      <div class="prod-name">Camisa Kankiu<span class="vbadge" style="width:16px;height:16px;margin-left:6px;" title="Drop Oficial"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
       <div class="prod-seals">
         <span class="seal seal-hot"><i class="fa-solid fa-fire icon-fire"></i> Poucas Unidades</span>
         <span class="seal seal-limit">Drop Limitado</span>
@@ -862,6 +854,44 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 .mcdot.active{background:#1db954;width:18px;border-radius:3px;}
 .sp-player{border-radius:12px;overflow:hidden;}
 .sp-player iframe{width:100%;border:none;display:block;}
+
+/* ── GALERIA SLIDESHOW ── */
+.sp-gallery-bg{
+  position:relative;
+  border-radius:16px;
+  overflow:hidden;
+  height:clamp(220px,55vw,400px);
+  margin-bottom:20px;
+  background:#111;
+}
+.sgb-bg{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center top;
+  transition:opacity .8s ease, background-image .01s;
+}
+.sgb-bg.fade{opacity:0;}
+.sgb-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.2) 60%,transparent 100%);
+  z-index:1;
+}
+.sgb-content{
+  position:absolute;bottom:0;left:0;right:0;
+  z-index:2;
+  padding:16px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.sgb-dots{display:flex;gap:6px;}
+.sgdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:all .3s;border:none;}
+.sgdot.active{background:#fff;width:18px;border-radius:3px;}
+.sgb-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;background:#1db954;border-radius:20px;
+  color:#000;font-size:12px;font-weight:700;text-decoration:none;
+  transition:all .2s;white-space:nowrap;flex-shrink:0;
+}
+.sgb-btn:hover{background:#1ed760;transform:scale(1.04);}
 </style>
 <div class="sp-page">
   <!-- Hero -->
@@ -872,8 +902,9 @@ document.addEventListener('selectstart',e=>e.preventDefault());
          onerror="this.style.opacity='.2'">
     <div class="sp-hero-overlay"></div>
     <div class="sp-hero-info">
-      <div class="sp-hero-name">PCN BOLADÃO<span class="vbadge" style="width:16px;height:16px;font-size:9px;background:linear-gradient(135deg,#1db954,#0d7a3a);">✓</span></div>
-      <div class="sp-hero-sub">Artista Oficial</div>
+      <div style="font-size:11px;color:#1db954;letter-spacing:1px;margin-bottom:4px;font-weight:600;">Artista Verificado</div>
+      <div class="sp-hero-name">PCN BOLADÃO<span class="vbadge" style="width:18px;height:18px;background:linear-gradient(135deg,#1db954,#0d7a3a);box-shadow:0 0 8px rgba(29,185,84,.5);" title="Artista Verificado"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="sp-hero-sub">Verificado pelo Spotify</div>
     </div>
   </div>
   <div class="sp-hero-actions">
@@ -893,10 +924,9 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     <div class="sp-release-tag"><i class="fa-solid fa-bolt"></i> ÚLTIMO LANÇAMENTO</div>
     <div class="sp-release-row">
       <div class="sp-release-cover">
-        <img src="https://i.imgur.com/DMZ6WBT.png"
+        <img src="https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg"
              alt="KANKIU — PCN Boladão"
              draggable="false"
-             style="background:#fff;"
              onerror="this.parentElement.style.background='#1db954';this.style.display='none'">
       </div>
       <div>
@@ -909,42 +939,27 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     </div>
   </div>
 
-  <!-- Fotos -->
-  <div class="sp-section-label"><i class="fa-solid fa-camera"></i> FOTOS</div>
-  <div class="sp-carousel">
-    <div class="mc-track" id="mcTrack">
-      <div class="mc-slide">
-        <img src="https://i.ibb.co/KxtSQhqD/imgi-32-464298985-17943959666865619-7484067345195022157-n.jpg"
-             alt="PCN Boladao"
-             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
+  <!-- GALERIA + DISCOGRAFIA — uma seção só com slideshow de fundo -->
+  <div class="sp-section-label"><i class="fa-solid fa-images"></i> GALERIA</div>
+  <div class="sp-gallery-bg" id="galleryBg">
+    <!-- Fundo passando -->
+    <div class="sgb-bg" id="sgbBg"></div>
+    <div class="sgb-overlay"></div>
+    <!-- Conteúdo -->
+    <div class="sgb-content">
+      <div class="sgb-dots" id="sgbDots">
+        <span class="sgdot active" onclick="galSlide(0)"></span>
+        <span class="sgdot" onclick="galSlide(1)"></span>
+        <span class="sgdot" onclick="galSlide(2)"></span>
+        <span class="sgdot" onclick="galSlide(3)"></span>
       </div>
-      <div class="mc-slide">
-        <img src="https://i.ibb.co/9R50RNv/imgi-41-661993170-18387838516083845-7837809524537980210-n.jpg"
-             alt="PCN Boladao"
-             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
-      </div>
-      <div class="mc-slide">
-        <img src="https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg"
-             alt="PCN Boladao"
-             onerror="this.parentElement.innerHTML='<div class=mc-fallback>PCN BOLADÃO</div>'">
-      </div>
-    </div>
-    <div class="mc-dots" id="mcDots">
-      <span class="mcdot active" onclick="goSlide(0)"></span>
-      <span class="mcdot" onclick="goSlide(1)"></span>
-      <span class="mcdot" onclick="goSlide(2)"></span>
+      <a class="sgb-btn" href="https://onerpm.link/750177162510" target="_blank">
+        <i class="fa-brands fa-spotify"></i> Ouvir KANKIU
+      </a>
     </div>
   </div>
 
   <!-- Player -->
-  <div class="sp-section-label"><i class="fa-solid fa-headphones"></i> DISCOGRAFIA</div>
-  <div style="border-radius:14px;overflow:hidden;margin-bottom:16px;background:#111;border:1px solid rgba(255,255,255,.06);">
-    <img src="https://i.ibb.co/pjrLw5d4/images.jpg"
-         alt="Arte da discografia Kankiu — PCN Boladão"
-         draggable="false"
-         style="width:100%;height:clamp(180px,40vw,320px);object-fit:cover;display:block;border-radius:14px;"
-         onerror="this.style.display='none'">
-  </div>
   <div class="sp-player">
     <iframe src="https://open.spotify.com/embed/artist/4EaBvk5268lNcv35sXhinc?theme=0"
             height="380"
@@ -1216,6 +1231,34 @@ document.getElementById('prodBox')?.addEventListener('click',()=>{
   let sx=0;
   track.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
   track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)goSlide(dx<0?(cur+1)%slides.length:(cur-1+slides.length)%slides.length);},{passive:true});
+})();
+
+// ── GALERIA SLIDESHOW ──
+(function(){
+  const bg=document.getElementById('sgbBg');
+  const dots=document.querySelectorAll('.sgdot');
+  if(!bg||!dots.length)return;
+  const imgs=[
+    'https://i.ibb.co/KxtSQhqD/imgi-32-464298985-17943959666865619-7484067345195022157-n.jpg',
+    'https://i.ibb.co/9R50RNv/imgi-41-661993170-18387838516083845-7837809524537980210-n.jpg',
+    'https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg',
+    'https://i.ibb.co/pjrLw5d4/images.jpg'
+  ];
+  let cur=0;
+  function galSlide(n){
+    bg.classList.add('fade');
+    setTimeout(()=>{
+      cur=n;
+      bg.style.backgroundImage=`url('${imgs[cur]}')`;
+      bg.classList.remove('fade');
+    },400);
+    dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+  }
+  window.galSlide=galSlide;
+  // Iniciar com primeira imagem
+  bg.style.backgroundImage=`url('${imgs[0]}')`;
+  // Autoplay
+  setInterval(()=>galSlide((cur+1)%imgs.length),4000);
 })();
 
 // ── CONTATO TABS ──
