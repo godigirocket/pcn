@@ -166,10 +166,49 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .hp-content{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;}
 .hp-name{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(52px,17vw,88px);
-  color:#fff;letter-spacing:4px;line-height:.9;
-  text-shadow:0 0 20px rgba(255,106,0,.9),0 0 50px rgba(255,106,0,.4),2px 2px 0 #c04000,4px 4px 0 #802000,6px 6px 12px rgba(0,0,0,.9);
+  font-size:clamp(58px,19vw,96px);
+  color:#fff;letter-spacing:6px;line-height:.88;
+  text-align:center;
+  position:relative;
   animation:nameFloat 4s ease-in-out infinite;
+  transform-style:preserve-3d;
+  /* Efeito 3D com sombras em camadas */
+  text-shadow:
+    0 0 20px rgba(255,106,0,1),
+    0 0 50px rgba(255,106,0,.55),
+    0 0 100px rgba(255,106,0,.2),
+    1px 1px 0 #e05000,
+    2px 2px 0 #c04000,
+    3px 3px 0 #a03000,
+    4px 4px 0 #802000,
+    5px 5px 0 #601000,
+    6px 6px 14px rgba(0,0,0,.95);
+}
+/* Glitch sutil no nome */
+.hp-name::before{
+  content:'PCN BOLADÃO';
+  position:absolute;left:0;top:0;
+  color:rgba(255,106,0,.4);
+  clip:rect(0,0,0,0);
+  animation:glitch1 4s steps(1) infinite;
+}
+.hp-name::after{
+  content:'PCN BOLADÃO';
+  position:absolute;left:0;top:0;
+  color:rgba(168,85,247,.3);
+  clip:rect(0,0,0,0);
+  animation:glitch2 4s steps(1) infinite;
+}
+@keyframes glitch1{
+  0%,90%,100%{clip:rect(0,0,0,0);transform:none;}
+  92%{clip:rect(20px,9999px,30px,0);transform:translateX(-3px);}
+  94%{clip:rect(50px,9999px,60px,0);transform:translateX(3px);}
+  96%{clip:rect(10px,9999px,20px,0);transform:translateX(-2px);}
+}
+@keyframes glitch2{
+  0%,88%,100%{clip:rect(0,0,0,0);transform:none;}
+  90%{clip:rect(40px,9999px,55px,0);transform:translateX(4px);}
+  93%{clip:rect(15px,9999px,25px,0);transform:translateX(-3px);}
 }
 @keyframes nameFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 .hp-sub{font-size:12px;color:rgba(255,106,0,.6);letter-spacing:5px;text-transform:uppercase;margin-top:4px;}
@@ -265,7 +304,7 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 /* ── CURSOR desktop only ── */
 @media(pointer:fine){
   *{cursor:none!important;}
-  #cur{position:fixed;top:0;left:0;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);transition:transform .12s;}
+  #cur{position:fixed;top:0;left:0;pointer-events:none;z-index:999999;transform:translate(-50%,-50%);will-change:transform;}
   #cur-dot{position:fixed;top:0;left:0;width:4px;height:4px;background:var(--or);border-radius:50%;pointer-events:none;z-index:999998;transform:translate(-50%,-50%);}
 }
 @media(pointer:coarse){
@@ -369,7 +408,7 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .pm-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;}
 .pm-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:none;color:#888;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
 .pm-close:hover{background:rgba(255,255,255,.12);color:#fff;}
-/* MODAL DE PRODUTO — fundo claro para produtos brancos */
+/* MODAL DE PRODUTO — fundo escuro premium com contraste */
 .pm-img{
   width:calc(100% - 32px);
   margin:0 auto 16px;
@@ -377,14 +416,20 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
   max-height:clamp(280px,58svh,480px);
   border-radius:14px;
   overflow:hidden;
-  background:#f0f0f0;
+  background:#1a1a1a;
   display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.pm-img::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,#2a2a2a 0%,#111 60%,#050505 100%);
 }
 .pm-img img{
-  width:100%;height:100%;
+  position:relative;z-index:1;
+  width:88%;height:88%;
   object-fit:contain;
-  background:#f0f0f0;
   display:block;
+  filter:drop-shadow(0 8px 24px rgba(0,0,0,.7));
 }
 .pm-body{padding:0 20px 24px;}
 .pm-price{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;margin-bottom:4px;}
@@ -485,7 +530,7 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 @media(min-width:500px){#pp-box{border-radius:20px;}}
 @keyframes ppUp{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
 /* capa hero do popup */
-.pp-hero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#111;}
+.pp-hero{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#111;}
 .pp-hero img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 .pp-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,#111b14 0%,transparent 60%);}
 .pp-hero-badge{position:absolute;top:12px;right:12px;background:#1db954;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#000;display:flex;align-items:center;gap:5px;}
@@ -649,8 +694,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 <!-- HEADER -->
 <header>
   <div class="h-logo">
-    <img src="https://i.ibb.co/Kc5HwFjB/imgi-2-651454321-17997294479865619-4343586608265419942-n.jpg" alt="PCN" onerror="this.style.display='none'">
-    <span class="h-name">PCN BOLADÃO</span><span class="vbadge" aria-label="Artista Oficial" title="Artista Oficial"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <img src="https://image-cdn-ak.spotifycdn.com/image/ab6761610000f1789efcb98b99bcfd26adf832e9"
+         alt="PCN" style="border-radius:50%;object-position:center top;"
+         onerror="this.src='https://i.ibb.co/5x8YfYbT/channels4-profile.jpg'">
+    <span class="h-name">PCN BOLADÃO</span>
   </div>
   <nav>
     <button class="active" data-s="home">HOME</button>
@@ -965,13 +1012,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     </div>
   </div>
 
-  <!-- GALERIA + DISCOGRAFIA — uma seção só com slideshow de fundo -->
-  <div class="sp-section-label"><i class="fa-solid fa-images"></i> GALERIA</div>
+  <!-- GALERIA -->
   <div class="sp-gallery-bg" id="galleryBg">
-    <!-- Fundo passando -->
     <div class="sgb-bg" id="sgbBg"></div>
     <div class="sgb-overlay"></div>
-    <!-- Conteúdo -->
     <div class="sgb-content">
       <div class="sgb-dots" id="sgbDots">
         <span class="sgdot active" onclick="galSlide(0)"></span>
@@ -979,9 +1023,6 @@ document.addEventListener('selectstart',e=>e.preventDefault());
         <span class="sgdot" onclick="galSlide(2)"></span>
         <span class="sgdot" onclick="galSlide(3)"></span>
       </div>
-      <a class="sgb-btn" href="https://onerpm.link/750177162510" target="_blank">
-        <i class="fa-brands fa-spotify"></i> Ouvir KANKIU
-      </a>
     </div>
   </div>
 
@@ -1153,11 +1194,18 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('keyup',e=>held.delete(e.key));
 
-// ── CURSOR ──
+// ── CURSOR 100fps suave ──
 (function(){
   const cur=document.getElementById('cur'),dot=document.getElementById('cur-dot');
   if(!cur)return;
-  document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';});
+  let mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  function tick(){
+    cx+=(mx-cx)*.18;cy+=(my-cy)*.18;
+    cur.style.left=cx+'px';cur.style.top=cy+'px';
+    requestAnimationFrame(tick);
+  }
+  tick();
   document.querySelectorAll('button,a,.dpad,.pk,.rbtn,.fl-tab,.fl-btn').forEach(el=>{
     el.addEventListener('mouseenter',()=>cur.style.transform='translate(-50%,-50%) scale(1.5)');
     el.addEventListener('mouseleave',()=>cur.style.transform='translate(-50%,-50%) scale(1)');
@@ -1172,6 +1220,23 @@ document.addEventListener('keyup',e=>held.delete(e.key));
   function onMove(x,y){active=true;clearTimeout(timer);tY=(x/window.innerWidth-.5)*MAX*2;tX=-(y/window.innerHeight-.5)*MAX*2;timer=setTimeout(()=>active=false,2500);}
   document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
   (function tick(){if(!active){idle+=.007;tX=Math.sin(idle*.7)*5;tY=Math.cos(idle*.5)*3;}cX+=(tX-cX)*L;cY+=(tY-cY)*L;el.style.transform=`perspective(900px) rotateX(${cX}deg) rotateY(${cY}deg)`;requestAnimationFrame(tick);})();
+})();
+
+// ── 3D TILT MOBILE no nome da home portrait ──
+(function(){
+  const el=document.querySelector('.hp-name');if(!el)return;
+  let lx=0,ly=0,cx=0,cy=0;
+  function apply(x,y,w,h){
+    lx=(x/w-.5)*30;ly=-(y/h-.5)*20;
+  }
+  document.addEventListener('touchmove',e=>{
+    const t=e.touches[0];
+    apply(t.clientX,t.clientY,window.innerWidth,window.innerHeight);
+    el.style.transform=`perspective(600px) rotateX(${ly}deg) rotateY(${lx}deg) scale(1.04)`;
+  },{passive:true});
+  document.addEventListener('touchend',()=>{
+    el.style.transform='';
+  },{passive:true});
 })();
 
 // ── PARTICLES (desktop) ──
