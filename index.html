@@ -522,34 +522,46 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .dr-brand span{font-size:14px;font-weight:700;color:#fff;}
 .dr-copy{font-size:9px;color:#1a1a1a;margin-top:10px;}
 
-#pp{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:9990;display:none;align-items:center;justify-content:center;padding:16px;}
+#pp{position:fixed;top:0;left:0;right:0;z-index:9990;display:none;justify-content:center;padding:env(safe-area-inset-top,12px) 12px 0;}
 #pp.show{display:flex;}
 #pp-box{
-  width:100%;max-width:320px;
-  background:linear-gradient(160deg,#111b14 0%,#0a0d0a 100%);
-  border:1px solid rgba(29,185,84,.2);
+  width:100%;max-width:390px;
+  background:rgba(18,18,18,.96);
+  border:1px solid rgba(255,255,255,.1);
   border-radius:18px;
   overflow:hidden;
-  box-shadow:0 8px 40px rgba(29,185,84,.15),0 0 60px rgba(0,0,0,.8);
-  animation:ppUp .35s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 8px 32px rgba(0,0,0,.6),0 0 0 0.5px rgba(255,255,255,.06);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  animation:ppDrop .5s cubic-bezier(.34,1.56,.64,1);
+  margin-top:8px;
 }
-@keyframes ppUp{from{transform:scale(.92);opacity:0;}to{transform:scale(1);opacity:1;}}
-.pp-hero{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#111;}
-.pp-hero img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
-.pp-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,#111b14 0%,transparent 55%);}
-.pp-hero-badge{position:absolute;top:10px;right:10px;background:#1db954;border-radius:16px;padding:3px 10px;font-size:10px;font-weight:700;color:#000;display:flex;align-items:center;gap:4px;}
-.pp-tb{height:32px;background:rgba(0,0,0,.3);display:flex;align-items:center;padding:0 12px;gap:7px;}
-.pp-dot{width:9px;height:9px;border-radius:50%;cursor:pointer;}
-.pp-dot.r{background:#ff5f57;}.pp-dot.y{background:#ffbd2e;}.pp-dot.g{background:#28c840;}
-.pp-body{padding:12px 16px 18px;text-align:center;}
-.pp-cover{display:none;}
-.pp-tag{font-size:8px;color:#1db954;letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:5px;}
-.pp-artist{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:3px;margin-bottom:2px;}
-.pp-rel{font-size:10px;color:#555;margin-bottom:14px;}
-.pp-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:12px;background:#1db954;border:none;border-radius:50px;color:#000;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;margin-bottom:10px;box-shadow:0 4px 16px rgba(29,185,84,.4);}
-.pp-btn:hover{background:#1ed760;}
-.pp-skip{font-size:10px;color:#333;cursor:pointer;display:block;text-align:center;transition:color .2s;}
-.pp-skip:hover{color:#777;}
+@keyframes ppDrop{from{transform:translateY(-110%);opacity:0;}to{transform:translateY(0);opacity:1;}}
+/* Barra de arraste */
+.pp-tb{height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 12px;}
+.pp-tb-app{display:flex;align-items:center;gap:6px;font-size:10px;color:#888;font-weight:600;letter-spacing:.5px;}
+.pp-tb-app i{color:#1db954;font-size:11px;}
+.pp-tb-time{font-size:10px;color:#555;}
+/* Linha divisória */
+.pp-divider{height:1px;background:rgba(255,255,255,.06);margin:0;}
+/* Corpo da notificação */
+.pp-body{display:flex;align-items:center;gap:12px;padding:12px 14px 14px;}
+.pp-cover{
+  width:52px;height:52px;border-radius:10px;
+  object-fit:cover;flex-shrink:0;display:block;
+  background:#111;
+}
+.pp-text{flex:1;min-width:0;}
+.pp-tag{font-size:9px;color:#1db954;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;display:flex;align-items:center;gap:4px;}
+.pp-artist{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pp-rel{font-size:11px;color:#888;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* Botões de ação */
+.pp-actions{display:flex;border-top:1px solid rgba(255,255,255,.06);}
+.pp-skip{flex:1;padding:11px;font-size:13px;color:#888;text-align:center;cursor:pointer;border:none;background:none;border-right:1px solid rgba(255,255,255,.06);transition:color .2s;}
+.pp-skip:hover{color:#fff;}
+.pp-btn{flex:1;padding:11px;font-size:13px;font-weight:700;color:#1db954;text-align:center;cursor:pointer;border:none;background:none;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:5px;transition:color .2s;}
+.pp-btn:hover{color:#1ed760;}
+/* esconder elementos velhos não usados */
+.pp-hero,.pp-hero-overlay,.pp-hero-badge{display:none!important;}
 </style>
 
 <style>
@@ -664,27 +676,26 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 <div id="pp">
   <div id="pp-box">
     <div class="pp-tb">
-      <span class="pp-dot r" onclick="closePP()"></span>
-      <span class="pp-dot y"></span><span class="pp-dot g"></span>
-      <span style="font-size:9px;color:#555;margin:0 auto;letter-spacing:2px;">NOVO LANÇAMENTO</span>
-      <span onclick="closePP()" style="color:#444;font-size:15px;cursor:pointer;line-height:1;">✕</span>
+      <div class="pp-tb-app"><i class="fa-brands fa-spotify"></i> SPOTIFY</div>
+      <div class="pp-tb-time">agora</div>
     </div>
-    <!-- Hero com imagem -->
-    <div class="pp-hero">
-      <img src="https://image-cdn-ak.spotifycdn.com/image/ab6761610000f1789efcb98b99bcfd26adf832e9"
+    <div class="pp-divider"></div>
+    <div class="pp-body">
+      <img class="pp-cover"
+           src="https://i.ibb.co/5x8YfYbT/channels4-profile.jpg"
            alt="KANKIU"
            onerror="this.src='https://i.ibb.co/JFRdB8yk/imgi-46-669848000-18574712185062930-4582735058102764467-n.jpg'">
-      <div class="pp-hero-overlay"></div>
-      <div class="pp-hero-badge"><i class="fa-brands fa-spotify"></i> No ar agora</div>
+      <div class="pp-text">
+        <div class="pp-tag"><i class="fa-solid fa-bolt"></i> Novo lançamento</div>
+        <div class="pp-artist">KANKIU</div>
+        <div class="pp-rel">PCN BOLADÃO · Ouça agora</div>
+      </div>
     </div>
-    <div class="pp-body">
-      <div class="pp-tag"><i class="fa-solid fa-music pp-icon-spin"></i> Novo Lançamento</div>
-      <div class="pp-artist">KANKIU</div>
-      <div class="pp-rel">PCN BOLADÃO · Ouça agora no Spotify</div>
+    <div class="pp-actions">
+      <button class="pp-skip" onclick="closePP()">Dispensar</button>
       <a class="pp-btn" href="https://onerpm.link/750177162510" target="_blank" onclick="closePP()">
-        <i class="fa-brands fa-spotify" style="font-size:20px;"></i> OUVIR AGORA
+        <i class="fa-brands fa-spotify"></i> Ouvir
       </a>
-      <span class="pp-skip" onclick="closePP()">Agora não</span>
     </div>
   </div>
 </div>
@@ -721,7 +732,6 @@ document.addEventListener('selectstart',e=>e.preventDefault());
         <div class="hp-name-pcn">PCN</div>
         <div class="hp-name-line"></div>
         <div class="hp-name-boladao">BOLADÃO</div>
-        <div class="hp-name-tag">Underground · Trap</div>
       </div>
       <div class="hp-ctas">
         <a class="hp-btn-main" href="https://open.spotify.com/artist/4EaBvk5268lNcv35sXhinc" target="_blank"><i class="fa-brands fa-spotify"></i> Ouvir agora</a>
@@ -1000,7 +1010,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
     <div class="sp-release-tag"><i class="fa-solid fa-bolt"></i> ÚLTIMO LANÇAMENTO</div>
     <div class="sp-release-row">
       <div class="sp-release-cover">
-        <img src="https://image-cdn-ak.spotifycdn.com/image/ab6761610000f1789efcb98b99bcfd26adf832e9"
+        <img src="https://i.ibb.co/5x8YfYbT/channels4-profile.jpg"
              alt="KANKIU — PCN Boladão"
              draggable="false"
              onerror="this.src='https://i.imgur.com/DMZ6WBT.png'">
