@@ -191,32 +191,29 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
   animation:nameFloat 5s ease-in-out infinite;
 }
 .hp-name-pcn{
-  font-family:'Underground','Bebas Neue',sans-serif;
-  font-size:clamp(72px,24vw,130px);
+  font-family:'Beyonders','Bebas Neue',sans-serif;
+  font-size:clamp(52px,18vw,100px);
   color:#fff;
-  letter-spacing:14px;
+  letter-spacing:8px;
   line-height:1;
   text-align:center;
   text-transform:uppercase;
   text-shadow:
-    0 0 30px rgba(255,106,0,.95),
-    0 0 60px rgba(255,106,0,.5),
-    0 0 120px rgba(255,106,0,.2);
-  -webkit-text-stroke:1px rgba(255,106,0,.25);
+    0 0 20px rgba(255,255,255,.7),
+    0 0 50px rgba(255,255,255,.25);
 }
 .hp-name-boladao{
-  font-family:'Underground','Bebas Neue',sans-serif;
-  font-size:clamp(28px,9vw,56px);
+  font-family:'Beyonders','Bebas Neue',sans-serif;
+  font-size:clamp(20px,7vw,44px);
   color:#fff;
-  letter-spacing:clamp(8px,3vw,18px);
+  letter-spacing:clamp(4px,2vw,10px);
   line-height:1;
   text-align:center;
   text-transform:uppercase;
   margin-top:4px;
   text-shadow:
-    0 0 20px rgba(255,106,0,.7),
-    0 0 40px rgba(255,106,0,.3);
-  -webkit-text-stroke:1px rgba(255,106,0,.15);
+    0 0 14px rgba(255,255,255,.5),
+    0 0 30px rgba(255,255,255,.15);
 }
 .hp-name-tag{
   font-family:'Random Grotesque Spacious Book',sans-serif;
@@ -295,12 +292,14 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
 .ering{display:none;}
 .hero-bg{display:none;}
 #pcn-label{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(54px,7.5vw,110px);
-  color:#fff;letter-spacing:6px;line-height:.88;text-align:center;
+  font-family:'Beyonders','Bebas Neue',sans-serif;
+  font-size:clamp(44px,6.5vw,90px);
+  color:#fff;letter-spacing:4px;line-height:.92;text-align:center;
   transform-style:preserve-3d;position:relative;z-index:2;
   text-shadow:0 0 20px rgba(255,255,255,.5),0 0 40px rgba(255,255,255,.15);
   animation:labelFloat 6s ease-in-out infinite;
+  transition:transform .1s ease-out;
+  cursor:default;
 }
 @keyframes labelFloat{0%,100%{transform:perspective(900px) rotateX(0) rotateY(0) translateY(0);}25%{transform:perspective(900px) rotateX(2deg) rotateY(-1deg) translateY(-3px);}50%{transform:perspective(900px) rotateX(-1deg) rotateY(2deg) translateY(-6px);}75%{transform:perspective(900px) rotateX(1deg) rotateY(-1deg) translateY(-3px);}}
 #pcn-label .refl{display:block;transform:scaleY(-.25) translateY(-3px);opacity:.04;filter:blur(5px);}
@@ -329,9 +328,8 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
 }
 .rack-body{flex:1;display:flex;flex-direction:column;padding:4px;gap:4px;overflow:hidden;min-height:0;}
 .rwin{background:#000;border:none;border-radius:0;overflow:hidden;display:flex;flex-direction:column;flex:1;min-height:0;}
-.rwin-head{height:18px;background:#12151a;display:flex;align-items:center;padding:0 6px;gap:3px;flex-shrink:0;}
-.rwin-head .fd{width:6px;height:6px;}
-.rwin-head span{font-size:8px;color:#444;margin-left:2px;}
+.rwin-head{display:none;}
+.rwin-foot{display:none;}
 .rwin-body{flex:1;position:relative;overflow:hidden;min-height:0;background:#000;}
 .rwin-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;}
 .rwin-body img.show{opacity:1;}
@@ -1223,10 +1221,11 @@ document.addEventListener('keyup',e=>held.delete(e.key));
 (function(){
   const el=document.getElementById('pcn-label');if(!el)return;
   let tX=0,tY=0,cX=0,cY=0,idle=0,active=false,timer=null;
-  const MAX=20,L=.07;
-  function onMove(x,y){active=true;clearTimeout(timer);tY=(x/window.innerWidth-.5)*MAX*2;tX=-(y/window.innerHeight-.5)*MAX*2;timer=setTimeout(()=>active=false,2500);}
+  const MAX=24,L=.09;
+  function onMove(x,y){active=true;clearTimeout(timer);tY=(x/window.innerWidth-.5)*MAX*2;tX=-(y/window.innerHeight-.5)*MAX*2;timer=setTimeout(()=>active=false,2000);}
   document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
-  (function tick(){if(!active){idle+=.007;tX=Math.sin(idle*.7)*5;tY=Math.cos(idle*.5)*3;}cX+=(tX-cX)*L;cY+=(tY-cY)*L;el.style.transform=`perspective(900px) rotateX(${cX}deg) rotateY(${cY}deg)`;requestAnimationFrame(tick);})();
+  document.addEventListener('touchmove',e=>{if(e.touches[0])onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+  (function tick(){if(!active){idle+=.008;tX=Math.sin(idle*.7)*6;tY=Math.cos(idle*.5)*4;}cX+=(tX-cX)*L;cY+=(tY-cY)*L;el.style.transform=`perspective(800px) rotateX(${cX}deg) rotateY(${cY}deg)`;requestAnimationFrame(tick);})();
 })();
 
 // ── 3D TILT MOBILE no nome da home portrait ──
@@ -1269,12 +1268,7 @@ document.addEventListener('keyup',e=>held.delete(e.key));
 
 
 
-// ── PRODUCT PHOTO CYCLE ──
-(function(){
-  const imgs=document.querySelectorAll('#prodPhotos img');if(!imgs.length)return;
-  let i=0;
-  setInterval(()=>{imgs[i].classList.remove('show');imgs[i].style.opacity='0';i=(i+1)%imgs.length;imgs[i].classList.add('show');imgs[i].style.opacity='1';},3000);
-})();
+// ── PRODUCT PHOTOS (sem cycling — performance) ──
 
 // ── LOJA: TOGGLE FRENTE/COSTAS ──
 function showFront(){
