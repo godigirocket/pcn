@@ -127,7 +127,7 @@ header{
   border-bottom:1px solid var(--border);
 }
 .h-logo{display:flex;align-items:center;gap:8px;font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;white-space:nowrap;}
-.h-logo img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,106,0,.6);box-shadow:0 0 8px rgba(255,106,0,.3);}
+.h-logo-icon{flex-shrink:0;border-radius:8px;box-shadow:0 0 10px rgba(255,106,0,.4);}
 .h-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(17px,4vw,22px);color:#fff;letter-spacing:1.5px;}
 nav{display:flex;gap:4px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;}
 nav::-webkit-scrollbar{display:none;}
@@ -569,7 +569,7 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 @media(max-width:768px){
   header{height:50px;padding:0 12px;}
   .h-logo{font-size:15px;gap:7px;}
-  .h-logo img{width:28px;height:28px;}
+  .h-logo-icon{width:28px;height:28px;}
   nav button{padding:5px 10px;font-size:10px;border-radius:14px;}
   #home.active{flex-direction:column;}
   /* portrait: show portrait UI */
@@ -700,9 +700,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 <!-- HEADER -->
 <header>
   <div class="h-logo">
-    <img src="https://image-cdn-ak.spotifycdn.com/image/ab6761610000f1789efcb98b99bcfd26adf832e9"
-         alt="PCN" style="border-radius:50%;object-position:center top;"
-         onerror="this.src='https://i.ibb.co/5x8YfYbT/channels4-profile.jpg'">
+    <svg class="h-logo-icon" width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <rect width="34" height="34" rx="8" fill="#ff6a00"/>
+      <text x="17" y="23" text-anchor="middle" font-family="'Underground','Bebas Neue',sans-serif" font-size="16" font-weight="900" fill="#000" letter-spacing="1">PCN</text>
+    </svg>
     <span class="h-name">PCN BOLADÃO</span>
   </div>
   <nav>
@@ -855,7 +856,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
         <span class="prod-price-pre">R$</span>
         <span class="prod-price">100,00</span>
       </div>
-      <div class="prod-freight">Frete incluído</div>
+      <div class="prod-freight">Frete incluído · <strong style="color:#ff8c00;">Enviamos para todo Brasil</strong></div>
       <div class="prod-desc">Camiseta oversized exclusiva. Tecido premium, estampa resinada, edição limitada.<br>100% algodão penteado · Drop oficial PCN</div>
       <div class="prod-stock"><div class="stock-dot"></div>Últimas peças disponíveis</div>
       <button class="prod-buy" onclick="buyZap('Camisa Kankiu R$ 100')"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</button>
@@ -1286,12 +1287,14 @@ function showFront(){
   document.getElementById('prodBack').classList.add('hidden');
   document.getElementById('btnFront').classList.add('active');
   document.getElementById('btnBack').classList.remove('active');
+  document.querySelector('.prod-img-hint').textContent='Toque para ver costas';
 }
 function showBack(){
   document.getElementById('prodFront').classList.add('hidden');
   document.getElementById('prodBack').classList.remove('hidden');
   document.getElementById('btnFront').classList.remove('active');
   document.getElementById('btnBack').classList.add('active');
+  document.querySelector('.prod-img-hint').textContent='Toque para ver frente';
 }
 // Tap on image toggles
 document.getElementById('prodBox')?.addEventListener('click',()=>{
