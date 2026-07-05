@@ -385,14 +385,14 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
 }
 .prod-toggle{display:flex;gap:8px;margin-top:10px;}
 .ptbtn{flex:1;padding:10px;background:#111;border:1px solid #2a2a2a;border-radius:8px;color:#888;font-size:12px;font-weight:600;transition:all .2s;}
-.ptbtn.active{background:#1a1a1a;border-color:#ff6a00;color:#ff6a00;}
+.ptbtn.active{background:#1a1a1a;border-color:#fff;color:#fff;}
 .prod-info{padding:20px 0;}
 @media(min-width:640px){.prod-info{padding:4px 0;}}
 .prod-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,40px);color:#fff;letter-spacing:2px;margin-bottom:10px;}
 .prod-seals{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
 .seal{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.3px;}
 .seal-hot{background:linear-gradient(135deg,#c01515,#e83232);color:#fff;box-shadow:0 2px 10px rgba(200,20,20,.35);}
-.seal-limit{background:#0e0e0e;border:1px solid rgba(255,140,0,.35);color:#ff8c00;}
+.seal-limit{background:#0e0e0e;border:1px solid rgba(255,255,255,.2);color:#fff;}
 .seal-new{background:#0e0e0e;border:1px solid rgba(255,255,255,.12);color:#aaa;}
 .prod-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:6px;}
 .prod-price{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,8vw,52px);color:#fff;line-height:1;}
@@ -413,10 +413,10 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
 .prod-buy:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.35);}
 .prod-buy i{font-size:20px;}
 .prod-detail-btn{width:100%;padding:12px;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#666;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;transition:all .2s;margin-top:8px;}
-.prod-detail-btn:hover{border-color:rgba(255,106,0,.3);color:#ff8c00;}
+.prod-detail-btn:hover{border-color:rgba(255,255,255,.3);color:#fff;}
 
 /* Mais produtos */
-.more-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin:40px 0 16px;border-left:3px solid #e01a1a;padding-left:12px;}
+.more-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;margin:40px 0 16px;border-left:3px solid #fff;padding-left:12px;}
 .more-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
 .more-card{background:#111;border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s;border:1px solid transparent;}
 .more-card:hover{transform:translateY(-4px);border-color:rgba(255,106,0,.2);}
@@ -869,7 +869,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
         <span class="prod-price">100,00</span>
       </div>
       <div class="prod-freight">Frete incluído</div>
-      <div style="display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(255,106,0,.08);border:1px solid rgba(255,106,0,.2);border-radius:8px;margin-bottom:12px;font-size:12px;color:#ff8c00;font-weight:600;"><i class="fa-solid fa-truck-fast"></i> Enviamos para todo Brasil</div>
+      <div style="display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:8px;margin-bottom:12px;font-size:12px;color:#fff;font-weight:600;"><i class="fa-solid fa-truck-fast"></i> Enviamos para todo Brasil</div>
       <div class="prod-desc">Camiseta oversized exclusiva. Tecido premium, estampa resinada, edição limitada.<br>100% algodão penteado · Drop oficial PCN</div>
       <div class="prod-stock"><div class="stock-dot"></div>Últimas peças disponíveis</div>
       <button class="prod-buy" onclick="buyZap('Camisa Kankiu R$ 100')"><i class="fa-brands fa-whatsapp"></i> Comprar via WhatsApp</button>
