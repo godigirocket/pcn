@@ -291,23 +291,17 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
 .hero-wrap{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;}
 .hero-bg{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,180px);color:rgba(255,106,0,.04);letter-spacing:10px;white-space:nowrap;animation:bgFloat 8s ease-in-out infinite;pointer-events:none;}
 @keyframes bgFloat{0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
-.hero-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-.ering{position:absolute;border-radius:50%;border:1px solid;animation:erot linear infinite;}
-@keyframes erot{to{transform:rotateZ(360deg);}}
-.ering.a{width:320px;height:100px;border-color:rgba(255,106,0,.16);animation-duration:7s;}
-.ering.b{width:420px;height:132px;border-color:rgba(255,106,0,.08);animation-duration:12s;animation-direction:reverse;}
-.ering.c{width:200px;height:64px;border-color:rgba(255,180,0,.09);animation-duration:5s;}
+.hero-rings{display:none;}
+.ering{display:none;}
+.hero-bg{display:none;}
 #pcn-label{
-  font-family:'Underground','Bebas Neue',sans-serif;
+  font-family:'Bebas Neue',sans-serif;
   font-size:clamp(54px,7.5vw,110px);
-  color:#fff;letter-spacing:8px;line-height:.88;text-align:center;
+  color:#fff;letter-spacing:6px;line-height:.88;text-align:center;
   transform-style:preserve-3d;position:relative;z-index:2;
-  text-shadow:
-    0 0 20px rgba(255,255,255,.6),
-    0 0 40px rgba(255,255,255,.2);
-  -webkit-text-stroke:1px rgba(255,255,255,.1);
+  text-shadow:0 0 20px rgba(255,255,255,.5),0 0 40px rgba(255,255,255,.15);
 }
-#pcn-label .refl{display:block;transform:scaleY(-.25) translateY(-3px);opacity:.04;filter:blur(5px);font-family:'Underground','Bebas Neue',sans-serif;}
+#pcn-label .refl{display:block;transform:scaleY(-.25) translateY(-3px);opacity:.04;filter:blur(5px);}
 .fl-rack{
   width:210px;min-width:210px;flex-shrink:0;
   background:#0e1014;border-left:1px solid #252830;
@@ -780,13 +774,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
           <div class="fl-grid"></div>
           <canvas id="ptc"></canvas>
           <div class="hero-wrap" id="heroBlock">
-            <div class="hero-bg">PCN BOLADAO</div>
-            <div class="hero-rings">
-              <div class="ering a"></div>
-              <div class="ering b"></div>
-              <div class="ering c"></div>
-            </div>
-            <div id="pcn-label">PCN BOLADAO<span class="refl">PCN BOLADAO</span></div>
+            <div id="pcn-label">PCN BOLADÃO<span class="refl">PCN BOLADÃO</span></div>
           </div>
         </div>
         <div class="fl-rack">
