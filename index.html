@@ -122,12 +122,12 @@ header{
   height:50px;
   background:var(--glass);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex;align-items:center;justify-content:center;
   padding:0 16px;
   z-index:1000;
   border-bottom:1px solid var(--border);
 }
-.h-logo{display:flex;align-items:center;justify-content:center;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;flex-direction:column;gap:0;line-height:1;}
+.h-logo{display:flex;align-items:center;position:absolute;left:14px;top:50%;transform:translateY(-50%);white-space:nowrap;flex-direction:column;gap:0;line-height:1;}
 .h-logo-text{
   font-family:'Beyonders',sans-serif;
   font-size:clamp(14px,3.5vw,18px);
@@ -814,23 +814,6 @@ document.addEventListener('selectstart',e=>e.preventDefault());
                 <span class="rbtn" onclick="goSection('loja')" style="cursor:pointer;">Loja</span>
               </div>
             </div>
-            <div class="rwin">
-              <div class="rwin-head"><div class="fd r"></div><div class="fd y"></div><div class="fd g"></div><span>Auto-Tune Pro</span></div>
-              <div class="rwin-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;background:#080c10;">
-                <div id="at-note" style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#40ff80;text-shadow:0 0 10px rgba(64,255,128,.5);margin-bottom:4px;cursor:pointer;">C</div>
-                <div style="display:flex;gap:3px;margin-bottom:6px;">
-                  <span class="at-k" data-n="C" style="background:rgba(64,255,128,.15);border:1px solid rgba(64,255,128,.3);padding:2px 5px;border-radius:3px;font-size:8px;color:#40ff80;cursor:pointer;">C</span>
-                  <span class="at-k" data-n="D" style="background:rgba(64,255,128,.08);border:1px solid rgba(64,255,128,.15);padding:2px 5px;border-radius:3px;font-size:8px;color:#40ff80;cursor:pointer;">D</span>
-                  <span class="at-k" data-n="E" style="background:rgba(64,255,128,.08);border:1px solid rgba(64,255,128,.15);padding:2px 5px;border-radius:3px;font-size:8px;color:#40ff80;cursor:pointer;">E</span>
-                  <span class="at-k" data-n="F" style="background:rgba(64,255,128,.08);border:1px solid rgba(64,255,128,.15);padding:2px 5px;border-radius:3px;font-size:8px;color:#40ff80;cursor:pointer;">F</span>
-                  <span class="at-k" data-n="G" style="background:rgba(64,255,128,.08);border:1px solid rgba(64,255,128,.15);padding:2px 5px;border-radius:3px;font-size:8px;color:#40ff80;cursor:pointer;">G</span>
-                </div>
-                <div id="at-bar" style="width:90%;height:4px;background:#1a2020;border-radius:2px;cursor:pointer;position:relative;overflow:hidden;">
-                  <div id="at-fill" style="height:100%;width:50%;background:linear-gradient(90deg,#40ff80,#00cc55);border-radius:2px;transition:width .1s;"></div>
-                </div>
-                <div style="font-size:7px;color:#333;margin-top:3px;letter-spacing:1px;">RETUNE SPEED</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1276,41 +1259,7 @@ document.addEventListener('keyup',e=>held.delete(e.key));
   (function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);ctx.fillStyle=p.p?`rgba(168,85,247,${p.o})`:`rgba(255,106,0,${p.o})`;ctx.fill();});requestAnimationFrame(draw);})();
 })();
 
-// ── AUTO-TUNE INTERATIVO ──
-(function(){
-  const noteEl=document.getElementById('at-note');
-  const bar=document.getElementById('at-bar');
-  const fill=document.getElementById('at-fill');
-  const keys=document.querySelectorAll('.at-k');
-  if(!noteEl||!bar)return;
-  const notes=['C','D','E','F','G','A','B'];
-  // Click nas teclas
-  keys.forEach(k=>{
-    k.addEventListener('click',()=>{
-      noteEl.textContent=k.dataset.n;
-      keys.forEach(kk=>{kk.style.background='rgba(64,255,128,.08)';kk.style.borderColor='rgba(64,255,128,.15)';});
-      k.style.background='rgba(64,255,128,.15)';k.style.borderColor='rgba(64,255,128,.3)';
-    });
-  });
-  // Click no note display cicla
-  let ni=0;
-  noteEl.addEventListener('click',()=>{
-    ni=(ni+1)%notes.length;
-    noteEl.textContent=notes[ni];
-  });
-  // Barra retune arrastável
-  function updateBar(e){
-    const rect=bar.getBoundingClientRect();
-    const pct=Math.max(0,Math.min(100,((e.clientX-rect.left)/rect.width)*100));
-    fill.style.width=pct+'%';
-  }
-  let dragging=false;
-  bar.addEventListener('mousedown',e=>{dragging=true;updateBar(e);});
-  document.addEventListener('mousemove',e=>{if(dragging)updateBar(e);});
-  document.addEventListener('mouseup',()=>dragging=false);
-  bar.addEventListener('touchstart',e=>{updateBar(e.touches[0]);},{passive:true});
-  bar.addEventListener('touchmove',e=>{updateBar(e.touches[0]);},{passive:true});
-})();
+
 
 // ── PRODUCT PHOTO CYCLE ──
 (function(){
