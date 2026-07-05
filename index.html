@@ -175,36 +175,33 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
   animation:nameFloat 5s ease-in-out infinite;
 }
 .hp-name-pcn{
-  font-family:'Underground',sans-serif;
-  font-size:clamp(68px,22vw,120px);
+  font-family:'Underground','Bebas Neue',sans-serif;
+  font-size:clamp(72px,24vw,130px);
   color:#fff;
-  letter-spacing:12px;
+  letter-spacing:14px;
   line-height:1;
   text-align:center;
   text-transform:uppercase;
   text-shadow:
-    0 0 30px rgba(255,106,0,.9),
-    0 0 60px rgba(255,106,0,.4),
-    0 0 120px rgba(255,106,0,.15);
-  -webkit-text-stroke:1px rgba(255,106,0,.3);
+    0 0 30px rgba(255,106,0,.95),
+    0 0 60px rgba(255,106,0,.5),
+    0 0 120px rgba(255,106,0,.2);
+  -webkit-text-stroke:1px rgba(255,106,0,.25);
 }
 .hp-name-boladao{
-  font-family:'Random Grotesque Standard Bold',sans-serif;
-  font-size:clamp(22px,7vw,46px);
-  color:rgba(255,255,255,.9);
-  letter-spacing:clamp(6px,2vw,14px);
+  font-family:'Underground','Bebas Neue',sans-serif;
+  font-size:clamp(28px,9vw,56px);
+  color:#fff;
+  letter-spacing:clamp(8px,3vw,18px);
   line-height:1;
   text-align:center;
   text-transform:uppercase;
   margin-top:4px;
-  background:linear-gradient(90deg,#ff6a00,#ff9500,#ffcc00,#ff9500,#ff6a00);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  animation:nameShine 3s linear infinite;
+  text-shadow:
+    0 0 20px rgba(255,106,0,.7),
+    0 0 40px rgba(255,106,0,.3);
+  -webkit-text-stroke:1px rgba(255,106,0,.15);
 }
-@keyframes nameShine{to{background-position:200% center;}}
 .hp-name-tag{
   font-family:'Random Grotesque Spacious Book',sans-serif;
   font-size:clamp(9px,2.5vw,13px);
@@ -285,13 +282,17 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .ering.b{width:420px;height:132px;border-color:rgba(168,85,247,.1);animation-duration:12s;animation-direction:reverse;}
 .ering.c{width:200px;height:64px;border-color:rgba(255,180,0,.09);animation-duration:5s;}
 #pcn-label{
-  font-family:'Bebas Neue',sans-serif;
+  font-family:'Underground','Bebas Neue',sans-serif;
   font-size:clamp(54px,7.5vw,110px);
-  color:#fff;letter-spacing:5px;line-height:.88;text-align:center;
+  color:#fff;letter-spacing:8px;line-height:.88;text-align:center;
   transform-style:preserve-3d;position:relative;z-index:2;
-  text-shadow:0 0 14px rgba(255,106,0,.95),0 0 30px rgba(255,106,0,.5),0 0 60px rgba(168,85,247,.2),1px 1px 0 #d05000,2px 2px 0 #a03800,3px 3px 0 #702000,4px 4px 8px rgba(0,0,0,.9);
+  text-shadow:
+    0 0 20px rgba(255,106,0,.9),
+    0 0 50px rgba(255,106,0,.4),
+    0 0 100px rgba(255,106,0,.15);
+  -webkit-text-stroke:1px rgba(255,106,0,.2);
 }
-#pcn-label .refl{display:block;transform:scaleY(-.25) translateY(-3px);opacity:.08;filter:blur(4px);}
+#pcn-label .refl{display:block;transform:scaleY(-.25) translateY(-3px);opacity:.06;filter:blur(5px);font-family:'Underground','Bebas Neue',sans-serif;}
 .fl-rack{
   width:210px;min-width:210px;flex-shrink:0;
   background:#0e1014;border-left:1px solid #252830;
@@ -416,28 +417,22 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .pm-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px;}
 .pm-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:none;color:#888;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
 .pm-close:hover{background:rgba(255,255,255,.12);color:#fff;}
-/* MODAL DE PRODUTO — fundo escuro premium com contraste */
+/* MODAL DE PRODUTO — fundo limpo sem filtro */
 .pm-img{
-  width:calc(100% - 32px);
+  width:calc(100% - 24px);
   margin:0 auto 16px;
   aspect-ratio:1;
   max-height:clamp(280px,58svh,480px);
   border-radius:14px;
   overflow:hidden;
-  background:#1a1a1a;
+  background:#fff;
   display:flex;align-items:center;justify-content:center;
-  position:relative;
-}
-.pm-img::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at center,#2a2a2a 0%,#111 60%,#050505 100%);
 }
 .pm-img img{
-  position:relative;z-index:1;
-  width:88%;height:88%;
+  width:100%;height:100%;
   object-fit:contain;
   display:block;
-  filter:drop-shadow(0 8px 24px rgba(0,0,0,.7));
+  background:#fff;
 }
 .pm-body{padding:0 20px 24px;}
 .pm-price{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;margin-bottom:4px;}
