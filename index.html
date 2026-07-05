@@ -320,7 +320,11 @@ nav button.active{background:linear-gradient(135deg,#ff8c00,#ff6a00);border-colo
 .dpad.hit{filter:brightness(2.2);transform:scale(.92);}
 .fl-status{height:16px;background:#0a0c10;border-top:1px solid #1a1d23;display:flex;align-items:center;padding:0 8px;font-size:9px;color:#333;flex-shrink:0;}
 
-/* ── SEM CURSOR CUSTOMIZADO — usa o padrão do SO ── */
+/* ── CURSOR CROSSHAIR — só CSS, sem JS, sem delay ── */
+@media(pointer:fine){
+  *{cursor:crosshair!important;}
+  a,button,.dpad,.pk,.rbtn,.fl-tab,.fl-btn,.ptbtn,.more-card,.loja-card,.pp-btn,.pp-skip{cursor:pointer!important;}
+}
 </style>
 
 <style>
@@ -1356,7 +1360,9 @@ function buyZap(p){window.open('https://wa.me/5511976369308?text='+encodeURIComp
 function openModal(name,price,img,desc,zapMsg){
   document.getElementById('pm-name').textContent=name;
   document.getElementById('pm-price').textContent='R$ '+price;
-  document.getElementById('pm-img-el').src=img;
+  const imgEl=document.getElementById('pm-img-el');
+  imgEl.style.display='block';
+  imgEl.src=img;
   document.getElementById('pm-desc').textContent=desc;
   document.getElementById('pm-zap-btn').onclick=()=>buyZap(zapMsg);
   const m=document.getElementById('prod-modal');
@@ -1385,7 +1391,7 @@ document.getElementById('prodBox')?.addEventListener('click',function(){
       <button class="pm-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="pm-img">
-      <img id="pm-img-el" src="" alt="Produto" onerror="this.style.display='none'">
+      <img id="pm-img-el" src="" alt="Produto">
     </div>
     <div class="pm-body">
       <div class="pm-price" id="pm-price">R$ 0,00</div>
