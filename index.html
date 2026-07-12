@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+
+<!-- Preconnect para fontes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+<link rel="preconnect" href="https://i.imgur.com">
+<link rel="preconnect" href="https://i.ibb.co">
 <title>PCN Boladão — Site Oficial | Kankiu, Músicas e Loja</title>
 <meta name="description" content="Site oficial do PCN Boladão. Ouça Kankiu, acompanhe lançamentos, veja discografia e compre produtos oficiais do drop PCN.">
 <meta name="keywords" content="PCN Boladão, Kankiu, trap underground, artista trap, loja PCN, Camisa Kankiu, Caneca PCN, músicas PCN Boladão">
@@ -236,7 +243,7 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
   margin:6px 0;
   animation:lineGlow 2s ease-in-out infinite alternate;
 }
-@keyframes lineGlow{from{opacity:.4;width:clamp(40px,12vw,80px);}to{opacity:1;width:clamp(60px,18vw,120px);}}
+@keyframes lineGlow{from{opacity:.4;transform:scaleX(1);}to{opacity:1;transform:scaleX(1.5);}}
 @keyframes nameFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 .hp-sub{font-size:12px;color:rgba(255,106,0,.6);letter-spacing:5px;text-transform:uppercase;margin-top:4px;}
 .hp-official{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:5px 12px;font-size:11px;color:rgba(255,255,255,.5);margin-top:8px;}
@@ -252,7 +259,7 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
 .hp-dots{display:flex;gap:6px;margin-top:20px;}
 .hp-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,106,0,.3);animation:dotPop 1.4s ease-in-out infinite;}
 .hp-dot:nth-child(2){animation-delay:.2s;}.hp-dot:nth-child(3){animation-delay:.4s;}
-@keyframes dotPop{0%,100%{background:rgba(255,106,0,.2);transform:scale(1);}50%{background:rgba(255,106,0,.9);transform:scale(1.5);}}
+@keyframes dotPop{0%,100%{opacity:.3;transform:scale(1);}50%{opacity:1;transform:scale(1.5);}}
 
 /* ══════════════════════════════════════
    HOME — FL STUDIO (landscape + desktop)
@@ -333,7 +340,7 @@ nav button.active{background:linear-gradient(135deg,#e01a1a,#ff3333);border-colo
 .rwin-body{flex:1;position:relative;overflow:hidden;min-height:0;background:#000;}
 .rwin-body img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;}
 .rwin-body img.show{opacity:1;}
-.rwin-body iframe{position:absolute;inset:-20%;width:140%;height:140%;border:none;}
+.rwin-body iframe{position:absolute;top:50%;left:50%;width:180%;height:180%;transform:translate(-50%,-50%);border:none;pointer-events:none;}
 #eq-c{width:100%;height:100%;display:block;}
 .rwin-foot{height:18px;background:#0a0c10;border-top:1px solid #151820;display:flex;align-items:center;gap:3px;padding:0 4px;flex-shrink:0;}
 .rbtn{font-size:7px;padding:1px 5px;background:#12151a;border:1px solid #1e2228;border-radius:2px;color:#444;cursor:pointer;transition:all .2s;}
@@ -689,7 +696,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
 
 <!-- LOADING -->
 <div id="loading">
-  <img src="https://upload.wikimedia.org/wikipedia/fr/e/ef/FL-Studio-12-Logo.png" alt="FL" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" style="animation:ldPulse 1s ease-in-out infinite;">
+    <rect x="10" y="10" width="52" height="52" rx="8" fill="#1a1a1a" stroke="#ff6a00" stroke-width="2"/>
+    <text x="36" y="44" text-anchor="middle" font-family="Bebas Neue,sans-serif" font-size="24" fill="#ff6a00" letter-spacing="2">FL</text>
+  </svg>
   <div id="ld-wrap"><div id="ld-bar"></div></div>
   <p id="ld-msg">Loading PCN BOLADÃO.flp...</p>
 </div>
@@ -706,7 +716,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
       <img class="pp-cover"
            src="https://image-cdn-ak.spotifycdn.com/image/ab6761610000f1789efcb98b99bcfd26adf832e9"
            alt="KANKIU"
-           onerror="this.style.display='none'">
+           onerror="this.style.display='none'" loading="lazy">
       <div class="pp-text">
         <div class="pp-tag"><i class="fa-solid fa-bolt"></i> Novo lançamento</div>
         <div class="pp-artist">KANKIU</div>
@@ -800,7 +810,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
             <div class="rwin">
               <div class="rwin-head"><div class="fd r"></div><div class="fd y"></div><div class="fd g"></div><span>clipe.exe</span></div>
               <div class="rwin-body">
-                <iframe src="https://www.youtube.com/embed/f03i6gQmmu0?autoplay=1&mute=1&loop=1&playlist=f03i6gQmmu0&controls=0&playsinline=1&rel=0&modestbranding=1" allow="autoplay;encrypted-media" loading="lazy"></iframe>
+                <iframe src="https://www.youtube.com/embed/f03i6gQmmu0?autoplay=1&mute=1&loop=1&playlist=f03i6gQmmu0&controls=0&playsinline=1&rel=0&modestbranding=1" allow="autoplay;encrypted-media" loading="lazy" importance="low"></iframe>
               </div>
               <div class="rwin-foot">
                 <span class="rbtn on">Clipe</span>
@@ -810,10 +820,10 @@ document.addEventListener('selectstart',e=>e.preventDefault());
             <div class="rwin">
               <div class="rwin-head"><div class="fd r"></div><div class="fd y"></div><div class="fd g"></div><span>produtos.exe</span></div>
               <div class="rwin-body" id="prodPhotos">
-                <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="object-fit:cover;" onerror="this.style.display='none'">
-                <img src="https://i.imgur.com/UYnObyx.png" style="object-fit:cover;" onerror="this.style.display='none'">
-                <img src="https://i.imgur.com/RnqS6xs.png" style="object-fit:cover;background:#f5f5f5;" onerror="this.style.display='none'">
-                <img src="https://i.imgur.com/COsCuKl.png" style="object-fit:cover;" onerror="this.style.display='none'">
+                <img src="https://i.imgur.com/DMZ6WBT.png" class="show" style="object-fit:cover;" onerror="this.style.display='none'" loading="lazy">
+                <img src="https://i.imgur.com/UYnObyx.png" style="object-fit:cover;" onerror="this.style.display='none'" loading="lazy">
+                <img src="https://i.imgur.com/RnqS6xs.png" style="object-fit:cover;background:#f5f5f5;" onerror="this.style.display='none'" loading="lazy">
+                <img src="https://i.imgur.com/COsCuKl.png" style="object-fit:cover;" onerror="this.style.display='none'" loading="lazy">
               </div>
               <div class="rwin-foot">
                 <span class="rbtn on">Produtos</span>
@@ -895,7 +905,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
       <div class="more-card-img"><img src="https://i.imgur.com/COsCuKl.png" alt="Moletom Kankiu" draggable="false" style="background:#f5f5f5;" onerror="this.parentElement.style.background='#111'"></div>
       <div class="more-card-body">
         <h3>Moletom Kankiu</h3>
-        <div class="more-card-price">R$ 260,00</div>
+        <div class="more-card-price">R$ 249,00</div>
         <div class="more-card-row">
           <button class="more-detail" onclick="openModal('Moletom Kankiu','260,00','https://i.imgur.com/COsCuKl.png','Moletom oversized premium. Tecido de alta qualidade, drop limitado Kankiu Collection.','Moletom Kankiu R$ 260')"><i class="fa-solid fa-eye"></i> Ver</button>
           <button class="more-buy" onclick="buyZap('Moletom Kankiu R$ 260')"><i class="fa-brands fa-whatsapp"></i> Comprar</button>
@@ -1024,7 +1034,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
         <img src="https://i.ibb.co/B2vWGgCJ/images.jpg"
              alt="KANKIU — PCN Boladão"
              draggable="false"
-             onerror="this.style.display='none'">
+             onerror="this.style.display='none'" loading="lazy">
       </div>
       <div>
         <div class="sp-release-title">KANKIU</div>
@@ -1055,7 +1065,7 @@ document.addEventListener('selectstart',e=>e.preventDefault());
             height="380"
             allowfullscreen
             allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture"
-            loading="lazy"></iframe>
+            loading="lazy" importance="low"></iframe>
   </div>
 </div>
 </section>
